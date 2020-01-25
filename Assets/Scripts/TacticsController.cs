@@ -36,7 +36,7 @@ public class TacticsController : MonoBehaviour
     //STEPS
     public Step[] tpArray;
     private Queue<Step> tpQueue;
-    public Step nextStep;
+    private Step nextStep;
     private GameObject player;
     // Start is called before the first frame update
     private void Awake()

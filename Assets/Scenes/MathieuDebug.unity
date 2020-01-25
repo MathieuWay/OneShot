@@ -543,6 +543,63 @@ MonoBehaviour:
   state: 0
   focusTime: 2
   focusorthographicSize: 3.3
+  FocusPositionCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.4987264
+      outSlope: 0.4987264
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.08233533
+    - serializedVersion: 3
+      time: 0.4977872
+      value: 0.6462711
+      inSlope: 2.159009
+      outSlope: 2.159009
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.082692705
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  FocusCameraSizeCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &578920124
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,9 +1235,6 @@ MonoBehaviour:
     time: 5
   - transform: {fileID: 579516706}
     time: 5.5
-  nextStep:
-    transform: {fileID: 0}
-    time: 0
 --- !u!1 &1193202680
 GameObject:
   m_ObjectHideFlags: 0
@@ -1192,7 +1246,7 @@ GameObject:
   - component: {fileID: 1193202682}
   - component: {fileID: 1193202681}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: LevelController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

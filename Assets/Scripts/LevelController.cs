@@ -29,9 +29,6 @@ public class LevelController : MonoBehaviour
         }
     }
 
-    public delegate void StartCombat();
-    public static event StartCombat OnCombat;
-
     public Phase phase;
 
     private void Awake()
