@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class SpawnController : MonoBehaviour
 {
-	public static SpawnController instance;
+	public static SpawnController Instance { get; private set; }
+
 	[SerializeField] private Camera cam;
 	[SerializeField] private GameObject pointPrefab;
 	[SerializeField] private int spawnCount = 10;
 	[SerializeField] private string[] blockerTags;
+	[SerializeField] private float detectionDistanceToFloor = 3;
+	[SerializeField] private float spawnDistanceToFloor = 0.3f;
 
 	public delegate void SpawnDelegate();
 	public event SpawnDelegate SpawnPointEvent;
@@ -36,13 +39,13 @@ public class SpawnController : MonoBehaviour
 
 	private void Awake()
 	{
-		if(instance != null)
+		if(Instance != null)
 		{
 			Destroy(gameObject);
 			return;
 		}
 
-		instance = this;
+		Instance = this;
 
 		points = new Queue<GameObject>();
 	}
@@ -60,35 +63,49 @@ public class SpawnController : MonoBehaviour
 			{
 				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-				if(hit.collider != null)
+				if(hit.collider == null)
 				{
-					bool hitBlocker = false;
-
-					for (int i = 0; i < blockerTags.Length; i++)
-					{
-						if(hit.transform.CompareTag(blockerTags[i]))
-						{
-							hitBlocker = true;
-						}
-					}
-
-					Debug.Log(hit.transform.tag + " " + hit.transform.name);
-
-					if (hitBlocker)
-					{
-						yield return null;
-						continue;
-					}
-						
-
-					GameObject instance = Instantiate(pointPrefab, hit.point, Quaternion.identity);
-
-					points.Enqueue(instance);
-
-					SpawnPointEvent?.Invoke();
-
-					Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
+					yield return null;
+					continue;
 				}
+
+				bool hitBlocker = false;
+
+				//Check tous les tags considérés comme "bloqueur"
+				for (int i = 0; i < blockerTags.Length; i++)
+				{
+					if (hit.transform.CompareTag(blockerTags[i]))
+					{
+						hitBlocker = true;
+					}
+				}
+
+				if (hitBlocker)
+				{
+					yield return null;
+					continue;
+				}
+
+				//Détection du sol sans prendre en compte les Triggers
+				ContactFilter2D contactFilter = new ContactFilter2D() { useTriggers = false };
+				RaycastHit2D[] results = new RaycastHit2D[1];
+				int hitGround = Physics2D.Raycast(hit.point, Vector2.down, contactFilter, results, detectionDistanceToFloor);
+
+				if (hitGround <= 0)
+				{
+					//Si aucune détection de collider, aucun sol n'a été trouvé
+					yield return null;
+					continue;
+				}
+
+				//Instance du point de spawn sur la surface touché
+				GameObject instance = Instantiate(pointPrefab, results[0].point + Vector2.up * spawnDistanceToFloor, Quaternion.identity);
+
+				points.Enqueue(instance);
+
+				SpawnPointEvent?.Invoke();
+
+				Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
 			}
 
 			yield return null;

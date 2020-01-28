@@ -11,8 +11,9 @@ GameObject:
   - component: {fileID: 8013875690123456576}
   - component: {fileID: 8013875690123456582}
   - component: {fileID: 8013875690123456577}
+  - component: {fileID: -607549871996367267}
   m_Layer: 5
-  m_Name: Point
+  m_Name: UI_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,8 +64,6 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
-      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_Sprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
@@ -75,3 +74,15 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &-607549871996367267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8013875690123456579}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2194cfcdf990d9340a84e235f37eca09, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
