@@ -6,10 +6,12 @@ using UnityEngine.EventSystems;
 public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 	public float Time { get; set; }
+	public SpawnPoint _SpawnPoint { get; set; }
 
-	public void Init(float time)
+	public void Init(float time, SpawnPoint spawnPoint)
 	{
 		Time = time;
+		_SpawnPoint = spawnPoint;
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
@@ -32,7 +34,6 @@ public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	public void UpdateTime()
 	{
 		Time = UI_Timeline.Instance.GetPointTime(transform);
-
-		Debug.Log(Time);
+		_SpawnPoint.SetTime(Time);
 	}
 }

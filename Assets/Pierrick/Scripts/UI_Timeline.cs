@@ -4,6 +4,12 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
+
+/// <summary>
+/// Gère le placement des points sur la timeline
+/// Instancie les points avec la classe UI_Point: time + position
+/// Contrôle le timer et sa position sur la timeline
+/// </summary>
 public class UI_Timeline : MonoBehaviour
 {
 	public static UI_Timeline Instance { get; private set; }
@@ -18,7 +24,7 @@ public class UI_Timeline : MonoBehaviour
 	[SerializeField] private Transform pointContainer;
 	[SerializeField] private GameObject pointPrefab;
 	[SerializeField] private TextMeshProUGUI pointCountText;
-	private Queue<GameObject> points;
+	private List<UI_Point> points;
 
 	[Header("Pause")]
 	[SerializeField] private Button pauseButton;
@@ -33,7 +39,7 @@ public class UI_Timeline : MonoBehaviour
 	{
 		while (points.Count > 0)
 		{
-			RemovePoint();
+			RemoveLastPoint();
 		}
 
 		timer = 0;
@@ -45,11 +51,14 @@ public class UI_Timeline : MonoBehaviour
 
 	public float GetPointTime(Transform point)
 	{
-		//point.localPosition = new Vector2(timelineRect.rect.xMin + value * (timelineRect.rect.xMax - timelineRect.rect.xMin), 0);
-
 		float value = (point.localPosition.x - timelineRect.rect.xMin) / (timelineRect.rect.xMax - timelineRect.rect.xMin);
 
 		return value * timerDuration;
+	}
+
+	public float GetCurrentTime()
+	{
+		return timer;
 	}
 
 	public void CheckPointOnTimeline(Transform point)
@@ -64,6 +73,19 @@ public class UI_Timeline : MonoBehaviour
 		}
 	}
 
+	//Supprime le dernier point sur la Timeline + le point de spawn associé sur la map
+	public void RemoveLastPoint()
+	{
+		if (points.Count <= 0) return;
+
+		UI_Point point = points[points.Count - 1];
+		Destroy(point.gameObject);
+
+		points.RemoveAt(points.Count - 1);
+
+		DisplayPointCount();
+	}
+
 
 	private void Awake()
 	{
@@ -75,7 +97,7 @@ public class UI_Timeline : MonoBehaviour
 
 		Instance = this;
 
-		points = new Queue<GameObject>();
+		points = new List<UI_Point>();
 
 		pauseButton.onClick.AddListener(PauseToggle);
 	}
@@ -84,32 +106,33 @@ public class UI_Timeline : MonoBehaviour
 	{
 		SpawnController.Instance.SpawnPointEvent += AddPoint;
 
-		pointCountText.text = SpawnController.Instance.GetRemainingPoints().ToString();
+		DisplayPointCount();
 
 		StartCoroutine(TimerProcess());
 	}
 
-	private void AddPoint()
+	private void DisplayPointCount()
 	{
-		SetPoint(timer / timerDuration);
+		pointCountText.text = SpawnController.Instance.GetRemainingPoints().ToString();
+	}
+
+	//Ajoute un point sur la timeline avec son point de spawn
+	private void AddPoint(SpawnPoint spawnPoint)
+	{
+		SetPoint(timer / timerDuration, spawnPoint);
 
 		pointCountText.text = SpawnController.Instance.GetRemainingPoints().ToString();
 	}
 
-	private void RemovePoint()
-	{
-		GameObject point = points.Dequeue();
-
-		Destroy(point);
-	}
-
-	public void SetPoint(float value)
+	//Met un point sur la timeline + associe son point de spawn
+	private void SetPoint(float value, SpawnPoint spawnPoint)
 	{
 		GameObject instance = Instantiate(pointPrefab, pointContainer);
 
-		instance.GetComponent<UI_Point>().Init(timer);
+		UI_Point uiPoint = instance.GetComponent<UI_Point>();
+		uiPoint.Init(timer, spawnPoint);
 
-		points.Enqueue(instance);
+		points.Add(uiPoint);
 
 		SetOnTimeline(instance.transform, value);
 	}

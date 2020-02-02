@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// Contrôle les points de spawn
+/// Instancie les points en fonction de l'input du joueur
+/// Place les points au-dessus du sol
+/// </summary>
 public class SpawnController : MonoBehaviour
 {
 	public static SpawnController Instance { get; private set; }
@@ -14,26 +19,37 @@ public class SpawnController : MonoBehaviour
 	[SerializeField] private float spawnDistanceToFloor = 0.3f;
 
 	public delegate void SpawnDelegate();
-	public event SpawnDelegate SpawnPointEvent;
+	public delegate void SpawnPointDelegate(SpawnPoint spawnPoint);
+	public event SpawnPointDelegate SpawnPointEvent;
 	public event SpawnDelegate SpawnComplete;
 
-	private Queue<GameObject> points;
+	public List<SpawnPoint> SpawnPoints { get; private set; }
 
 
 	//TODO: Test
 	public void RemoveAllPoints()
 	{
-		while (points.Count > 0)
+		for (int i = 0; i < SpawnPoints.Count; i++)
 		{
-			GameObject point = points.Dequeue();
-
-			Destroy(point);
+			Destroy(SpawnPoints[i]._GameObject);
 		}
+
+		SpawnPoints.Clear();
+	}
+
+	public void RemoveLastPoint()
+	{
+		if (SpawnPoints.Count <= 0) return;
+
+		Destroy(SpawnPoints[SpawnPoints.Count - 1]._GameObject);
+		SpawnPoints.RemoveAt(SpawnPoints.Count - 1);
+
+		UI_Timeline.Instance.RemoveLastPoint();
 	}
 
 	public int GetRemainingPoints()
 	{
-		return spawnCount - points.Count;
+		return spawnCount - SpawnPoints.Count;
 	}
 
 
@@ -47,7 +63,7 @@ public class SpawnController : MonoBehaviour
 
 		Instance = this;
 
-		points = new Queue<GameObject>();
+		SpawnPoints = new List<SpawnPoint>();
 	}
 
 	private void Start()
@@ -57,7 +73,7 @@ public class SpawnController : MonoBehaviour
 
 	private IEnumerator SpawnProcess()
 	{
-		while(points.Count < spawnCount)
+		while(SpawnPoints.Count < spawnCount)
 		{
 			if (Input.GetMouseButtonDown(0))
 			{
@@ -101,11 +117,21 @@ public class SpawnController : MonoBehaviour
 				//Instance du point de spawn sur la surface touché
 				GameObject instance = Instantiate(pointPrefab, results[0].point + Vector2.up * spawnDistanceToFloor, Quaternion.identity);
 
-				points.Enqueue(instance);
+				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
+				spawnPoint.Init();
 
-				SpawnPointEvent?.Invoke();
+				SpawnPoints.Add(spawnPoint);
+
+				SpawnPointEvent?.Invoke(spawnPoint);
 
 				Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
+
+				//Debug.Log(spawnPoint.Time + " " + spawnPoint._Position + " " + spawnPoint._GameObject.name);
+			}
+
+			if (Input.GetMouseButtonDown(1))
+			{
+				RemoveLastPoint();
 			}
 
 			yield return null;
