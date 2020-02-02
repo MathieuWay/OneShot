@@ -51,9 +51,9 @@ public class Fader : MonoBehaviour
     }
     private void Start()
     {
-        StartCoroutine(DelayEvent("in"));
+        //StartCoroutine(DelayEvent("in"));
     }
-
+    /*
     public IEnumerator DelayEvent(string state)
     {
         yield return new WaitForSeconds(1f);
@@ -62,4 +62,5 @@ public class Fader : MonoBehaviour
         else
             OnFadeOut();
     }
+    */
 }
