@@ -73,7 +73,7 @@ public class TacticsController : MonoBehaviour
         tpQueue = new Queue<Step>();
         foreach (SpawnPoint tp in tpList)
         {
-            Step step = new Step(tp._Position, tp.Time);
+            Step step = new Step(tp._Position, tp._Time);
             tpQueue.Enqueue(step);
         }
         nextStep = tpQueue.Dequeue();

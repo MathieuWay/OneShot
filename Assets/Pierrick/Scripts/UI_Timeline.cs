@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 
 /// <summary>
@@ -122,6 +123,8 @@ public class UI_Timeline : MonoBehaviour
 		SetPoint(timer / timerDuration, spawnPoint);
 
 		pointCountText.text = SpawnController.Instance.GetRemainingPoints().ToString();
+
+		UpdatePointsOrder();
 	}
 
 	//Met un point sur la timeline + associe son point de spawn
@@ -130,7 +133,9 @@ public class UI_Timeline : MonoBehaviour
 		GameObject instance = Instantiate(pointPrefab, pointContainer);
 
 		UI_Point uiPoint = instance.GetComponent<UI_Point>();
-		uiPoint.Init(timer, spawnPoint);
+
+		//L'ID correspond au nombre de point - 1 (pour commencer à partir de 0)
+		uiPoint.Init((SpawnController.Instance.SpawnPoints.Count - 1), timer, spawnPoint);
 
 		points.Add(uiPoint);
 
@@ -187,7 +192,17 @@ public class UI_Timeline : MonoBehaviour
         pause = false;
     }
 
+	public void UpdatePointsOrder()
+	{
+		points = points.OrderBy(o => o.Time).ToList();
 
+		for (int i = 0; i < points.Count; i++)
+		{
+			points[i].ChangeID(i);
+		}
+
+		SpawnController.Instance.ChangeSpawnPointsOrder();
+	}
 
 	//OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline
 	//

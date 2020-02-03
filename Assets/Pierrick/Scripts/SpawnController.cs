@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 /// <summary>
 /// Contrôle les points de spawn
@@ -50,6 +51,11 @@ public class SpawnController : MonoBehaviour
 	public int GetRemainingPoints()
 	{
 		return spawnCount - SpawnPoints.Count;
+	}
+
+	public void ChangeSpawnPointsOrder()
+	{
+		SpawnPoints = SpawnPoints.OrderBy(o => o._Time).ToList();
 	}
 
 
@@ -118,7 +124,9 @@ public class SpawnController : MonoBehaviour
 				GameObject instance = Instantiate(pointPrefab, results[0].point + Vector2.up * spawnDistanceToFloor, Quaternion.identity);
 
 				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
-				spawnPoint.Init(results[0].point);
+
+				//L'ID correspond au nombre de point de spawn, on commence ici par 0
+				spawnPoint.Init(SpawnPoints.Count, results[0].point);
 
 				SpawnPoints.Add(spawnPoint);
 
