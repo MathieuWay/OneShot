@@ -8,9 +8,9 @@ public class SpawnPoint : MonoBehaviour
 	public Vector2 _Position { get; private set; }
 	public GameObject _GameObject { get; private set; }
 
-	public void Init()
+	public void Init(Vector3 root)
 	{
-		_Position = transform.position;
+		_Position = root;
 		_GameObject = gameObject;
 		Time = UI_Timeline.Instance.GetCurrentTime();
 	}

@@ -118,7 +118,7 @@ public class SpawnController : MonoBehaviour
 				GameObject instance = Instantiate(pointPrefab, results[0].point + Vector2.up * spawnDistanceToFloor, Quaternion.identity);
 
 				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
-				spawnPoint.Init();
+				spawnPoint.Init(results[0].point);
 
 				SpawnPoints.Add(spawnPoint);
 

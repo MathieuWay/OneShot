@@ -37,10 +37,28 @@ public class LevelController : MonoBehaviour
         Fader.OnFadeIn += FocusOnPlayer;
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Return) && phase == Phase.Tactical)
+        {
+            CameraController.Instance.FocusOnPlayer();
+            UI_Timeline.Instance.SetPause(false);
+            StartCoroutine(DelayBeforeCombatPhase(CameraController.Instance.focusTime));
+        }
+    }
+
 
     private void FocusOnPlayer()
     {
         if(phase != Phase.Combat)
             CameraController.Instance.FocusOnPlayer();
+    }
+
+    private IEnumerator DelayBeforeCombatPhase(float sec)
+    {
+        yield return new WaitForSeconds(sec);
+        phase = Phase.Combat;
+        TacticsController.Instance.loadTactics(SpawnController.Instance.SpawnPoints);
+        UI_Timeline.Instance.ResetTimeline();
     }
 }

@@ -167,12 +167,25 @@ public class UI_Timeline : MonoBehaviour
 		}
 	}
 
-	private void PauseToggle()
+	public void PauseToggle()
 	{
 		pause = !pause;
 
 		pauseImage.sprite = pause ? playSprite : pauseSprite;
 	}
+
+    public void SetPause(bool state)
+    {
+        pause = state;
+        pauseImage.sprite = pause ? playSprite : pauseSprite;
+    }
+
+    public void ResetTimeline()
+    {
+        timer = 0;
+        SetOnTimeline(timerIndicator, timer / timerDuration);
+        pause = false;
+    }
 
 
 
