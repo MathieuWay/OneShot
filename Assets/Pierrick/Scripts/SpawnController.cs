@@ -81,7 +81,7 @@ public class SpawnController : MonoBehaviour
 	{
 		while(SpawnPoints.Count < spawnCount)
 		{
-			if (Input.GetMouseButtonDown(0))
+			if (Input.GetMouseButtonDown(0) && !UI_PointController.Instance.DraggingPoint())
 			{
 				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 

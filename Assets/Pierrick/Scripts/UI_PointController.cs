@@ -14,6 +14,11 @@ public class UI_PointController : MonoBehaviour
 		currentPoint = point;
 	}
 
+	public bool DraggingPoint()
+	{
+		return currentPoint != null;
+	}
+
 	private void Awake()
 	{
 		if(Instance != null)
