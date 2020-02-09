@@ -14,7 +14,10 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        anim.SetTrigger("dying");
-        OnEnemyDead();
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            anim.SetTrigger("dying");
+            OnEnemyDead();
+        }
     }
 }

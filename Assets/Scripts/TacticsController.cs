@@ -4,9 +4,14 @@ using UnityEngine;
 [System.Serializable]
 public struct Step
 {
-    public Transform transform;
+    public Vector3 pos;
     public float time;
 
+    public Step(Vector2 position, float time) : this()
+    {
+        pos = new Vector3(position.x, position.y, 0);
+        this.time = time;
+    }
 }
 public class TacticsController : MonoBehaviour
 {
@@ -43,12 +48,6 @@ public class TacticsController : MonoBehaviour
     {
         instance = this;
         player = GameObject.FindWithTag("Player");
-        tpQueue = new Queue<Step>();
-        foreach (Step tp in tpArray)
-        {
-            tpQueue.Enqueue(tp);
-        }
-        nextStep = tpQueue.Dequeue();
     }
 
     // Update is called once per frame
@@ -64,8 +63,19 @@ public class TacticsController : MonoBehaviour
 
     private void ExecuteNextStep()
     {
-        player.transform.position = nextStep.transform.position;
+        player.transform.position = nextStep.pos;
         if(tpQueue.Count > 0)
             nextStep = tpQueue.Dequeue();
+    }
+
+    public void loadTactics(List<SpawnPoint> tpList)
+    {
+        tpQueue = new Queue<Step>();
+        foreach (SpawnPoint tp in tpList)
+        {
+            Step step = new Step(tp._Position, tp._Time);
+            tpQueue.Enqueue(step);
+        }
+        nextStep = tpQueue.Dequeue();
     }
 }
