@@ -79,13 +79,19 @@ public class SpawnController : MonoBehaviour
 
 	private IEnumerator SpawnProcess()
 	{
-		while(SpawnPoints.Count < spawnCount)
+		while(LevelController.Instance.phase == Phase.Tactical && SpawnPoints.Count < spawnCount)
 		{
 			if (/*Input.GetMouseButtonDown(0)*/Gamepad.Instance.ButtonDownA /*&& !UI_PointController.Instance.DraggingPoint()*/)
 			{
-				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
+				//!OLD : Fonctionne uniquement avec une camera en vue orthographique
+				//RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
 
-				if(hit.collider == null)
+
+				Ray ray = Camera.main.ScreenPointToRay(CursorController.Instance.GetPosition());
+
+				RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+
+				if (hit.collider == null)
 				{
 					yield return null;
 					continue;
@@ -108,7 +114,10 @@ public class SpawnController : MonoBehaviour
 					continue;
 				}
 
+
+				//!OLD: DETECTION 2D
 				//Détection du sol sans prendre en compte les Triggers
+				/*
 				ContactFilter2D contactFilter = new ContactFilter2D() { useTriggers = false };
 				RaycastHit2D[] results = new RaycastHit2D[1];
 				int hitGround = Physics2D.Raycast(hit.point, Vector2.down, contactFilter, results, detectionDistanceToFloor);
@@ -122,11 +131,38 @@ public class SpawnController : MonoBehaviour
 
 				//Instance du point de spawn sur la surface touché
 				GameObject instance = Instantiate(pointPrefab, results[0].point + Vector2.up * spawnDistanceToFloor, Quaternion.identity);
+				
 
 				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
 
 				//L'ID correspond au nombre de point de spawn, on commence ici par 0
 				spawnPoint.Init(SpawnPoints.Count, results[0].point);
+				*/
+				//!FIN
+
+
+				//!DETECTION 3D
+				RaycastHit hitFloor;
+				Physics.Raycast(hit.point, Vector3.down, out hitFloor, detectionDistanceToFloor);
+
+				if (hitFloor.transform == null)
+				{
+					//Si aucune détection de collider, aucun sol n'a été trouvé
+					yield return null;
+					continue;
+				}
+
+				Vector3 spawnPosition = hitFloor.point + Vector3.up * spawnDistanceToFloor;
+
+				//Instance du point de spawn sur la surface touché
+				GameObject instance = Instantiate(pointPrefab, spawnPosition, Quaternion.identity);
+
+				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
+
+				//L'ID correspond au nombre de point de spawn, on commence ici par 0
+				spawnPoint.Init(SpawnPoints.Count, hitFloor.point);
+				//!FIN
+
 
 				SpawnPoints.Add(spawnPoint);
 

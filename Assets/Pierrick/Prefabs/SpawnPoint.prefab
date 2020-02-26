@@ -96,6 +96,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   numberText: {fileID: 8602085083982113771}
+  spriteRenderer: {fileID: 5559989912328591875}
 --- !u!1 &5985284077944053108
 GameObject:
   m_ObjectHideFlags: 0
@@ -309,7 +310,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 10
+  m_SortingOrder: 15
   m_TargetDisplay: 0
 --- !u!114 &1831697541981275684
 MonoBehaviour:

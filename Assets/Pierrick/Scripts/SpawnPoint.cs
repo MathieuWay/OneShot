@@ -6,6 +6,7 @@ using TMPro;
 public class SpawnPoint : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI numberText;
+	[SerializeField] private SpriteRenderer spriteRenderer;
 	public int _ID { get; set; }
 	public float _Time { get; private set; }
 	public Vector2 _Position { get; private set; }
@@ -28,5 +29,14 @@ public class SpawnPoint : MonoBehaviour
 	{
 		_ID = id;
 		numberText.text = (id + 1).ToString();
+	}
+
+	public void Select()
+	{
+		spriteRenderer.color = new Color(1, 0.7f, 0);
+	}
+	public void Unselect()
+	{
+		spriteRenderer.color = Color.red;
 	}
 }

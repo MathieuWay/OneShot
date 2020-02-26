@@ -49,11 +49,13 @@ public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	}
 	public void Select()
 	{
-		pointImage.color = new Color(1, 0.5f, 0);
+		pointImage.color = new Color(1, 0.7f, 0);
+		_SpawnPoint.Select();
 	}
 	public void Unselect()
 	{
 		pointImage.color = Color.red;
+		_SpawnPoint.Unselect();
 	}
 
 	public void UpdateTime()
