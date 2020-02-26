@@ -81,9 +81,9 @@ public class SpawnController : MonoBehaviour
 	{
 		while(SpawnPoints.Count < spawnCount)
 		{
-			if (Input.GetMouseButtonDown(0) && !UI_PointController.Instance.DraggingPoint())
+			if (/*Input.GetMouseButtonDown(0)*/Gamepad.Instance.ButtonDownA /*&& !UI_PointController.Instance.DraggingPoint()*/)
 			{
-				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+				RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
 
 				if(hit.collider == null)
 				{
@@ -137,7 +137,7 @@ public class SpawnController : MonoBehaviour
 				//Debug.Log(spawnPoint.Time + " " + spawnPoint._Position + " " + spawnPoint._GameObject.name);
 			}
 
-			if (Input.GetMouseButtonDown(1))
+			if (/*Input.GetMouseButtonDown(1)*/Gamepad.Instance.ButtonDownB)
 			{
 				RemoveLastPoint();
 			}

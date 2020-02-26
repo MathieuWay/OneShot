@@ -1,20 +1,22 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
 public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 	[SerializeField] private TextMeshProUGUI text;
-	public int ID { get; set; }
-	public float Time { get; set; }
+	[SerializeField] private Image pointImage;
+	public int _ID { get; set; }
+	public float _Time { get; set; }
 	public SpawnPoint _SpawnPoint { get; set; }
 
 	public void Init(int id, float time, SpawnPoint spawnPoint)
 	{
-		ID = id;
-		Time = time;
+		_ID = id;
+		_Time = time;
 		_SpawnPoint = spawnPoint;
 		text.text = (id + 1).ToString();
 	}
@@ -38,15 +40,31 @@ public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 		UI_Timeline.Instance.CheckPointOnTimeline(transform);
 	}
 
+	//!NEW FOR GAMEPAD
+	public void MovePosition(float dir, float speed)
+	{
+		transform.position = new Vector2(transform.position.x + dir * speed * Time.deltaTime, transform.position.y);
+
+		UI_Timeline.Instance.CheckPointOnTimeline(transform);
+	}
+	public void Select()
+	{
+		pointImage.color = new Color(1, 0.5f, 0);
+	}
+	public void Unselect()
+	{
+		pointImage.color = Color.red;
+	}
+
 	public void UpdateTime()
 	{
-		Time = UI_Timeline.Instance.GetPointTime(transform);
-		_SpawnPoint.SetTime(Time);
+		_Time = UI_Timeline.Instance.GetPointTime(transform);
+		_SpawnPoint.SetTime(_Time);
 	}
 
 	public void ChangeID(int id)
 	{
-		ID = id;
+		_ID = id;
 		text.text = (id + 1).ToString();
 		_SpawnPoint.SetID(id);
 	}

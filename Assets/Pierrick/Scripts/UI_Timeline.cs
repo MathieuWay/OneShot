@@ -26,6 +26,7 @@ public class UI_Timeline : MonoBehaviour
 	[SerializeField] private GameObject pointPrefab;
 	[SerializeField] private TextMeshProUGUI pointCountText;
 	private List<UI_Point> points;
+	private int selectedPoint;
 
 	[Header("Pause")]
 	[SerializeField] private Button pauseButton;
@@ -35,7 +36,6 @@ public class UI_Timeline : MonoBehaviour
 	private bool pause = false;
 
 
-	//TODO: To Test
 	public void ResetAll()
 	{
 		while (points.Count > 0)
@@ -112,6 +112,24 @@ public class UI_Timeline : MonoBehaviour
 		StartCoroutine(TimerProcess());
 	}
 
+	private void Update()
+	{
+		//!NEW FOR GAMEPAD
+		//Sélection des points sur la timeline
+		if(Gamepad.Instance.ButtonDownTriggerR && selectedPoint < points.Count - 1)
+		{
+			selectedPoint++;
+
+			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
+		}
+		if(Gamepad.Instance.ButtonDownTriggerL && selectedPoint > 0)
+		{
+			selectedPoint--;
+
+			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
+		}
+	}
+
 	private void DisplayPointCount()
 	{
 		pointCountText.text = SpawnController.Instance.GetRemainingPoints().ToString();
@@ -125,6 +143,9 @@ public class UI_Timeline : MonoBehaviour
 		pointCountText.text = SpawnController.Instance.GetRemainingPoints().ToString();
 
 		UpdatePointsOrder();
+
+		//!NEW FOR GAMEPAD
+		selectedPoint = UI_PointController.Instance.GetCurrentPointID();
 	}
 
 	//Met un point sur la timeline + associe son point de spawn
@@ -140,6 +161,9 @@ public class UI_Timeline : MonoBehaviour
 		points.Add(uiPoint);
 
 		SetOnTimeline(instance.transform, value);
+
+		//!NEW FOR GAMEPAD
+		UI_PointController.Instance.SetCurrentPoint(uiPoint);
 	}
 
 	/// <summary>
@@ -194,7 +218,7 @@ public class UI_Timeline : MonoBehaviour
 
 	public void UpdatePointsOrder()
 	{
-		points = points.OrderBy(o => o.Time).ToList();
+		points = points.OrderBy(o => o._Time).ToList();
 
 		for (int i = 0; i < points.Count; i++)
 		{
@@ -202,6 +226,11 @@ public class UI_Timeline : MonoBehaviour
 		}
 
 		SpawnController.Instance.ChangeSpawnPointsOrder();
+	}
+
+	public void UpdateCurrentPointSelected()
+	{
+		selectedPoint = UI_PointController.Instance.GetCurrentPointID();
 	}
 
 	//OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline

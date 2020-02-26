@@ -7,11 +7,20 @@ public class UI_PointController : MonoBehaviour
 	public static UI_PointController Instance { get; private set; }
 
 	private UI_Point currentPoint;
+	private bool pointMoved;
 
 
 	public void SetCurrentPoint(UI_Point point)
 	{
+		if(currentPoint != null) currentPoint.Unselect();
+
 		currentPoint = point;
+		currentPoint.Select();
+	}
+
+	public int GetCurrentPointID()
+	{
+		return currentPoint._ID;
 	}
 
 	public bool DraggingPoint()
@@ -34,7 +43,22 @@ public class UI_PointController : MonoBehaviour
 	{
 		if(currentPoint != null)
 		{
-			currentPoint.SetPosition(Input.mousePosition);
+			//!FOR MOUSE & KEYBOARD
+			//currentPoint.SetPosition(Input.mousePosition);
+
+			//!NEW FOR GAMEPAD
+			if (Gamepad.Instance.HorizontalJR != 0)
+			{
+				currentPoint.MovePosition(Gamepad.Instance.HorizontalJR, 100f);
+				pointMoved = true;
+			}
+			else if(pointMoved)
+			{
+				UI_Timeline.Instance.UpdatePointsOrder();
+				UI_Timeline.Instance.UpdateCurrentPointSelected();
+				pointMoved = false;
+			}
+
 			currentPoint.UpdateTime();
 		}
 	}
