@@ -90,7 +90,7 @@ public class CameraController : MonoBehaviour
                     if (Input.GetAxis("Mouse ScrollWheel") != 0f)
                     {
                         Debug.Log("Scroll Value:" + Input.GetAxis("Mouse ScrollWheel") + "    /    Scroll Value with sensitivity:" + Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
-                        path.AddPourcentage(Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
+                        path.AddProgression(Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
                     }
                 }
                 break;
