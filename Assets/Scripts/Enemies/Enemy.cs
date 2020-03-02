@@ -20,4 +20,9 @@ public class Enemy : MonoBehaviour
             OnEnemyDead();
         }
     }
+
+	public void Kill()
+	{
+		anim.SetTrigger("dying");
+	}
 }

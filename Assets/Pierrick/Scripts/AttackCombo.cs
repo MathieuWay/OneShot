@@ -2,12 +2,17 @@
 using System.Collections;
 using UnityEngine;
 
-public class AttackCombo : MonoBehaviour
-{
-	[SerializeField] private Combo[] combos;
 
-	private void Start()
+namespace oneShot
+{
+	public class AttackCombo : MonoBehaviour
 	{
-		ComboController.Instance.StartCombos(combos);
+		[SerializeField] private Combo[] combos;
+
+		private void Start()
+		{
+			ComboController.Instance.StartCombos(combos);
+			ComboController.Instance.ComboSuccessEvent += AttackController.Instance.LaunchAttack;
+		}
 	}
 }
