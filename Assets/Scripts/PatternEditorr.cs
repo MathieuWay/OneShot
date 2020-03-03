@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace oneShot
 {
-    public class PatternEditor : MonoBehaviour
+    public class PatternEditorr : MonoBehaviour
     {
         public List<Enemy> enemies;
         private void Awake()

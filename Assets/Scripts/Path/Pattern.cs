@@ -7,41 +7,83 @@ namespace oneShot
 {
     public class Pattern : MonoBehaviour
     {
-        public List<PatternStep> patternSteps = new List<PatternStep>();
-        PatternStep currentStep = null;
+        public List<PatternStepMove> patternSteps = new List<PatternStepMove>();
+        private List<PatternStepMove> patternStepsLoaded = new List<PatternStepMove>();
+
+        //private PatternStepMove currentStep = null;
+        private Animator anim;
+        private Agent agent;
+        private Vector3 initialPosition;
+
+        public bool RecordPattern;
 
         private void Awake()
         {
-            GetNextStep();
+            anim = GetComponentInChildren<Animator>();
+            agent = GetComponent<Agent>();
+
+            patternStepsLoaded = new List<PatternStepMove>(patternSteps);
+            UI_Timeline.OnTimelineReset += ResetPattern;
+            initialPosition = transform.position;
+
+            if (patternStepsLoaded.Count > 0)
+                GetNextStep();
         }
 
         public void Update()
         {
-            if (currentStep != null)
+            if (patternStepsLoaded.Count > 0)
             {
-                if (currentStep.EndCondition())
-                {
+                if (patternStepsLoaded[0].startTime <= UI_Timeline.Instance.GetCurrentTime())
                     GetNextStep();
+            }
+
+            if (RecordPattern && Input.GetMouseButtonDown(0))
+            {
+                RaycastHit hit;
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                int layerMask = 1 << 8;
+                if (Physics.Raycast(ray, out hit, layerMask))
+                {
+                    Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
+                    //Debug.Log(normalizePos);
+                    patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos));
+                    //Transform objectHit = hit.transform;
+                    // Do something with the object that was hit by the raycast.
                 }
-                currentStep.Update();
-            }else if(patternSteps.Count > 0)
-                GetNextStep();
+            }
         }
 
         private void GetNextStep()
         {
-            if (patternSteps.Count > 0)
+            if (patternStepsLoaded.Count > 0)
             {
                 //currentStep = patternSteps.Dequeue();
-                PatternStep step = patternSteps[0];
-                patternSteps.RemoveAt(0);
-                switch (currentStep.stepType)
+                PatternStepMove step = patternStepsLoaded[0];
+                patternStepsLoaded.RemoveAt(0);
+                switch (step.stepType)
                 {
                     case StepType.Move:
-                        PatternStepMove moveStep = (PatternStepMove)currentStep;
-                        moveStep.InitMove(GetComponent<Path>());
+                        agent.SetTarget(step.target);
+                        //moveStep.InitMove(GetComponent<Path>());
                         break;
                 }
+            }
+        }
+
+        private void ResetPattern()
+        {
+            transform.position = initialPosition;
+            patternStepsLoaded = new List<PatternStepMove>(patternSteps);
+            Debug.Log("resetPattern");
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            foreach (PatternStepMove moveStep in patternSteps)
+            {
+                Gizmos.DrawSphere(moveStep.target, 0.1f);
             }
         }
     }

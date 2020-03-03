@@ -14,10 +14,10 @@ namespace oneShot
     [Serializable]
     public class PatternStep
     {
-        public float startTime;
         public StepType stepType;
-        public virtual void Init() { }
+        public float startTime;
+        /*public virtual void Init() { }
         public virtual void Update() { }
-        public virtual bool EndCondition() { return true; }
+        public virtual bool EndCondition() { return true; }*/
     }
 }

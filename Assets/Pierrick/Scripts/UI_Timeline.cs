@@ -35,8 +35,12 @@ public class UI_Timeline : MonoBehaviour
 	private bool pause = false;
 
 
-	//TODO: To Test
-	public void ResetAll()
+    public delegate void TimelineReset();
+    public static event TimelineReset OnTimelineReset;
+
+
+    //TODO: To Test
+    public void ResetAll()
 	{
 		while (points.Count > 0)
 		{
@@ -164,7 +168,7 @@ public class UI_Timeline : MonoBehaviour
 
 			timer += Time.deltaTime;
 
-			if(timer >= timerDuration) timer = 0;
+            if (timer >= timerDuration) ResetTimeline();//timer = 0;
 
 			SetOnTimeline(timerIndicator, timer / timerDuration);
 
@@ -190,6 +194,7 @@ public class UI_Timeline : MonoBehaviour
         timer = 0;
         SetOnTimeline(timerIndicator, timer / timerDuration);
         pause = false;
+        OnTimelineReset();
     }
 
 	public void UpdatePointsOrder()

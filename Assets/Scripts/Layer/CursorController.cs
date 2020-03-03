@@ -22,16 +22,17 @@ public class CursorController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //HORIZONTAL MOVEMENT
         transform.Translate(transform.right * Input.GetAxis(horizontalAxis) * (speed *  Time.deltaTime));
-        if(Input.GetAxis(verticalAxis) != 0 && LayerMoveTimer <= 0)
+
+        //VERTICAL MOVEMENT
+        if(Input.GetAxisRaw(verticalAxis) != 0 && LayerMoveTimer <= 0)
         {
             Vector3 direction = Vector3.up;
             if (Input.GetAxis(verticalAxis) < 0)
                 direction = -direction;
             int layerMask = 1 << 8;
             RaycastHit hit;
-            //if(Physics.Raycast(transform.position + (Vector3.up * 10f), direction, out hit, layerMask))
-            Debug.DrawRay(transform.position, transform.TransformDirection(direction) * 10, Color.yellow);
             if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity, layerMask))
             {
                 //Layer1 nextLayer = LayersController.instance.GetLayer(currentLayer.index + direction);
@@ -44,9 +45,11 @@ public class CursorController : MonoBehaviour
                 }
             }
         }
+
         if (LayerMoveTimer > 0)
             LayerMoveTimer -= Time.deltaTime;
 
+        //PLACEHOLDER TP POINT
         if (Input.GetKeyDown(KeyCode.Space))
             Instantiate(prefab, transform.position + prefab.transform.position, Quaternion.identity);
     }

@@ -10,21 +10,31 @@ namespace oneShot
         public static event EnemyDead OnEnemyDead;
 
         //public pattern
-        private Path path;
+        //private Path path;
 
         private Animator anim;
+        private Agent agent;
+
         private void Start()
         {
             anim = GetComponentInChildren<Animator>();
-            path = GetComponent<Path>();
+            agent = GetComponent<Agent>();
+            /*path = GetComponent<Path>();
             if(path)
-                path.InitPath(transform.position);
+                path.InitPath(transform.position);*/
         }
 
         private void Update()
         {
-            if(path)
-                transform.position = path.GetPositionAlongPath();
+            /*if(path)
+                transform.position = path.GetPositionAlongPath();*/
+            if (agent)
+            {
+                if (!agent.reach)
+                    anim.SetBool("isMoving", true);
+                else
+                    anim.SetBool("isMoving", false);
+            }
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

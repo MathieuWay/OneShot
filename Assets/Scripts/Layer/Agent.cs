@@ -9,14 +9,13 @@ public class Agent : MonoBehaviour
     public Layer1 currentLayer;
     public float speed;
     public bool reach = true;
-    public Vector3 target;
+    public Vector3 target = Vector3.zero;
     private float clock;
     public List<Vector3> path = new List<Vector3>();
     public bool debug;
     // Start is called before the first frame update
     void Start()
     {
-        target = Vector3.zero;
         //StartCoroutine("StepLayer");
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
     }
@@ -54,12 +53,12 @@ public class Agent : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (false)//DEBUG TARGET
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit))
+            int layerMask = 1 << 8;
+            if (Physics.Raycast(ray, out hit, layerMask))
             {
                 Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
                 float time = CalculateTime(normalizePos);
@@ -149,6 +148,12 @@ public class Agent : MonoBehaviour
                 Gizmos.DrawLine(path[i], path[i + 1]);
             }
         }
+    }
+
+    public void SetTarget(Vector3 pos)
+    {
+        target = pos;
+        reach = false;
     }
 
     IEnumerator delay(float time)

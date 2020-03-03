@@ -8,13 +8,15 @@ namespace oneShot
     [Serializable]
     public class PatternStepMove : PatternStep
     {
-        public Node GoToNode;
-        public DirectionAxis directionAxis;
-        public new StepType stepType = StepType.Move;
-        private Path currentPath;
-        private float direction;
+        public Vector3 target;
 
-        public PatternStepMove(Node GoTo)
+        public PatternStepMove(float time, Vector3 pos)
+        {
+            stepType = StepType.Move;
+            startTime = time;
+            target = pos;
+        }
+        /*public PatternStepMove(Node GoTo)
         {
             this.GoToNode = GoTo;
         }
@@ -43,6 +45,6 @@ namespace oneShot
                 return true;
             else
                 return false;
-        }
+        }*/
     }
 }
