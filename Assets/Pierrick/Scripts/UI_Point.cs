@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using TMPro;
 
+
 public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 	[SerializeField] private TextMeshProUGUI text;

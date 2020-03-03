@@ -2,10 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+
 namespace oneShot
 {
 	public class SpiralAttack : Attack
 	{
+		[Header("SPIRAL PARAMETERS")]
 		[SerializeField] private float radius = 1;
 
 #if UNITY_EDITOR
@@ -14,8 +16,6 @@ namespace oneShot
 
 		public override void Launch()
 		{
-			Debug.Log("HEY");
-
 			Collider2D[] hits = Physics2D.OverlapCircleAll(PlayerBehaviour.Instance.CenterPivot.position, radius);
 
 #if UNITY_EDITOR

@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+
 namespace oneShot
 {
 	public enum AttackName { SpiralAttack, ThrustAttack, SlashAttack }
@@ -21,6 +22,8 @@ namespace oneShot
 			attacksDic[attackName].Launch();
 
 			StartCoroutine(RepeatAttackDelay(attackName));
+
+			CameraShake.Instance.ShakeCamera();
 		}
 
 
@@ -33,12 +36,23 @@ namespace oneShot
 			}
 
 			Instance = this;
+		}
 
+		private void Start()
+		{
 			attacksDic = new Dictionary<AttackName, Attack>();
+			List<Combo> combos = new List<Combo>();
+
 			for (int i = 0; i < attacks.Length; i++)
 			{
 				attacksDic.Add(attacks[i]._AttackName, attacks[i]);
+
+				attacks[i].Combo.Init(attacks[i]._AttackName);
+				combos.Add(attacks[i].Combo);
 			}
+
+			ComboController.Instance.StartCombos(combos.ToArray());
+			ComboController.Instance.ComboSuccessEvent += LaunchAttack;
 		}
 
 		private IEnumerator RepeatAttackDelay(AttackName attackName)

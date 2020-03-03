@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+
 public class SpawnPoint : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI numberText;

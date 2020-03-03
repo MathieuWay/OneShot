@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 public class CursorController : MonoBehaviour
 {
 	public static CursorController Instance { get; private set; }
@@ -21,13 +22,13 @@ public class CursorController : MonoBehaviour
 
 	private void Awake()
 	{
-		if(Instance != null)
+		if (Instance != null)
 		{
 			Destroy(gameObject);
 			return;
 		}
 
-		Instance = this;	
+		Instance = this;
 	}
 
 	private void Start()
@@ -38,9 +39,9 @@ public class CursorController : MonoBehaviour
 
 	private void Update()
 	{
-		if(Gamepad.Instance.HorizontalJL != 0 || Gamepad.Instance.VerticalJL != 0)
+		if (Gamepad.Instance.HorizontalJL != 0 || Gamepad.Instance.VerticalJL != 0)
 		{
-			if(acceleration > maxAcceleration)
+			if (acceleration > maxAcceleration)
 			{
 				acceleration = maxAcceleration;
 			}
@@ -48,22 +49,22 @@ public class CursorController : MonoBehaviour
 			{
 				acceleration += Time.deltaTime * accelerationSpeed;
 			}
-			
+
 			cursorPoint.position += new Vector3(Gamepad.Instance.HorizontalJL, Gamepad.Instance.VerticalJL, 0) * speed * acceleration * Time.deltaTime;
 
-			if(cursorPoint.position.x > Screen.width - radius)
+			if (cursorPoint.position.x > Screen.width - radius)
 			{
 				cursorPoint.position = new Vector2(Screen.width - radius, cursorPoint.position.y);
 			}
-			if(cursorPoint.position.y > Screen.height - radius)
+			if (cursorPoint.position.y > Screen.height - radius)
 			{
 				cursorPoint.position = new Vector2(cursorPoint.position.x, Screen.height - radius);
 			}
-			if(cursorPoint.position.x < radius)
+			if (cursorPoint.position.x < radius)
 			{
 				cursorPoint.position = new Vector2(radius, cursorPoint.position.y);
 			}
-			if(cursorPoint.position.y < radius)
+			if (cursorPoint.position.y < radius)
 			{
 				cursorPoint.position = new Vector2(cursorPoint.position.x, radius);
 			}

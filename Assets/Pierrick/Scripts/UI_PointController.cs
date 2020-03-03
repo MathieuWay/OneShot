@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class UI_PointController : MonoBehaviour
 {
 	public static UI_PointController Instance { get; private set; }
@@ -12,7 +13,7 @@ public class UI_PointController : MonoBehaviour
 
 	public void SetCurrentPoint(UI_Point point)
 	{
-		if(currentPoint != null) currentPoint.Unselect();
+		if (currentPoint != null) currentPoint.Unselect();
 
 		currentPoint = point;
 		currentPoint.Select();
@@ -30,7 +31,7 @@ public class UI_PointController : MonoBehaviour
 
 	private void Awake()
 	{
-		if(Instance != null)
+		if (Instance != null)
 		{
 			Destroy(gameObject);
 			return;
@@ -41,7 +42,7 @@ public class UI_PointController : MonoBehaviour
 
 	private void Update()
 	{
-		if(currentPoint != null)
+		if (currentPoint != null)
 		{
 			//!FOR MOUSE & KEYBOARD
 			//currentPoint.SetPosition(Input.mousePosition);
@@ -52,7 +53,7 @@ public class UI_PointController : MonoBehaviour
 				currentPoint.MovePosition(Gamepad.Instance.HorizontalJR, 100f);
 				pointMoved = true;
 			}
-			else if(pointMoved)
+			else if (pointMoved)
 			{
 				UI_Timeline.Instance.UpdatePointsOrder();
 				UI_Timeline.Instance.UpdateCurrentPointSelected();

@@ -15,6 +15,7 @@ public class UI_Timeline : MonoBehaviour
 {
 	public static UI_Timeline Instance { get; private set; }
 
+
 	[Header("Timer")]
 	[SerializeField] private RectTransform timelineRect;
 	[SerializeField] private Transform timerIndicator;
@@ -64,11 +65,11 @@ public class UI_Timeline : MonoBehaviour
 
 	public void CheckPointOnTimeline(Transform point)
 	{
-		if(point.localPosition.x > timelineRect.rect.xMax)
+		if (point.localPosition.x > timelineRect.rect.xMax)
 		{
 			point.localPosition = new Vector2(timelineRect.rect.xMax, point.localPosition.y);
 		}
-		else if(point.localPosition.x < timelineRect.rect.xMin)
+		else if (point.localPosition.x < timelineRect.rect.xMin)
 		{
 			point.localPosition = new Vector2(timelineRect.rect.xMin, point.localPosition.y);
 		}
@@ -90,7 +91,7 @@ public class UI_Timeline : MonoBehaviour
 
 	private void Awake()
 	{
-		if(Instance != null)
+		if (Instance != null)
 		{
 			Destroy(gameObject);
 			return;
@@ -101,6 +102,8 @@ public class UI_Timeline : MonoBehaviour
 		points = new List<UI_Point>();
 
 		pauseButton.onClick.AddListener(PauseToggle);
+
+
 	}
 
 	private void Start()
@@ -116,13 +119,13 @@ public class UI_Timeline : MonoBehaviour
 	{
 		//!NEW FOR GAMEPAD
 		//Sélection des points sur la timeline
-		if(Gamepad.Instance.ButtonDownTriggerR && selectedPoint < points.Count - 1)
+		if (Gamepad.Instance.ButtonDownTriggerR && selectedPoint < points.Count - 1)
 		{
 			selectedPoint++;
 
 			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
 		}
-		if(Gamepad.Instance.ButtonDownTriggerL && selectedPoint > 0)
+		if (Gamepad.Instance.ButtonDownTriggerL && selectedPoint > 0)
 		{
 			selectedPoint--;
 
@@ -178,7 +181,7 @@ public class UI_Timeline : MonoBehaviour
 
 	private IEnumerator TimerProcess()
 	{
-		while(true)
+		while (true)
 		{
 			if (pause)
 			{
@@ -186,9 +189,9 @@ public class UI_Timeline : MonoBehaviour
 				continue;
 			}
 
-			timer += Time.deltaTime;
+			timer += Time.deltaTime * GameTime.Instance.TimeSpeed;
 
-			if(timer >= timerDuration) timer = 0;
+			if (timer >= timerDuration) timer = 0;
 
 			SetOnTimeline(timerIndicator, timer / timerDuration);
 
@@ -203,18 +206,18 @@ public class UI_Timeline : MonoBehaviour
 		pauseImage.sprite = pause ? playSprite : pauseSprite;
 	}
 
-    public void SetPause(bool state)
-    {
-        pause = state;
-        pauseImage.sprite = pause ? playSprite : pauseSprite;
-    }
+	public void SetPause(bool state)
+	{
+		pause = state;
+		pauseImage.sprite = pause ? playSprite : pauseSprite;
+	}
 
-    public void ResetTimeline()
-    {
-        timer = 0;
-        SetOnTimeline(timerIndicator, timer / timerDuration);
-        pause = false;
-    }
+	public void ResetTimeline()
+	{
+		timer = 0;
+		SetOnTimeline(timerIndicator, timer / timerDuration);
+		pause = false;
+	}
 
 	public void UpdatePointsOrder()
 	{

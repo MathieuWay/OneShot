@@ -2,19 +2,23 @@
 using System.Collections;
 using UnityEngine;
 
+
 namespace oneShot
 {
 	public abstract class Attack : MonoBehaviour
 	{
+		[Header("MAIN")]
 		[SerializeField] private AttackName attackName;
 		[SerializeField] private float repeatDelay = 2;
+		[SerializeField] private Combo combo;
 		public AttackName _AttackName { get => attackName; }
 		public float RepeatDelay { get => repeatDelay; }
+		public Combo Combo { get => combo; }
 		public bool IsReady { get; set; }
 
 #if UNITY_EDITOR
-		private bool isDebug;
-		private float detectionRange;
+		private bool isDebugRange;
+		private float debugDetectionRange;
 #endif
 
 		public abstract void Launch();
@@ -70,18 +74,18 @@ namespace oneShot
 #if UNITY_EDITOR
 		private IEnumerator DebugOverlapBox(float duration, float detectionRange)
 		{
-			isDebug = true;
-			this.detectionRange = detectionRange;
+			isDebugRange = true;
+			this.debugDetectionRange = detectionRange;
 			yield return new WaitForSeconds(duration);
-			isDebug = false;
+			isDebugRange = false;
 		}
 
 		private void OnDrawGizmos()
 		{
-			if(isDebug)
+			if(isDebugRange)
 			{
 				Gizmos.color = Color.red;
-				Gizmos.DrawWireCube(PlayerBehaviour.Instance.CenterPivot.position, new Vector3(detectionRange, 1, 0));
+				Gizmos.DrawWireCube(PlayerBehaviour.Instance.CenterPivot.position, new Vector3(debugDetectionRange, 1, 0));
 			}
 		}
 #endif

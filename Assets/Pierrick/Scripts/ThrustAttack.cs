@@ -2,10 +2,12 @@
 using System.Collections;
 using UnityEngine;
 
+
 namespace oneShot
 {
 	public class ThrustAttack : Attack
 	{
+		[Header("THRUST PARAMETERS")]
 		[SerializeField] private float detectionRange = 1;
 
 		public override void Launch()

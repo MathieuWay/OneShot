@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
+
 /// <summary>
 /// Contrôle les points de spawn
 /// Instancie les points en fonction de l'input du joueur
@@ -61,7 +62,7 @@ public class SpawnController : MonoBehaviour
 
 	private void Awake()
 	{
-		if(Instance != null)
+		if (Instance != null)
 		{
 			Destroy(gameObject);
 			return;
@@ -79,7 +80,7 @@ public class SpawnController : MonoBehaviour
 
 	private IEnumerator SpawnProcess()
 	{
-		while(LevelController.Instance.phase == Phase.Tactical && SpawnPoints.Count < spawnCount)
+		while (LevelController.Instance.phase == Phase.Tactical && SpawnPoints.Count < spawnCount)
 		{
 			if (/*Input.GetMouseButtonDown(0)*/Gamepad.Instance.ButtonDownA /*&& !UI_PointController.Instance.DraggingPoint()*/)
 			{
@@ -131,7 +132,7 @@ public class SpawnController : MonoBehaviour
 
 				//Instance du point de spawn sur la surface touché
 				GameObject instance = Instantiate(pointPrefab, results[0].point + Vector2.up * spawnDistanceToFloor, Quaternion.identity);
-				
+
 
 				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
 
