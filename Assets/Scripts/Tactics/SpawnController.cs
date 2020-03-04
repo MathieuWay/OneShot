@@ -88,7 +88,7 @@ public class SpawnController : MonoBehaviour
 				//RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
 
 
-				Ray ray = Camera.main.ScreenPointToRay(CursorLayerController.Instance.GetPosition());
+				Ray ray = Camera.main.ScreenPointToRay(CursorController.Instance.GetPosition());
 
 				RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 

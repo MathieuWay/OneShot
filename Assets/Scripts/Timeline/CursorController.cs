@@ -2,9 +2,9 @@
 using UnityEngine.UI;
 
 
-public class CursorLayerController : MonoBehaviour
+public class CursorController : MonoBehaviour
 {
-	public static CursorLayerController Instance { get; private set; }
+	public static CursorController Instance { get; private set; }
 
 	[SerializeField] private Transform canvasTransform;
 	[SerializeField] private Transform cursorPoint;
