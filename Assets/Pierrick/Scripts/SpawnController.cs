@@ -80,7 +80,7 @@ public class SpawnController : MonoBehaviour
 
 	private IEnumerator SpawnProcess()
 	{
-		while (LevelController.Instance.phase == Phase.Tactical && SpawnPoints.Count < spawnCount)
+		while (oneShot.LevelController.Instance.phase == oneShot.Phase.Tactical && SpawnPoints.Count < spawnCount)
 		{
 			if (/*Input.GetMouseButtonDown(0)*/Gamepad.Instance.ButtonDownA /*&& !UI_PointController.Instance.DraggingPoint()*/)
 			{
@@ -88,7 +88,7 @@ public class SpawnController : MonoBehaviour
 				//RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
 
 
-				Ray ray = Camera.main.ScreenPointToRay(CursorController.Instance.GetPosition());
+				Ray ray = Camera.main.ScreenPointToRay(CursorLayerController.Instance.GetPosition());
 
 				RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
 

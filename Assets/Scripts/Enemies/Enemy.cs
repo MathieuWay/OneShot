@@ -45,10 +45,10 @@ namespace oneShot
                 OnEnemyDead();
             }
         }
-    }
 
-	public void Kill()
-	{
-		anim.SetTrigger("dying");
+		public void Kill()
+		{
+			anim.SetTrigger("dying");
+		}
 	}
 }
