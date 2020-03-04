@@ -2,26 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemiesController : MonoBehaviour
+namespace oneShot
 {
-    public int enemyCount;
-
-    //public delegate void NoEnemiesLeft();
-    //public static event NoEnemiesLeft OnNoEnemiesLeft;
-
-    private void Awake()
+    public class EnemiesController : MonoBehaviour
     {
-        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        Enemy.OnEnemyDead += EnemyDied;
-    }
-    private void EnemyDied()
-    {
-        enemyCount--;
-        if (enemyCount <= 0)
+        public int enemyCount;
+
+        //public delegate void NoEnemiesLeft();
+        //public static event NoEnemiesLeft OnNoEnemiesLeft;
+
+        private void Awake()
         {
-            Debug.Log("No enemy left");
-            //OnNoEnemiesLeft();
-            Fader.Instance.FadeOut();
+            enemyCount = LevelController.Instance.GetEnemies().Count;
+            Enemy.OnEnemyDead += EnemyDied;
+        }
+        private void EnemyDied()
+        {
+            enemyCount--;
+            if (enemyCount <= 0)
+            {
+                Debug.Log("No enemy left");
+                //OnNoEnemiesLeft();
+                Fader.Instance.FadeOut();
+            }
         }
     }
 }

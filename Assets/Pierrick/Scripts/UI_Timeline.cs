@@ -36,6 +36,8 @@ public class UI_Timeline : MonoBehaviour
 	[SerializeField] private Sprite playSprite;
 	private bool pause = false;
 
+  public delegate void TimelineReset();
+  public static event TimelineReset OnTimelineReset;
 
 	public void ResetAll()
 	{
@@ -191,7 +193,7 @@ public class UI_Timeline : MonoBehaviour
 
 			timer += Time.deltaTime * GameTime.Instance.TimeSpeed;
 
-			if (timer >= timerDuration) timer = 0;
+			if (timer >= timerDuration) ResetTimeline();
 
 			SetOnTimeline(timerIndicator, timer / timerDuration);
 
@@ -214,9 +216,10 @@ public class UI_Timeline : MonoBehaviour
 
 	public void ResetTimeline()
 	{
-		timer = 0;
-		SetOnTimeline(timerIndicator, timer / timerDuration);
-		pause = false;
+			timer = 0;
+			SetOnTimeline(timerIndicator, timer / timerDuration);
+			pause = false;
+			OnTimelineReset?.Invoke();
 	}
 
 	public void UpdatePointsOrder()

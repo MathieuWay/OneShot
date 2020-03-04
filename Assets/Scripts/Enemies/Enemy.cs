@@ -2,22 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace oneShot
 {
-    public delegate void EnemyDead();
-    public static event EnemyDead OnEnemyDead;
+    public class Enemy : MonoBehaviour
+    {
+        public delegate void EnemyDead();
+        public static event EnemyDead OnEnemyDead;
 
-    private Animator anim; 
-    private void Start()
-    {
-        anim = GetComponentInChildren<Animator>();
-    }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
+        //public pattern
+        //private Path path;
+
+        private Animator anim;
+        private Agent agent;
+
+        private void Start()
         {
-            anim.SetTrigger("dying");
-            OnEnemyDead();
+            anim = GetComponentInChildren<Animator>();
+            agent = GetComponent<Agent>();
+            /*path = GetComponent<Path>();
+            if(path)
+                path.InitPath(transform.position);*/
+        }
+
+        private void Update()
+        {
+            /*if(path)
+                transform.position = path.GetPositionAlongPath();*/
+            if (agent)
+            {
+                if (!agent.reach)
+                    anim.SetBool("isMoving", true);
+                else
+                    anim.SetBool("isMoving", false);
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                anim.SetTrigger("dying");
+                OnEnemyDead();
+            }
         }
     }
 

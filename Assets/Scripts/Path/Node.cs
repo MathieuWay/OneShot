@@ -9,7 +9,9 @@ namespace oneShot
         Top,
         Right,
         Bottom,
-        Left
+        Left,
+        Front,
+        Back
     }
 
     [Serializable]
@@ -29,6 +31,16 @@ namespace oneShot
                 return neighbour.node;
             else
                 return null;
+        }
+
+        public void OnDrawGizmos()
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(transform.position, 0.2f);
+            foreach(NeighbourNode neighbourNode in neighbourNodes)
+            {
+                Debug.DrawLine(transform.position, neighbourNode.node.transform.position, Color.green);
+            }
         }
     }
 }
