@@ -194,7 +194,7 @@ public class UI_Timeline : MonoBehaviour
         timer = 0;
         SetOnTimeline(timerIndicator, timer / timerDuration);
         pause = false;
-        OnTimelineReset();
+        OnTimelineReset?.Invoke();
     }
 
 	public void UpdatePointsOrder()

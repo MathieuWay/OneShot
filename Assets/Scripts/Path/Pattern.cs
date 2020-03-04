@@ -65,6 +65,7 @@ namespace oneShot
                 {
                     case StepType.Move:
                         agent.SetTarget(step.target);
+                        agent.CalculateTime(agent.target);
                         //moveStep.InitMove(GetComponent<Path>());
                         break;
                 }

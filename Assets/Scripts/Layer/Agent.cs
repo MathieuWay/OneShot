@@ -90,7 +90,7 @@ public class Agent : MonoBehaviour
         transform.position = newPos;
     }
 
-    private float CalculateTime(Vector3 position)
+    public float CalculateTime(Vector3 position)
     {
         path.Clear();
         float time = 0;
@@ -160,6 +160,7 @@ public class Agent : MonoBehaviour
 
     public void resetPosition()
     {
+        target = Vector3.zero;
         transform.position = initialPosition;
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
     }
