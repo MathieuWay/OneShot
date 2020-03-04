@@ -98,7 +98,7 @@ public class CameraController : MonoBehaviour
                 float distCovered = Time.time - focusStartTime;
                 float fraction = distCovered / focusTime;
                 transform.position = Vector3.Lerp(focusStartPosition, new Vector3(AnchorCamera.position.x, AnchorCamera.position.y, -10), FocusPositionCurve.Evaluate(fraction));
-                mainCamera.orthographicSize = Mathf.Lerp(focusStartorthographicSize, focusorthographicSize, FocusCameraSizeCurve.Evaluate(fraction));
+                mainCamera.orthographicSize = Mathf.Lerp(focusStartorthographicSize, focusorthographicSize, fraction) * FocusCameraSizeCurve.Evaluate(fraction);
                 if (fraction >= 1)
                 {
                     state = State.Chasing;
