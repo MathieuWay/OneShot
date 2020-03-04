@@ -39,16 +39,17 @@ namespace oneShot
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.CompareTag("Player"))
-            {
-                anim.SetTrigger("dying");
-                OnEnemyDead();
-            }
+            //if (collision.gameObject.CompareTag("Player"))
+            //{
+            //    anim.SetTrigger("dying");
+            //    OnEnemyDead();
+            //}
         }
 
 		public void Kill()
 		{
 			anim.SetTrigger("dying");
+			OnEnemyDead();
 		}
 	}
 }
