@@ -73,7 +73,7 @@ namespace oneShot
 
         private void ResetPattern()
         {
-            transform.position = initialPosition;
+            agent.resetPosition();
             patternStepsLoaded = new List<PatternStepMove>(patternSteps);
             Debug.Log("resetPattern");
         }

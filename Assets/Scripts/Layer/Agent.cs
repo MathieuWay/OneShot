@@ -13,10 +13,12 @@ public class Agent : MonoBehaviour
     private float clock;
     public List<Vector3> path = new List<Vector3>();
     public bool debug;
+    private Vector3 initialPosition;
     // Start is called before the first frame update
     void Start()
     {
         //StartCoroutine("StepLayer");
+        initialPosition = transform.position;
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
     }
 
@@ -154,6 +156,12 @@ public class Agent : MonoBehaviour
     {
         target = pos;
         reach = false;
+    }
+
+    public void resetPosition()
+    {
+        transform.position = initialPosition;
+        currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
     }
 
     IEnumerator delay(float time)
