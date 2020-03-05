@@ -44,7 +44,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: 2
-  repeatDelay: 2
   combo:
     inputs:
     - inputName: 6
@@ -53,6 +52,8 @@ MonoBehaviour:
       delay: 1
     - inputName: 7
       delay: 1
+    repeatDelay: 2
+    attackTitle: Slash
   detectionRange: 4
 --- !u!1 &3672627027250455344
 GameObject:
@@ -148,7 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: 0
-  repeatDelay: 2
   combo:
     inputs:
     - inputName: 2
@@ -157,6 +157,8 @@ MonoBehaviour:
       delay: 1
     - inputName: 8
       delay: 1.5
+    repeatDelay: 2
+    attackTitle: Spiral
   radius: 1
 --- !u!1 &3672627028709258143
 GameObject:
@@ -202,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackName: 1
-  repeatDelay: 2
   combo:
     inputs:
     - inputName: 3
@@ -211,4 +212,6 @@ MonoBehaviour:
       delay: 1
     - inputName: 2
       delay: 1
+    repeatDelay: 2
+    attackTitle: Thrust
   detectionRange: 4
