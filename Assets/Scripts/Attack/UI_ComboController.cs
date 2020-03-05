@@ -7,7 +7,9 @@ namespace oneShot
 	public class UI_ComboController : MonoBehaviour
 	{
 		[SerializeField] private GameObject inputPrefab;
+		[SerializeField] private GameObject comboPrefab;
 		[SerializeField] private Transform comboContainer;
+		[SerializeField] private Transform comboListContainer;
 		private List<UI_Input> uiInputs;
 		private bool isRunning;
 		private bool nextInput;
@@ -21,10 +23,21 @@ namespace oneShot
 			currentInput = 0;
 			uiInputs = new List<UI_Input>();
 
+			ComboController.Instance.InitCombosEvent += InitCombos;
 			ComboController.Instance.StartComboEvent += StartCombo;
 			ComboController.Instance.ComboFailedEvent += ClearCombo;
 			ComboController.Instance.ComboCompletedEvent += ClearCombo;
 			ComboController.Instance.NextInputEvent += delegate { nextInput = true; };
+		}
+
+		private void InitCombos(Combo[] combos)
+		{
+			for (int i = 0; i < combos.Length; i++)
+			{
+				GameObject instance = Instantiate(comboPrefab, comboListContainer);
+
+				instance.GetComponent<UI_Combo>().Init(combos[i].attackTitle.ToString().ToUpper(), combos[i]);
+			}
 		}
 
 		private void StartCombo(Combo combo)

@@ -13,6 +13,7 @@ namespace oneShot
 	{
 		public ComboInput[] inputs;
 		public float repeatDelay = 2;
+		public string attackTitle;
 
 		[System.Serializable]
 		public class ComboInput
@@ -38,6 +39,8 @@ namespace oneShot
 		public delegate void ComboDelegate(AttackName comboName);
 		public delegate void ComboDelegateV2(Combo combo);
 		public delegate void ComboDelegateV3();
+		public delegate void ComboDelegateV4(Combo[] combos);
+		public event ComboDelegateV4 InitCombosEvent;
 		public event ComboDelegate ComboSuccessEvent;
 		public event ComboDelegateV2 StartComboEvent;
 		public event ComboDelegateV3 ComboFailedEvent;
@@ -51,6 +54,8 @@ namespace oneShot
 		public void StartCombos(Combo[] combos)
 		{
 			StartCoroutine(ComboSelection(combos));
+
+			InitCombosEvent?.Invoke(combos);
 		}
 
 
