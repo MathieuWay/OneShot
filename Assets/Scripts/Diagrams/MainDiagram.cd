@@ -50,13 +50,6 @@
   </Class>
   <Class Name="oneShot.ComboController" Collapsed="true">
     <Position X="2.5" Y="1" Width="1.5" />
-    <NestedTypes>
-      <Delegate Name="oneShot.ComboController.ComboDelegate" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Assets\Scripts\Attack\ComboController.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Delegate>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>AAEAAAAAAQQAAAAAAAACAAAAAAAAAAAAQAAgAABwIEQ=</HashCode>
       <FileName>Assets\Scripts\Attack\ComboController.cs</FileName>
@@ -115,7 +108,7 @@
   <Class Name="CursorController" Collapsed="true">
     <Position X="21.25" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>EAQBAAAACCAAAAAAACAAAAAAAAAAAQQAQAAAAAIAAEA=</HashCode>
+      <HashCode>EAQBBAAACCAAAAAAACAAAAAAAAAAAQQAQAAAAAIAAEA=</HashCode>
       <FileName>Assets\Scripts\Timeline\CursorController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -139,13 +132,6 @@
   </Class>
   <Class Name="UI_Timeline" Collapsed="true">
     <Position X="18.75" Y="1" Width="1.5" />
-    <NestedTypes>
-      <Delegate Name="UI_Timeline.TimelineReset" Collapsed="true">
-        <TypeIdentifier>
-          <NewMemberFileName>Assets\Scripts\Timeline\UI_Timeline.cs</NewMemberFileName>
-        </TypeIdentifier>
-      </Delegate>
-    </NestedTypes>
     <TypeIdentifier>
       <HashCode>CMQACECQEiAYgEAAAAAAIAACAEgCIAIgwAAAAIAIK0A=</HashCode>
       <FileName>Assets\Scripts\Timeline\UI_Timeline.cs</FileName>
@@ -154,14 +140,14 @@
   <Class Name="Gamepad" Collapsed="true">
     <Position X="21.25" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>QCRAAABAAQBAABiMEBBBAChgCAAAAAAgQAAAAAAAAEA=</HashCode>
+      <HashCode>QCRAAABAAQBAABiMEBBBAChgCAAAIAAgQAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\Gamepad.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GameTime" Collapsed="true">
     <Position X="21.25" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAAAgACAAAAAAAQAAAAAAAQAAAAAAAAEA=</HashCode>
+      <HashCode>AAAAAAAAACAAEAgACAAAAAAAQAAAAAAAQAAAAAAAAEA=</HashCode>
       <FileName>Assets\Scripts\GameTime.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -181,15 +167,22 @@
   </Class>
   <Class Name="oneShot.Enemy" Collapsed="true">
     <Position X="3" Y="6.25" Width="1.5" />
+    <NestedTypes>
+      <Delegate Name="oneShot.Enemy.EnemyDead" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scripts\Enemies\Enemy.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Delegate>
+    </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAQAAAQAAGAAAQAAAAAAAAAAAEAAAAAAAQAAAAAAAAA=</HashCode>
+      <HashCode>AAQAAAQAAGAAAQAAAAAAAAAAAEAAAAAAAQAAAAEAAAA=</HashCode>
       <FileName>Assets\Scripts\Enemies\Enemy.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Agent" Collapsed="true">
     <Position X="3" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AEQEEAAAACAAAAgAIICCAAgQAEAAAQAAIAACAAAAAAI=</HashCode>
+      <HashCode>AEQEEAAAQCAAAAAAIICCAAgQAEAAAQAAIAACAAAAAAI=</HashCode>
       <FileName>Assets\Scripts\Layer\Agent.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -308,7 +301,7 @@
   <Class Name="oneShot.TacticsController" Collapsed="true">
     <Position X="5.25" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAIBAAAAAgAAAAAAAAAAAAAAAABIAAIBQAAAAAAAQEA=</HashCode>
+      <HashCode>AAYBAAAAAAAAAAAAAAAAAAAAAABIAAIBQAAAAAQAQEA=</HashCode>
       <FileName>Assets\Scripts\TacticsController.cs</FileName>
     </TypeIdentifier>
   </Class>

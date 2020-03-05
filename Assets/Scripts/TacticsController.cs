@@ -38,6 +38,7 @@ namespace oneShot
             }
         }
 
+		public bool isFinished;
         //TIMER
         public float time;
         //STEPS
@@ -50,25 +51,33 @@ namespace oneShot
         {
             instance = this;
             player = GameObject.FindWithTag("Player");
+			isFinished = false;
         }
 
         // Update is called once per frame
-        private void FixedUpdate()
+        private void Update()
         {
-            if (LevelController.Instance.phase == Phase.Combat)
+            if (LevelController.Instance.phase == Phase.Combat && !isFinished)
             {
                 if (time >= nextStep.time)
-                    ExecuteNextStep();
-                time += Time.fixedDeltaTime;
+				{
+					GameTime.Instance.SetTimeSpeed(0.2f, 1);
+					ExecuteNextStep();
+				}
+                    
+                time += Time.deltaTime * GameTime.Instance.TimeSpeed;
             }
         }
 
         private void ExecuteNextStep()
         {
             player.transform.position = nextStep.pos;
-            if (tpQueue.Count > 0)
-                nextStep = tpQueue.Dequeue();
-        }
+			if (tpQueue.Count > 0)
+				nextStep = tpQueue.Dequeue();
+			else
+				isFinished = true;
+
+		}
 
         public void loadTactics(List<SpawnPoint> tpList)
         {

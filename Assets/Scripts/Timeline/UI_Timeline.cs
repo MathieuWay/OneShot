@@ -119,6 +119,8 @@ public class UI_Timeline : MonoBehaviour
 
 	private void Update()
 	{
+		if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat) return;
+
 		//!NEW FOR GAMEPAD
 		//Sélection des points sur la timeline
 		if (Gamepad.Instance.ButtonDownTriggerR && selectedPoint < points.Count - 1)
@@ -132,6 +134,11 @@ public class UI_Timeline : MonoBehaviour
 			selectedPoint--;
 
 			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
+		}
+
+		if (Gamepad.Instance.ButtonDownY)
+		{
+			PauseToggle();
 		}
 	}
 
@@ -185,12 +192,6 @@ public class UI_Timeline : MonoBehaviour
 	{
 		while (true)
 		{
-			if (pause)
-			{
-				yield return null;
-				continue;
-			}
-
 			timer += Time.deltaTime * GameTime.Instance.TimeSpeed;
 
 			if (timer >= timerDuration) ResetTimeline();
@@ -205,21 +206,23 @@ public class UI_Timeline : MonoBehaviour
 	{
 		pause = !pause;
 
-		pauseImage.sprite = pause ? playSprite : pauseSprite;
+		SetPause(pause);
 	}
 
 	public void SetPause(bool state)
 	{
 		pause = state;
 		pauseImage.sprite = pause ? playSprite : pauseSprite;
+
+		GameTime.Instance.SetHardTimeSpeed(pause ? 0 : 1);
 	}
 
 	public void ResetTimeline()
 	{
-			timer = 0;
-			SetOnTimeline(timerIndicator, timer / timerDuration);
-			pause = false;
-			OnTimelineReset?.Invoke();
+		timer = 0;
+		SetOnTimeline(timerIndicator, timer / timerDuration);
+		SetPause(false);
+		OnTimelineReset?.Invoke();
 	}
 
 	public void UpdatePointsOrder()

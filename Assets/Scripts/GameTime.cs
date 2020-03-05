@@ -8,8 +8,16 @@ public class GameTime : MonoBehaviour
 	public static GameTime Instance { get; private set; }
 	public float TimeSpeed { get; private set; }
 
+
+	public void SetHardTimeSpeed(float speed)
+	{
+		TimeSpeed = speed;
+	}
+
 	public void SetTimeSpeed(float speed, float duration)
 	{
+		Debug.Log("SET TIME");
+
 		if (speed > 1)
 		{
 			speed = 1;

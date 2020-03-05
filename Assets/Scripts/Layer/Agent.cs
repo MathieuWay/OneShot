@@ -32,7 +32,7 @@ public class Agent : MonoBehaviour
             if (transform.position.y == target.y)
             {
                 if (transform.position != target && !reach)
-                    transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
                 else
                 {
                     reach = true;
@@ -53,7 +53,7 @@ public class Agent : MonoBehaviour
                     ChangeLayer();
                 }
                 else
-                    transform.position = Vector3.MoveTowards(transform.position, accessPos, speed * Time.deltaTime);
+                    transform.position = Vector3.MoveTowards(transform.position, accessPos, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
             }
         }
 
@@ -163,6 +163,7 @@ public class Agent : MonoBehaviour
     public void ResetAgent()
     {
 		enemy.isAlive = true;
+		enemy.anim.Rebind();
         target = Vector3.zero;
         transform.position = initialPosition;
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));

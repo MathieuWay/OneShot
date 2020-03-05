@@ -42,6 +42,8 @@ public class UI_PointController : MonoBehaviour
 
 	private void Update()
 	{
+		if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat) return;
+
 		if (currentPoint != null)
 		{
 			//!FOR MOUSE & KEYBOARD
@@ -50,7 +52,7 @@ public class UI_PointController : MonoBehaviour
 			//!NEW FOR GAMEPAD
 			if (Gamepad.Instance.HorizontalJR != 0)
 			{
-				currentPoint.MovePosition(Gamepad.Instance.HorizontalJR, 100f);
+				currentPoint.MovePosition(Gamepad.Instance.HorizontalJR, 150f);
 				pointMoved = true;
 			}
 			else if (pointMoved)

@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+
 namespace oneShot
 {
     public enum Phase
@@ -41,12 +43,17 @@ namespace oneShot
 
         private void Update()
         {
-            if (Input.GetKeyDown(KeyCode.Return) && phase == Phase.Tactical)
+            if ((Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownStart) && phase == Phase.Tactical)
             {
                 CameraController.Instance.FocusOnPlayer();
                 UI_Timeline.Instance.SetPause(false);
                 StartCoroutine(DelayBeforeCombatPhase(CameraController.Instance.focusTime));
             }
+
+			if(Input.GetKeyDown(KeyCode.R))
+			{
+				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			}
         }
 
 
@@ -61,9 +68,9 @@ namespace oneShot
 			CursorController.Instance.SetState(false);
 
             yield return new WaitForSeconds(sec);
-            phase = Phase.Combat;
             TacticsController.Instance.loadTactics(SpawnController.Instance.SpawnPoints);
-            UI_Timeline.Instance.ResetTimeline();
+			phase = Phase.Combat;
+			UI_Timeline.Instance.ResetTimeline();
         }
 
         public List<Enemy> GetEnemies()

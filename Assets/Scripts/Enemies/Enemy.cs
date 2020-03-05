@@ -12,7 +12,7 @@ namespace oneShot
 		//public pattern
 		//private Path path;
 		public bool isAlive;
-        private Animator anim;
+        public Animator anim;
         private Agent agent;
 
         private void Start()
@@ -27,6 +27,7 @@ namespace oneShot
 
         private void Update()
         {
+			anim.speed = GameTime.Instance.TimeSpeed;
             /*if(path)
                 transform.position = path.GetPositionAlongPath();*/
             if (agent)

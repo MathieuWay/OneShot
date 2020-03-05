@@ -102,7 +102,6 @@ public class CameraController : MonoBehaviour
                 if (fraction >= 1)
                 {
                     state = State.Chasing;
-                    LevelController.Instance.phase = Phase.Combat;
                 }
                 break;
             case State.Chasing:
