@@ -184,4 +184,12 @@ public class SpawnController : MonoBehaviour
 
 		SpawnComplete?.Invoke();
 	}
+
+	public SpawnPoint SpawnPoint
+	{
+		get => default;
+		set
+		{
+		}
+	}
 }

@@ -14,9 +14,11 @@ public class Agent : MonoBehaviour
     public List<Vector3> path = new List<Vector3>();
     public bool debug;
     private Vector3 initialPosition;
+	private oneShot.Enemy enemy;
     // Start is called before the first frame update
     void Start()
     {
+		enemy = GetComponent<oneShot.Enemy>();
         //StartCoroutine("StepLayer");
         initialPosition = transform.position;
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
@@ -25,7 +27,7 @@ public class Agent : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(target != Vector3.zero && !reach)
+        if(target != Vector3.zero && !reach && enemy.isAlive)
         {
             if (transform.position.y == target.y)
             {
@@ -158,8 +160,9 @@ public class Agent : MonoBehaviour
         reach = false;
     }
 
-    public void resetPosition()
+    public void ResetAgent()
     {
+		enemy.isAlive = true;
         target = Vector3.zero;
         transform.position = initialPosition;
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));

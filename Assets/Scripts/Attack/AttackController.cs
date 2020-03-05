@@ -17,6 +17,8 @@ namespace oneShot
 
 		public void LaunchAttack(AttackName attackName)
 		{
+			if (LevelController.Instance.phase != Phase.Combat) return;
+
 			if (!attacksDic[attackName].IsReady) return;
 
 			attacksDic[attackName].Launch();

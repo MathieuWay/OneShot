@@ -20,6 +20,11 @@ public class CursorController : MonoBehaviour
 		return cursorPoint.position;
 	}
 
+	public void SetState(bool state)
+	{
+		cursorPoint.gameObject.SetActive(state);
+	}
+
 	private void Awake()
 	{
 		if (Instance != null)

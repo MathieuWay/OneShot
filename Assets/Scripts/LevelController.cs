@@ -58,6 +58,8 @@ namespace oneShot
 
         private IEnumerator DelayBeforeCombatPhase(float sec)
         {
+			CursorController.Instance.SetState(false);
+
             yield return new WaitForSeconds(sec);
             phase = Phase.Combat;
             TacticsController.Instance.loadTactics(SpawnController.Instance.SpawnPoints);

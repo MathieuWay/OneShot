@@ -74,7 +74,7 @@ namespace oneShot
 
         private void ResetPattern()
         {
-            agent.resetPosition();
+            agent.ResetAgent();
             patternStepsLoaded = new List<PatternStepMove>(patternSteps);
             Debug.Log("resetPattern");
         }

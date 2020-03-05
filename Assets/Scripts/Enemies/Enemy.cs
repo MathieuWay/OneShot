@@ -9,14 +9,15 @@ namespace oneShot
         public delegate void EnemyDead();
         public static event EnemyDead OnEnemyDead;
 
-        //public pattern
-        //private Path path;
-
+		//public pattern
+		//private Path path;
+		public bool isAlive;
         private Animator anim;
         private Agent agent;
 
         private void Start()
         {
+			isAlive = true;
             anim = GetComponentInChildren<Animator>();
             agent = GetComponent<Agent>();
             /*path = GetComponent<Path>();
@@ -48,6 +49,7 @@ namespace oneShot
 
 		public void Kill()
 		{
+			isAlive = false;
 			anim.SetTrigger("dying");
 			OnEnemyDead();
 		}
