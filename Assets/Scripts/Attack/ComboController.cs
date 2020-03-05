@@ -11,10 +11,18 @@ namespace oneShot
 	[System.Serializable]
 	public class Combo
 	{
-		public InputName[] inputs;
-		public float delay = 1f;
+		public ComboInput[] inputs;
+		public float repeatDelay = 2;
+
+		[System.Serializable]
+		public class ComboInput
+		{
+			public InputName inputName;
+			public float delay = 1;
+		}
 
 		public AttackName _AttackName { get; private set; }
+		public bool IsStopped { get; set; }
 
 		public void Init(AttackName attackName)
 		{
@@ -28,7 +36,13 @@ namespace oneShot
 		public static ComboController Instance { get; private set; }
 
 		public delegate void ComboDelegate(AttackName comboName);
+		public delegate void ComboDelegateV2(Combo combo);
+		public delegate void ComboDelegateV3();
 		public event ComboDelegate ComboSuccessEvent;
+		public event ComboDelegateV2 StartComboEvent;
+		public event ComboDelegateV3 ComboFailedEvent;
+		public event ComboDelegateV3 ComboCompletedEvent;
+		public event ComboDelegateV3 NextInputEvent;
 
 		private bool comboRunning = false;
 		private float joystickLimit = 0.8f;
@@ -66,11 +80,14 @@ namespace oneShot
 
 				for (int i = 0; i < combos.Length; i++)
 				{
-					bool startCombo = CheckInput(combos[i].inputs[0]);
+					bool startCombo = CheckInput(combos[i].inputs[0].inputName);
 
-					if (startCombo)
+					if (startCombo && !combos[i].IsStopped)
 					{
 						Debug.Log("______________________\n START ATTACK: " + combos[i]._AttackName.ToString());
+
+						StartComboEvent?.Invoke(combos[i]);
+
 						StartCoroutine(ComboProcess(combos[i]));
 						break;
 					}
@@ -88,18 +105,23 @@ namespace oneShot
 			while (comboID < combo.inputs.Length)
 			{
 				//Vérification de la réussite de l'input
-				inputSucceed = CheckInput(combo.inputs[comboID]);
+				inputSucceed = CheckInput(combo.inputs[comboID].inputName);
 
 				if (inputSucceed)
 				{
 					Debug.Log("SUCCEED: " + combo.inputs[comboID].ToString());
 					inputSucceed = false;
 					comboID++;
+					NextInputEvent?.Invoke();
 
 					if (comboID >= combo.inputs.Length)
 					{
 						Debug.Log("COMBO COMPLETED");
 						ComboSuccessEvent?.Invoke(combo._AttackName);
+						ComboCompletedEvent?.Invoke();
+
+						StartCoroutine(ComboReadyProcess(combo));
+
 						comboRunning = false;
 						yield break;
 					}
@@ -110,12 +132,12 @@ namespace oneShot
 				}
 
 				//Vérification d'un mauvais input
-				bool comboFailed = CheckBadInput(combo.inputs[comboID]);
+				bool comboFailed = CheckBadInput(combo.inputs[comboID].inputName);
 
 				//Mauvais input ou temps dépassé
 				//Pour le mauvais input, on le compte après un délai 
 				//pour éviter d'entrer en conflit avec l'input précédent
-				if ((comboFailed && timer > 0.3f) || timer > combo.delay)
+				if ((comboFailed && timer > 0.3f) || timer > combo.inputs[comboID].delay)
 				{
 					if (comboFailed)
 					{
@@ -126,6 +148,8 @@ namespace oneShot
 						Debug.Log("FAILED: TIME OUT");
 					}
 
+					ComboFailedEvent?.Invoke();
+
 					comboRunning = false;
 					yield break;
 				}
@@ -133,6 +157,13 @@ namespace oneShot
 				timer += Time.deltaTime;
 				yield return null;
 			}
+		}
+
+		private IEnumerator ComboReadyProcess(Combo combo)
+		{
+			combo.IsStopped = true;
+			yield return new WaitForSeconds(combo.repeatDelay);
+			combo.IsStopped = false;
 		}
 
 		private bool inputSucceed = false;

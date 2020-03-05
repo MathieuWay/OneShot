@@ -38,6 +38,9 @@ namespace oneShot
             }
         }
 
+		[SerializeField] private GameObject tpStartParticle;
+		[SerializeField] private GameObject tpFinishParticle;
+		private bool launchStartParticle;
 		public bool isFinished;
         //TIMER
         public float time;
@@ -59,7 +62,14 @@ namespace oneShot
         {
             if (LevelController.Instance.phase == Phase.Combat && !isFinished)
             {
-                if (time >= nextStep.time)
+				//FX
+				if ((time >= nextStep.time - 0.5f && time < nextStep.time) && !launchStartParticle)
+				{
+					launchStartParticle = true;
+					Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
+				}
+
+				if (time >= nextStep.time)
 				{
 					GameTime.Instance.SetTimeSpeed(0.2f, 1);
 					ExecuteNextStep();
@@ -72,6 +82,11 @@ namespace oneShot
         private void ExecuteNextStep()
         {
             player.transform.position = nextStep.pos;
+
+			//FX
+			launchStartParticle = false;
+			Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
+
 			if (tpQueue.Count > 0)
 				nextStep = tpQueue.Dequeue();
 			else

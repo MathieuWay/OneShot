@@ -9,12 +9,9 @@ namespace oneShot
 	{
 		[Header("MAIN")]
 		[SerializeField] private AttackName attackName;
-		[SerializeField] private float repeatDelay = 2;
 		[SerializeField] private Combo combo;
 		public AttackName _AttackName { get => attackName; }
-		public float RepeatDelay { get => repeatDelay; }
 		public Combo Combo { get => combo; }
-		public bool IsReady { get; set; }
 
 #if UNITY_EDITOR
 		private bool isDebugRange;
@@ -25,7 +22,6 @@ namespace oneShot
 
 		protected virtual void Start()
 		{
-			IsReady = true;
 		}
 
 		protected Enemy GetNearestEnemy(float detectionRange)

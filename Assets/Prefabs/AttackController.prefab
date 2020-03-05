@@ -46,8 +46,13 @@ MonoBehaviour:
   attackName: 2
   repeatDelay: 2
   combo:
-    inputs: 060000000100000007000000
-    delay: 1
+    inputs:
+    - inputName: 6
+      delay: 1
+    - inputName: 1
+      delay: 1
+    - inputName: 7
+      delay: 1
   detectionRange: 4
 --- !u!1 &3672627027250455344
 GameObject:
@@ -145,9 +150,14 @@ MonoBehaviour:
   attackName: 0
   repeatDelay: 2
   combo:
-    inputs: 020000000200000008000000
-    delay: 1
-  radius: 2.5
+    inputs:
+    - inputName: 2
+      delay: 1
+    - inputName: 2
+      delay: 1
+    - inputName: 8
+      delay: 1.5
+  radius: 1
 --- !u!1 &3672627028709258143
 GameObject:
   m_ObjectHideFlags: 0
@@ -194,6 +204,11 @@ MonoBehaviour:
   attackName: 1
   repeatDelay: 2
   combo:
-    inputs: 030000000400000002000000
-    delay: 1
+    inputs:
+    - inputName: 3
+      delay: 1
+    - inputName: 4
+      delay: 1
+    - inputName: 2
+      delay: 1
   detectionRange: 4

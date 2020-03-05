@@ -11,6 +11,7 @@ namespace oneShot
 
 		//public pattern
 		//private Path path;
+		[SerializeField] private GameObject killParticle;
 		public bool isAlive;
         public Animator anim;
         private Agent agent;
@@ -53,6 +54,9 @@ namespace oneShot
 			isAlive = false;
 			anim.SetTrigger("dying");
 			OnEnemyDead();
+
+			//FX
+			Instantiate(killParticle);
 		}
 	}
 }

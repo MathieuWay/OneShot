@@ -1266,11 +1266,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackController
       objectReference: {fileID: 0}
-    - target: {fileID: 3672627027562074272, guid: 44d46ff1d5effa843bb2b562fea80c54,
-        type: 3}
-      propertyPath: radius
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 3672627027953958419, guid: 44d46ff1d5effa843bb2b562fea80c54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1551,26 +1546,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 5970794460537540966, guid: fc6173ef0d0cd36458bc0b7798b0e4ba,
-        type: 3}
-      propertyPath: m_textInfo.characterCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5970794460537540966, guid: fc6173ef0d0cd36458bc0b7798b0e4ba,
-        type: 3}
-      propertyPath: m_textInfo.wordCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5970794460537540966, guid: fc6173ef0d0cd36458bc0b7798b0e4ba,
-        type: 3}
-      propertyPath: m_textInfo.lineCount
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5970794460537540966, guid: fc6173ef0d0cd36458bc0b7798b0e4ba,
-        type: 3}
-      propertyPath: m_textInfo.pageCount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 5970794460596883080, guid: fc6173ef0d0cd36458bc0b7798b0e4ba,
         type: 3}
       propertyPath: m_Name

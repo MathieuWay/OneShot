@@ -19,11 +19,11 @@ namespace oneShot
 		{
 			if (LevelController.Instance.phase != Phase.Combat) return;
 
-			if (!attacksDic[attackName].IsReady) return;
+			//if (!attacksDic[attackName].IsReady) return;
 
 			attacksDic[attackName].Launch();
 
-			StartCoroutine(RepeatAttackDelay(attackName));
+			//StartCoroutine(RepeatAttackDelay(attackName));
 
 			CameraShake.Instance.ShakeCamera();
 		}
@@ -57,11 +57,11 @@ namespace oneShot
 			ComboController.Instance.ComboSuccessEvent += LaunchAttack;
 		}
 
-		private IEnumerator RepeatAttackDelay(AttackName attackName)
-		{
-			attacksDic[attackName].IsReady = false;
-			yield return new WaitForSeconds(attacksDic[attackName].RepeatDelay);
-			attacksDic[attackName].IsReady = true;
-		}
+		//private IEnumerator RepeatAttackDelay(AttackName attackName)
+		//{
+		//	attacksDic[attackName].IsReady = false;
+		//	yield return new WaitForSeconds(attacksDic[attackName].RepeatDelay);
+		//	attacksDic[attackName].IsReady = true;
+		//}
 	}
 }
