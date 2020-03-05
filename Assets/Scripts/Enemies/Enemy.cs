@@ -56,7 +56,7 @@ namespace oneShot
 			OnEnemyDead();
 
 			//FX
-			Instantiate(killParticle);
+			Instantiate(killParticle, transform.position + new Vector3(0, 0.2f, 0), killParticle.transform.rotation);
 		}
 	}
 }

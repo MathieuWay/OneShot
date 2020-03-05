@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fe8f0172870334e98f7bfa8d934cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  killParticle: {fileID: 7107743795993528294, guid: bd4db6fabc54b1f42b3429efc46c9e91,
+    type: 3}
+  isAlive: 0
+  anim: {fileID: 0}
 --- !u!1001 &112407703549972221
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -43,13 +43,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5a9473df0b83fa34abb0ff3eb16fedcd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tpStartParticle: {fileID: 7107743795993528294, guid: c9ee5e0ce35fe5b468c15361f06a4535,
+    type: 3}
+  tpFinishParticle: {fileID: 7107743795993528294, guid: c9ee5e0ce35fe5b468c15361f06a4535,
+    type: 3}
+  isFinished: 0
   time: 0
-  tpArray:
-  - pos: {x: 0, y: 0, z: 0}
-    time: 2
-  - pos: {x: 0, y: 0, z: 0}
-    time: 4
-  - pos: {x: 0, y: 0, z: 0}
-    time: 5
-  - pos: {x: 0, y: 0, z: 0}
-    time: 5.5
+  tpArray: []
