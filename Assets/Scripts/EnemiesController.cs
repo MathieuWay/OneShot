@@ -6,8 +6,10 @@ namespace oneShot
 {
     public class EnemiesController : MonoBehaviour
     {
-        public int enemyCount;
+		public int enemyCount;
 
+		public delegate void EnemyDelegate();
+		public static event EnemyDelegate OnAllEnemiesKilled;
         //public delegate void NoEnemiesLeft();
         //public static event NoEnemiesLeft OnNoEnemiesLeft;
 
@@ -23,7 +25,9 @@ namespace oneShot
             {
                 Debug.Log("No enemy left");
                 //OnNoEnemiesLeft();
-                Fader.Instance.FadeOut();
+                
+
+				OnAllEnemiesKilled?.Invoke();
             }
         }
     }

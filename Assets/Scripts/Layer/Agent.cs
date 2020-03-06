@@ -163,8 +163,11 @@ public class Agent : MonoBehaviour
     public void ResetAgent()
     {
 		enemy.isAlive = true;
+
+		enemy.anim.SetBool("isMoving", false);
 		enemy.anim.Rebind();
-        target = Vector3.zero;
+		
+		target = Vector3.zero;
         transform.position = initialPosition;
         currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
     }

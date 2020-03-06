@@ -39,6 +39,7 @@ namespace oneShot
         {
             instance = this;
             Fader.OnFadeIn += FocusOnPlayer;
+			EnemiesController.OnAllEnemiesKilled += ReloadScene;
         }
 
         private void Update()
@@ -52,7 +53,7 @@ namespace oneShot
 
 			if(Input.GetKeyDown(KeyCode.R))
 			{
-				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+				ReloadScene();
 			}
         }
 
@@ -82,6 +83,17 @@ namespace oneShot
             }
             return enemies;
         }
+
+		private void ReloadScene()
+		{
+			StartCoroutine(ReloadDelay(1));
+		}
+		private IEnumerator ReloadDelay(float delay)
+		{
+			Fader.Instance.FadeOut();
+			yield return new WaitForSeconds(delay);
+			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
     }
 }
 
