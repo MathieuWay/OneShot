@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 
 namespace oneShot
 {
@@ -62,7 +62,6 @@ namespace oneShot
                 {
                     case StepType.Move:
                         agent.SetTarget(step.target);
-                        agent.CalculateTime(agent.target);
                         //moveStep.InitMove(GetComponent<Path>());
                         break;
                 }
@@ -73,7 +72,6 @@ namespace oneShot
         {
             agent.ResetAgent();
             patternStepsLoaded = new List<PatternStepMove>(patternSteps);
-            Debug.Log("resetPattern");
         }
 
         private void OnDrawGizmos()
@@ -82,6 +80,23 @@ namespace oneShot
             foreach (PatternStepMove moveStep in patternSteps)
             {
                 Gizmos.DrawSphere(moveStep.target, 0.1f);
+            }
+        }
+
+        private void OnValidate()
+        {
+            if (EditorApplication.isPlaying && agent)
+            {
+                for (int i = 0; i < patternSteps.Count; i++)
+                {
+                    Vector3 initialPos = agent.initialPosition;
+                    if (i > 0)
+                    {
+                        initialPos = patternSteps[i - 1].target;
+                    }
+                    Debug.Log("initial:" + initialPos + "      /target:" + patternSteps[i].target);
+                    patternSteps[i].stepDuration = agent.CalculateTime(initialPos, patternSteps[i].target);
+                }
             }
         }
     }

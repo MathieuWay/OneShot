@@ -13,7 +13,7 @@ public class Agent : MonoBehaviour
     private float clock;
     public List<Vector3> path = new List<Vector3>();
     public bool debug;
-    private Vector3 initialPosition;
+    public Vector3 initialPosition;
 	private oneShot.Enemy enemy;
     // Start is called before the first frame update
     void Start()
@@ -65,7 +65,7 @@ public class Agent : MonoBehaviour
             if (Physics.Raycast(ray, out hit, layerMask))
             {
                 Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
-                float time = CalculateTime(normalizePos);
+                float time = CalculateTime(transform.position, normalizePos);
                 if(time >= 0)
                 {
                     target = normalizePos;
@@ -92,24 +92,22 @@ public class Agent : MonoBehaviour
         transform.position = newPos;
     }
 
-    public float CalculateTime(Vector3 position)
+    public float CalculateTime(Vector3 initialPos,Vector3 position)
     {
         path.Clear();
         float time = 0;
-        Vector3 cursor = transform.position;
-        Layer1 layer = currentLayer;
+        Vector3 cursor = initialPos;
+        Layer1 layer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(cursor.y)); ;
         path.Add(cursor);
         while (cursor.y != position.y)
         {
-            Debug.Log(layer.index);
-            Debug.Log("currentposY:" + cursor.y + "    targetY:" + position.y);
             int direction;
-            if (transform.position.y < position.y)
+            if (cursor.y < position.y)
                 direction = 1;
             else
                 direction = -1;
+            Debug.Log("position:" + cursor + "  /direction:" + direction);
             Vector3 access = layer.GetClosestAccess(direction, cursor);
-            Debug.Log(access);
             if (access == Vector3.zero)
             {
                 path.Clear();

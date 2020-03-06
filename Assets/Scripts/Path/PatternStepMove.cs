@@ -9,6 +9,7 @@ namespace oneShot
     public class PatternStepMove : PatternStep
     {
         public Vector3 target;
+        public float stepDuration;
 
         public PatternStepMove(float time, Vector3 pos)
         {
