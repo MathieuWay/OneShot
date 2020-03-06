@@ -54,6 +54,10 @@ namespace oneShot
 			{
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			}
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                UI_Timeline.Instance.ResetTimeline();
+            }
         }
 
 

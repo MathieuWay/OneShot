@@ -65,7 +65,7 @@ public class Agent : MonoBehaviour
             if (Physics.Raycast(ray, out hit, layerMask))
             {
                 Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
-                float time = CalculateTime(transform.position, normalizePos);
+                float time = CalculateTime(transform.position, normalizePos, speed);
                 if(time >= 0)
                 {
                     target = normalizePos;
@@ -92,13 +92,13 @@ public class Agent : MonoBehaviour
         transform.position = newPos;
     }
 
-    public float CalculateTime(Vector3 initialPos,Vector3 position)
+    public static float CalculateTime(Vector3 initialPos,Vector3 position, float speed)
     {
-        path.Clear();
+        //path.Clear();
         float time = 0;
         Vector3 cursor = initialPos;
         Layer1 layer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(cursor.y)); ;
-        path.Add(cursor);
+        //path.Add(cursor);
         while (cursor.y != position.y)
         {
             int direction;
@@ -110,7 +110,7 @@ public class Agent : MonoBehaviour
             Vector3 access = layer.GetClosestAccess(direction, cursor);
             if (access == Vector3.zero)
             {
-                path.Clear();
+                //path.Clear();
                 Debug.LogError("No access Found");
                 Debug.Break();
                 return -1;
@@ -118,17 +118,17 @@ public class Agent : MonoBehaviour
             //Path to access
             time += Vector3.Distance(cursor, access) / speed;
             cursor = access;
-            path.Add(access);
+            //path.Add(access);
 
             //ChangeLayer
             layer = LayersController.instance.GetLayer(layer.index + direction);
             Vector3 nextPos = cursor;
             nextPos.y = layer.transform.position.y;
             cursor = nextPos;
-            path.Add(nextPos);
+            //path.Add(nextPos);
         }
         time += Vector3.Distance(cursor, position) / speed;
-        path.Add(position);
+        //path.Add(position);
         return time;
     }
 

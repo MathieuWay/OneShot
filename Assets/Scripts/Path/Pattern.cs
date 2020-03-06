@@ -44,7 +44,10 @@ namespace oneShot
                 {
                     Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
                     //Debug.Log(normalizePos);
-                    patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos));
+                    if(patternSteps.Count > 0)
+                        patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos, patternSteps[patternSteps.Count-1].target, agent.speed));
+                    else
+                        patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos, agent.initialPosition, agent.speed));
                     //Transform objectHit = hit.transform;
                     // Do something with the object that was hit by the raycast.
                 }
@@ -95,7 +98,7 @@ namespace oneShot
                         initialPos = patternSteps[i - 1].target;
                     }
                     Debug.Log("initial:" + initialPos + "      /target:" + patternSteps[i].target);
-                    patternSteps[i].stepDuration = agent.CalculateTime(initialPos, patternSteps[i].target);
+                    patternSteps[i].duration = Agent.CalculateTime(initialPos, patternSteps[i].target, agent.speed);
                 }
             }
         }
