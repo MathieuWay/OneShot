@@ -25,9 +25,6 @@ namespace oneShot
             patternStepsLoaded = new List<PatternStepMove>(patternSteps);
             UI_Timeline.OnTimelineReset += ResetPattern;
             initialPosition = transform.position;
-
-            if (patternStepsLoaded.Count > 0)
-                GetNextStep();
         }
 
         public void Update()
