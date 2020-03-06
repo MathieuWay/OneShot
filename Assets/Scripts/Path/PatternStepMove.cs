@@ -9,12 +9,21 @@ namespace oneShot
     public class PatternStepMove : PatternStep
     {
         public Vector3 target;
+        public float duration;
 
         public PatternStepMove(float time, Vector3 pos)
         {
             stepType = StepType.Move;
             startTime = time;
             target = pos;
+        }
+
+        public PatternStepMove(float time, Vector3 pos, Vector3 initialPos, float speed)
+        {
+            stepType = StepType.Move;
+            startTime = time;
+            target = pos;
+            duration = Agent.CalculateTime(initialPos, pos, speed);
         }
         /*public PatternStepMove(Node GoTo)
         {

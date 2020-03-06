@@ -124,18 +124,21 @@ namespace oneShot
 
         public void AddProgression(float direction)
         {
-            if (!((!next && this.pourcentage > 0) || (!previous && this.pourcentage < 0)))
+            if (next)
             {
-                float speedRatio = pathSpeed / Vector3.Distance(CurrentNode.transform.position, next.transform.position);
-                if (direction > 0)
-                    this.pourcentage += speedRatio;
-                else if(direction < 0)
-                    this.pourcentage -= speedRatio;
-            }
-            else
-            {
-                if (!next)
-                    this.pourcentage = 0;
+                if (!((!next && this.pourcentage > 0) || (!previous && this.pourcentage < 0)))
+                {
+                    float speedRatio = pathSpeed / Vector3.Distance(CurrentNode.transform.position, next.transform.position);
+                    if (direction > 0)
+                        this.pourcentage += speedRatio;
+                    else if (direction < 0)
+                        this.pourcentage -= speedRatio;
+                }
+                else
+                {
+                    if (!next)
+                        this.pourcentage = 0;
+                }
             }
         }
     }

@@ -55,6 +55,10 @@ namespace oneShot
 			{
 				ReloadScene();
 			}
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                UI_Timeline.Instance.ResetTimeline();
+            }
         }
 
 

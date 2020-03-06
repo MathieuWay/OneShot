@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEditor;
 
 namespace oneShot
 {
@@ -44,7 +44,10 @@ namespace oneShot
                 {
                     Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
                     //Debug.Log(normalizePos);
-                    patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos));
+                    if(patternSteps.Count > 0)
+                        patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos, patternSteps[patternSteps.Count-1].target, agent.speed));
+                    else
+                        patternSteps.Add(new PatternStepMove(UI_Timeline.Instance.GetCurrentTime(), normalizePos, agent.initialPosition, agent.speed));
                     //Transform objectHit = hit.transform;
                     // Do something with the object that was hit by the raycast.
                 }
@@ -62,7 +65,6 @@ namespace oneShot
                 {
                     case StepType.Move:
                         agent.SetTarget(step.target);
-                        agent.CalculateTime(agent.target);
                         //moveStep.InitMove(GetComponent<Path>());
                         break;
                 }
@@ -73,7 +75,6 @@ namespace oneShot
         {
             agent.ResetAgent();
             patternStepsLoaded = new List<PatternStepMove>(patternSteps);
-            Debug.Log("resetPattern");
         }
 
         private void OnDrawGizmos()
@@ -82,6 +83,23 @@ namespace oneShot
             foreach (PatternStepMove moveStep in patternSteps)
             {
                 Gizmos.DrawSphere(moveStep.target, 0.1f);
+            }
+        }
+
+        private void OnValidate()
+        {
+            if (EditorApplication.isPlaying && agent)
+            {
+                for (int i = 0; i < patternSteps.Count; i++)
+                {
+                    Vector3 initialPos = agent.initialPosition;
+                    if (i > 0)
+                    {
+                        initialPos = patternSteps[i - 1].target;
+                    }
+                    Debug.Log("initial:" + initialPos + "      /target:" + patternSteps[i].target);
+                    patternSteps[i].duration = Agent.CalculateTime(initialPos, patternSteps[i].target, agent.speed);
+                }
             }
         }
     }
