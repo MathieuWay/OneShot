@@ -90,7 +90,7 @@ namespace oneShot
 
 		private void ReloadScene()
 		{
-			StartCoroutine(ReloadDelay(1));
+			StartCoroutine(ReloadDelay(2));
 		}
 		private IEnumerator ReloadDelay(float delay)
 		{

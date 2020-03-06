@@ -714,12 +714,15 @@ MonoBehaviour:
   - stepType: 0
     startTime: 0
     target: {x: -2, y: 2, z: 0}
+    duration: 0
   - stepType: 0
     startTime: 0
     target: {x: 1.5, y: 1, z: 0}
+    duration: 0
   - stepType: 0
     startTime: 7.5
     target: {x: -1, y: 2, z: 0}
+    duration: 0
   RecordPattern: 1
 --- !u!114 &200956820
 MonoBehaviour:
@@ -740,6 +743,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   path: []
   debug: 0
+  initialPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &224538957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1864,6 +1868,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 224538958}
     m_Modifications:
+    - target: {fileID: 3672627026782432811, guid: 44d46ff1d5effa843bb2b562fea80c54,
+        type: 3}
+      propertyPath: combo.inputs.Array.data[0].inputName
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672627026782432811, guid: 44d46ff1d5effa843bb2b562fea80c54,
+        type: 3}
+      propertyPath: combo.inputs.Array.data[2].inputName
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672627026782432811, guid: 44d46ff1d5effa843bb2b562fea80c54,
+        type: 3}
+      propertyPath: combo.inputs.Array.data[1].inputName
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 3672627027250455344, guid: 44d46ff1d5effa843bb2b562fea80c54,
         type: 3}
       propertyPath: m_Name
@@ -1923,6 +1942,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672627028709258129, guid: 44d46ff1d5effa843bb2b562fea80c54,
+        type: 3}
+      propertyPath: combo.inputs.Array.data[1].inputName
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 44d46ff1d5effa843bb2b562fea80c54, type: 3}
@@ -2372,6 +2396,30 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8663024865212203370, guid: 3fdc2e1ad6902274c8567eeb96f54bef,
+        type: 3}
+      propertyPath: uiInputs.Array.data[4].inputSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 37f5fba833dbc1c4588f0210faf3a379,
+        type: 3}
+    - target: {fileID: 8663024865212203370, guid: 3fdc2e1ad6902274c8567eeb96f54bef,
+        type: 3}
+      propertyPath: uiInputs.Array.data[6].inputSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 463c5d7d2f010f34dbdd9aa502be9b31,
+        type: 3}
+    - target: {fileID: 8663024865212203370, guid: 3fdc2e1ad6902274c8567eeb96f54bef,
+        type: 3}
+      propertyPath: uiInputs.Array.data[7].inputSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 6c20830dc83c5fa41bc448eb65385071,
+        type: 3}
+    - target: {fileID: 8663024865212203370, guid: 3fdc2e1ad6902274c8567eeb96f54bef,
+        type: 3}
+      propertyPath: uiInputs.Array.data[8].inputSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 39098a92f6cfed24d85f7452d240320a,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3fdc2e1ad6902274c8567eeb96f54bef, type: 3}
 --- !u!4 &834816861 stripped
@@ -4196,9 +4244,11 @@ MonoBehaviour:
   - stepType: 0
     startTime: 0
     target: {x: 2.5, y: 0, z: 0}
+    duration: 0
   - stepType: 0
     startTime: 5
     target: {x: -2.5, y: 0, z: 0}
+    duration: 0
   RecordPattern: 0
 --- !u!114 &1672744203
 MonoBehaviour:
@@ -4219,6 +4269,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   path: []
   debug: 0
+  initialPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &1700760185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4671,6 +4722,7 @@ MonoBehaviour:
   target: {x: 0, y: 0, z: 0}
   path: []
   debug: 0
+  initialPosition: {x: 0, y: 0, z: 0}
 --- !u!114 &1976127004
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4687,12 +4739,15 @@ MonoBehaviour:
   - stepType: 0
     startTime: 2
     target: {x: -3, y: 1, z: 0}
+    duration: 0
   - stepType: 0
     startTime: 4
     target: {x: 3, y: 2, z: 0}
+    duration: 0
   - stepType: 0
     startTime: 6.5
     target: {x: 3, y: 1, z: 0}
+    duration: 0
   RecordPattern: 0
 --- !u!1001 &2009917477
 PrefabInstance:

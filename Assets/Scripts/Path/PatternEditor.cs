@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
+
 namespace oneShot
 {
     
     public class PatternEditor : Editor
     {
-        private void OnSceneGUI()
+		private void OnSceneGUI()
         {
             Ray ray = HandleUtility.GUIPointToWorldRay(Event.current.mousePosition);
 
