@@ -9,6 +9,8 @@ public class Gamepad : MonoBehaviour
 	public float VerticalJL { get; private set; }
 	public float HorizontalJR { get; private set; }
 	public float VerticalJR { get; private set; }
+	public float PadHorizontal { get; private set; }
+	public float PadVertical { get; private set; }
 	public bool TriggerL { get; private set; }
 	public bool TriggerR { get; private set; }
 	public bool ButtonA { get; private set; }
@@ -29,7 +31,7 @@ public class Gamepad : MonoBehaviour
 	public bool ButtonDownTriggerL { get; private set; }
 	public bool ButtonDownTriggerR { get; private set; }
 	public bool ButtonDownStart { get; private set; }
-	
+
 
 	private void Awake()
 	{
@@ -54,6 +56,10 @@ public class Gamepad : MonoBehaviour
 		HorizontalJR = Input.GetAxis("Horizontal_JR");
 		VerticalJR = Input.GetAxis("Vertical_JR");
 
+		//Pad
+		PadHorizontal = Input.GetAxis("Pad_Horizontal");
+		PadVertical = Input.GetAxis("Pad_Vertical");
+
 		//Boutons enfoncé une fois
 		ButtonDownA = Input.GetKeyDown("joystick button 0");
 		ButtonDownB = Input.GetKeyDown("joystick button 1");
@@ -75,8 +81,5 @@ public class Gamepad : MonoBehaviour
 		ButtonTriggerL = Input.GetKey("joystick button 4");
 		ButtonTriggerR = Input.GetKey("joystick button 5");
 		ButtonDownStart = Input.GetKeyDown("joystick button 7"); 
-
-		//Debug.Log(TriggerL + " " + TriggerR);
-		//Debug.Log(HorizontalJL + " " + VerticalJL + " " + HorizontalJR + " " + VerticalJR);
 	}
 }

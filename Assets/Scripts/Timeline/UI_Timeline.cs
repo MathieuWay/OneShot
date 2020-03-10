@@ -27,7 +27,7 @@ public class UI_Timeline : MonoBehaviour
 	[SerializeField] private GameObject pointPrefab;
 	[SerializeField] private TextMeshProUGUI pointCountText;
 	private List<UI_Point> points;
-	private int selectedPoint;
+	public int SelectedPoint { get; private set; }
 
 	[Header("Pause")]
 	[SerializeField] private Button pauseButton;
@@ -36,14 +36,14 @@ public class UI_Timeline : MonoBehaviour
 	[SerializeField] private Sprite playSprite;
 	private bool pause = false;
 
-  public delegate void TimelineReset();
-  public static event TimelineReset OnTimelineReset;
+	public delegate void TimelineReset();
+	public static event TimelineReset OnTimelineReset;
 
 	public void ResetAll()
 	{
 		while (points.Count > 0)
 		{
-			RemoveLastPoint();
+			RemoveSelectedPoint();
 		}
 
 		timer = 0;
@@ -78,14 +78,29 @@ public class UI_Timeline : MonoBehaviour
 	}
 
 	//Supprime le dernier point sur la Timeline + le point de spawn associé sur la map
-	public void RemoveLastPoint()
+	public void RemoveSelectedPoint()
 	{
 		if (points.Count <= 0) return;
 
-		UI_Point point = points[points.Count - 1];
+		UI_Point point = points[SelectedPoint];
 		Destroy(point.gameObject);
 
-		points.RemoveAt(points.Count - 1);
+		points.RemoveAt(SelectedPoint);
+
+		SelectedPoint--;
+
+		if (points.Count <= 0)
+		{
+			SelectedPoint = 0;
+		}
+		else
+		{
+			if (SelectedPoint < 0) SelectedPoint = 0;
+
+			UpdatePointsOrder();
+
+			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
+		}
 
 		DisplayPointCount();
 	}
@@ -123,20 +138,20 @@ public class UI_Timeline : MonoBehaviour
 
 		//!NEW FOR GAMEPAD
 		//Sélection des points sur la timeline
-		if (Gamepad.Instance.ButtonDownTriggerR && selectedPoint < points.Count - 1)
+		if (Gamepad.Instance.TriggerR && SelectedPoint < points.Count - 1)
 		{
-			selectedPoint++;
+			SelectedPoint++;
 
-			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
+			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 		}
-		if (Gamepad.Instance.ButtonDownTriggerL && selectedPoint > 0)
+		if (Gamepad.Instance.TriggerL && SelectedPoint > 0)
 		{
-			selectedPoint--;
+			SelectedPoint--;
 
-			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
+			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 		}
 
-		if (Gamepad.Instance.ButtonDownY)
+		if (Gamepad.Instance.ButtonDownX)
 		{
 			PauseToggle();
 		}
@@ -157,7 +172,7 @@ public class UI_Timeline : MonoBehaviour
 		UpdatePointsOrder();
 
 		//!NEW FOR GAMEPAD
-		selectedPoint = UI_PointController.Instance.GetCurrentPointID();
+		SelectedPoint = UI_PointController.Instance.GetCurrentPointID();
 	}
 
 	//Met un point sur la timeline + associe son point de spawn
@@ -239,7 +254,7 @@ public class UI_Timeline : MonoBehaviour
 
 	public void UpdateCurrentPointSelected()
 	{
-		selectedPoint = UI_PointController.Instance.GetCurrentPointID();
+		SelectedPoint = UI_PointController.Instance.GetCurrentPointID();
 	}
 
 	//OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline

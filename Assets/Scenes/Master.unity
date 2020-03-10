@@ -1888,6 +1888,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: AttackController
       objectReference: {fileID: 0}
+    - target: {fileID: 3672627027562074272, guid: 44d46ff1d5effa843bb2b562fea80c54,
+        type: 3}
+      propertyPath: combo.inputs.Array.data[0].inputName
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3672627027562074272, guid: 44d46ff1d5effa843bb2b562fea80c54,
+        type: 3}
+      propertyPath: combo.inputs.Array.data[1].inputName
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 3672627027953958419, guid: 44d46ff1d5effa843bb2b562fea80c54,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2395,6 +2405,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1978420182415845284, guid: 3fdc2e1ad6902274c8567eeb96f54bef,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8663024865212203370, guid: 3fdc2e1ad6902274c8567eeb96f54bef,
         type: 3}

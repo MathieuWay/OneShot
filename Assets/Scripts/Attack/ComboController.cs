@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace oneShot
 {
-	public enum InputName { A, B, X, Y, Joy_Up, Joy_Down, Joy_Left, Joy_Right, Joy_Loop }
+	public enum InputName { A, B, X, Y, Joy_Up, Joy_Down, Joy_Left, Joy_Right, Joy_Loop, RT, LT }
 
 
 	[System.Serializable]
@@ -185,10 +185,12 @@ namespace oneShot
 				case InputName.B: succeed = gamepad.ButtonDownB; break;
 				case InputName.X: succeed = gamepad.ButtonDownX; break;
 				case InputName.Y: succeed = gamepad.ButtonDownY; break;
-				case InputName.Joy_Left: succeed = gamepad.HorizontalJL < -joystickLimit; break;
-				case InputName.Joy_Right: succeed = gamepad.HorizontalJL > joystickLimit; break;
-				case InputName.Joy_Up: succeed = gamepad.VerticalJL > joystickLimit; break;
-				case InputName.Joy_Down: succeed = gamepad.VerticalJL < -joystickLimit; break;
+				case InputName.RT: succeed = gamepad.TriggerR; break;
+				case InputName.LT: succeed = gamepad.TriggerL; break;
+				case InputName.Joy_Left: succeed = gamepad.HorizontalJL < -joystickLimit || gamepad.PadHorizontal < -joystickLimit; break;
+				case InputName.Joy_Right: succeed = gamepad.HorizontalJL > joystickLimit || gamepad.PadHorizontal > joystickLimit; break;
+				case InputName.Joy_Up: succeed = gamepad.VerticalJL > joystickLimit || gamepad.PadVertical > joystickLimit; break;
+				case InputName.Joy_Down: succeed = gamepad.VerticalJL < -joystickLimit || gamepad.PadVertical < -joystickLimit; break;
 				case InputName.Joy_Loop: succeed = loopSucceed; CheckJoyLoop(1); break;
 			}
 
@@ -204,11 +206,14 @@ namespace oneShot
 
 			Gamepad gamepad = Gamepad.Instance;
 
+			//BUTTONS
 			if ((gamepad.ButtonDownA && rightInput != InputName.A) || (gamepad.ButtonDownB && rightInput != InputName.B)
-				|| (gamepad.ButtonDownX && rightInput != InputName.X) || (gamepad.ButtonDownY && rightInput != InputName.Y))
+				|| (gamepad.ButtonDownX && rightInput != InputName.X) || (gamepad.ButtonDownY && rightInput != InputName.Y)
+				|| (gamepad.TriggerR && rightInput != InputName.RT) || (gamepad.TriggerL && rightInput != InputName.LT))
 			{
 				fail = true;
 			}
+			//JOYSTICK HORIZONTAL
 			else if (Mathf.Abs(gamepad.HorizontalJL) > joystickLimit)
 			{
 				if ((gamepad.HorizontalJL > joystickLimit && rightInput != InputName.Joy_Right) ||
@@ -217,10 +222,29 @@ namespace oneShot
 					fail = true;
 				}
 			}
+			//JOYSTICK VERTICAL
 			else if (Mathf.Abs(gamepad.VerticalJL) > joystickLimit)
 			{
 				if ((gamepad.VerticalJL > joystickLimit && rightInput != InputName.Joy_Up) ||
 					 (gamepad.VerticalJL < -joystickLimit && rightInput != InputName.Joy_Down))
+				{
+					fail = true;
+				}
+			}
+			//PAD HORIZONTAL
+			else if(gamepad.PadHorizontal != 0)
+			{
+				if((gamepad.PadHorizontal > 0 && rightInput != InputName.Joy_Right) || 
+					(gamepad.PadHorizontal < 0 && rightInput != InputName.Joy_Left))
+				{
+					fail = true;
+				}
+			}
+			//PAD VERTICAL
+			else if(gamepad.PadVertical != 0)
+			{
+				if ((gamepad.PadVertical > 0 && rightInput != InputName.Joy_Up) ||
+					(gamepad.PadVertical < 0 && rightInput != InputName.Joy_Down))
 				{
 					fail = true;
 				}

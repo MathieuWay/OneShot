@@ -39,14 +39,14 @@ public class SpawnController : MonoBehaviour
 		SpawnPoints.Clear();
 	}
 
-	public void RemoveLastPoint()
+	public void RemoveSelectedPoint()
 	{
 		if (SpawnPoints.Count <= 0) return;
 
-		Destroy(SpawnPoints[SpawnPoints.Count - 1]._GameObject);
-		SpawnPoints.RemoveAt(SpawnPoints.Count - 1);
+		Destroy(SpawnPoints[UI_Timeline.Instance.SelectedPoint]._GameObject);
+		SpawnPoints.RemoveAt(UI_Timeline.Instance.SelectedPoint);
 
-		UI_Timeline.Instance.RemoveLastPoint();
+		UI_Timeline.Instance.RemoveSelectedPoint();
 	}
 
 	public int GetRemainingPoints()
@@ -176,7 +176,7 @@ public class SpawnController : MonoBehaviour
 
 			if (/*Input.GetMouseButtonDown(1)*/Gamepad.Instance.ButtonDownB)
 			{
-				RemoveLastPoint();
+				RemoveSelectedPoint();
 			}
 
 			yield return null;
