@@ -16,11 +16,21 @@ namespace oneShot
         public Animator anim;
         private Agent agent;
 
-        private void Start()
+		public void Init(float speed)
+		{
+			agent.speed = speed;
+		}
+
+		private void Awake()
+		{
+			agent = GetComponent<Agent>();
+		}
+
+		private void Start()
         {
 			isAlive = true;
             anim = GetComponentInChildren<Animator>();
-            agent = GetComponent<Agent>();
+            
             /*path = GetComponent<Path>();
             if(path)
                 path.InitPath(transform.position);*/
@@ -51,9 +61,14 @@ namespace oneShot
 
 		public void Kill()
 		{
+			if (!isAlive) return;
+
 			isAlive = false;
 			anim.SetTrigger("dying");
 			OnEnemyDead();
+
+			CameraShake.Instance.ShakeCamera();
+			Gamepad.Instance.Vibrate(0.5f, 0.5f, 0.5f);
 
 			//FX
 			Instantiate(killParticle, transform.position + new Vector3(0, 0.2f, 0), killParticle.transform.rotation);

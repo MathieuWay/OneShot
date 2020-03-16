@@ -22,14 +22,36 @@ namespace oneShot
 			StartCoroutine(DrawAttack(1));
 #endif
 
+			int enemyKilledCount = 0;
+
 			for (int i = 0; i < hits.Length; i++)
 			{
 				if(hits[i].CompareTag("Enemy"))
 				{
-					Debug.Log("HIT: " + hits[i].name + " " + Vector2.Distance(hits[i].transform.position, PlayerBehaviour.Instance.CenterPivot.position));
+					//DEBUG HIT DISTANCE
+					//Debug.Log("HIT: " + hits[i].name + " " + Vector2.Distance(hits[i].transform.position, PlayerBehaviour.Instance.CenterPivot.position));
 
-					hits[i].GetComponent<Enemy>().Kill();
+					Enemy enemy = hits[i].GetComponent<Enemy>();
+
+					if(enemy != null)
+					{
+						if (enemy.GetComponent<EnemyBase>() != null)
+						{
+							enemy.GetComponent<EnemyBase>().Hit(_AttackName, PlayerBehaviour.Instance.CenterPivot.position);
+						}
+						else
+						{
+							enemy.Kill();
+						}
+
+						if(!enemy.isAlive) enemyKilledCount++;
+					}
 				}
+			}
+
+			if(enemyKilledCount >= 2)
+			{
+				GameTime.Instance.SlowMotion(0.2f, 1.5f);
 			}
 		}
 

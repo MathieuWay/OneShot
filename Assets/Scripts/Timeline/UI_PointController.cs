@@ -19,6 +19,16 @@ public class UI_PointController : MonoBehaviour
 		currentPoint.Select();
 	}
 
+	public void UnselectCurrentPoint()
+	{
+		currentPoint.Unselect();
+	}
+	public void SelectPoint(UI_Point point)
+	{
+		currentPoint = point;
+		currentPoint.SelectUIPointOnly();
+	}
+
 	public int GetCurrentPointID()
 	{
 		return currentPoint._ID;

@@ -19,10 +19,15 @@ public class SpawnController : MonoBehaviour
 	[SerializeField] private string[] blockerTags;
 	[SerializeField] private float detectionDistanceToFloor = 3;
 	[SerializeField] private float spawnDistanceToFloor = 0.3f;
+	private bool pointSelected;
+	private SpawnPoint currentPointSelected;
 
 	public delegate void SpawnDelegate();
 	public delegate void SpawnPointDelegate(SpawnPoint spawnPoint);
 	public event SpawnPointDelegate SpawnPointEvent;
+	public event SpawnPointDelegate GrabPointEvent;
+	public event SpawnPointDelegate UngrabPointEvent;
+	public event SpawnDelegate SpawnFailEvent;
 	public event SpawnDelegate SpawnComplete;
 
 	public List<SpawnPoint> SpawnPoints { get; private set; }
@@ -47,6 +52,12 @@ public class SpawnController : MonoBehaviour
 		SpawnPoints.RemoveAt(UI_Timeline.Instance.SelectedPoint);
 
 		UI_Timeline.Instance.RemoveSelectedPoint();
+
+		if(pointSelected)
+		{
+			pointSelected = false;
+			currentPointSelected = null;
+		}
 	}
 
 	public int GetRemainingPoints()
@@ -57,6 +68,15 @@ public class SpawnController : MonoBehaviour
 	public void ChangeSpawnPointsOrder()
 	{
 		SpawnPoints = SpawnPoints.OrderBy(o => o._Time).ToList();
+	}
+
+	public void CancelGrab()
+	{
+		if (!pointSelected) return;
+
+		pointSelected = false;
+		currentPointSelected.Unselect();
+		currentPointSelected = null;
 	}
 
 
@@ -80,7 +100,7 @@ public class SpawnController : MonoBehaviour
 
 	private IEnumerator SpawnProcess()
 	{
-		while (oneShot.LevelController.Instance.phase == oneShot.Phase.Tactical && SpawnPoints.Count < spawnCount)
+		while (oneShot.LevelController.Instance.phase == oneShot.Phase.Tactical)
 		{
 			if (/*Input.GetMouseButtonDown(0)*/Gamepad.Instance.ButtonDownA /*&& !UI_PointController.Instance.DraggingPoint()*/)
 			{
@@ -111,6 +131,28 @@ public class SpawnController : MonoBehaviour
 
 				if (hitBlocker)
 				{
+					yield return null;
+					continue;
+				}
+
+				//Impossible de placer un point sur un autre
+				if(pointSelected && hit.transform.GetComponent<SpawnPoint>() != null)
+				{
+					SpawnFailEvent?.Invoke();
+					yield return null;
+					continue;
+				}
+
+				//Point Selection
+				if (!pointSelected && hit.transform.GetComponent<SpawnPoint>() != null)
+				{
+					pointSelected = true;
+					
+					SpawnPoint point = hit.transform.GetComponent<SpawnPoint>();
+					currentPointSelected = point;
+					point.Grab();
+
+					GrabPointEvent?.Invoke(point);
 					yield return null;
 					continue;
 				}
@@ -153,25 +195,50 @@ public class SpawnController : MonoBehaviour
 					continue;
 				}
 
-				Vector3 spawnPosition = hitFloor.point + Vector3.up * spawnDistanceToFloor;
+				//Le point de spawn est décalé suivant Z pour être placé devant la zone Trigger des TP
+				Vector3 offset = new Vector3(0, 0, -0.1f);
 
-				//Instance du point de spawn sur la surface touché
-				GameObject instance = Instantiate(pointPrefab, spawnPosition, Quaternion.identity);
+				Vector3 spawnPosition = hitFloor.point + Vector3.up * spawnDistanceToFloor + offset;
 
-				SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
+				Vector3 rootPoint = hitFloor.point;
 
-				//L'ID correspond au nombre de point de spawn, on commence ici par 0
-				spawnPoint.Init(SpawnPoints.Count, hitFloor.point);
-				//!FIN
+				if(pointSelected)
+				{
+					//Déplacement Point
 
+					pointSelected = false;
 
-				SpawnPoints.Add(spawnPoint);
+					currentPointSelected.transform.position = spawnPosition;
+					currentPointSelected.UpdatePosition(rootPoint);
+					currentPointSelected.Select();
+					UngrabPointEvent?.Invoke(currentPointSelected);
 
-				SpawnPointEvent?.Invoke(spawnPoint);
+					currentPointSelected = null;
+				}
+				else
+				{
+					if(SpawnPoints.Count >= spawnCount)
+					{
+						yield return null;
+						continue;
+					}
+
+					//Ajout Point
+
+					//Instance du point de spawn sur la surface touché
+					GameObject instance = Instantiate(pointPrefab, spawnPosition, Quaternion.identity);
+
+					SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
+
+					//L'ID correspond au nombre de point de spawn, on commence ici par 0
+					spawnPoint.Init(SpawnPoints.Count, rootPoint);
+
+					SpawnPoints.Add(spawnPoint);
+
+					SpawnPointEvent?.Invoke(spawnPoint);
+				}
 
 				Debug.DrawLine(Camera.main.transform.position, hit.point, Color.red);
-
-				//Debug.Log(spawnPoint.Time + " " + spawnPoint._Position + " " + spawnPoint._GameObject.name);
 			}
 
 			if (/*Input.GetMouseButtonDown(1)*/Gamepad.Instance.ButtonDownB)

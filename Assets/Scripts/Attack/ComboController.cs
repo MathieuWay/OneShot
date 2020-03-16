@@ -47,6 +47,9 @@ namespace oneShot
 		public event ComboDelegateV3 ComboCompletedEvent;
 		public event ComboDelegateV3 NextInputEvent;
 
+		[SerializeField] private float startNewComboOnFailedDelay = 1;
+		[SerializeField] private float startNewComboOnSucceedDelay = 0.5f;
+
 		private bool comboRunning = false;
 		private float joystickLimit = 0.8f;
 
@@ -127,6 +130,8 @@ namespace oneShot
 
 						StartCoroutine(ComboReadyProcess(combo));
 
+						yield return new WaitForSeconds(startNewComboOnSucceedDelay);
+
 						comboRunning = false;
 						yield break;
 					}
@@ -154,6 +159,8 @@ namespace oneShot
 					}
 
 					ComboFailedEvent?.Invoke();
+
+					yield return new WaitForSeconds(startNewComboOnFailedDelay);
 
 					comboRunning = false;
 					yield break;

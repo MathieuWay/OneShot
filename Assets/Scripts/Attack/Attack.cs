@@ -15,7 +15,7 @@ namespace oneShot
 
 #if UNITY_EDITOR
 		private bool isDebugRange;
-		private float debugDetectionRange;
+		private Vector2 debugDetectionVolume;
 #endif
 
 		public abstract void Launch();
@@ -24,12 +24,12 @@ namespace oneShot
 		{
 		}
 
-		protected Enemy GetNearestEnemy(float detectionRange)
+		protected Enemy GetNearestEnemy(Vector2 boxVolume)
 		{
-			Collider2D[] colliders = Physics2D.OverlapBoxAll(PlayerBehaviour.Instance.CenterPivot.position, new Vector2(detectionRange, 1), 0);
+			Collider2D[] colliders = Physics2D.OverlapBoxAll(PlayerBehaviour.Instance.CenterPivot.position, new Vector2(boxVolume.x, boxVolume.y), 0);
 
 #if UNITY_EDITOR
-			StartCoroutine(DebugOverlapBox(1, detectionRange));
+			StartCoroutine(DebugOverlapBox(1, boxVolume));
 #endif
 
 			List<Transform> enemies = new List<Transform>();
@@ -38,11 +38,14 @@ namespace oneShot
 			{
 				if (colliders[i].CompareTag("Enemy"))
 				{
-					enemies.Add(colliders[i].transform);
+					if(colliders[i].GetComponent<Enemy>().isAlive)
+					{
+						enemies.Add(colliders[i].transform);
+					}
 				}
 			}
 
-			float minDistance = detectionRange;
+			float minDistance = Mathf.Infinity;
 			Transform target = null;
 
 			for (int i = 0; i < enemies.Count; i++)
@@ -61,6 +64,7 @@ namespace oneShot
 			if(target != null)
 			{
 				enemy = target.GetComponent<Enemy>();
+
 				Debug.Log("HIT: " + target.name + " " + target.position);
 			}
 
@@ -68,10 +72,10 @@ namespace oneShot
 		}
 
 #if UNITY_EDITOR
-		private IEnumerator DebugOverlapBox(float duration, float detectionRange)
+		private IEnumerator DebugOverlapBox(float duration, Vector2 volume)
 		{
 			isDebugRange = true;
-			this.debugDetectionRange = detectionRange;
+			debugDetectionVolume = volume;
 			yield return new WaitForSeconds(duration);
 			isDebugRange = false;
 		}
@@ -81,7 +85,7 @@ namespace oneShot
 			if(isDebugRange)
 			{
 				Gizmos.color = Color.red;
-				Gizmos.DrawWireCube(PlayerBehaviour.Instance.CenterPivot.position, new Vector3(debugDetectionRange, 1, 0));
+				Gizmos.DrawWireCube(PlayerBehaviour.Instance.CenterPivot.position, new Vector3(debugDetectionVolume.x, debugDetectionVolume.y, 0));
 			}
 		}
 #endif

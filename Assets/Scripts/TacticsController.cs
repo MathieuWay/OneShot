@@ -71,7 +71,7 @@ namespace oneShot
 
 				if (time >= nextStep.time)
 				{
-					GameTime.Instance.SetTimeSpeed(0.2f, 1);
+					//GameTime.Instance.SetTimeSpeed(0.2f, 1);
 					ExecuteNextStep();
 				}
                     

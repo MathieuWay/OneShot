@@ -1,16 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 
 public class CursorController : MonoBehaviour
 {
 	public static CursorController Instance { get; private set; }
 
+	//[Header("Cursor Selection")]
+	//[SerializeField] private GraphicRaycaster m_Raycaster;
+	//[SerializeField] private EventSystem m_EventSystem;
+	//private PointerEventData m_PointerEventData;
+	
+	[Header("Cursor Settings")]
 	[SerializeField] private Transform canvasTransform;
 	[SerializeField] private Transform cursorPoint;
+	[SerializeField] private Image cursorImage;
+	[SerializeField] private Color cursorFailColor;
 	[SerializeField] private float speed = 100;
 	[SerializeField] private float accelerationSpeed = 5;
 	[SerializeField] private float maxAcceleration = 10;
+	private Color initCursorColor;
+	private bool isFailing;
 	private float acceleration;
 	private float radius;
 
@@ -25,6 +38,21 @@ public class CursorController : MonoBehaviour
 		cursorPoint.gameObject.SetActive(state);
 	}
 
+	public void SpawnPointFail()
+	{
+		if (isFailing) return;
+
+		cursorImage.color = cursorFailColor;
+		StartCoroutine(SpawnPointFailDuration());
+	}
+	private IEnumerator SpawnPointFailDuration()
+	{
+		isFailing = true;
+		yield return new WaitForSeconds(0.5f);
+		cursorImage.color = initCursorColor;
+		isFailing = false;
+	}
+
 	private void Awake()
 	{
 		if (Instance != null)
@@ -34,6 +62,8 @@ public class CursorController : MonoBehaviour
 		}
 
 		Instance = this;
+
+		initCursorColor = cursorImage.color;
 	}
 
 	private void Start()
@@ -78,5 +108,25 @@ public class CursorController : MonoBehaviour
 		{
 			acceleration = 1;
 		}
+
+		//Selection();
 	}
+
+	//private void Selection()
+	//{
+	//	if (Gamepad.Instance.ButtonDownA)
+	//	{
+	//		m_PointerEventData = new PointerEventData(m_EventSystem);
+	//		m_PointerEventData.position = cursorPoint.position;
+
+	//		List<RaycastResult> results = new List<RaycastResult>();
+
+	//		m_Raycaster.Raycast(m_PointerEventData, results);
+
+	//		foreach (RaycastResult result in results)
+	//		{
+	//			Debug.Log("Hit " + result.gameObject.name);
+	//		}
+	//	}
+	//}
 }
