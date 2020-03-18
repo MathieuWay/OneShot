@@ -38,6 +38,9 @@ namespace oneShot
             }
         }
 
+		public delegate void TacticsDelegate();
+		public event TacticsDelegate OnPlayerTeleport;
+
 		[SerializeField] private GameObject tpStartParticle;
 		[SerializeField] private GameObject tpFinishParticle;
 		private bool launchStartParticle;
@@ -60,7 +63,7 @@ namespace oneShot
         // Update is called once per frame
         private void Update()
         {
-            if (LevelController.Instance.phase == Phase.Combat && !isFinished)
+            if (LevelController.Instance.phase == Phase.Combat && !isFinished && !PlayerBehaviour.Instance.IsDead)
             {
 				//FX
 				if ((time >= nextStep.time - 0.5f && time < nextStep.time) && !launchStartParticle)
@@ -86,6 +89,8 @@ namespace oneShot
 			//FX
 			launchStartParticle = false;
 			Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
+
+			OnPlayerTeleport?.Invoke();
 
 			if (tpQueue.Count > 0)
 				nextStep = tpQueue.Dequeue();

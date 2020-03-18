@@ -33,13 +33,16 @@ namespace oneShot
             }
         }
 
+		public delegate void LevelDelegate();
+		public event LevelDelegate OnStartCombatPhase;
+
         public Phase phase;
 
         private void Awake()
         {
             instance = this;
             Fader.OnFadeIn += FocusOnPlayer;
-			EnemiesController.OnAllEnemiesKilled += ReloadScene;
+			EnemiesController.OnAllEnemiesKilled += delegate { ReloadScene(2); };
         }
 
         private void Update()
@@ -53,7 +56,7 @@ namespace oneShot
 
 			if(Input.GetKeyDown(KeyCode.R))
 			{
-				ReloadScene();
+				ReloadScene(1);
 			}
             if (Input.GetKeyDown(KeyCode.T))
             {
@@ -75,6 +78,7 @@ namespace oneShot
             yield return new WaitForSeconds(sec);
             TacticsController.Instance.loadTactics(SpawnController.Instance.SpawnPoints);
 			phase = Phase.Combat;
+			OnStartCombatPhase?.Invoke();
 			UI_Timeline.Instance.ResetTimeline();
         }
 
@@ -88,9 +92,9 @@ namespace oneShot
             return enemies;
         }
 
-		private void ReloadScene()
+		public void ReloadScene(float delay)
 		{
-			StartCoroutine(ReloadDelay(2));
+			StartCoroutine(ReloadDelay(delay));
 		}
 		private IEnumerator ReloadDelay(float delay)
 		{

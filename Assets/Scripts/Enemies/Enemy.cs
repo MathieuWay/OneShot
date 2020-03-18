@@ -8,6 +8,7 @@ namespace oneShot
     {
         public delegate void EnemyDead();
         public static event EnemyDead OnEnemyDead;
+		public event EnemyDead OnKill;
 
 		//public pattern
 		//private Path path;
@@ -72,6 +73,8 @@ namespace oneShot
 
 			//FX
 			Instantiate(killParticle, transform.position + new Vector3(0, 0.2f, 0), killParticle.transform.rotation);
+
+			OnKill?.Invoke();
 		}
 	}
 }

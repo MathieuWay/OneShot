@@ -11,6 +11,19 @@ namespace oneShot
 
 		[SerializeField] private Transform centerPivot;
 		public Transform CenterPivot { get => centerPivot; }
+		public bool IsDead { get; private set; }
+		private Animator anim;
+
+		public void Kill()
+		{
+			if (IsDead) return;
+
+			IsDead = true;
+
+			anim.SetTrigger("dying");
+
+			LevelController.Instance.ReloadScene(3);
+		}
 
 		private void Awake()
 		{
@@ -21,6 +34,11 @@ namespace oneShot
 			}
 
 			Instance = this;
+		}
+
+		private void Start()
+		{
+			anim = GetComponentInChildren<Animator>();
 		}
 	}
 }

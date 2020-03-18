@@ -8,7 +8,11 @@ namespace oneShot
 	{
 		public override void Hit(AttackName attackName, Vector2 hitOriginPos)
 		{
-			if (attackName != AttackName.SlashAttack) return;
+			if (attackName != AttackName.SlashAttack)
+			{
+				PlayerAttackFailed();
+				return;
+			}
 
 			base.Hit(attackName, hitOriginPos);
 		}

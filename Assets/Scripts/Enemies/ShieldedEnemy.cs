@@ -16,7 +16,12 @@ namespace oneShot
 			Debug.Log("DIR: " + Vector2.Dot(dirToOrigin, new Vector2(xDir, 0)));
 
 			//Si les deux vecteurs pointent dans la même direction (la frappe ne vient pas de derrière), il ne prend pas de dégât
-			if (Vector2.Dot(dirToOrigin, new Vector2(xDir, 0)) > 0) return;
+			if (Vector2.Dot(dirToOrigin, new Vector2(xDir, 0)) > 0)
+			{
+				PlayerAttackFailed();
+				return;
+			}
+				
 
 			base.Hit(attackName, hitOriginPos);
 		}
