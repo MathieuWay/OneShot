@@ -30,11 +30,6 @@ namespace oneShot
 
 		public enum Direction { Left, Right }
 
-		public void Init(float speed)
-		{
-			agent.speed = speed;
-		}
-
 		public float GetDirectionX()
 		{
 			return _Direction == Direction.Left ? -1 : 1;
@@ -42,7 +37,6 @@ namespace oneShot
 
 		private void Awake()
 		{
-			agent = GetComponent<Agent>();
 			anim = GetComponentInChildren<Animator>();
 		}
 
