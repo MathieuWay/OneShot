@@ -4,12 +4,12 @@ using UnityEngine;
 namespace oneShot
 {
     [System.Serializable]
-    public struct Step
+    public struct TacticsStep
     {
         public Vector3 pos;
         public float time;
 
-        public Step(Vector2 position, float time) : this()
+        public TacticsStep(Vector2 position, float time) : this()
         {
             pos = new Vector3(position.x, position.y, 0);
             this.time = time;
@@ -49,8 +49,8 @@ namespace oneShot
         public float time;
         //STEPS
         public Step[] tpArray;
-        private Queue<Step> tpQueue;
-        private Step nextStep;
+        private Queue<TacticsStep> tpQueue;
+        private TacticsStep nextStep;
         private GameObject player;
         // Start is called before the first frame update
         private void Awake()
@@ -101,10 +101,10 @@ namespace oneShot
 
         public void loadTactics(List<SpawnPoint> tpList)
         {
-            tpQueue = new Queue<Step>();
+            tpQueue = new Queue<TacticsStep>();
             foreach (SpawnPoint tp in tpList)
             {
-                Step step = new Step(tp._Position, tp._Time);
+                TacticsStep step = new TacticsStep(tp._Position, tp._Time);
                 tpQueue.Enqueue(step);
             }
             nextStep = tpQueue.Dequeue();

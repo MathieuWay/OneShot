@@ -65,6 +65,11 @@ public class UI_Timeline : MonoBehaviour
 		return timer;
 	}
 
+    public float GetTimerDuration()
+    {
+        return timerDuration;
+    }
+
 	public void CheckPointOnTimeline(Transform point)
 	{
 		if (point.localPosition.x > timelineRect.rect.xMax)
