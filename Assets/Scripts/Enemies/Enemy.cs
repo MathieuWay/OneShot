@@ -23,7 +23,10 @@ namespace oneShot
 		private Vector2 lastPos;
 		public bool isAlive;
         public Animator anim;
-        private Agent agent;
+        public float speed = 1f;
+        //private Agent agent;
+        private Vector3 initialPosition;
+        private Pattern pattern;
 
 		public enum Direction { Left, Right }
 
@@ -46,8 +49,10 @@ namespace oneShot
 		private void Start()
         {
 			isAlive = true;
-
-			_Direction = defaultDirection;
+            pattern = GetComponent<Pattern>();
+            anim = GetComponentInChildren<Animator>();
+            //agent = GetComponent<Agent>();
+            initialPosition = transform.position;
             /*path = GetComponent<Path>();
             if(path)
                 path.InitPath(transform.position);*/
@@ -58,12 +63,30 @@ namespace oneShot
 			anim.speed = GameTime.Instance.TimeSpeed;
             /*if(path)
                 transform.position = path.GetPositionAlongPath();*/
-            if (agent)
+            /*if (agent)
             {
                 if (!agent.reach)
                     anim.SetBool("isMoving", true);
                 else
                     anim.SetBool("isMoving", false);
+            }*/
+            if (pattern)
+            {
+                if (pattern.currentStep != null)
+                {
+                    if(pattern.currentStep.type == StepType.Move)
+                        anim.SetBool("isMoving", true);
+                    else
+                        anim.SetBool("isMoving", false);
+                }
+                else
+                {
+                    anim.SetBool("isMoving", false);
+                }
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
             }
 
 			SetDirection();
@@ -107,5 +130,14 @@ namespace oneShot
 
 			OnKill?.Invoke();
 		}
-	}
+
+        public void ResetAgent()
+        {
+            isAlive = true;
+            anim.SetBool("isMoving", false);
+            anim.Rebind();
+            transform.position = initialPosition;
+            //currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
+        }
+    }
 }
