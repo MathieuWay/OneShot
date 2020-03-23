@@ -12,7 +12,7 @@ namespace oneShot
 		public string horizontalAxis;
 		public string verticalAxis;
 		public float speed;
-		private Layer1 currentLayer;
+		private Layer currentLayer;
 
 		public float LayerMoveCooldown;
 		private float LayerMoveTimer;
@@ -40,7 +40,7 @@ namespace oneShot
 				if (Physics.Raycast(transform.position, transform.TransformDirection(direction), out hit, Mathf.Infinity, layerMask))
 				{
 					//Layer1 nextLayer = LayersController.instance.GetLayer(currentLayer.index + direction);
-					Layer1 nextLayer = hit.collider.GetComponentInParent<Layer1>();
+					Layer nextLayer = hit.collider.GetComponentInParent<Layer>();
 					if (nextLayer)
 					{
 						currentLayer = nextLayer;

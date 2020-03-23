@@ -89,7 +89,7 @@ public class CameraController : MonoBehaviour
                     transform.position = Vector3.SmoothDamp(transform.position, path.GetPositionAlongPath() + offsetPath, ref VelocitySmooth, SmoothTraveling);
                     if (Input.GetAxis("Mouse ScrollWheel") != 0f)
                     {
-                        Debug.Log("Scroll Value:" + Input.GetAxis("Mouse ScrollWheel") + "    /    Scroll Value with sensitivity:" + Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
+                        //Debug.Log("Scroll Value:" + Input.GetAxis("Mouse ScrollWheel") + "    /    Scroll Value with sensitivity:" + Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
                         path.AddProgression(Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
                     }
                 }
