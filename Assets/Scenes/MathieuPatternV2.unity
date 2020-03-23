@@ -611,7 +611,7 @@ PrefabInstance:
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.5
+      value: -4
       objectReference: {fileID: 0}
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
@@ -683,6 +683,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy
       objectReference: {fileID: 0}
+    - target: {fileID: 174964612362923569, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: speed
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15832efbd63208b40b557c9270213c6d, type: 3}
 --- !u!4 &191590662 stripped
@@ -691,49 +696,12 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 191590661}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &200956817 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 133501194019460207, guid: 15832efbd63208b40b557c9270213c6d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1609129050}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &200956818 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
     type: 3}
   m_PrefabInstance: {fileID: 1609129050}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &200956819
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200956817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1bf6b03ff7fdb045a855cc96964c234, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &200956820
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 200956817}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3198f367f2cab04ba69b4838193f5ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerIndex: 0
-  currentLayer: {fileID: 0}
-  speed: 1
-  reach: 1
-  target: {x: 0, y: 0, z: 0}
-  debug: 0
-  initialPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &224538957
 GameObject:
   m_ObjectHideFlags: 0
@@ -4223,28 +4191,71 @@ MonoBehaviour:
   m_GameObject: {fileID: 1672744201}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1bf6b03ff7fdb045a855cc96964c234, type: 3}
+  m_Script: {fileID: 11500000, guid: 90af60a9d90ef6f479c4780685cb8505, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1672744203
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1672744201}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c3198f367f2cab04ba69b4838193f5ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  layerIndex: 0
-  currentLayer: {fileID: 0}
-  speed: 1
-  reach: 1
-  target: {x: 0, y: 0, z: 0}
-  debug: 0
-  initialPosition: {x: 0, y: 0, z: 0}
+  steps:
+  - type: 1
+    startTime: 0
+    endTime: 4
+    duration: 4
+    moveType: 0
+    targetPos: {x: 0, y: 0, z: 0}
+    stepMovePaths:
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 0
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+  - type: 0
+    startTime: 4
+    endTime: 6
+    duration: 2
+    moveType: 0
+    targetPos: {x: 0, y: 0, z: 0}
+    stepMovePaths:
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 0
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 0
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 0
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 0
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 0
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 4
+  - type: 1
+    startTime: 6
+    endTime: 10
+    duration: 4
+    moveType: 0
+    targetPos: {x: -4, y: 0, z: 0}
+    stepMovePaths:
+    - waypoint: {x: 0, y: 0, z: 0}
+      time: 6
+    - waypoint: {x: -4, y: 0, z: 0}
+      time: 10
+  currentStep:
+    type: 0
+    startTime: 0
+    endTime: 0
+    duration: 0
+    moveType: 0
+    targetPos: {x: 0, y: 0, z: 0}
+    stepMovePaths: []
 --- !u!1 &1700760185
 GameObject:
   m_ObjectHideFlags: 0
@@ -4712,37 +4723,44 @@ MonoBehaviour:
   steps:
   - type: 1
     startTime: 0
-    endTime: 6
-    duration: 6
-    moveType: 0
+    endTime: 2
+    duration: 2
+    moveType: 2
     targetPos: {x: -3, y: 1, z: 0}
     stepMovePaths:
     - waypoint: {x: 3, y: 1, z: 0}
       time: 0
     - waypoint: {x: -3, y: 1, z: 0}
       time: 2
-    - waypoint: {x: 3, y: 1, z: 0}
-      time: 0
-    - waypoint: {x: -3, y: 1, z: 0}
-      time: Infinity
-    - waypoint: {x: 3, y: 1, z: 0}
-      time: 0
-    - waypoint: {x: -3, y: 1, z: 0}
-      time: 6
   - type: 0
-    startTime: 6
-    endTime: 9
+    startTime: 2
+    endTime: 5
     duration: 3
     moveType: 0
     targetPos: {x: 0, y: 0, z: 0}
     stepMovePaths: []
-  - type: 0
-    startTime: 9
-    endTime: 12
-    duration: 3
-    moveType: 0
+  - type: 1
+    startTime: 5
+    endTime: 7
+    duration: 2
+    moveType: 2
     targetPos: {x: 3, y: 1, z: 0}
-    stepMovePaths: []
+    stepMovePaths:
+    - waypoint: {x: -3, y: 1, z: 0}
+      time: 5
+    - waypoint: {x: 3, y: 1, z: 0}
+      time: 7
+  - type: 0
+    startTime: 7
+    endTime: 10
+    duration: 3
+    moveType: 2
+    targetPos: {x: 3, y: 1, z: 0}
+    stepMovePaths:
+    - waypoint: {x: 3, y: 1, z: 0}
+      time: 6
+    - waypoint: {x: 3, y: 1, z: 0}
+      time: 6
   currentStep:
     type: 0
     startTime: 0
