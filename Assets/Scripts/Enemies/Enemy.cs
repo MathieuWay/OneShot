@@ -47,6 +47,7 @@ namespace oneShot
         {
 			isAlive = true;
 
+			lastPos = transform.position;
 			_Direction = defaultDirection;
             /*path = GetComponent<Path>();
             if(path)

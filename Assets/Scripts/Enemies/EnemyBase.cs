@@ -8,7 +8,6 @@ namespace oneShot
 	{
 		[SerializeField] protected EnemyData enemyData;
 		[SerializeField] private GameObject firePrefab;
-		[SerializeField] private Transform fireSpawn;
 		protected Enemy enemy;
 
 		[Header("DEBUG")]
