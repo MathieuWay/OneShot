@@ -14,13 +14,18 @@ namespace oneShot
 		[SerializeField] private GameObject killParticle;
 		public bool isAlive;
         public Animator anim;
-        private Agent agent;
+        public float speed = 1f;
+        //private Agent agent;
+        private Vector3 initialPosition;
+        private Pattern pattern;
 
         private void Start()
         {
 			isAlive = true;
+            pattern = GetComponent<Pattern>();
             anim = GetComponentInChildren<Animator>();
-            agent = GetComponent<Agent>();
+            //agent = GetComponent<Agent>();
+            initialPosition = transform.position;
             /*path = GetComponent<Path>();
             if(path)
                 path.InitPath(transform.position);*/
@@ -31,12 +36,30 @@ namespace oneShot
 			anim.speed = GameTime.Instance.TimeSpeed;
             /*if(path)
                 transform.position = path.GetPositionAlongPath();*/
-            if (agent)
+            /*if (agent)
             {
                 if (!agent.reach)
                     anim.SetBool("isMoving", true);
                 else
                     anim.SetBool("isMoving", false);
+            }*/
+            if (pattern)
+            {
+                if (pattern.currentStep != null)
+                {
+                    if(pattern.currentStep.type == StepType.Move)
+                        anim.SetBool("isMoving", true);
+                    else
+                        anim.SetBool("isMoving", false);
+                }
+                else
+                {
+                    anim.SetBool("isMoving", false);
+                }
+            }
+            else
+            {
+                anim.SetBool("isMoving", false);
             }
         }
 
@@ -58,5 +81,14 @@ namespace oneShot
 			//FX
 			Instantiate(killParticle, transform.position + new Vector3(0, 0.2f, 0), killParticle.transform.rotation);
 		}
-	}
+
+        public void ResetAgent()
+        {
+            isAlive = true;
+            anim.SetBool("isMoving", false);
+            anim.Rebind();
+            transform.position = initialPosition;
+            //currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
+        }
+    }
 }

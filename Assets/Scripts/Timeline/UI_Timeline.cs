@@ -65,6 +65,11 @@ public class UI_Timeline : MonoBehaviour
 		return timer;
 	}
 
+    public float GetTimerDuration()
+    {
+        return timerDuration;
+    }
+
 	public void CheckPointOnTimeline(Transform point)
 	{
 		if (point.localPosition.x > timelineRect.rect.xMax)
@@ -136,7 +141,7 @@ public class UI_Timeline : MonoBehaviour
 			UI_PointController.Instance.SetCurrentPoint(points[selectedPoint]);
 		}
 
-		if (Gamepad.Instance.ButtonDownY)
+		if (Gamepad.Instance.ButtonDownY || Input.GetKeyDown(KeyCode.P))
 		{
 			PauseToggle();
 		}

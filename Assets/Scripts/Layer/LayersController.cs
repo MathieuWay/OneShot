@@ -2,19 +2,33 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
+using UnityEditor;  
 
+[ExecuteInEditMode]
 public class LayersController : MonoBehaviour
 {
     public static LayersController instance;
-    public List<GameObject> layers;
+    public List<GameObject> layers = new List<GameObject>();
+
+    private void OnEnable()
+    {
+        Init();
+    }
+
     private void Awake()
     {
+        Init();
+    }
+
+    private void Init()
+    {
+        Debug.Log("init layer controller");
         instance = this;
         layers = GameObject.FindGameObjectsWithTag("Etage").OrderBy(layer => layer.transform.position.y).ToList();
         for (int i = 0; i < layers.Count; i++)
         {
-            layers[i].GetComponent<Layer1>().index = i;
+            layers[i].GetComponent<oneShot.Layer>().index = i;
+            layers[i].GetComponent<oneShot.Layer>().LoadAccess();
         }
     }
 
@@ -47,16 +61,16 @@ public class LayersController : MonoBehaviour
         return 0;
     }
 
-    public Layer1 GetLayer(int index)
+    public oneShot.Layer GetLayer(int index)
     {
-        return layers[index].GetComponent<Layer1>();
+        return layers[index].GetComponent<oneShot.Layer>();
     }
 
     private void OnDrawGizmos()
     {
         foreach (GameObject etage in layers)
         {
-            Layer1 layer = etage.GetComponent<Layer1>();
+            oneShot.Layer layer = etage.GetComponent<oneShot.Layer>();
             Handles.color = Handles.yAxisColor;
             foreach (Transform access in layer.UpAccess)
             {

@@ -2,177 +2,124 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-
-public class Agent : MonoBehaviour
+namespace oneShot
 {
-    public int layerIndex;
-    public Layer1 currentLayer;
-    public float speed;
-    public bool reach = true;
-    public Vector3 target = Vector3.zero;
-    private float clock;
-    public List<Vector3> path = new List<Vector3>();
-    public bool debug;
-    public Vector3 initialPosition;
-	private oneShot.Enemy enemy;
-    // Start is called before the first frame update
-    void Start()
+    public class Agent : MonoBehaviour
     {
-		enemy = GetComponent<oneShot.Enemy>();
-        //StartCoroutine("StepLayer");
-        initialPosition = transform.position;
-        currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if(target != Vector3.zero && !reach && enemy.isAlive)
+        public int layerIndex;
+        public oneShot.Layer currentLayer;
+        public float speed;
+        public bool reach = true;
+        public Vector3 target = Vector3.zero;
+        private float clock;
+        public bool debug;
+        public Vector3 initialPosition;
+        private oneShot.Enemy enemy;
+        // Start is called before the first frame update
+        void Awake()
         {
-            if (transform.position.y == target.y)
-            {
-                if (transform.position != target && !reach)
-                    transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
-                else
-                {
-                    reach = true;
-                    if(debug)
-                        Debug.Log("real time:"+(Time.time - clock));
-                }
-            }
-            else
-            {
-                int direction;
-                if (transform.position.y < target.y)
-                    direction = 1;
-                else
-                    direction = -1;
-                Vector3 accessPos = currentLayer.GetClosestAccess(direction, transform.position);
-                if (Vector3.Distance(transform.position, accessPos) == 0){
-                    currentLayer = LayersController.instance.GetLayer(currentLayer.index + direction);
-                    ChangeLayer();
-                }
-                else
-                    transform.position = Vector3.MoveTowards(transform.position, accessPos, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
-            }
+            enemy = GetComponent<oneShot.Enemy>();
+            //StartCoroutine("StepLayer");
+            initialPosition = transform.position;
+        }
+        private void Start()
+        {
+            currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
         }
 
-        if (false)//DEBUG TARGET
+        // Update is called once per frame
+        void Update()
         {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            int layerMask = 1 << 8;
-            if (Physics.Raycast(ray, out hit, layerMask))
+            if (target != Vector3.zero && !reach && enemy.isAlive)
             {
-                Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
-                float time = CalculateTime(transform.position, normalizePos, speed);
-                if(time >= 0)
+                if (transform.position.y == target.y)
                 {
+                    if (transform.position != target && !reach)
+                        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
+                    else
+                    {
+                        reach = true;
+                        if (debug)
+                            Debug.Log("real time:" + (Time.time - clock));
+                    }
+                }
+                else
+                {
+                    int direction;
+                    if (transform.position.y < target.y)
+                        direction = 1;
+                    else
+                        direction = -1;
+                    Vector3 accessPos = currentLayer.GetClosestAccess(direction, transform.position);
+                    if (Vector3.Distance(transform.position, accessPos) == 0)
+                    {
+                        currentLayer = LayersController.instance.GetLayer(currentLayer.index + direction);
+                        ChangeLayer();
+                    }
+                    else
+                        transform.position = Vector3.MoveTowards(transform.position, accessPos, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
+                }
+            }
+
+            if (false)//DEBUG TARGET
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                int layerMask = 1 << 8;
+                if (Physics.Raycast(ray, out hit, layerMask))
+                {
+                    Vector3 normalizePos = new Vector3(hit.point.x, (int)hit.point.y, 0);
                     target = normalizePos;
                     reach = false;
                     clock = Time.time;
-                    if (debug)
-                    {
-                        Debug.Log(time);
-                        StartCoroutine(delay(time));
-                    }
                 }
-                //int targetIndex = LayersController.instance.GetLayerIndexByHeight(target.y);
-                //Debug.Log("target:"+targetIndex+"    /   current"+layerIndex);
-                //if (targetIndex != layerIndex)
-                //    StartCoroutine(StepLayer(targetIndex));
             }
         }
-    }
 
-    private void ChangeLayer()
-    {
-        Vector3 newPos = transform.position;
-        newPos.y = currentLayer.transform.position.y;
-        transform.position = newPos;
-    }
-
-    public static float CalculateTime(Vector3 initialPos,Vector3 position, float speed)
-    {
-        //path.Clear();
-        float time = 0;
-        Vector3 cursor = initialPos;
-        Layer1 layer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(cursor.y)); ;
-        //path.Add(cursor);
-        while (cursor.y != position.y)
+        private void ChangeLayer()
         {
-            int direction;
-            if (cursor.y < position.y)
-                direction = 1;
-            else
-                direction = -1;
-            Debug.Log("position:" + cursor + "  /direction:" + direction);
-            Vector3 access = layer.GetClosestAccess(direction, cursor);
-            if (access == Vector3.zero)
-            {
-                //path.Clear();
-                Debug.LogError("No access Found");
-                Debug.Break();
-                return -1;
-            }
-            //Path to access
-            time += Vector3.Distance(cursor, access) / speed;
-            cursor = access;
-            //path.Add(access);
-
-            //ChangeLayer
-            layer = LayersController.instance.GetLayer(layer.index + direction);
-            Vector3 nextPos = cursor;
-            nextPos.y = layer.transform.position.y;
-            cursor = nextPos;
-            //path.Add(nextPos);
+            Vector3 newPos = transform.position;
+            newPos.y = currentLayer.transform.position.y;
+            transform.position = newPos;
         }
-        time += Vector3.Distance(cursor, position) / speed;
-        //path.Add(position);
-        return time;
-    }
 
-    private void OnDrawGizmos()
-    {
-        if (debug)
+
+        private void OnDrawGizmos()
         {
-            Handles.color = Handles.zAxisColor;
-            if (target != Vector3.zero)
+            if (debug)
             {
-                Vector3 offset = target;
-                offset.y += 0.5f;
-                Handles.ArrowHandleCap(0, offset, Quaternion.Euler(90, 0, 0), 0.4f, EventType.Repaint);
-            }
-
-            Gizmos.color = Color.green;
-            for (int i = 0; i < path.Count - 1; i++)
-            {
-                Gizmos.DrawLine(path[i], path[i + 1]);
+                Handles.color = Handles.zAxisColor;
+                if (target != Vector3.zero)
+                {
+                    Vector3 offset = target;
+                    offset.y += 0.5f;
+                    Handles.ArrowHandleCap(0, offset, Quaternion.Euler(90, 0, 0), 0.4f, EventType.Repaint);
+                }
             }
         }
-    }
 
-    public void SetTarget(Vector3 pos)
-    {
-        target = pos;
-        reach = false;
-    }
+        public void SetTarget(Vector3 pos)
+        {
+            target = pos;
+            reach = false;
+        }
 
-    public void ResetAgent()
-    {
-		enemy.isAlive = true;
+        public void ResetAgent()
+        {
+            enemy.isAlive = true;
 
-		enemy.anim.SetBool("isMoving", false);
-		enemy.anim.Rebind();
-		
-		target = Vector3.zero;
-        transform.position = initialPosition;
-        currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
-    }
+            enemy.anim.SetBool("isMoving", false);
+            enemy.anim.Rebind();
 
-    IEnumerator delay(float time)
-    {
-        yield return new WaitForSeconds(time);
-        Debug.Log("Path ended");
+            target = Vector3.zero;
+            transform.position = initialPosition;
+            currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
+        }
+
+        IEnumerator delay(float time)
+        {
+            yield return new WaitForSeconds(time);
+            Debug.Log("Path ended");
+        }
     }
 }
