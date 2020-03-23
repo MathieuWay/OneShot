@@ -108,9 +108,7 @@ public class SpawnController : MonoBehaviour
 				//RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
 
 
-				Ray ray = Camera.main.ScreenPointToRay(CursorController.Instance.GetPosition());
-
-				RaycastHit2D hit = Physics2D.GetRayIntersection(ray);
+				RaycastHit2D hit = FireRaycast(CursorController.Instance.GetPosition());
 
 				if (hit.collider == null)
 				{
@@ -121,18 +119,33 @@ public class SpawnController : MonoBehaviour
 				bool hitBlocker = false;
 
 				//Check tous les tags considérés comme "bloqueur"
-				for (int i = 0; i < blockerTags.Length; i++)
-				{
-					if (hit.transform.CompareTag(blockerTags[i]))
-					{
-						hitBlocker = true;
-					}
-				}
+				hitBlocker = CheckBlockerTags(hit);
 
 				if (hitBlocker)
 				{
-					yield return null;
-					continue;
+					//Tests sur les côtés jusqu'à trouver un emplacement libre
+					/*
+					float[] testPos = new float[] { 40, -40 };
+
+					for (int i = 0; i < testPos.Length; i++)
+					{
+						hit = FireRaycast(CursorController.Instance.GetPosition() + new Vector2(testPos[i], 0));
+						hitBlocker = CheckBlockerTags(hit);
+
+						if(!hitBlocker)
+						{
+							//Emplacement trouvé !
+							break;
+						}
+					}
+					*/
+
+					if(hitBlocker)
+					{
+						//Aucun emplacement libre trouvé
+						yield return null;
+						continue;
+					}
 				}
 
 				//Impossible de placer un point sur un autre
@@ -188,19 +201,20 @@ public class SpawnController : MonoBehaviour
 				RaycastHit hitFloor;
 				Physics.Raycast(hit.point, Vector3.down, out hitFloor, detectionDistanceToFloor);
 
-				if (hitFloor.transform == null)
-				{
-					//Si aucune détection de collider, aucun sol n'a été trouvé
-					yield return null;
-					continue;
-				}
+				//if (hitFloor.transform == null)
+				//{
+				//	//Si aucune détection de collider, aucun sol n'a été trouvé
+				//	yield return null;
+				//	continue;
+				//}
 
 				//Le point de spawn est décalé suivant Z pour être placé devant la zone Trigger des TP
 				Vector3 offset = new Vector3(0, 0, -0.1f);
 
-				Vector3 spawnPosition = hitFloor.point + Vector3.up * spawnDistanceToFloor + offset;
+				Vector3 spawnPosition = hitFloor.collider != null ? hitFloor.point + Vector3.up * spawnDistanceToFloor + offset :
+					(Vector3)hit.point;
 
-				Vector3 rootPoint = hitFloor.point;
+				Vector3 rootPoint = hitFloor.collider != null ? hitFloor.point : (Vector3)hit.point + new Vector3(0, -spawnDistanceToFloor, 0);
 
 				if(pointSelected)
 				{
@@ -250,6 +264,26 @@ public class SpawnController : MonoBehaviour
 		}
 
 		SpawnComplete?.Invoke();
+	}
+
+	private bool CheckBlockerTags(RaycastHit2D hit)
+	{
+		for (int i = 0; i < blockerTags.Length; i++)
+		{
+			if (hit.transform.CompareTag(blockerTags[i]))
+			{
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private RaycastHit2D FireRaycast(Vector2 startPos)
+	{
+		Ray ray = Camera.main.ScreenPointToRay(startPos);
+
+		return Physics2D.GetRayIntersection(ray);
 	}
 
 	public SpawnPoint SpawnPoint

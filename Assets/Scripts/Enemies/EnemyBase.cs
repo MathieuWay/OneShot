@@ -9,6 +9,7 @@ namespace oneShot
 		[SerializeField] protected EnemyData enemyData;
 		[SerializeField] private GameObject firePrefab;
 		[SerializeField] private Transform fireSpawn;
+		protected Enemy enemy;
 
 		[Header("DEBUG")]
 		[SerializeField] private bool drawGizmos = true;
@@ -20,7 +21,7 @@ namespace oneShot
 			LevelController.Instance.OnStartCombatPhase += StartHunt;
 			TacticsController.Instance.OnPlayerTeleport += ResetReactionTime;
 
-			Enemy enemy = GetComponent<Enemy>();
+			enemy = GetComponent<Enemy>();
 			enemy.Init(enemyData.Speed);
 			enemy.OnKill += StopHunt;
 		}
@@ -76,13 +77,18 @@ namespace oneShot
 			//!TMP: Les ennemis tirent sur le joueur même s'il est mort :)
 			//if (PlayerBehaviour.Instance.IsDead) return;
 
-			float distanceToPlayer = Vector2.Distance(fireSpawn.position, PlayerBehaviour.Instance.transform.position);
+			float distanceToPlayer = Vector2.Distance(enemy.Pivot.position, PlayerBehaviour.Instance.transform.position);
 
+			//Le joueur doit être à sa portée
 			if (distanceToPlayer > enemyData.FieldOfView) return;
 
-			Vector2 shootDir = PlayerBehaviour.Instance.CenterPivot.position - fireSpawn.position;
+			Vector2 shootDir = PlayerBehaviour.Instance.CenterPivot.position - enemy.WeaponPivot.position;
 
-			RaycastHit2D[] hits = Physics2D.RaycastAll(fireSpawn.position, shootDir, enemyData.FieldOfView);
+			//Le joueur doit être dans sa direction
+			if (Vector2.Dot(shootDir, new Vector2(enemy.GetDirectionX(), 0)) < 0) return;
+
+
+			RaycastHit2D[] hits = Physics2D.RaycastAll(enemy.WeaponPivot.position, shootDir, enemyData.FieldOfView);
 
 			List<RaycastHit2D> correctHits = new List<RaycastHit2D>();
 
@@ -99,7 +105,7 @@ namespace oneShot
 
 			for (int i = 0; i < correctHits.Count; i++)
 			{
-				float distanceToHit = Vector2.Distance(correctHits[i].point, fireSpawn.position);
+				float distanceToHit = Vector2.Distance(correctHits[i].point, enemy.WeaponPivot.position);
 
 				if(distanceToHit < nearestHitDist)
 				{
@@ -112,7 +118,7 @@ namespace oneShot
 			{
 				PlayerBehaviour player = nearestHit.transform.GetComponent<PlayerBehaviour>();
 				player.Kill();
-				LaunchEffect(fireSpawn.position, nearestHit.point);
+				LaunchEffect(enemy.WeaponPivot.position, nearestHit.point);
 			}
 		}
 
@@ -134,8 +140,12 @@ namespace oneShot
 		{
 			if (!drawGizmos) return;
 
+			if (enemy == null) return;
+
 			Gizmos.color = new Color(1, 0.8f, 0);
-			Gizmos.DrawWireSphere(fireSpawn.position, enemyData.FieldOfView);
+			Gizmos.DrawWireSphere(enemy.Pivot.position, enemyData.FieldOfView);
+
+			Debug.DrawRay(enemy.WeaponPivot.position, enemy.WeaponPivot.right * enemyData.FieldOfView, Color.red);
 		}
 	}
 }

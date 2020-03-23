@@ -49,5 +49,5 @@ MonoBehaviour:
   spawnCount: 10
   blockerTags:
   - Obstacle
-  detectionDistanceToFloor: 3
+  detectionDistanceToFloor: 1
   spawnDistanceToFloor: 0.3
