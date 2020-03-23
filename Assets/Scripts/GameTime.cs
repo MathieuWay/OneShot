@@ -16,8 +16,11 @@ public class GameTime : MonoBehaviour
 
 	public void SetTimeSpeed(float speed, float duration)
 	{
-		Debug.Log("SET TIME");
+		StartCoroutine(SetTimeSpeedProcess(speed, duration));
+	}
 
+	public void SlowMotion(float speed, float duration)
+	{
 		if (speed > 1)
 		{
 			speed = 1;
@@ -27,7 +30,7 @@ public class GameTime : MonoBehaviour
 			speed = 0;
 		}
 
-		StartCoroutine(SetTimeSpeedProcess(speed, duration));
+		SetTimeSpeed(speed, duration);
 	}
 
 

@@ -12,11 +12,18 @@ namespace oneShot
 
 		public override void Launch()
 		{
-			Enemy enemy = GetNearestEnemy(detectionRange); 
+			Enemy enemy = GetNearestEnemy(new Vector2(1, detectionRange)); 
 
-			if(enemy != null)
+			if (enemy != null)
 			{
-				enemy.Kill(); 
+				if (enemy.GetComponent<EnemyBase>() != null)
+				{
+					enemy.GetComponent<EnemyBase>().Hit(_AttackName, PlayerBehaviour.Instance.CenterPivot.position);
+				}
+				else
+				{
+					enemy.Kill();
+				}
 			}
 		}
 	}

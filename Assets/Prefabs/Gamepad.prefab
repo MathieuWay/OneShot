@@ -60,6 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   canvasTransform: {fileID: 1978420182415845287}
   cursorPoint: {fileID: 1978420181470257233}
+  cursorImage: {fileID: 1978420181470257232}
+  cursorFailColor: {r: 1, g: 0.19607843, b: 0, a: 0.78431374}
   speed: 150
   accelerationSpeed: 10
   maxAcceleration: 5

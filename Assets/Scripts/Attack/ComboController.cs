@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace oneShot
 {
-	public enum InputName { A, B, X, Y, Joy_Up, Joy_Down, Joy_Left, Joy_Right, Joy_Loop, RT, LT }
+	public enum InputName { A, B, X, Y, Joy_Up, Joy_Down, Joy_Left, Joy_Right, Joy_Loop, Joy_QuarterLoop, Joy_HalfLoop, RT, LT }
 
 
 	[System.Serializable]
@@ -46,6 +46,9 @@ namespace oneShot
 		public event ComboDelegateV3 ComboFailedEvent;
 		public event ComboDelegateV3 ComboCompletedEvent;
 		public event ComboDelegateV3 NextInputEvent;
+
+		[SerializeField] private float startNewComboOnFailedDelay = 1;
+		[SerializeField] private float startNewComboOnSucceedDelay = 0.5f;
 
 		private bool comboRunning = false;
 		private float joystickLimit = 0.8f;
@@ -127,6 +130,8 @@ namespace oneShot
 
 						StartCoroutine(ComboReadyProcess(combo));
 
+						yield return new WaitForSeconds(startNewComboOnSucceedDelay);
+
 						comboRunning = false;
 						yield break;
 					}
@@ -154,6 +159,8 @@ namespace oneShot
 					}
 
 					ComboFailedEvent?.Invoke();
+
+					yield return new WaitForSeconds(startNewComboOnFailedDelay);
 
 					comboRunning = false;
 					yield break;
@@ -191,7 +198,9 @@ namespace oneShot
 				case InputName.Joy_Right: succeed = gamepad.HorizontalJL > joystickLimit || gamepad.PadHorizontal > joystickLimit; break;
 				case InputName.Joy_Up: succeed = gamepad.VerticalJL > joystickLimit || gamepad.PadVertical > joystickLimit; break;
 				case InputName.Joy_Down: succeed = gamepad.VerticalJL < -joystickLimit || gamepad.PadVertical < -joystickLimit; break;
-				case InputName.Joy_Loop: succeed = loopSucceed; CheckJoyLoop(1); break;
+				case InputName.Joy_QuarterLoop: succeed = loopSucceed; CheckJoyLoop(0.25f, 1); break;
+				case InputName.Joy_HalfLoop: succeed = loopSucceed; CheckJoyLoop(0.5f, 1); break;
+				case InputName.Joy_Loop: succeed = loopSucceed; CheckJoyLoop(1, 1); break;
 			}
 
 			return succeed;
@@ -202,7 +211,10 @@ namespace oneShot
 			bool fail = false;
 
 			//!Critical: pas de mauvais input quand on fait la boucle avec le joystick, sinon impossible de faire la boucle
-			if (rightInput == InputName.Joy_Loop) return false;
+			if (rightInput == InputName.Joy_QuarterLoop || rightInput == InputName.Joy_HalfLoop || rightInput == InputName.Joy_Loop)
+			{
+				return false;
+			}
 
 			Gamepad gamepad = Gamepad.Instance;
 
@@ -257,14 +269,14 @@ namespace oneShot
 		private bool isCheckingJoyLoop;
 		private bool loopSucceed;
 
-		private void CheckJoyLoop(float duration)
+		private void CheckJoyLoop(float percentage, float duration)
 		{
 			if (isCheckingJoyLoop) return;
 
-			StartCoroutine(JoyLoopProcess(duration));
+			StartCoroutine(JoyLoopProcess(percentage, duration));
 		}
 
-		private IEnumerator JoyLoopProcess(float duration)
+		private IEnumerator JoyLoopProcess(float percentage, float duration)
 		{
 			isCheckingJoyLoop = true;
 
@@ -290,7 +302,7 @@ namespace oneShot
 				}
 
 				//360 pour un tour - 30 (arbitraire) pour un peu plus de souplesse
-				if(angle >= 330)
+				if(angle >= (percentage * 360) - 30)
 				{
 					loopSucceed = true;
 					yield return new WaitForEndOfFrame();

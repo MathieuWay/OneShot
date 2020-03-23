@@ -2,7 +2,9 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+# if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class LayersController : MonoBehaviour
 {
@@ -52,7 +54,8 @@ public class LayersController : MonoBehaviour
         return layers[index].GetComponent<Layer1>();
     }
 
-    private void OnDrawGizmos()
+#if UNITY_EDITOR
+	private void OnDrawGizmos()
     {
         foreach (GameObject etage in layers)
         {
@@ -71,4 +74,5 @@ public class LayersController : MonoBehaviour
             }
         }
     }
+#endif
 }

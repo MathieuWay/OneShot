@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
+using XInputDotNetPure;
 
 
 public class Gamepad : MonoBehaviour
@@ -31,7 +33,26 @@ public class Gamepad : MonoBehaviour
 	public bool ButtonDownTriggerL { get; private set; }
 	public bool ButtonDownTriggerR { get; private set; }
 	public bool ButtonDownStart { get; private set; }
+	private bool isVibrating;
 
+
+	public void Vibrate(float leftMotor, float rightMotor, float duration)
+	{
+		if (isVibrating) return;
+
+		GamePad.SetVibration(0, leftMotor, rightMotor);
+		StartCoroutine(VibrateDuration(duration));
+	}
+	private IEnumerator VibrateDuration(float duration)
+	{
+		isVibrating = true;
+
+		yield return new WaitForSeconds(duration);
+
+		GamePad.SetVibration(0, 0, 0);
+
+		isVibrating = false;
+	}
 
 	private void Awake()
 	{
@@ -81,5 +102,10 @@ public class Gamepad : MonoBehaviour
 		ButtonTriggerL = Input.GetKey("joystick button 4");
 		ButtonTriggerR = Input.GetKey("joystick button 5");
 		ButtonDownStart = Input.GetKeyDown("joystick button 7"); 
+	}
+
+	private void OnApplicationQuit()
+	{
+		GamePad.SetVibration(0, 0, 0);
 	}
 }

@@ -119,13 +119,14 @@ public class UI_Timeline : MonoBehaviour
 		points = new List<UI_Point>();
 
 		pauseButton.onClick.AddListener(PauseToggle);
-
-
 	}
 
 	private void Start()
 	{
 		SpawnController.Instance.SpawnPointEvent += AddPoint;
+		SpawnController.Instance.GrabPointEvent += GrabPoint;
+		SpawnController.Instance.UngrabPointEvent += UngrabPoint;
+		SpawnController.Instance.SpawnFailEvent += delegate { CursorController.Instance.SpawnPointFail(); };
 
 		DisplayPointCount();
 
@@ -138,17 +139,19 @@ public class UI_Timeline : MonoBehaviour
 
 		//!NEW FOR GAMEPAD
 		//Sélection des points sur la timeline
-		if (Gamepad.Instance.TriggerR && SelectedPoint < points.Count - 1)
+		if (Gamepad.Instance.ButtonDownTriggerR && SelectedPoint < points.Count - 1)
 		{
 			SelectedPoint++;
 
 			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
+			SpawnController.Instance.CancelGrab();
 		}
-		if (Gamepad.Instance.TriggerL && SelectedPoint > 0)
+		if (Gamepad.Instance.ButtonDownTriggerL && SelectedPoint > 0)
 		{
 			SelectedPoint--;
 
 			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
+			SpawnController.Instance.CancelGrab();
 		}
 
 		if (Gamepad.Instance.ButtonDownX)
@@ -255,6 +258,23 @@ public class UI_Timeline : MonoBehaviour
 	public void UpdateCurrentPointSelected()
 	{
 		SelectedPoint = UI_PointController.Instance.GetCurrentPointID();
+	}
+
+	private void GrabPoint(SpawnPoint point)
+	{
+		if(point._ID != UI_PointController.Instance.GetCurrentPointID())
+		{
+			UI_PointController.Instance.UnselectCurrentPoint();
+		}
+
+		SelectedPoint = point._ID;
+		UI_PointController.Instance.SelectPoint(points[SelectedPoint]);
+		//UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
+	}
+	private void UngrabPoint(SpawnPoint point)
+	{
+		SelectedPoint = point._ID;
+		UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 	}
 
 	//OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline

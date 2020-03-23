@@ -32,6 +32,11 @@ public class SpawnPoint : MonoBehaviour
 		numberText.text = (id + 1).ToString();
 	}
 
+	public void UpdatePosition(Vector3 root)
+	{
+		_Position = root;
+	}
+
 	public void Select()
 	{
 		spriteRenderer.color = new Color(1, 0.7f, 0);
@@ -39,5 +44,9 @@ public class SpawnPoint : MonoBehaviour
 	public void Unselect()
 	{
 		spriteRenderer.color = Color.red;
+	}
+	public void Grab()
+	{
+		spriteRenderer.color = Color.green;
 	}
 }
