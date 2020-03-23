@@ -5,7 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Master.unity
     guid: 1171a902f14a723458d6db667613239d
+  - enabled: 1
+    path: Assets/Scenes/PierrickDevelop.unity
+    guid: 83e151e62f1783146a59a5c3bd8cb0c6
   m_configObjects: {}

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace oneShot
 {
@@ -63,6 +65,7 @@ namespace oneShot
 			transform.position = newPos;
 		}
 
+#if UNITY_EDITOR
 		private void OnDrawGizmos()
 		{
 			/*
@@ -77,6 +80,7 @@ namespace oneShot
 			Handles.color = Handles.zAxisColor;
 			Handles.ArrowHandleCap(0, transform.position + new Vector3(0, 0.5f, 0), Quaternion.identity * Quaternion.Euler(90, 0, 0), 0.4f, EventType.Repaint);
 		}
+#endif
 	}
 
 }

@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 namespace oneShot
 {
@@ -77,7 +79,8 @@ namespace oneShot
             patternStepsLoaded = new List<PatternStepMove>(patternSteps);
         }
 
-        private void OnDrawGizmos()
+#if UNITY_EDITOR
+		private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
             foreach (PatternStepMove moveStep in patternSteps)
@@ -85,6 +88,7 @@ namespace oneShot
                 Gizmos.DrawSphere(moveStep.target, 0.1f);
             }
         }
+
 
         private void OnValidate()
         {
@@ -102,5 +106,6 @@ namespace oneShot
                 }
             }
         }
-    }
+#endif
+	}
 }

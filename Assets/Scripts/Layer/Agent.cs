@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
 using UnityEditor;
+#endif
 
 public class Agent : MonoBehaviour
 {
@@ -132,7 +134,8 @@ public class Agent : MonoBehaviour
         return time;
     }
 
-    private void OnDrawGizmos()
+#if UNITY_EDITOR
+	private void OnDrawGizmos()
     {
         if (debug)
         {
@@ -151,8 +154,9 @@ public class Agent : MonoBehaviour
             }
         }
     }
+#endif
 
-    public void SetTarget(Vector3 pos)
+	public void SetTarget(Vector3 pos)
     {
         target = pos;
         reach = false;
@@ -160,14 +164,17 @@ public class Agent : MonoBehaviour
 
     public void ResetAgent()
     {
-		enemy.isAlive = true;
+		if (enemy)
+		{
+			enemy.isAlive = true;
 
-		enemy.anim.SetBool("isMoving", false);
-		enemy.anim.Rebind();
-		
-		target = Vector3.zero;
-        transform.position = initialPosition;
-        currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
+			enemy.anim.SetBool("isMoving", false);
+			enemy.anim.Rebind();
+
+			target = Vector3.zero;
+			transform.position = initialPosition;
+			currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
+		}
     }
 
     IEnumerator delay(float time)

@@ -40,12 +40,12 @@ namespace oneShot
 		private void Awake()
 		{
 			agent = GetComponent<Agent>();
+			anim = GetComponentInChildren<Animator>();
 		}
 
 		private void Start()
         {
 			isAlive = true;
-            anim = GetComponentInChildren<Animator>();
 
 			_Direction = defaultDirection;
             /*path = GetComponent<Path>();
