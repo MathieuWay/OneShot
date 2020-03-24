@@ -38,12 +38,19 @@ namespace oneShot
             }
         }
 
+		
+
 		public delegate void TacticsDelegate();
 		public event TacticsDelegate OnPlayerTeleport;
 
+		[Header("Main")]
+		[SerializeField] private float timelineDuration = 10;
 		[SerializeField] private GameObject tpStartParticle;
 		[SerializeField] private GameObject tpFinishParticle;
 		private bool launchStartParticle;
+
+		public float TimelineDuration { get => timelineDuration; }
+
 		public bool isFinished;
         //TIMER
         public float time;

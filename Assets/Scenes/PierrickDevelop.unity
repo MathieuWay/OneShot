@@ -1072,7 +1072,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435519743}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eff043aeca5bf9d4486c415b2916dc3b, type: 3}
   m_Name: 
@@ -5515,6 +5515,11 @@ PrefabInstance:
       propertyPath: patternSteps.Array.size
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 25942248378887479, guid: 607e37805d80efb488dd5f2590a76bb5,
+        type: 3}
+      propertyPath: steps.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1277644002226569976, guid: 607e37805d80efb488dd5f2590a76bb5,
         type: 3}
       propertyPath: m_Name
@@ -5627,6 +5632,11 @@ PrefabInstance:
     - target: {fileID: 200956819, guid: 7bd87996e81c6304ea7ee08f48a7d808, type: 3}
       propertyPath: patternSteps.Array.data[2].target.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
+        type: 3}
+      propertyPath: steps.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1161568642282078209, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -5809,6 +5819,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Ninja
       objectReference: {fileID: 0}
+    - target: {fileID: 4227883105352859396, guid: a1dc8c858abcf8f41b113c04b2aed16d,
+        type: 3}
+      propertyPath: steps.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1dc8c858abcf8f41b113c04b2aed16d, type: 3}
 --- !u!1001 &8762153798582403882
@@ -5841,6 +5856,11 @@ PrefabInstance:
     - target: {fileID: 785218936, guid: 75086500099708b4aa4559f64fa2d17f, type: 3}
       propertyPath: patternSteps.Array.data[2].target.x
       value: -2.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
+        type: 3}
+      propertyPath: steps.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8665812801708507693, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
