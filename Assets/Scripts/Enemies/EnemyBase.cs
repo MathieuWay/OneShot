@@ -8,7 +8,6 @@ namespace oneShot
 	{
 		[SerializeField] protected EnemyData enemyData;
 		[SerializeField] private GameObject firePrefab;
-		[SerializeField] private Transform fireSpawn;
 		protected Enemy enemy;
 
 		[Header("DEBUG")]
@@ -22,8 +21,8 @@ namespace oneShot
 			TacticsController.Instance.OnPlayerTeleport += ResetReactionTime;
 
 			enemy = GetComponent<Enemy>();
-			enemy.Init(enemyData.Speed);
-			enemy.OnKill += StopHunt;
+            enemy.speed = enemyData.Speed;
+            enemy.OnKill += StopHunt;
 		}
 
 		public virtual void Hit(AttackName attackName, Vector2 hitOriginPos)

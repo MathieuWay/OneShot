@@ -19,7 +19,7 @@ public class UI_Timeline : MonoBehaviour
 	[Header("Timer")]
 	[SerializeField] private RectTransform timelineRect;
 	[SerializeField] private Transform timerIndicator;
-	[SerializeField] private float timerDuration = 10;
+	private float timerDuration;
 	private float timer = 0;
 
 	[Header("Point")]
@@ -128,6 +128,8 @@ public class UI_Timeline : MonoBehaviour
 
 	private void Start()
 	{
+		timerDuration = oneShot.TacticsController.Instance.TimelineDuration;
+
 		SpawnController.Instance.SpawnPointEvent += AddPoint;
 		SpawnController.Instance.GrabPointEvent += GrabPoint;
 		SpawnController.Instance.UngrabPointEvent += UngrabPoint;

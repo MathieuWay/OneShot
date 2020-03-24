@@ -43,6 +43,8 @@ namespace oneShot
 		private void Start()
         {
 			isAlive = true;
+			lastPos = transform.position;
+			_Direction = defaultDirection;
             pattern = GetComponent<Pattern>();
             anim = GetComponentInChildren<Animator>();
             //agent = GetComponent<Agent>();
