@@ -48,7 +48,7 @@ namespace oneShot
         // Update is called once per frame
         void Update()
         {
-            if (!Application.isPlaying) return;
+            if (!Application.isPlaying || stepsLoaded.Count == 0) return;
             float currentTime = 0f;
             if (UI_Timeline.Instance)
                 currentTime = UI_Timeline.Instance.GetCurrentTime();
