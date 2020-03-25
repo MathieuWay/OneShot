@@ -9,7 +9,7 @@ namespace oneShot
 	{
 		public static PlayerBehaviour Instance { get; private set; }
 
-		[SerializeField] private Transform centerPivot;
+		[SerializeField] private Transform centerPivot = null;
 		public Transform CenterPivot { get => centerPivot; }
 		public bool IsDead { get; private set; }
 		private Animator anim;
@@ -22,7 +22,7 @@ namespace oneShot
 
 			anim.SetTrigger("dying");
 
-			LevelController.Instance.ReloadScene(3);
+			LevelController.Instance.PlayerDie();
 		}
 
 		private void Awake()

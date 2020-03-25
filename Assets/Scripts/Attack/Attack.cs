@@ -8,8 +8,8 @@ namespace oneShot
 	public abstract class Attack : MonoBehaviour
 	{
 		[Header("MAIN")]
-		[SerializeField] private AttackName attackName;
-		[SerializeField] private Combo combo;
+		[SerializeField] private AttackName attackName = AttackName.SpiralAttack;
+		[SerializeField] private Combo combo = null;
 		public AttackName _AttackName { get => attackName; }
 		public Combo Combo { get => combo; }
 

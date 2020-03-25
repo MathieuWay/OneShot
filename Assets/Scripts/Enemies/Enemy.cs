@@ -115,7 +115,7 @@ namespace oneShot
 			if (!isAlive) return;
 
 			isAlive = false;
-			anim.SetTrigger("dying");
+			anim.Play("dying");
 			OnEnemyDead();
 
 			CameraShake.Instance.ShakeCamera();
@@ -127,12 +127,18 @@ namespace oneShot
 			OnKill?.Invoke();
 		}
 
-        public void ResetAgent()
+        public void ResetEnemy()
         {
             isAlive = true;
-            anim.SetBool("isMoving", false);
-            anim.Rebind();
-            transform.position = initialPosition;
+
+			if(anim)
+			{
+				anim.SetBool("isMoving", false);
+				anim.Rebind();
+
+				transform.position = initialPosition;
+			}
+            
             //currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
         }
     }

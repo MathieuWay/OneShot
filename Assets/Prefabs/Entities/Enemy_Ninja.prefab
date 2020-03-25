@@ -111,23 +111,33 @@ PrefabInstance:
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 133501194019460207, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_Name
       value: Enemy_Ninja
       objectReference: {fileID: 0}
+    - target: {fileID: 2278131240243740547, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee7f04e9d690974d8812684982069f9, type: 2}
+    - target: {fileID: 6394652471380386907, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee7f04e9d690974d8812684982069f9, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15832efbd63208b40b557c9270213c6d, type: 3}
 --- !u!1 &3119663504345092299 stripped

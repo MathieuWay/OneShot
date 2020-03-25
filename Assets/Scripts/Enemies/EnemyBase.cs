@@ -7,7 +7,7 @@ namespace oneShot
 	public abstract class EnemyBase : MonoBehaviour
 	{
 		[SerializeField] protected EnemyData enemyData;
-		[SerializeField] private GameObject firePrefab;
+		[SerializeField] private GameObject firePrefab = null;
 		protected Enemy enemy;
 
 		[Header("DEBUG")]

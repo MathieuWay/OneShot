@@ -6,10 +6,10 @@ namespace oneShot
 {
 	public class UI_ComboController : MonoBehaviour
 	{
-		[SerializeField] private GameObject inputPrefab;
-		[SerializeField] private GameObject comboPrefab;
-		[SerializeField] private Transform comboContainer;
-		[SerializeField] private Transform comboListContainer;
+		[SerializeField] private GameObject inputPrefab = null;
+		[SerializeField] private GameObject comboPrefab = null;
+		[SerializeField] private Transform comboContainer = null;
+		[SerializeField] private Transform comboListContainer = null;
 		private List<UI_Input> uiInputs;
 		private bool isRunning;
 		private bool nextInput;

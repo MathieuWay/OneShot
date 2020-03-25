@@ -37,7 +37,7 @@ public class SpriteLoader : MonoBehaviour
                     {
                         transform.localScale = new Vector3((float)(tex.width) / (float)(tex.height), 1, 1);
                     }
-                    transform.localScale *= ScaleFactor;
+					transform.localScale = new Vector3(transform.localScale.x * ScaleFactor, transform.localScale.y * ScaleFactor, 1);
                 }
             }
             else

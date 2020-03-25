@@ -37,7 +37,7 @@ public class CameraController : MonoBehaviour
     public Node initNode;
     public Path path;
     public Vector3 offsetPath = Vector3.zero;
-    private float pathPourcentage = 0;
+    //private float pathPourcentage = 0;
 
 
     private static CameraController instance;

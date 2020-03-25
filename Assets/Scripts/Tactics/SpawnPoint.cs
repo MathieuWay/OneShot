@@ -6,8 +6,8 @@ using TMPro;
 
 public class SpawnPoint : MonoBehaviour
 {
-	[SerializeField] private TextMeshProUGUI numberText;
-	[SerializeField] private SpriteRenderer spriteRenderer;
+	[SerializeField] private TextMeshProUGUI numberText = null;
+	[SerializeField] private SpriteRenderer spriteRenderer = null;
 	public int _ID { get; set; }
 	public float _Time { get; private set; }
 	public Vector2 _Position { get; private set; }
