@@ -1,12 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+#if UNITY_EDITOR
+using UnityEditor;
 [ExecuteInEditMode]
 public class SpriteLoader : MonoBehaviour
 {
-    public Texture2D tex;
-    public Color tint = Color.white;
+    //public Texture2D tex;
+    //public Color tint = Color.white;
     [Range(0.5f,10f)]
     public float ScaleFactor = 1f;
     private void OnEnable()
@@ -20,20 +21,37 @@ public class SpriteLoader : MonoBehaviour
 
     private void ApplyTextureAndResizeQuad()
     {
-        GetComponent<Renderer>().material.SetColor("_Tint", tint);
-        //Debug.Log(tex.width / tex.height);
-        if (tex)
+        if (GetComponent<Renderer>())
         {
-            GetComponent<Renderer>().material.SetTexture("_MainTex", tex);
-            if (tex.width > tex.height)
+            Renderer renderer = GetComponent<Renderer>();
+            if (renderer.sharedMaterial)
             {
-                transform.localScale = new Vector3(1, (float)(tex.height) / (float)(tex.width), 1);
+                Texture tex = renderer.sharedMaterial.GetTexture("_MainTex");
+                if (tex)
+                {
+                    if (tex.width > tex.height)
+                    {
+                        transform.localScale = new Vector3(1, (float)(tex.height) / (float)(tex.width), 1);
+                    }
+                    else
+                    {
+                        transform.localScale = new Vector3((float)(tex.width) / (float)(tex.height), 1, 1);
+                    }
+                    transform.localScale *= ScaleFactor;
+                }
             }
             else
             {
-                transform.localScale = new Vector3((float)(tex.width) / (float)(tex.height), 1, 1);
+                if (gameObject.scene.name != null)
+                {
+                    Debug.Log("Generating a new Material");
+                    var material = new Material(Shader.Find("Customs/SpriteShadow"));
+                    AssetDatabase.CreateAsset(material, "Assets/Materials/SpriteShadow/" + transform.name + ".mat");
+                    renderer.sharedMaterial = material;
+                }
             }
         }
-        transform.localScale *= ScaleFactor;
     }
 }
+
+#endif

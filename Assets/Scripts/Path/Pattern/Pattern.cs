@@ -12,6 +12,7 @@ namespace oneShot
     public class Pattern : MonoBehaviour
     {
         private Animator anim;
+        //private Animation animation;
         //private Agent agent;
         private Enemy enemy;
         private Vector3 initialPosition;
@@ -33,6 +34,7 @@ namespace oneShot
         private void Awake()
         {
             anim = GetComponentInChildren<Animator>();
+            //animation = GetComponentInChildren<Animation>();
             enemy = GetComponent<Enemy>();
             //agent = GetComponent<Agent>();
 
@@ -57,14 +59,42 @@ namespace oneShot
             switch (current.type)
             {
                 case StepType.Idle:
+                    if (!current.stepFlag)
+                    {
+                        /*
+                        animation.Stop();
+                        animation["idle"].speed = GameTime.Instance.TimeSpeed;
+                        animation.CrossFade("idle");
+                        */
+                        anim.Play("idle");
+                        current.stepFlag = true;
+                    }
+                    anim.speed = GameTime.Instance.TimeSpeed;
                     break;
                 case StepType.Move:
                     StepMove stepMove = new StepMove(current);
                     //Debug.Log(current.targetPos);
                     //Debug.Log(stepMove.GetPositionByTime(currentTime));
+                    //animation["move"].speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
+                    //animation.Play("move");
+                    if(!current.stepFlag)
+                    {
+                        anim.Play(StepMove.GetClipName(current.moveType));
+                        current.stepFlag = true;
+                    }
+                    anim.speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
                     transform.position = stepMove.GetPositionByTime(currentTime);
                     break;
                 case StepType.Anim:
+                    if (!current.stepFlag)
+                    {
+                        //animation.Stop();
+                        //animation.Play(current.clip.name);
+                        anim.Play(current.clip.name);
+                        current.stepFlag = true;
+                    }
+                    anim.speed = GameTime.Instance.TimeSpeed;
+                    //animation[current.clip.name].speed = GameTime.Instance.TimeSpeed;
                     break;
                 default:
                     break;
@@ -73,8 +103,12 @@ namespace oneShot
 
         private void ResetPattern()
         {
-            enemy.ResetAgent();
+            enemy.ResetEnemy();
             stepsLoaded = new List<Step>(steps);
+            foreach(Step step in stepsLoaded)
+            {
+                step.stepFlag = false;
+            }
         }
 
         private Step GetCurrentStep(float currentTime)
@@ -113,6 +147,15 @@ namespace oneShot
                         pos = stepmove.targetPos;
                         break;
                     case StepType.Anim:
+                        /*if (step.clip)
+                        {
+                            animation.AddClip(step.clip, step.clip.name);
+                            step.duration = step.clip.length;
+                        }*/
+                        if (step.clip)
+                        {
+                            step.duration = step.clip.length;
+                        }
                         break;
                     default:
                         break;
