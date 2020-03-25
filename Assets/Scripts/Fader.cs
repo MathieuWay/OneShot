@@ -6,14 +6,14 @@ public class Fader : MonoBehaviour
 {
     private Animator anim;
 
-    //EVENT FADER
-    public delegate void EventFadeIn();
-    public static event EventFadeIn OnFadeIn;
+	//EVENT FADER
+	public delegate void EventFadeIn();
+	public static event EventFadeIn OnFadeIn;
 
-    public delegate void EventFadeOut();
-    public static event EventFadeOut OnFadeOut;
+	public delegate void EventFadeOut();
+	public static event EventFadeOut OnFadeOut;
 
-    private static Fader instance;
+	private static Fader instance;
     public static Fader Instance
     {
         get{
@@ -45,7 +45,7 @@ public class Fader : MonoBehaviour
 
     private void Awake()
     {
-        DontDestroyOnLoad(this.gameObject);
+        //DontDestroyOnLoad(this.gameObject);
         instance = this;
         anim = GetComponent<Animator>();
     }

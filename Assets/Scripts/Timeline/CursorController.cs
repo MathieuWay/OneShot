@@ -15,10 +15,10 @@ public class CursorController : MonoBehaviour
 	//private PointerEventData m_PointerEventData;
 	
 	[Header("Cursor Settings")]
-	[SerializeField] private Transform canvasTransform;
-	[SerializeField] private Transform cursorPoint;
-	[SerializeField] private Image cursorImage;
-	[SerializeField] private Color cursorFailColor;
+	[SerializeField] private Transform canvasTransform = null;
+	[SerializeField] private Transform cursorPoint = null;
+	[SerializeField] private Image cursorImage = null;
+	[SerializeField] private Color cursorFailColor = Color.white;
 	[SerializeField] private float speed = 100;
 	[SerializeField] private float accelerationSpeed = 5;
 	[SerializeField] private float maxAcceleration = 10;

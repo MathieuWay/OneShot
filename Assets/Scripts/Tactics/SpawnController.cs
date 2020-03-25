@@ -14,9 +14,9 @@ public class SpawnController : MonoBehaviour
 	public static SpawnController Instance { get; private set; }
 
 	[SerializeField] private Camera cam;
-	[SerializeField] private GameObject pointPrefab;
+	[SerializeField] private GameObject pointPrefab = null;
 	[SerializeField] private int spawnCount = 10;
-	[SerializeField] private string[] blockerTags;
+	[SerializeField] private string[] blockerTags = null;
 	[SerializeField] private float detectionDistanceToFloor = 3;
 	[SerializeField] private float spawnDistanceToFloor = 0.3f;
 	private bool pointSelected;

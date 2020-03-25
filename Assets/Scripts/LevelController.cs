@@ -35,6 +35,8 @@ namespace oneShot
 
 		public delegate void LevelDelegate();
 		public event LevelDelegate OnStartCombatPhase;
+		public event LevelDelegate OnPlayerDie;
+		public event LevelDelegate OnTimeElapsed;
 
         public Phase phase;
 
@@ -42,10 +44,10 @@ namespace oneShot
         {
             instance = this;
             Fader.OnFadeIn += FocusOnPlayer;
-			EnemiesController.OnAllEnemiesKilled += delegate { ReloadScene(2); };
-        }
+			UI_Timeline.OnTimeElapsed += delegate { OnTimeElapsed?.Invoke(); };
+		}
 
-        private void Update()
+		private void Update()
         {
             if ((Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownStart) && phase == Phase.Tactical)
             {
@@ -101,6 +103,11 @@ namespace oneShot
 			Fader.Instance.FadeOut();
 			yield return new WaitForSeconds(delay);
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+		}
+
+		public void PlayerDie()
+		{
+			OnPlayerDie?.Invoke();
 		}
     }
 }

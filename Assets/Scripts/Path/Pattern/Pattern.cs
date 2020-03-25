@@ -24,12 +24,14 @@ namespace oneShot
 
         private void OnEnable()
         {
-            CalculatePattern();
-        }
+			if(LayersController.instance)
+				CalculatePattern();
+		}
         private void OnValidate()
         {
-            CalculatePattern();
-        }
+			if (LayersController.instance)
+				CalculatePattern();
+		}
 
         private void Awake()
         {
@@ -50,12 +52,15 @@ namespace oneShot
         // Update is called once per frame
         void Update()
         {
-            if (!Application.isPlaying || stepsLoaded.Count == 0) return;
+			if (!enemy.isAlive) return;
+
+			if (!Application.isPlaying || stepsLoaded.Count == 0) return;
             float currentTime = 0f;
             if (UI_Timeline.Instance)
                 currentTime = UI_Timeline.Instance.GetCurrentTime();
             //Debug.Log(stepsLoaded[i].targetPos);
             Step current = GetCurrentStep(currentTime);
+
             switch (current.type)
             {
                 case StepType.Idle:

@@ -8,8 +8,8 @@ using TMPro;
 
 public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
-	[SerializeField] private TextMeshProUGUI text;
-	[SerializeField] private Image pointImage;
+	[SerializeField] private TextMeshProUGUI text = null;
+	[SerializeField] private Image pointImage = null;
 	public int _ID { get; set; }
 	public float _Time { get; set; }
 	public SpawnPoint _SpawnPoint { get; set; }

@@ -12,7 +12,7 @@ namespace oneShot
 	{
 		public static AttackController Instance { get; private set; }
 
-		[SerializeField] private Attack[] attacks;
+		[SerializeField] private Attack[] attacks = null;
 		private Dictionary<AttackName, Attack> attacksDic;
 
 		public void LaunchAttack(AttackName attackName)

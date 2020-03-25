@@ -10,9 +10,9 @@ namespace oneShot
 
 		public bool debugMode = false;//Test-run/Call ShakeCamera() on start
 
-		[SerializeField] private float shakeAmount;//The amount to shake this frame.
-		[SerializeField] private float shakeDuration;//The duration this frame.
-		[SerializeField] private bool smooth;//Smooth rotation?
+		[SerializeField] private float shakeAmount = 1;//The amount to shake this frame.
+		[SerializeField] private float shakeDuration = 1;//The duration this frame.
+		[SerializeField] private bool smooth = false;//Smooth rotation?
 		[SerializeField] private float smoothAmount = 5f;//Amount to smooth
 
 		private float initShakeAmount; //The initial shake amount (to determine percentage), set when ShakeCamera is called.

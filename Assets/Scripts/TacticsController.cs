@@ -45,9 +45,15 @@ namespace oneShot
 
 		[Header("Main")]
 		[SerializeField] private float timelineDuration = 10;
-		[SerializeField] private GameObject tpStartParticle;
-		[SerializeField] private GameObject tpFinishParticle;
+		[SerializeField] private AnimationCurve fastSpeedCurve = null;
+		[SerializeField] private float fastSpeedFactor = 1;
+		[SerializeField] private float fastSpeedDelay = 2;
+		[SerializeField] private GameObject tpStartParticle = null;
+		[SerializeField] private GameObject tpFinishParticle = null;
 		private bool launchStartParticle;
+		private float newStepTime;
+		private float fastSpeedTime;
+		private float fastSpeedDuration;
 
 		public float TimelineDuration { get => timelineDuration; }
 
@@ -79,10 +85,16 @@ namespace oneShot
 					Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
 				}
 
+				//Fast Speed
+				if(time >= newStepTime + fastSpeedDelay)
+				{
+					GameTime.Instance.SetHardTimeSpeed(1 + fastSpeedCurve.Evaluate(fastSpeedTime / fastSpeedDuration) * fastSpeedFactor);
+					fastSpeedTime += Time.deltaTime * GameTime.Instance.TimeSpeed;
+				}
+
 				if (time >= nextStep.time)
 				{
-					//GameTime.Instance.SetTimeSpeed(0.2f, 1);
-					ExecuteNextStep();
+					ExecuteNextStep();					
 				}
                     
                 time += Time.deltaTime * GameTime.Instance.TimeSpeed;
@@ -104,6 +116,11 @@ namespace oneShot
 			else
 				isFinished = true;
 
+			//Fast Speed
+			SetFastSpeed();
+
+			//Reset time speed
+			GameTime.Instance.SetHardTimeSpeed(1);
 		}
 
         public void loadTactics(List<SpawnPoint> tpList)
@@ -115,7 +132,20 @@ namespace oneShot
                 tpQueue.Enqueue(step);
             }
             nextStep = tpQueue.Dequeue();
-        }
-    }
 
+			//Fast Speed
+			SetFastSpeed();
+		}
+
+		private void SetFastSpeed()
+		{
+			newStepTime = time;
+			fastSpeedTime = 0;
+			float durationBetweenStep = nextStep.time - newStepTime;
+			if (durationBetweenStep > fastSpeedDelay)
+			{
+				fastSpeedDuration = nextStep.time - (newStepTime + fastSpeedDelay);
+			}
+		}
+    }
 }
