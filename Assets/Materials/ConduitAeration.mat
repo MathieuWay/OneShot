@@ -7,13 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Cardboard
+  m_Name: ConduitAeration
   m_Shader: {fileID: 4800000, guid: 933532a4fcc9baf4fa0491de14d08ed7, type: 3}
-  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _NORMALMAP
+  m_ShaderKeywords: ETC1_EXTERNAL_ALPHA _METALLICSPECGLOSSMAP _NORMALMAP
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
-  m_DoubleSidedGI: 1
-  m_CustomRenderQueue: 2000
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: 2050
   stringTagMap:
     RenderType: Opaque
   disabledShaderPasses: []
@@ -21,11 +21,11 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: f64115e36f148094ebc998610d690d24, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8a677222aeb912f48b3391cd3c581b21, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: -0.016}
     - _BumpMap:
-        m_Texture: {fileID: 2800000, guid: e10c0132ef3db0b41be527d2f0deb143, type: 3}
+        m_Texture: {fileID: 2800000, guid: 0947808b9c441c840ac6c9e014e3eddd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -33,11 +33,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: f64115e36f148094ebc998610d690d24, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8a677222aeb912f48b3391cd3c581b21, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: -0.016}
     - _MetallicGlossMap:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 0947808b9c441c840ac6c9e014e3eddd, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _OcclusionMap:
@@ -52,8 +52,8 @@ Material:
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
-    - _Cull: 0
-    - _Cutoff: 0
+    - _Cull: 2
+    - _Cutoff: 0.5
     - _DstBlend: 0
     - _EnvironmentReflections: 1
     - _GlossMapScale: 0
@@ -61,9 +61,9 @@ Material:
     - _GlossyReflections: 0
     - _Metallic: 0
     - _OcclusionStrength: 1
-    - _QueueOffset: 50
+    - _QueueOffset: 0
     - _ReceiveShadows: 1
-    - _Smoothness: 0
+    - _Smoothness: 0.938
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
