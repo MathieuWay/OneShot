@@ -20,7 +20,7 @@ namespace oneShot
 
 			IsDead = true;
 
-			anim.SetTrigger("dying");
+			anim.Play("dying");
 
 			LevelController.Instance.PlayerDie();
 		}
