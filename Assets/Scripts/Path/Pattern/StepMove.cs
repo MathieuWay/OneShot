@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 namespace oneShot
 {
@@ -17,6 +18,21 @@ namespace oneShot
                     return 2f;
                 default:
                     return 0f;
+            }
+        }
+
+        public static String GetClipName(MoveType type)
+        {
+            switch (type)
+            {
+                case MoveType.Walk:
+                    return "walk";
+                case MoveType.Run:
+                    return "run";
+                case MoveType.Sprint:
+                    return "sprint";
+                default:
+                    return "walk";
             }
         }
 

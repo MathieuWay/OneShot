@@ -45,6 +45,10 @@ namespace oneShot
         public Vector3 targetPos;
         public List<StepMovePath> stepMovePaths = new List<StepMovePath>();
 
+        //animData
+        public AnimationClip clip;
+        [HideInInspector] public bool stepFlag;
+
         public float GetStartTime() { return startTime; }
     }
 }
