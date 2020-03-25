@@ -11,13 +11,13 @@ namespace oneShot
 		[System.Serializable]
 		public class UI_Input
 		{
-			[SerializeField] private InputName inputName;
-			[SerializeField] private Sprite inputSprite;
+			[SerializeField] private InputName inputName = InputName.X;
+			[SerializeField] private Sprite inputSprite = null;
 			public InputName InputName { get => inputName; }
 			public Sprite InputSprite { get => inputSprite; }
 		}
 
-		[SerializeField] private UI_Input[] uiInputs;
+		[SerializeField] private UI_Input[] uiInputs = null;
 		private Dictionary<InputName, UI_Input> uiInputDic;
 
 

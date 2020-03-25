@@ -7,8 +7,8 @@ namespace oneShot
 {
 	public class UI_Input : MonoBehaviour
 	{
-		[SerializeField] private Image inputImage;
-		[SerializeField] private Image progressImage;
+		[SerializeField] private Image inputImage = null;
+		[SerializeField] private Image progressImage = null;
 
 		public void Init(Sprite sprite)
 		{

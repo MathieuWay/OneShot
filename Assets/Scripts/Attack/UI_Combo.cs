@@ -7,9 +7,9 @@ namespace oneShot
 {
 	public class UI_Combo : MonoBehaviour
 	{
-		[SerializeField] private TextMeshProUGUI comboText;
-		[SerializeField] private GameObject inputPrefab;
-		[SerializeField] private Transform inputContainer;
+		[SerializeField] private TextMeshProUGUI comboText = null;
+		[SerializeField] private GameObject inputPrefab = null;
+		[SerializeField] private Transform inputContainer = null;
 
 		public void Init(string title, Combo combo)
 		{

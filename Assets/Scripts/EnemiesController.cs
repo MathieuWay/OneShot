@@ -6,8 +6,13 @@ namespace oneShot
 {
     public class EnemiesController : MonoBehaviour
     {
-        public int enemyCount;
+		public static EnemiesController Instance { get; private set; }
+		public int EnemyKilledCount { get => enemyCount - currentEnemyCount; }
+		public int EnemyLeft { get => currentEnemyCount; }
+
+		public int enemyCount;
         private int currentEnemyCount;
+
 
 		public delegate void EnemyDelegate();
 		public static event EnemyDelegate OnAllEnemiesKilled;
@@ -16,6 +21,14 @@ namespace oneShot
 
         private void Awake()
         {
+			if(Instance != null)
+			{
+				Destroy(gameObject);
+				return;
+			}
+
+			Instance = this;
+
             enemyCount = LevelController.Instance.GetEnemies().Count;
             currentEnemyCount = enemyCount;
             Enemy.OnEnemyDead += EnemyDied;

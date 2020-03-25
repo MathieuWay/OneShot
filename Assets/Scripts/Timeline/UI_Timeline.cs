@@ -17,40 +17,38 @@ public class UI_Timeline : MonoBehaviour
 
 
 	[Header("Timer")]
-	[SerializeField] private RectTransform timelineRect;
-	[SerializeField] private Transform timerIndicator;
+	[SerializeField] private RectTransform timelineRect = null;
+	[SerializeField] private Transform timerIndicator = null;
+	[SerializeField] private AnimationCurve pointSelectionCurve = null;
+	[SerializeField] private float pointSelectionSpeed = 10;
 	private float timerDuration;
 	private float timer = 0;
+	private bool movingTimeline = false;
+	public bool TimeElapsed { get; private set; }
 
 	[Header("Point")]
-	[SerializeField] private Transform pointContainer;
-	[SerializeField] private GameObject pointPrefab;
-	[SerializeField] private TextMeshProUGUI pointCountText;
+	[SerializeField] private Transform pointContainer = null;
+	[SerializeField] private GameObject pointPrefab = null;
+	[SerializeField] private TextMeshProUGUI pointCountText = null;
 	private List<UI_Point> points;
 	public int SelectedPoint { get; private set; }
 
 	[Header("Pause")]
-	[SerializeField] private Button pauseButton;
-	[SerializeField] private Image pauseImage;
-	[SerializeField] private Sprite pauseSprite;
-	[SerializeField] private Sprite playSprite;
+	[SerializeField] private Button pauseButton = null;
+	[SerializeField] private Image pauseImage = null;
+	[SerializeField] private Sprite pauseSprite = null;
+	[SerializeField] private Sprite playSprite = null;
 	private bool pause = false;
+	
 
 	public delegate void TimelineReset();
 	public static event TimelineReset OnTimelineReset;
+	public static event TimelineReset OnTimeElapsed;
 
-	public void ResetAll()
+
+	public void SetTime(float time)
 	{
-		while (points.Count > 0)
-		{
-			RemoveSelectedPoint();
-		}
-
-		timer = 0;
-
-		SetOnTimeline(timerIndicator, timer / timerDuration);
-
-		pause = true;
+		timer = time;
 	}
 
 	public float GetPointTime(Transform point)
@@ -122,6 +120,7 @@ public class UI_Timeline : MonoBehaviour
 		Instance = this;
 
 		points = new List<UI_Point>();
+		TimeElapsed = false;
 
 		pauseButton.onClick.AddListener(PauseToggle);
 	}
@@ -144,21 +143,24 @@ public class UI_Timeline : MonoBehaviour
 	{
 		if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat) return;
 
-		//!NEW FOR GAMEPAD
 		//Sélection des points sur la timeline
-		if (Gamepad.Instance.ButtonDownTriggerR && SelectedPoint < points.Count - 1)
+		if (!movingTimeline && Gamepad.Instance.ButtonDownTriggerR && SelectedPoint < points.Count - 1)
 		{
 			SelectedPoint++;
 
 			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 			SpawnController.Instance.CancelGrab();
+
+			MoveTimeline(points[SelectedPoint]._Time);
 		}
-		if (Gamepad.Instance.ButtonDownTriggerL && SelectedPoint > 0)
+		if (!movingTimeline && Gamepad.Instance.ButtonDownTriggerL && SelectedPoint > 0)
 		{
 			SelectedPoint--;
 
 			UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 			SpawnController.Instance.CancelGrab();
+
+			MoveTimeline(points[SelectedPoint]._Time);
 		}
 
 		if (Gamepad.Instance.ButtonDownX)
@@ -181,7 +183,6 @@ public class UI_Timeline : MonoBehaviour
 
 		UpdatePointsOrder();
 
-		//!NEW FOR GAMEPAD
 		SelectedPoint = UI_PointController.Instance.GetCurrentPointID();
 	}
 
@@ -199,7 +200,6 @@ public class UI_Timeline : MonoBehaviour
 
 		SetOnTimeline(instance.transform, value);
 
-		//!NEW FOR GAMEPAD
 		UI_PointController.Instance.SetCurrentPoint(uiPoint);
 	}
 
@@ -213,13 +213,66 @@ public class UI_Timeline : MonoBehaviour
 		point.localPosition = new Vector2(timelineRect.rect.xMin + value * (timelineRect.rect.xMax - timelineRect.rect.xMin), 0);
 	}
 
+	private void MoveTimeline(float time)
+	{
+		if (movingTimeline) return;
+
+		movingTimeline = true;
+
+		StartCoroutine(MoveTimelineProcess(time));
+	}
+	private IEnumerator MoveTimelineProcess(float time)
+	{
+		float duration = Mathf.Abs(time - timer);
+		float moveTimer = 0;
+
+		if (timer < time)
+		{
+			while (timer < time)
+			{
+				GameTime.Instance.SetHardTimeSpeed(1 + pointSelectionCurve.Evaluate(moveTimer / duration) * pointSelectionSpeed);
+
+				moveTimer += Time.deltaTime * GameTime.Instance.TimeSpeed;
+				yield return null;
+			}
+		}
+		else if (timer > time)
+		{
+			while (timer > time)
+			{
+				GameTime.Instance.SetHardTimeSpeed(-1 * (1 + pointSelectionCurve.Evaluate(moveTimer / duration) * pointSelectionSpeed));
+
+				moveTimer += Time.deltaTime * Mathf.Abs(GameTime.Instance.TimeSpeed);
+				yield return null;
+			}
+		}
+
+		timer = time;
+		SetOnTimeline(timerIndicator, timer / timerDuration);
+		SetPause(true);
+
+		movingTimeline = false;
+	}
+
 	private IEnumerator TimerProcess()
 	{
 		while (true)
 		{
 			timer += Time.deltaTime * GameTime.Instance.TimeSpeed;
 
-			if (timer >= timerDuration) ResetTimeline();
+			if (timer >= timerDuration)
+			{
+				if(oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
+				{
+					TimeElapsed = true;
+					OnTimeElapsed?.Invoke();
+					yield break;
+				}
+				else
+				{
+					ResetTimeline();
+				}
+			}
 
 			SetOnTimeline(timerIndicator, timer / timerDuration);
 
@@ -229,9 +282,7 @@ public class UI_Timeline : MonoBehaviour
 
 	public void PauseToggle()
 	{
-		pause = !pause;
-
-		SetPause(pause);
+		SetPause(!pause);
 	}
 
 	public void SetPause(bool state)
@@ -276,13 +327,31 @@ public class UI_Timeline : MonoBehaviour
 
 		SelectedPoint = point._ID;
 		UI_PointController.Instance.SelectPoint(points[SelectedPoint]);
-		//UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
+
+		SetTime(points[SelectedPoint]._Time);
+		SetPause(true);
 	}
 	private void UngrabPoint(SpawnPoint point)
 	{
 		SelectedPoint = point._ID;
 		UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 	}
+
+
+	//OLD
+	//public void ResetAll()
+	//{
+	//	while (points.Count > 0)
+	//	{
+	//		RemoveSelectedPoint();
+	//	}
+
+	//	timer = 0;
+
+	//	SetOnTimeline(timerIndicator, timer / timerDuration);
+
+	//	pause = true;
+	//}
 
 	//OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline
 	//
