@@ -2,14 +2,16 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
+# if UNITY_EDITOR
 using UnityEditor;
+#endif
 namespace oneShot
 {
     public class Layer : MonoBehaviour
     {
         public int index;
-        public List<Transform> UpAccess = new List<Transform>();
-        public List<Transform> DownAccess = new List<Transform>();
+        private List<Transform> UpAccess = new List<Transform>();
+        private List<Transform> DownAccess = new List<Transform>();
 
         public Vector3 GetClosestAccess(int direction, Vector3 pos)
         {
@@ -42,5 +44,23 @@ namespace oneShot
                 DownAccess.Add(Downaccess);
             }
         }
+
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            Handles.color = Handles.yAxisColor;
+            foreach (Transform access in UpAccess)
+            {
+                Handles.ArrowHandleCap(0, access.position, access.rotation * Quaternion.Euler(-90, 0, 0), 0.4f, EventType.Repaint);
+            }
+
+
+            Handles.color = Handles.xAxisColor;
+            foreach (Transform access in DownAccess)
+            {
+                Handles.ArrowHandleCap(0, access.position, access.rotation * Quaternion.Euler(90, 0, 0), 0.4f, EventType.Repaint);
+            }
+        }
+#endif
     }
 }

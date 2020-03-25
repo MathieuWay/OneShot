@@ -77,7 +77,6 @@ namespace oneShot
                     anim.speed = GameTime.Instance.TimeSpeed;
                     break;
                 case StepType.Move:
-                    StepMove stepMove = new StepMove(current);
                     //Debug.Log(current.targetPos);
                     //Debug.Log(stepMove.GetPositionByTime(currentTime));
                     //animation["move"].speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
@@ -88,7 +87,7 @@ namespace oneShot
                         current.stepFlag = true;
                     }
                     anim.speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
-                    transform.position = stepMove.GetPositionByTime(currentTime);
+                    transform.position = StepMove.GetPositionByTime(current.stepMovePaths, currentTime);
                     break;
                 case StepType.Anim:
                     if (!current.stepFlag)
@@ -128,6 +127,7 @@ namespace oneShot
             if (i > 0)
                 i--;
             //Debug.Log(i);
+            currentStep = stepsLoaded[i];
             return stepsLoaded[i];
         }
 
@@ -147,9 +147,11 @@ namespace oneShot
                         break;
                     case StepType.Move:
                         //StepMove stepmove = (StepMove)step;
-                        StepMove stepmove = new StepMove(step);
-                        step.duration = stepmove.Load(time, StepMove.GetMoveFactor(step.moveType) * enemy.speed, pos);
-                        pos = stepmove.targetPos;
+                        step.stepMovePaths.Clear();
+                        step.startTime = time;
+                        step.duration = StepMove.CalculateTime(step, pos, step.targetPos, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);//Load(time, StepMove.GetMoveFactor(step.moveType) * enemy.speed, pos);
+                        step.endTime = step.startTime + step.duration;
+                        pos = step.targetPos;
                         break;
                     case StepType.Anim:
                         /*if (step.clip)

@@ -2,9 +2,6 @@
 using System.Linq;
 using System.Collections.Generic;
 using UnityEngine;
-# if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 [ExecuteInEditMode]
 public class LayersController : MonoBehaviour
@@ -67,26 +64,4 @@ public class LayersController : MonoBehaviour
     {
         return layers[index].GetComponent<oneShot.Layer>();
     }
-
-#if UNITY_EDITOR
-	private void OnDrawGizmos()
-    {
-        foreach (GameObject etage in layers)
-        {
-            oneShot.Layer layer = etage.GetComponent<oneShot.Layer>();
-            Handles.color = Handles.yAxisColor;
-            foreach (Transform access in layer.UpAccess)
-            {
-                Handles.ArrowHandleCap(0, access.position, access.rotation * Quaternion.Euler(-90, 0, 0), 0.4f, EventType.Repaint);
-            }
-
-
-            Handles.color = Handles.xAxisColor;
-            foreach (Transform access in layer.DownAccess)
-            {
-                Handles.ArrowHandleCap(0, access.position, access.rotation * Quaternion.Euler(90, 0, 0), 0.4f, EventType.Repaint);
-            }
-        }
-    }
-#endif
 }

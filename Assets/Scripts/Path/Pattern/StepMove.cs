@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using System;
 using UnityEngine;
 namespace oneShot
 {
-    public class StepMove : Step
+    public static class StepMove
     {
         public static float GetMoveFactor(MoveType type)
         {
@@ -21,7 +20,7 @@ namespace oneShot
             }
         }
 
-        public static String GetClipName(MoveType type)
+        public static string GetClipName(MoveType type)
         {
             switch (type)
             {
@@ -36,28 +35,7 @@ namespace oneShot
             }
         }
 
-        public StepMove(Step step)
-        {
-            type = StepType.Move;
-            startTime = step.startTime;
-            duration = step.duration;
-            endTime = step.endTime;
-
-            //move data
-            targetPos = step.targetPos;
-            stepMovePaths = step.stepMovePaths;
-        }
-
-        public float Load(float time, float speed, Vector3 initialPos)
-        {
-            stepMovePaths.Clear();
-            startTime = time;
-            duration = CalculateTime(initialPos, targetPos, speed, startTime);
-            endTime = startTime + duration;
-            return duration;
-        }
-
-        public Vector3 GetPositionByTime(float currentTime)
+        public static Vector3 GetPositionByTime(List<StepMovePath> stepMovePaths, float currentTime)
         {
             int i = 0;
             while (i < stepMovePaths.Count)
@@ -80,7 +58,7 @@ namespace oneShot
                 float duration = stepMovePaths[i - 1].time - UI_Timeline.Instance.GetTimerDuration();
                 float norm = (stepMovePaths[i - 1].time - currentTime) / duration;
                 //Debug.Log(norm);
-                return Vector3.Lerp(stepMovePaths[i - 1].waypoint, this.targetPos, norm);
+                return stepMovePaths[i - 1].waypoint;//Vector3.Lerp(stepMovePaths[i - 1].waypoint, step.targetPos, norm);
             }
             else
             {
@@ -91,13 +69,13 @@ namespace oneShot
             }
         }
 
-        public float CalculateTime(Vector3 initialPos, Vector3 position, float speed, float starttime)
+        public static float CalculateTime(Step step, Vector3 initialPos, Vector3 position, float speed, float starttime)
         {
             float duration = 0f;
             Vector3 cursor = initialPos;
             oneShot.Layer layer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(cursor.y));
             //path.Add(cursor);
-            stepMovePaths.Add(new StepMovePath(new Vector2(cursor.x, cursor.y), starttime + duration));
+            step.stepMovePaths.Add(new StepMovePath(new Vector2(cursor.x, cursor.y), starttime + duration));
             while (cursor.y != position.y)
             {
                 int direction;
@@ -110,7 +88,7 @@ namespace oneShot
                 if (access == Vector3.zero)
                 {
                     //path.Clear();
-                    stepMovePaths.Clear();
+                    step.stepMovePaths.Clear();
                     Debug.LogError("No access Found");
                     Debug.Break();
                     return -1;
@@ -119,7 +97,7 @@ namespace oneShot
                 duration += Vector3.Distance(cursor, access) / speed;
                 cursor = access;
                 //path.Add(access);
-                stepMovePaths.Add(new StepMovePath(new Vector2(access.x, access.y), starttime + duration));
+                step.stepMovePaths.Add(new StepMovePath(new Vector2(access.x, access.y), starttime + duration));
 
                 //ChangeLayer
                 layer = LayersController.instance.GetLayer(layer.index + direction);
@@ -127,11 +105,11 @@ namespace oneShot
                 nextPos.y = layer.transform.position.y;
                 cursor = nextPos;
                 //path.Add(nextPos);
-                stepMovePaths.Add(new StepMovePath(new Vector2(nextPos.x, nextPos.y), starttime + duration));
+                step.stepMovePaths.Add(new StepMovePath(new Vector2(nextPos.x, nextPos.y), starttime + duration));
             }
             duration += Vector3.Distance(cursor, position) / speed;
             //path.Add(position);
-            stepMovePaths.Add(new StepMovePath(new Vector2(position.x, position.y), starttime + duration));
+            step.stepMovePaths.Add(new StepMovePath(new Vector2(position.x, position.y), starttime + duration));
             return duration;
         }
 
