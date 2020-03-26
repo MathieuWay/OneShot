@@ -59,11 +59,19 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+<<<<<<< HEAD
     - _Metallic: 0.829
     - _OcclusionStrength: 1
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _Smoothness: 0.431
+=======
+    - _Metallic: 0.966
+    - _OcclusionStrength: 1
+    - _QueueOffset: 0
+    - _ReceiveShadows: 1
+    - _Smoothness: 0.778
+>>>>>>> 0e6f65cd520264deda1b51db27024538a2d0757c
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

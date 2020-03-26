@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Basic
   m_EditorClassIdentifier: 
   speed: 1
-  reactionTime: 1
-  fieldOfView: 5
+  reactionTime: 1.2
+  fieldOfView: 1.2

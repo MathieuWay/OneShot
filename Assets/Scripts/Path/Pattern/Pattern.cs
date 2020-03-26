@@ -22,12 +22,14 @@ namespace oneShot
 
         //DEBUG
         public Step currentStep = null;
+        public bool DrawPattern;
 
         private void OnEnable()
         {
 			if(LayersController.instance)
 				CalculatePattern();
 		}
+
         private void OnValidate()
         {
 			if (LayersController.instance)
@@ -36,6 +38,7 @@ namespace oneShot
 
         private void Awake()
         {
+            initialPosition = transform.position;
             anim = GetComponentInChildren<Animator>();
             enemy = GetComponent<Enemy>();
 
@@ -116,7 +119,7 @@ namespace oneShot
         {
             if (!enemy) return;
             float time = 0;
-            Vector3 pos = transform.position;
+            Vector3 pos = initialPosition;
             foreach (Step step in steps)
             {
                 step.startTime = time;
@@ -126,7 +129,8 @@ namespace oneShot
                         break;
                     case StepType.Move:
                         step.stepMovePaths.Clear();
-                        step.duration = StepMove.CalculateTime(step, pos, step.targetPos, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);//Load(time, StepMove.GetMoveFactor(step.moveType) * enemy.speed, pos);
+                        step.targetPos.y = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(step.targetPos.y)).transform.position.y;
+                        step.duration = StepMove.CalculateTime(step, pos, step.targetPos, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);
                         pos = step.targetPos;
                         break;
                     case StepType.Anim:
@@ -142,5 +146,21 @@ namespace oneShot
                 time += step.duration;
             }
         }
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (DrawPattern)
+            {
+                foreach (Step step in stepsLoaded)
+                {
+                    if (step.type == StepType.Move)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawSphere(step.targetPos, 0.2f);
+                    }
+                }
+            }
+        }
+#endif
     }
 }
