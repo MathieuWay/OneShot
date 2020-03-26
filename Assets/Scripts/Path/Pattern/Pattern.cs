@@ -12,14 +12,15 @@ namespace oneShot
     public class Pattern : MonoBehaviour
     {
         private Animator anim;
-        //private Animation animation;
-        //private Agent agent;
         private Enemy enemy;
         private Vector3 initialPosition;
+
         //PATTERN
         [ReorderableList]
         public List<Step> steps = new List<Step>();
         private List<Step> stepsLoaded = new List<Step>();
+
+        //DEBUG
         public Step currentStep = null;
 
         private void OnEnable()
@@ -36,20 +37,13 @@ namespace oneShot
         private void Awake()
         {
             anim = GetComponentInChildren<Animator>();
-            //animation = GetComponentInChildren<Animation>();
             enemy = GetComponent<Enemy>();
-            //agent = GetComponent<Agent>();
 
             CalculatePattern();
             stepsLoaded = new List<Step>(steps);
             UI_Timeline.OnTimelineReset += ResetPattern;
         }
-        // Start is called before the first frame update
-        void Start()
-        {
-        }
-
-        // Update is called once per frame
+        
         void Update()
         {
 			if (!enemy.isAlive) return;
@@ -58,7 +52,6 @@ namespace oneShot
             float currentTime = 0f;
             if (UI_Timeline.Instance)
                 currentTime = UI_Timeline.Instance.GetCurrentTime();
-            //Debug.Log(stepsLoaded[i].targetPos);
             Step current = GetCurrentStep(currentTime);
 
             switch (current.type)
@@ -66,21 +59,12 @@ namespace oneShot
                 case StepType.Idle:
                     if (!current.stepFlag)
                     {
-                        /*
-                        animation.Stop();
-                        animation["idle"].speed = GameTime.Instance.TimeSpeed;
-                        animation.CrossFade("idle");
-                        */
                         anim.Play("idle");
                         current.stepFlag = true;
                     }
                     anim.speed = GameTime.Instance.TimeSpeed;
                     break;
                 case StepType.Move:
-                    //Debug.Log(current.targetPos);
-                    //Debug.Log(stepMove.GetPositionByTime(currentTime));
-                    //animation["move"].speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
-                    //animation.Play("move");
                     if(!current.stepFlag)
                     {
                         anim.Play(StepMove.GetClipName(current.moveType));
@@ -92,13 +76,10 @@ namespace oneShot
                 case StepType.Anim:
                     if (!current.stepFlag)
                     {
-                        //animation.Stop();
-                        //animation.Play(current.clip.name);
                         anim.Play(current.clip.name);
                         current.stepFlag = true;
                     }
                     anim.speed = GameTime.Instance.TimeSpeed;
-                    //animation[current.clip.name].speed = GameTime.Instance.TimeSpeed;
                     break;
                 default:
                     break;
@@ -142,23 +123,13 @@ namespace oneShot
                 switch (step.type)
                 {
                     case StepType.Idle:
-                        //StepIdle stepIdle = (StepIdle)step;
-                        //time += stepIdle.Load(time);
                         break;
                     case StepType.Move:
-                        //StepMove stepmove = (StepMove)step;
                         step.stepMovePaths.Clear();
-                        step.startTime = time;
                         step.duration = StepMove.CalculateTime(step, pos, step.targetPos, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);//Load(time, StepMove.GetMoveFactor(step.moveType) * enemy.speed, pos);
-                        step.endTime = step.startTime + step.duration;
                         pos = step.targetPos;
                         break;
                     case StepType.Anim:
-                        /*if (step.clip)
-                        {
-                            animation.AddClip(step.clip, step.clip.name);
-                            step.duration = step.clip.length;
-                        }*/
                         if (step.clip)
                         {
                             step.duration = step.clip.length;

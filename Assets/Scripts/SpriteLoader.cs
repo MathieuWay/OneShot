@@ -42,13 +42,13 @@ public class SpriteLoader : MonoBehaviour
             }
             else
             {
-                if (gameObject.scene.name != null)
+                /*if (gameObject.scene.name != null)
                 {
                     Debug.Log("Generating a new Material");
                     var material = new Material(Shader.Find("Customs/SpriteShadow"));
                     AssetDatabase.CreateAsset(material, "Assets/Materials/SpriteShadow/" + transform.name + ".mat");
                     renderer.sharedMaterial = material;
-                }
+                }*/
             }
         }
     }

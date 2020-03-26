@@ -5,7 +5,7 @@ using oneShot;
 
 public enum State
 {
-    Idle,
+    Travelling,
     Focusing,
     Chasing
 }
@@ -14,16 +14,16 @@ public class CameraController : MonoBehaviour
     //state
     public State state;
     public float focusTime = 2f;
-    public float focusorthographicSize;
+    public float focusFOVSize;
 
     //CURVE
     public AnimationCurve FocusPositionCurve;
-    public AnimationCurve FocusCameraSizeCurve;
+    public AnimationCurve FocusCameraFOVSize;
 
     //LERP
     private float focusStartTime;
     private Vector3 focusStartPosition;
-    private float focusStartorthographicSize;
+    private float focusStartFOVSize;
 
     //REF
     private Camera mainCamera;
@@ -69,7 +69,7 @@ public class CameraController : MonoBehaviour
         GameObject player = GameObject.FindWithTag("Player");
         if(player)
             AnchorCamera = player.transform.Find("CameraAnchor");
-        state = State.Idle;
+        state = State.Travelling;
         path = GetComponent<Path>();
         if (path)
         {
@@ -83,13 +83,12 @@ public class CameraController : MonoBehaviour
     {
         switch (state)
         {
-            case State.Idle:
+            case State.Travelling:
                 if (path)
                 {
                     transform.position = Vector3.SmoothDamp(transform.position, path.GetPositionAlongPath() + offsetPath, ref VelocitySmooth, SmoothTraveling);
                     if (Input.GetAxis("Mouse ScrollWheel") != 0f)
                     {
-                        //Debug.Log("Scroll Value:" + Input.GetAxis("Mouse ScrollWheel") + "    /    Scroll Value with sensitivity:" + Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
                         path.AddProgression(Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
                     }
                 }
@@ -98,7 +97,7 @@ public class CameraController : MonoBehaviour
                 float distCovered = Time.time - focusStartTime;
                 float fraction = distCovered / focusTime;
                 transform.position = Vector3.Lerp(focusStartPosition, new Vector3(AnchorCamera.position.x, AnchorCamera.position.y, offsetPath.z), FocusPositionCurve.Evaluate(fraction));
-                mainCamera.orthographicSize = Mathf.Lerp(focusStartorthographicSize, focusorthographicSize, fraction) * FocusCameraSizeCurve.Evaluate(fraction);
+                mainCamera.fieldOfView = Mathf.Lerp(focusStartFOVSize, focusFOVSize, fraction) * FocusCameraFOVSize.Evaluate(fraction);
                 if (fraction >= 1)
                 {
                     state = State.Chasing;
@@ -114,7 +113,7 @@ public class CameraController : MonoBehaviour
     {
         focusStartTime = Time.time;
         focusStartPosition = transform.position;
-        focusStartorthographicSize = mainCamera.orthographicSize;
+        focusStartFOVSize = mainCamera.fieldOfView;
         state = State.Focusing;
     }
 }
