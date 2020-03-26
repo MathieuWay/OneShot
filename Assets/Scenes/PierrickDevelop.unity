@@ -333,7 +333,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 18454001}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 10, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1524327530}
@@ -2267,7 +2267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789365247}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 10, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1057295763}
@@ -3885,7 +3885,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1217514798}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 10, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 387800712}
@@ -4460,7 +4460,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1420346303}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 10, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 820021258}
@@ -5643,7 +5643,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2054059588}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.05, z: 0}
   m_LocalScale: {x: 10, y: 0.1, z: 1}
   m_Children: []
   m_Father: {fileID: 1475741589}
@@ -7080,12 +7080,12 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[0].endTime
-      value: 5
+      value: 8.333333
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[0].duration
-      value: 5
+      value: 8.333333
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
@@ -7095,7 +7095,7 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[0].stepMovePaths.Array.data[1].time
-      value: 5
+      value: 8.333333
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
@@ -7115,12 +7115,12 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].startTime
-      value: 5
+      value: 8.333333
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].endTime
-      value: 10
+      value: 16.666666
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
@@ -7135,7 +7135,7 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.data[0].time
-      value: 5
+      value: 8.333333
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
@@ -7145,12 +7145,12 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.data[1].time
-      value: 10
+      value: 16.666666
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].duration
-      value: 5
+      value: 8.333333
       objectReference: {fileID: 0}
     - target: {fileID: 8665812801708507693, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
