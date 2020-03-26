@@ -21,7 +21,6 @@ public class LayersController : MonoBehaviour
 
     private void Init()
     {
-        Debug.Log("init layer controller");
         instance = this;
         layers = GameObject.FindGameObjectsWithTag("Etage").OrderBy(layer => layer.transform.position.y).ToList();
         for (int i = 0; i < layers.Count; i++)
@@ -29,12 +28,6 @@ public class LayersController : MonoBehaviour
             layers[i].GetComponent<oneShot.Layer>().index = i;
             layers[i].GetComponent<oneShot.Layer>().LoadAccess();
         }
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 
     public float GetLayerPositionByIndex(int index)
@@ -52,7 +45,7 @@ public class LayersController : MonoBehaviour
         {
             if (height == layers[i].transform.position.y)
                 return i;
-            else if (height <= layers[i].transform.position.y)
+            else if (height < layers[i].transform.position.y)
                 return i - 1;
             else
                 i++;
