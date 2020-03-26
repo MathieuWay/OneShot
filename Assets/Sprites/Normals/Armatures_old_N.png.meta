@@ -1,19 +1,25 @@
 fileFormatVersion: 2
-guid: b0b1331550033f34b8de9b9f9cf60a96
+guid: ec009bf6a11a94040b938663493e94d2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -109582767413384798
-    second: Armature_front
+      213: 8211462112367796836
+    second: Armatures_0
   - first:
-      213: 8686384914773263260
-    second: Armature_side
+      213: 7790187067750943896
+    second: Armatures_1
+  - first:
+      213: 7118384371978721134
+    second: Armatures_2
+  - first:
+      213: 5010664989684557342
+    second: Armatures_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 0
-    sRGBTexture: 1
+    enableMipMap: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -22,9 +28,9 @@ TextureImporter:
     mipMapFadeDistanceStart: 1
     mipMapFadeDistanceEnd: 3
   bumpmap:
-    convertToNormalMap: 0
+    convertToNormalMap: 1
     externalNormalMap: 0
-    heightScale: 0.25
+    heightScale: 0.01
     normalMapFilter: 0
   isReadable: 0
   streamingMipmaps: 0
@@ -40,8 +46,8 @@ TextureImporter:
     filterMode: 0
     aniso: 2
     mipBias: -100
-    wrapU: 1
-    wrapV: 1
+    wrapU: 0
+    wrapV: 0
     wrapW: 0
   nPOTScale: 0
   lightmap: 0
@@ -53,11 +59,11 @@ TextureImporter:
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spriteGenerateFallbackPhysicsShape: 0
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 1
+  alphaIsTransparency: 0
   spriteTessellationDetail: -1
-  textureType: 8
+  textureType: 1
   textureShape: 1
   singleChannelComponent: 0
   maxTextureSizeSet: 0
@@ -128,43 +134,85 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Armature_front
+      name: Armatures_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 224
+        x: 96
+        y: 32
+        width: 31
         height: 128
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2a922dabd0faa7ef0800000000000000
-      internalID: -109582767413384798
+      spriteID: 462e246f849f4f170800000000000000
+      internalID: 8211462112367796836
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Armature_side
+      name: Armatures_1
       rect:
         serializedVersion: 2
-        x: 192
-        y: 0
-        width: 101
+        x: 96
+        y: 32
+        width: 224
         height: 128
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c934f5bbe0d3c8870800000000000000
-      internalID: 8686384914773263260
+      spriteID: 89c032b2ddd4c1c60800000000000000
+      internalID: 7790187067750943896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Armatures_2
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 32
+        width: 96
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e67db7a1fd499c260800000000000000
+      internalID: 7118384371978721134
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Armatures_3
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 32
+        width: 64
+        height: 128
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1662aea245798540800000000000000
+      internalID: 5010664989684557342
       vertices: []
       indices: 
       edges: []
