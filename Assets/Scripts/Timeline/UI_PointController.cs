@@ -66,6 +66,7 @@ public class UI_PointController : MonoBehaviour
 				currentPoint.MovePosition(Gamepad.Instance.HorizontalJR, movePointSpeed);
 				pointMoved = true;
 				UI_Timeline.Instance.SetTime(currentPoint._Time);
+				UI_Timeline.Instance.SetPause(true);
 			}
 			else if (pointMoved)
 			{

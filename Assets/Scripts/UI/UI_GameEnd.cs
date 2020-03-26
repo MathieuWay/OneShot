@@ -46,7 +46,7 @@ public class UI_GameEnd : MonoBehaviour
 		if (!readyToReload) return;
 
 		readyToReload = false;
-		oneShot.LevelController.Instance.ReloadScene(1);
+		oneShot.LevelController.Instance.ReloadScene(1.5f);
 	}
 
 	private void Victory()
@@ -65,7 +65,7 @@ public class UI_GameEnd : MonoBehaviour
 		victoryPanel.SetActive(true);
 
 		resultText.text = "YOU KILLED " + oneShot.EnemiesController.Instance.EnemyKilledCount
-			+ " ENEMIES IN " + UI_Timeline.Instance.GetCurrentTime() + " SECONDS";
+			+ " ENEMIES IN " + UI_Timeline.Instance.GetCurrentTime().ToString("0.00") + " SECONDS";
 
 		yield return new WaitForSeconds(1);
 
@@ -88,33 +88,35 @@ public class UI_GameEnd : MonoBehaviour
 
 		endPanel.SetActive(true);
 		defeatPanel.SetActive(true);
+		resultText.enabled = false;
+		oneShot.LevelController.Instance.ReloadScene(1.5f);
 
-		int enemyLeft = oneShot.EnemiesController.Instance.EnemyLeft;
-		int enemyKilled = oneShot.EnemiesController.Instance.EnemyKilledCount;
+		//int enemyLeft = oneShot.EnemiesController.Instance.EnemyLeft;
+		//int enemyKilled = oneShot.EnemiesController.Instance.EnemyKilledCount;
 
-		switch (defeatType)
-		{
-			case DefeatType.PlayerDie:
-				resultText.text = "YOU KILLED " + enemyKilled + " ENEMIES BUT DIED";
-				break;
+		//switch (defeatType)
+		//{
+		//	case DefeatType.PlayerDie:
+		//		resultText.text = "YOU KILLED " + enemyKilled + " ENEMIES BUT DIED";
+		//		break;
 
-			case DefeatType.TimeElapsed:
-				if(enemyKilled <= 0)
-				{
-					resultText.text = "YOU KILLED NO ENEMY";
-				}
-				else
-				{
-					resultText.text = "YOU KILLED " + enemyKilled.ToString() + (enemyKilled > 1 ? " ENEMIES" : " ENEMY") 
-						+ " AND MISSED " + enemyLeft + (enemyLeft > 1 ? " OTHERS" : " OTHER");
-				}
-				break;
-		}
+		//	case DefeatType.TimeElapsed:
+		//		if(enemyKilled <= 0)
+		//		{
+		//			resultText.text = "YOU KILLED NO ENEMY";
+		//		}
+		//		else
+		//		{
+		//			resultText.text = "YOU KILLED " + enemyKilled.ToString() + (enemyKilled > 1 ? " ENEMIES" : " ENEMY") 
+		//				+ " AND MISSED " + enemyLeft + (enemyLeft > 1 ? " OTHERS" : " OTHER");
+		//		}
+		//		break;
+		//}
 
-		yield return new WaitForSeconds(1);
+		//yield return new WaitForSeconds(1);
 
-		continueButton.gameObject.SetActive(true);
-		continueText.text = "RETRY";
-		readyToReload = true;
+		//continueButton.gameObject.SetActive(true);
+		//continueText.text = "RETRY";
+		//readyToReload = true;
 	}
 }
