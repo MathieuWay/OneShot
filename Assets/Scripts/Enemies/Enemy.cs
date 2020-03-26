@@ -118,6 +118,9 @@ namespace oneShot
 			anim.Play("dying");
 			OnEnemyDead();
 
+			//!TMP
+			pivot.gameObject.SetActive(false);
+
 			CameraShake.Instance.ShakeCamera();
 			Gamepad.Instance.Vibrate(0.5f, 0.5f, 0.5f);
 

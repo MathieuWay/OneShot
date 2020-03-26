@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   centerPivot: {fileID: 5373720305252162197}
+  pivot: {fileID: 2292501851968759249}
 --- !u!1 &5969566483369509360
 GameObject:
   m_ObjectHideFlags: 0
@@ -499,6 +500,12 @@ GameObject:
 --- !u!4 &2435881472229163068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 23943605534317200, guid: e6ae6e55ec3600448b9df080943c4be1,
+    type: 3}
+  m_PrefabInstance: {fileID: 2420946337948179116}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2292501851968759249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4487968522725162877, guid: e6ae6e55ec3600448b9df080943c4be1,
     type: 3}
   m_PrefabInstance: {fileID: 2420946337948179116}
   m_PrefabAsset: {fileID: 0}

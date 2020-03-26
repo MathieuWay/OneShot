@@ -47,8 +47,15 @@ namespace oneShot
 				combos.Add(attacks[i].Combo);
 			}
 
-			ComboController.Instance.StartCombos(combos.ToArray());
 			ComboController.Instance.ComboSuccessEvent += LaunchAttack;
+
+			StartCoroutine(StartDelay(combos.ToArray()));
+		}
+
+		private IEnumerator StartDelay(Combo[] combos)
+		{
+			yield return new WaitForEndOfFrame();
+			ComboController.Instance.StartCombos(combos);
 		}
 	}
 }

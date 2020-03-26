@@ -23,6 +23,7 @@ namespace oneShot
 			currentInput = 0;
 			uiInputs = new List<UI_Input>();
 
+			Debug.Log("OK");
 			ComboController.Instance.InitCombosEvent += InitCombos;
 			ComboController.Instance.StartComboEvent += StartCombo;
 			ComboController.Instance.ComboFailedEvent += ClearCombo;
@@ -32,6 +33,7 @@ namespace oneShot
 
 		private void InitCombos(Combo[] combos)
 		{
+			Debug.Log("WTF");
 			for (int i = 0; i < combos.Length; i++)
 			{
 				GameObject instance = Instantiate(comboPrefab, comboListContainer);

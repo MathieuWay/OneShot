@@ -123,6 +123,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Shielded
       objectReference: {fileID: 0}
+    - target: {fileID: 2012173607127642059, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.78431374
+      objectReference: {fileID: 0}
     - target: {fileID: 2278131240243740547, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
