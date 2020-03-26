@@ -25,6 +25,7 @@ Shader "Customs/SpriteShadow"
 		// Render State
 		Blend One Zero, One Zero
 		Cull Back
+		Cull Off
 		ZTest LEqual
 		ZWrite On
 		// ColorMask: <None>
