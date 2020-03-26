@@ -22,6 +22,7 @@ namespace oneShot
 
         //DEBUG
         public Step currentStep = null;
+        public bool DrawPattern;
 
         private void OnEnable()
         {
@@ -145,5 +146,21 @@ namespace oneShot
                 time += step.duration;
             }
         }
+#if UNITY_EDITOR
+        private void OnDrawGizmos()
+        {
+            if (DrawPattern)
+            {
+                foreach (Step step in stepsLoaded)
+                {
+                    if (step.type == StepType.Move)
+                    {
+                        Gizmos.color = Color.red;
+                        Gizmos.DrawSphere(step.targetPos, 0.2f);
+                    }
+                }
+            }
+        }
+#endif
     }
 }
