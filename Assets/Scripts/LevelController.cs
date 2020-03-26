@@ -49,10 +49,11 @@ namespace oneShot
 
 		private void Update()
         {
-            if ((Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownStart) && phase == Phase.Tactical)
+            if ((Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
             {
                 CameraController.Instance.FocusOnPlayer();
-                UI_Timeline.Instance.SetPause(false);
+				//UI_Timeline.Instance.SetPause(false);
+				UI_Timeline.Instance.BeginCarnage();
                 StartCoroutine(DelayBeforeCombatPhase(CameraController.Instance.focusTime));
             }
 
@@ -76,12 +77,15 @@ namespace oneShot
         private IEnumerator DelayBeforeCombatPhase(float sec)
         {
 			CursorController.Instance.SetState(false);
+			UI_Timeline.Instance.ResetTimeline();
+			UI_Timeline.Instance.SetPause(true);
 
-            yield return new WaitForSeconds(sec);
-            TacticsController.Instance.loadTactics(SpawnController.Instance.SpawnPoints);
+			yield return new WaitForSeconds(sec);
+			UI_Timeline.Instance.SetPause(false);
+			TacticsController.Instance.loadTactics(SpawnController.Instance.SpawnPoints);
 			phase = Phase.Combat;
 			OnStartCombatPhase?.Invoke();
-			UI_Timeline.Instance.ResetTimeline();
+			//UI_Timeline.Instance.ResetTimeline();
         }
 
         public List<Enemy> GetEnemies()

@@ -34,12 +34,17 @@ public class UI_Timeline : MonoBehaviour
 	public int SelectedPoint { get; private set; }
 
 	[Header("Pause")]
-	[SerializeField] private Button pauseButton = null;
-	[SerializeField] private Image pauseImage = null;
-	[SerializeField] private Sprite pauseSprite = null;
-	[SerializeField] private Sprite playSprite = null;
+	[SerializeField] private GameObject pauseContainer = null;
 	private bool pause = false;
-	
+	//OLD
+	//[SerializeField] private Image pauseImage = null;
+	//[SerializeField] private Sprite pauseSprite = null;
+	//[SerializeField] private Sprite playSprite = null;
+	//[SerializeField] private Button pauseButton = null;
+
+	[Header("Other")]
+	[SerializeField] private GameObject beginCarnageContainer = null;
+
 
 	public delegate void TimelineReset();
 	public static event TimelineReset OnTimelineReset;
@@ -108,6 +113,11 @@ public class UI_Timeline : MonoBehaviour
 		DisplayPointCount();
 	}
 
+	public void BeginCarnage()
+	{
+		beginCarnageContainer.SetActive(false);
+	}
+
 
 	private void Awake()
 	{
@@ -122,7 +132,9 @@ public class UI_Timeline : MonoBehaviour
 		points = new List<UI_Point>();
 		TimeElapsed = false;
 
-		pauseButton.onClick.AddListener(PauseToggle);
+		pauseContainer.SetActive(false);
+		//OLD
+		//pauseButton.onClick.AddListener(PauseToggle);
 	}
 
 	private void Start()
@@ -288,9 +300,12 @@ public class UI_Timeline : MonoBehaviour
 	public void SetPause(bool state)
 	{
 		pause = state;
-		pauseImage.sprite = pause ? playSprite : pauseSprite;
+		pauseContainer.SetActive(pause);
 
 		GameTime.Instance.SetHardTimeSpeed(pause ? 0 : 1);
+
+		//OLD
+		//pauseImage.sprite = pause ? playSprite : pauseSprite;
 	}
 
 	public void ResetTimeline()

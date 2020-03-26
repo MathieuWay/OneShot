@@ -101,7 +101,14 @@ public class Gamepad : MonoBehaviour
 		ButtonL = Input.GetKey("joystick button 8");
 		ButtonTriggerL = Input.GetKey("joystick button 4");
 		ButtonTriggerR = Input.GetKey("joystick button 5");
-		ButtonDownStart = Input.GetKeyDown("joystick button 7"); 
+		ButtonDownStart = Input.GetKeyDown("joystick button 7");
+
+		//!DEBUG : Input Clavier/Souris
+		//ButtonDownStart = Input.GetKeyDown(KeyCode.Return);
+		//ButtonDownA = Input.GetKeyDown(KeyCode.S);
+		//ButtonDownB = Input.GetKeyDown(KeyCode.D);
+		//ButtonDownX = Input.GetKeyDown(KeyCode.Q);
+		//ButtonDownY = Input.GetKeyDown(KeyCode.Z);
 	}
 
 	private void OnApplicationQuit()
