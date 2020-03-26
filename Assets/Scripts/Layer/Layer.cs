@@ -29,6 +29,8 @@ namespace oneShot
 
         public void LoadAccess()
         {
+            UpAccess.Clear();
+            DownAccess.Clear();
             Transform access = transform.Find("Access");
             //UP
             Transform up = access.Find("UP");
