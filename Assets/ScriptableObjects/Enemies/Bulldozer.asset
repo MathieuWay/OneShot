@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Bulldozer
   m_EditorClassIdentifier: 
   speed: 0.8
-  reactionTime: 1.3
-  fieldOfView: 10
+  reactionTime: 1.4
+  fieldOfView: 1.5
