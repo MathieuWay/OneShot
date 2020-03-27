@@ -2703,7 +2703,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 435519743}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eff043aeca5bf9d4486c415b2916dc3b, type: 3}
   m_Name: 
@@ -3525,7 +3525,7 @@ PrefabInstance:
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
       propertyPath: steps.Array.data[0].stepMovePaths.Array.size
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -6326,7 +6326,7 @@ PrefabInstance:
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.size
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -7717,7 +7717,7 @@ PrefabInstance:
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -9251,7 +9251,7 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.size
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
