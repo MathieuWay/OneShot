@@ -44,14 +44,14 @@ RenderSettings:
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 1
+  m_GIWorkflowMode: 0
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
     m_IndirectOutputScale: 1
     m_AlbedoBoost: 1
     m_EnvironmentLightingMode: 0
-    m_EnableBakedLightmaps: 0
+    m_EnableBakedLightmaps: 1
     m_EnableRealtimeLightmaps: 0
   m_LightmapEditorSettings:
     serializedVersion: 12
@@ -1280,6 +1280,11 @@ PrefabInstance:
       propertyPath: m_Intensity
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 7196267167952050663, guid: b3888ac95b33cae4782c8c4d692a1cd0,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7196267168233855395, guid: b3888ac95b33cae4782c8c4d692a1cd0,
         type: 3}
       propertyPath: m_Intensity
@@ -1289,6 +1294,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Range
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196267168233855395, guid: b3888ac95b33cae4782c8c4d692a1cd0,
+        type: 3}
+      propertyPath: m_Lightmapping
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b3888ac95b33cae4782c8c4d692a1cd0, type: 3}
@@ -1708,6 +1718,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ceilling_lights_top (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196267167487278802, guid: d7bdf641dd9328d44b3120e5f17dbf29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7196267167487278803, guid: d7bdf641dd9328d44b3120e5f17dbf29,
         type: 3}
@@ -3510,7 +3525,7 @@ PrefabInstance:
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
       propertyPath: steps.Array.data[0].stepMovePaths.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -6311,7 +6326,7 @@ PrefabInstance:
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.size
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -7702,7 +7717,7 @@ PrefabInstance:
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 142295099653959628, guid: 7bd87996e81c6304ea7ee08f48a7d808,
         type: 3}
@@ -9236,7 +9251,7 @@ PrefabInstance:
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
       propertyPath: steps.Array.data[1].stepMovePaths.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7612234496159362528, guid: 75086500099708b4aa4559f64fa2d17f,
         type: 3}
@@ -10010,6 +10025,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Ceilling_lights_top
+      objectReference: {fileID: 0}
+    - target: {fileID: 7196267167487278802, guid: d7bdf641dd9328d44b3120e5f17dbf29,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7196267167487278803, guid: d7bdf641dd9328d44b3120e5f17dbf29,
         type: 3}
