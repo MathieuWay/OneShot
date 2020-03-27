@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6475033231983274436}
   - component: {fileID: 6475033231983274439}
   - component: {fileID: 6475033231983274437}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Elevator_front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -182,7 +182,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 16384
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -190,7 +190,7 @@ Light:
   m_BounceIntensity: 0
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_BoundingSphereOverride: {x: 3.613e-42, y: 0, z: 8.56e-43, w: 3.066e-41}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -204,7 +204,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6475033232046729786}
   - component: {fileID: 6475033232046729789}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Elevator_side_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6475033232444642812}
   - component: {fileID: 6475033232444642813}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Elevator_move_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6475033232715954194}
   - component: {fileID: 6475033232715954197}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Elevator_side_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -536,7 +536,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6475033233592955600}
   - component: {fileID: 6475033233592955603}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Elevator_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -617,7 +617,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6475033233598722181}
   - component: {fileID: 6475033233598722178}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Elevator_light
   m_TagString: Untagged
   m_Icon: {fileID: 0}
