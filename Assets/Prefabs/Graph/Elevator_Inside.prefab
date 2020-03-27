@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707203457697440933}
   - component: {fileID: 5707203457697440932}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Elevator inside_2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +92,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707203458012592559}
   - component: {fileID: 5707203458012592558}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Point Light_elevator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,7 +162,7 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 8192
   m_RenderingLayerMask: 1
   m_Lightmapping: 1
   m_LightShadowCasterMode: 0
@@ -184,7 +184,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707203458902018445}
   - component: {fileID: 5707203458902018444}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Elevator inside_right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707203459007328516}
   - component: {fileID: 5707203459007328539}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Elevator inside_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -348,7 +348,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707203459069269094}
   - component: {fileID: 5707203459069269093}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Elevator inside_0
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +432,7 @@ GameObject:
   - component: {fileID: 5707203459146532263}
   - component: {fileID: 5707203459146532262}
   - component: {fileID: 5707203459146532261}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +561,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5707203459720173806}
   - component: {fileID: 5707203459720173805}
-  m_Layer: 0
+  m_Layer: 13
   m_Name: Elevator inside_3
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -19,11 +19,11 @@ TagManager:
   - 
   - Layer
   - Post Processing
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Layer_light_ignore
+  - Layer_1
+  - Layer_2
+  - Elevator_Inside
+  - Elevator_Front
   - 
   - 
   - 

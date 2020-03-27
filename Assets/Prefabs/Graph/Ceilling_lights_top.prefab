@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7196267167487278803}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Ceilling_lights_top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -42,7 +42,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7196267167952050662}
   - component: {fileID: 7196267167952050663}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Spot Light (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -76,9 +76,9 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.84944296, g: 0.78039217, b: 0.9254902, a: 1}
   m_Intensity: 1.5
-  m_Range: 2
-  m_SpotAngle: 120.160095
-  m_InnerSpotAngle: 35.160084
+  m_Range: 1
+  m_SpotAngle: 142.48856
+  m_InnerSpotAngle: 57.488564
   m_CookieSize: 10
   m_Shadows:
     m_Type: 2
@@ -112,9 +112,9 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4096
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
@@ -134,7 +134,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7196267168233855394}
   - component: {fileID: 7196267168233855395}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Point Light (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +168,7 @@ Light:
   m_Shape: 0
   m_Color: {r: 0.8509804, g: 0.78039217, b: 0.9254902, a: 1}
   m_Intensity: 0.6
-  m_Range: 2
+  m_Range: 4
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -204,9 +204,9 @@ Light:
   m_RenderMode: 1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 4096
   m_RenderingLayerMask: 1
-  m_Lightmapping: 1
+  m_Lightmapping: 4
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 0
