@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<WwiseDocument Type="WorkUnit" ID="{73D871BA-7148-4C60-8894-333D96A0B579}" SchemaVersion="97">
+	<AudioObjects>
+		<WorkUnit Name="Default Work Unit" ID="{73D871BA-7148-4C60-8894-333D96A0B579}" PersistMode="Standalone">
+			<ChildrenList>
+				<Sound Name="beep" ID="{F994AC97-F7C7-4902-B4BD-19F0E405DF80}" ShortID="191491620">
+					<ReferenceList>
+						<Reference Name="Conversion">
+							<ObjectRef Name="Default Conversion Settings" ID="{6D1B890C-9826-4384-BF07-C15223E9FB56}" WorkUnitID="{75ED9004-EFBB-482A-9677-3153B92262BE}"/>
+						</Reference>
+						<Reference Name="OutputBus">
+							<ObjectRef Name="Master Audio Bus" ID="{1514A4D8-1DA6-412A-A17E-75CA0C2149F3}" WorkUnitID="{AFC1AF2E-DA6F-410F-B61C-5807F8ECC81F}"/>
+						</Reference>
+					</ReferenceList>
+					<ChildrenList>
+						<AudioFileSource Name="beep" ID="{1390D692-895A-41C0-B039-88A864C72B87}">
+							<Language>SFX</Language>
+							<AudioFile>beep.wav</AudioFile>
+							<MediaIDList>
+								<MediaID ID="538059332"/>
+							</MediaIDList>
+						</AudioFileSource>
+					</ChildrenList>
+					<ActiveSourceList>
+						<ActiveSource Name="beep" ID="{1390D692-895A-41C0-B039-88A864C72B87}" Platform="Linked"/>
+					</ActiveSourceList>
+				</Sound>
+			</ChildrenList>
+		</WorkUnit>
+	</AudioObjects>
+</WwiseDocument>
