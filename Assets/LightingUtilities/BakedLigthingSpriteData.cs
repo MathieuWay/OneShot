@@ -89,6 +89,15 @@ public class BakedLigthingSpriteData : MonoBehaviour
         SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
         Sprite sprite = spriteRenderer.sprite;
 
+		//NEW
+		if(spriteRenderer.drawMode == SpriteDrawMode.Tiled)
+		{
+			Vector3 contentLocalScale = content.transform.localScale;
+			contentLocalScale.x = spriteRenderer.size.x;
+			contentLocalScale.y = spriteRenderer.size.y;
+			content.transform.localScale = contentLocalScale;
+		}
+
         if (mesh)
         {
             DestroyImmediate(mesh);
@@ -99,8 +108,26 @@ public class BakedLigthingSpriteData : MonoBehaviour
         {
             mesh = new Mesh();
             mesh.name = sprite.name + "_Mesh";
-            mesh.vertices = sprite.vertices.Select(x => (Vector3)x).ToArray();
-            mesh.uv = sprite.uv;
+
+			//NEW
+			if(spriteRenderer.drawMode == SpriteDrawMode.Tiled)
+			{
+				Vector2[] vertices = sprite.vertices;
+				for (int i = 0; i < vertices.Length; i++)
+				{
+					vertices[i] /= (sprite.rect.size / sprite.pixelsPerUnit);
+				}
+				mesh.vertices = vertices.Select(x => (Vector3)x).ToArray();
+
+				mesh.uv = SetupUvMap(sprite.uv, spriteRenderer.size, sprite);
+			}
+			else
+			{
+				//ORIGIN
+				mesh.vertices = sprite.vertices.Select(x => (Vector3)x).ToArray();
+				mesh.uv = sprite.uv;
+			}
+            
             mesh.triangles = sprite.triangles.Select(x => (int)x).ToArray();
             mesh.RecalculateBounds();
             mesh.RecalculateNormals();
@@ -184,5 +211,20 @@ public class BakedLigthingSpriteData : MonoBehaviour
         UnityEditor.EditorUtility.SetDirty(spriteRenderer);
 #endif
     }
+
+	private Vector2[] SetupUvMap(Vector2[] meshUVs, Vector2 spriteSize, Sprite sprite)
+	{
+		float left = 0f;
+		float right = spriteSize.x / (sprite.rect.width / sprite.pixelsPerUnit);
+		float bottom = 0;
+		float top = spriteSize.y / (sprite.rect.height / sprite.pixelsPerUnit);
+
+		meshUVs[0] = new Vector2(left, top);
+		meshUVs[1] = new Vector2(right, bottom);
+		meshUVs[2] = new Vector2(right, top);
+		meshUVs[3] = new Vector2(left, bottom);
+
+		return meshUVs;
+	}
 }
 

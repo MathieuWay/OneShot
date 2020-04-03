@@ -65,7 +65,7 @@ public static class BakeSpritesLigthingEditor
 		EditorApplication.isPlaying = true;
 	}
 
-    [MenuItem("Lighting/Prepare Sprites")]
+    [MenuItem("Lighting/Prepare Sprites %L")]
     public static void PrepareSprites()
     {
         for (int i = 0; i < EditorSceneManager.loadedSceneCount; i++)
@@ -93,7 +93,7 @@ public static class BakeSpritesLigthingEditor
         EditorSceneManager.MarkAllScenesDirty();
     }
 
-    [MenuItem("Lighting/Clean Sprites")]
+    [MenuItem("Lighting/Clean Sprites #L")]
     public static void CleanLightingSpriteData()
     {
         for (int i = 0; i < EditorSceneManager.loadedSceneCount; i++)
