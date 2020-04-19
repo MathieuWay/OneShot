@@ -3,20 +3,36 @@ using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
+
 [ExecuteInEditMode]
 public class SpriteLoader : MonoBehaviour
 {
-    //public Texture2D tex;
+    public Sprite sprite;
+    private Sprite currentSprite;
     //public Color tint = Color.white;
-    [Range(0.5f,10f)]
+    [Range(0.5f, 10f)]
     public float ScaleFactor = 1f;
+    private void Update()
+    {
+        if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
+        {
+            UpdateSprite();
+        }
+    }
+
     private void OnEnable()
     {
         ApplyTextureAndResizeQuad();
+
+        if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
+            UpdateSprite();
     }
     private void OnValidate()
     {
         ApplyTextureAndResizeQuad();
+
+        if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
+            UpdateSprite();
     }
 
     private void ApplyTextureAndResizeQuad()
@@ -28,17 +44,7 @@ public class SpriteLoader : MonoBehaviour
             {
                 Texture tex = renderer.sharedMaterial.GetTexture("_MainTex");
                 if (tex)
-                {
-                    if (tex.width > tex.height)
-                    {
-                        transform.localScale = new Vector3(1, (float)(tex.height) / (float)(tex.width), 1);
-                    }
-                    else
-                    {
-                        transform.localScale = new Vector3((float)(tex.width) / (float)(tex.height), 1, 1);
-                    }
-					transform.localScale = new Vector3(transform.localScale.x * ScaleFactor, transform.localScale.y * ScaleFactor, 1);
-                }
+                    UpdateQuadSize(tex);
             }
             else
             {
@@ -51,6 +57,33 @@ public class SpriteLoader : MonoBehaviour
                 }*/
             }
         }
+    }
+
+    private void UpdateQuadSize(Texture tex)
+    {
+        float width = 1;
+        float height = 1;
+        if (tex.width > tex.height)
+            height = (float)(tex.height) / (float)(tex.width);
+        else
+            width = (float)(tex.width) / (float)(tex.height);
+        transform.localScale = new Vector3(width * ScaleFactor, height * ScaleFactor, 1);
+    }
+
+    private void UpdateSprite()
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        var croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
+        var pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
+                                                (int)sprite.textureRect.y,
+                                                (int)sprite.textureRect.width,
+                                                (int)sprite.textureRect.height);
+        croppedTexture.SetPixels(pixels);
+        croppedTexture.Apply();
+        croppedTexture.filterMode = FilterMode.Point;
+        renderer.sharedMaterial.SetTexture("_MainTex", croppedTexture);
+        UpdateQuadSize(croppedTexture);
+        currentSprite = sprite;
     }
 }
 
