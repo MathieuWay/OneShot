@@ -51,14 +51,14 @@ namespace oneShot
                         direction = 1;
                     else
                         direction = -1;
-                    Vector3 accessPos = currentLayer.GetClosestAccess(direction, transform.position);
-                    if (Vector3.Distance(transform.position, accessPos) == 0)
+                    Transform accessPos = currentLayer.GetClosestAccess(direction, transform.position);
+                    if (Vector3.Distance(transform.position, accessPos.position) == 0)
                     {
                         currentLayer = LayersController.instance.GetLayer(currentLayer.index + direction);
                         ChangeLayer();
                     }
                     else
-                        transform.position = Vector3.MoveTowards(transform.position, accessPos, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
+                        transform.position = Vector3.MoveTowards(transform.position, accessPos.position, speed * Time.deltaTime * GameTime.Instance.TimeSpeed);
                 }
             }
 

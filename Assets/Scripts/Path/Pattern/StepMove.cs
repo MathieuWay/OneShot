@@ -84,8 +84,8 @@ namespace oneShot
                 else
                     direction = -1;
                 //Debug.Log("position:" + cursor + "  /direction:" + direction);
-                Vector3 access = layer.GetClosestAccess(direction, cursor);
-                if (access == Vector3.zero)
+                Transform access = layer.GetClosestAccess(direction, cursor);
+                if (access.position == Vector3.zero)
                 {
                     //path.Clear();
                     step.stepMovePaths.Clear();
@@ -94,18 +94,28 @@ namespace oneShot
                     return -1;
                 }
                 //Path to access
-                duration += Vector3.Distance(cursor, access) / speed;
-                cursor = access;
+                duration += Vector3.Distance(cursor, access.position) / speed;
+                cursor = access.position;
                 //path.Add(access);
-                step.stepMovePaths.Add(new StepMovePath(new Vector2(access.x, access.y), starttime + duration));
+                step.stepMovePaths.Add(new StepMovePath(new Vector2(access.position.x, access.position.y), starttime + duration));
 
                 //ChangeLayer
                 layer = LayersController.instance.GetLayer(layer.index + direction);
-                Vector3 nextPos = cursor;
-                nextPos.y = layer.transform.position.y;
-                cursor = nextPos;
+                /*
+                access.GetComponent<InterLayer>().LoadPath();
+                step.stepMovePaths
+                */
+                List<StepMovePath> accessPath = access.GetComponent<InterLayer>().LoadPath();
+                for (int i = 0; i < accessPath.Count; i++)
+                {
+                    step.stepMovePaths.Add(new StepMovePath(accessPath[i].waypoint, starttime + duration + accessPath[i].time));
+                }
+                duration += accessPath[accessPath.Count -1].time;
+                cursor = accessPath[accessPath.Count - 1].waypoint;
+                //Vector3 nextPos = cursor;
+                //nextPos.y = layer.transform.position.y;
                 //path.Add(nextPos);
-                step.stepMovePaths.Add(new StepMovePath(new Vector2(nextPos.x, nextPos.y), starttime + duration));
+                //step.stepMovePaths.Add(new StepMovePath(new Vector2(nextPos.x, nextPos.y), starttime + duration));
             }
             duration += Vector3.Distance(cursor, position) / speed;
             //path.Add(position);

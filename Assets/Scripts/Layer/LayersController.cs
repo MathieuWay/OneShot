@@ -26,6 +26,9 @@ public class LayersController : MonoBehaviour
         for (int i = 0; i < layers.Count; i++)
         {
             layers[i].GetComponent<oneShot.Layer>().index = i;
+        }
+        for (int i = 0; i < layers.Count; i++)
+        {
             layers[i].GetComponent<oneShot.Layer>().LoadAccess();
         }
     }
@@ -55,6 +58,9 @@ public class LayersController : MonoBehaviour
 
     public oneShot.Layer GetLayer(int index)
     {
-        return layers[index].GetComponent<oneShot.Layer>();
+        if (index < layers.Count)
+            return layers[index].GetComponent<oneShot.Layer>();
+        else
+            return null;
     }
 }

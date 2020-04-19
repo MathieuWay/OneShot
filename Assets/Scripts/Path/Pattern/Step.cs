@@ -10,9 +10,9 @@ namespace oneShot
         public Vector3 waypoint;
         public float time;
 
-        public StepMovePath(Vector2 vector2, float startTime)
+        public StepMovePath(Vector3 vector, float startTime)
         {
-            this.waypoint = new Vector3(vector2.x, vector2.y, 0);
+            this.waypoint = new Vector3(vector.x, vector.y, vector.z);
             this.time = startTime;
         }
     }

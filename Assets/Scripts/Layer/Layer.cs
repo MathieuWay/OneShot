@@ -13,7 +13,7 @@ namespace oneShot
         private List<Transform> UpAccess = new List<Transform>();
         private List<Transform> DownAccess = new List<Transform>();
 
-        public Vector3 GetClosestAccess(int direction, Vector3 pos)
+        public Transform GetClosestAccess(int direction, Vector3 pos)
         {
             List<Transform> access;
             if (direction > 0)
@@ -22,9 +22,9 @@ namespace oneShot
                 access = DownAccess;
             access = access.OrderBy(accessTransform => Vector3.Distance(pos, accessTransform.position)).ToList();
             if (access.Count > 0)
-                return access[0].position;
+                return access[0];
             else
-                return Vector3.zero;
+                return null;
         }
 
         public void LoadAccess()
