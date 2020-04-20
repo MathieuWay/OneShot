@@ -104,12 +104,23 @@ namespace oneShot
                 access.GetComponent<InterLayer>().LoadPath();
                 step.stepMovePaths
                 */
-                List<StepMovePath> accessPath = access.GetComponent<InterLayer>().LoadPath();
+                List<StepMovePath> accessPath = new List<StepMovePath>();
+                InterLayer interLayer = access.GetComponent<InterLayer>();
+                if(interLayer != null)
+                    accessPath = interLayer.LoadPath();
+                else
+                {
+                    Debug.LogError("Access manquant InterLayer Component");
+                    Debug.Break();
+                    return -1;
+                }
+
                 for (int i = 0; i < accessPath.Count; i++)
                 {
                     step.stepMovePaths.Add(new StepMovePath(accessPath[i].waypoint, starttime + duration + accessPath[i].time));
                 }
                 duration += accessPath[accessPath.Count -1].time;
+                accessPath[accessPath.Count - 1].waypoint.y = layer.transform.position.y;
                 cursor = accessPath[accessPath.Count - 1].waypoint;
                 //Vector3 nextPos = cursor;
                 //nextPos.y = layer.transform.position.y;

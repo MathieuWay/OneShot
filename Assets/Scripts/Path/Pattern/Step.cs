@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 namespace oneShot
 {
-    [Serializable]
+    [System.Serializable]
     public class StepMovePath
     {
         public Vector3 waypoint;
@@ -32,7 +31,7 @@ namespace oneShot
         Sprint
     }
 
-    [Serializable]
+    [System.Serializable]
     public class Step
     {
         public StepType type;

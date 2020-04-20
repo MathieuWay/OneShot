@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
-#if UNITY_EDITOR
-using UnityEditor;
-#endif
 
 namespace oneShot
 {
@@ -133,7 +130,6 @@ namespace oneShot
                         step.stepMovePaths.Clear();
                         Vector3 target = step.targetPos;
                         target.y = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(step.targetPos.y)).transform.position.y;
-                        Debug.Log("height: " +target.y + "  previous:" + step.targetPos);
                         step.duration = StepMove.CalculateTime(step, pos, target, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);
                         pos = target;
                         break;
@@ -162,11 +158,7 @@ namespace oneShot
                 {
                     if (steps[i].type == StepType.Move)
                     {
-                        Vector3 target = steps[i].targetPos;
-
-                        //if (editPattern)
-                        //    steps[i].targetPos = Handles.PositionHandle(target, Quaternion.identity);
-                        Gizmos.DrawSphere(target, 0.1f);
+                        Gizmos.DrawSphere(steps[i].targetPos, 0.1f);
                         for (int j = 0; j < steps[i].stepMovePaths.Count - 1; j++)
                         {
                             Gizmos.DrawLine(steps[i].stepMovePaths[j].waypoint, steps[i].stepMovePaths[j+1].waypoint);
