@@ -85,12 +85,11 @@ namespace oneShot
                     direction = -1;
                 //Debug.Log("position:" + cursor + "  /direction:" + direction);
                 Transform access = layer.GetClosestAccess(direction, cursor);
-                if (access.position == Vector3.zero)
+                if (access == null)
                 {
                     //path.Clear();
                     step.stepMovePaths.Clear();
-                    Debug.LogError("No access Found");
-                    Debug.Break();
+                    Debug.LogError("No access Found (layer:"+layer.index+"  /from:"+cursor+"/   direction:"+direction);
                     return -1;
                 }
                 //Path to access

@@ -43,7 +43,7 @@ namespace oneShot
         //moveData
         public MoveType moveType;
         public Vector3 targetPos;
-        public List<StepMovePath> stepMovePaths = new List<StepMovePath>();
+        [HideInInspector] public List<StepMovePath> stepMovePaths = new List<StepMovePath>();
 
         //animData
         public AnimationClip clip;

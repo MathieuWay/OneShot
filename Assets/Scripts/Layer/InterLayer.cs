@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using NaughtyAttributes;
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
 
 [System.Serializable]
 public struct AccessPath
@@ -15,6 +18,8 @@ public class InterLayer : MonoBehaviour
 {
     [ReorderableList]
     public List<AccessPath> paths = new List<AccessPath>();
+    public bool showPath = false;
+    public bool editPath = false;
 
     public List<oneShot.StepMovePath> LoadPath()
     {
@@ -46,8 +51,19 @@ public class InterLayer : MonoBehaviour
 #if UNITY_EDITOR
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.green;//transform.TransformVector(paths[i - 1].path.waypoint)
-        for (int i = 1; i < paths.Count; i++) Gizmos.DrawLine(transform.TransformPoint(paths[i - 1].path.waypoint), transform.TransformPoint(paths[i].path.waypoint));
+        if (showPath)
+        {
+            Gizmos.color = Color.green;//transform.TransformVector(paths[i - 1].path.waypoint)
+            for (int i = 0; i < paths.Count; i++)
+            {
+                Vector3 localPos = transform.TransformPoint(paths[i].path.waypoint);
+                //if (editPath)
+                //    paths[i].path.waypoint = transform.InverseTransformPoint(Handles.PositionHandle(transform.TransformPoint(paths[i].path.waypoint), Quaternion.identity));
+                Gizmos.DrawSphere(localPos, 0.1f);
+                if(i < paths.Count - 1)
+                    Gizmos.DrawLine(localPos, transform.TransformPoint(paths[i+1].path.waypoint));
+            }
+        }
     }
 #endif
 }

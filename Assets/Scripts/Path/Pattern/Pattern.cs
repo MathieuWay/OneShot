@@ -21,8 +21,10 @@ namespace oneShot
         private List<Step> stepsLoaded = new List<Step>();
 
         //DEBUG
+        [HideInInspector]
         public Step currentStep = null;
-        public bool DrawPattern;
+        public bool showPattern;
+        public bool editPattern;
 
         private void OnEnable()
         {
@@ -129,9 +131,11 @@ namespace oneShot
                         break;
                     case StepType.Move:
                         step.stepMovePaths.Clear();
-                        step.targetPos.y = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(step.targetPos.y)).transform.position.y;
-                        step.duration = StepMove.CalculateTime(step, pos, step.targetPos, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);
-                        pos = step.targetPos;
+                        Vector3 target = step.targetPos;
+                        target.y = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(step.targetPos.y)).transform.position.y;
+                        Debug.Log("height: " +target.y + "  previous:" + step.targetPos);
+                        step.duration = StepMove.CalculateTime(step, pos, target, StepMove.GetMoveFactor(step.moveType) * enemy.speed, time);
+                        pos = target;
                         break;
                     case StepType.Anim:
                         if (step.clip)
@@ -149,14 +153,24 @@ namespace oneShot
 #if UNITY_EDITOR
         private void OnDrawGizmos()
         {
-            if (DrawPattern)
+            if (LayersController.instance)
+                CalculatePattern();
+            if (showPattern)
             {
-                foreach (Step step in stepsLoaded)
+                Gizmos.color = Color.green;
+                for (int i = 0; i < steps.Count; i++)
                 {
-                    if (step.type == StepType.Move)
+                    if (steps[i].type == StepType.Move)
                     {
-                        Gizmos.color = Color.red;
-                        Gizmos.DrawSphere(step.targetPos, 0.2f);
+                        Vector3 target = steps[i].targetPos;
+
+                        //if (editPattern)
+                        //    steps[i].targetPos = Handles.PositionHandle(target, Quaternion.identity);
+                        Gizmos.DrawSphere(target, 0.1f);
+                        for (int j = 0; j < steps[i].stepMovePaths.Count - 1; j++)
+                        {
+                            Gizmos.DrawLine(steps[i].stepMovePaths[j].waypoint, steps[i].stepMovePaths[j+1].waypoint);
+                        }
                     }
                 }
             }

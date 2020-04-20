@@ -49,9 +49,15 @@ public class LayersController : MonoBehaviour
             if (height == layers[i].transform.position.y)
                 return i;
             else if (height < layers[i].transform.position.y)
-                return i - 1;
+                if (i > 0)
+                    return i - 1;
+                else
+                    return 0;
             else
-                i++;
+                if (i == layers.Count - 1)
+                    return i;
+                else
+                    i++;
         }
         return 0;
     }
