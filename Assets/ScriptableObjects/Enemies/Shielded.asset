@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Shielded
   m_EditorClassIdentifier: 
   speed: 0
-  reactionTime: 1
-  fieldOfView: 1.5
+  reactionTime: 1.4
+  fieldOfView: 1.2
