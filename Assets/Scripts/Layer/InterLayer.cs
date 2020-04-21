@@ -45,11 +45,12 @@ public class InterLayer : MonoBehaviour
     }
 
 #if UNITY_EDITOR
+    public Color debugColor = Color.green;
     private void OnDrawGizmos()
     {
         if (showPath)
         {
-            Gizmos.color = Color.green;//transform.TransformVector(paths[i - 1].path.waypoint)
+            Gizmos.color = debugColor;//transform.TransformVector(paths[i - 1].path.waypoint)
             for (int i = 0; i < paths.Count; i++)
             {
                 Vector3 localPos = transform.TransformPoint(paths[i].path.waypoint);

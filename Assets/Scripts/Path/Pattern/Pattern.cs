@@ -147,13 +147,14 @@ namespace oneShot
             }
         }
 #if UNITY_EDITOR
+        public Color debugColor = Color.white;
         private void OnDrawGizmos()
         {
             if (LayersController.instance)
                 CalculatePattern();
             if (showPattern)
             {
-                Gizmos.color = Color.green;
+                Gizmos.color = debugColor;
                 for (int i = 0; i < steps.Count; i++)
                 {
                     if (steps[i].type == StepType.Move)

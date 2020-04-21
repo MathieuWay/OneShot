@@ -29,7 +29,12 @@ public class PatternEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        DrawPropertiesExcluding(serializedObject, new string[] { "steps"});
+        string[] filter;
+        if (serializedObject.FindProperty("showPattern").boolValue)
+            filter = new string[] { "steps" };
+        else
+            filter = new string[] { "steps", "debugColor" };
+        DrawPropertiesExcluding(serializedObject, filter);
         _patternStepsReorderableList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }
@@ -47,49 +52,48 @@ public class PatternEditor : Editor
             switch (stepType)
             {
                 case oneShot.StepType.Idle:
-                    return EditorGUIUtility.singleLineHeight * 3 + 10f;
+                    return EditorGUIUtility.singleLineHeight * 3 + 20f;
                 case oneShot.StepType.Move:
                     return EditorGUIUtility.singleLineHeight * 5 + 10f;
                 case oneShot.StepType.Anim:
-                    return EditorGUIUtility.singleLineHeight * 3 + 10f;
+                    return EditorGUIUtility.singleLineHeight * 3 + 20f;
                 default:
-                    return EditorGUIUtility.singleLineHeight * 2 + 10f;
+                    return EditorGUIUtility.singleLineHeight * 2 + 15f;
             }
         };
         _patternStepsReorderableList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
             SerializedProperty patternStepsProperty = serializedObject.FindProperty("steps").GetArrayElementAtIndex(index);
             Rect propertyRect = rect;
-            //STEP TYPE
+            // Step Type
             propertyRect.height = EditorGUIUtility.singleLineHeight;
             propertyRect.y += 5f;
             SerializedProperty patternStepTypeProperty = patternStepsProperty.FindPropertyRelative("type");
-            EditorGUI.PropertyField(propertyRect, patternStepTypeProperty);
-            //START TIME
-            propertyRect.y += EditorGUIUtility.singleLineHeight;
-            SerializedProperty patternStartTimeProperty = patternStepsProperty.FindPropertyRelative("startTime");
-            EditorGUI.LabelField(propertyRect, "Début de la Step:", patternStartTimeProperty.floatValue.ToString());
+            EditorGUI.PropertyField(propertyRect, patternStepTypeProperty, new GUIContent("Step Type"));
+            // Start time step
+            propertyRect.y += EditorGUIUtility.singleLineHeight + 5f;
+            EditorGUI.FloatField(propertyRect, "Start at", patternStepsProperty.FindPropertyRelative("startTime").floatValue);
 
             oneShot.StepType stepType = (oneShot.StepType)patternStepTypeProperty.intValue;
             switch (stepType)
             {
                 case oneShot.StepType.Idle:
-                    propertyRect.y += EditorGUIUtility.singleLineHeight;
-                    SerializedProperty patternTargetPosProperty = patternStepsProperty.FindPropertyRelative("duration");
-                    EditorGUI.PropertyField(propertyRect, patternTargetPosProperty);
+                    // Idle Duration
+                    propertyRect.y += EditorGUIUtility.singleLineHeight + 5f;
+                    EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("duration"), new GUIContent("Duration"));
                     break;
                 case oneShot.StepType.Move:
+                    // Position target
                     propertyRect.y += EditorGUIUtility.singleLineHeight + 5f;
-                    SerializedProperty patternDurationProperty = patternStepsProperty.FindPropertyRelative("targetPos");
-                    EditorGUI.PropertyField(propertyRect, patternDurationProperty);
+                    EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("targetPos"), new GUIContent("Position"));
+                    // Move Type
                     propertyRect.y += EditorGUIUtility.singleLineHeight + 5f;
-                    SerializedProperty patternMoveTypeProperty = patternStepsProperty.FindPropertyRelative("moveType");
-                    EditorGUI.PropertyField(propertyRect, patternMoveTypeProperty);
+                    EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("moveType"), new GUIContent("Move Type"));
                     break;
                 case oneShot.StepType.Anim:
-                    propertyRect.y += EditorGUIUtility.singleLineHeight;
-                    SerializedProperty patternClipProperty = patternStepsProperty.FindPropertyRelative("clip");
-                    EditorGUI.PropertyField(propertyRect, patternClipProperty);
+                    // Animation clip
+                    propertyRect.y += EditorGUIUtility.singleLineHeight +5f;
+                    EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("clip"), new GUIContent("Animation Clip"));
                     break;
                 default:
                     break;

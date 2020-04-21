@@ -23,7 +23,12 @@ public class InterLayerEditor : Editor
     public override void OnInspectorGUI()
     {
         serializedObject.Update();
-        DrawPropertiesExcluding(serializedObject, new string[] { "paths" });
+        string[] filter;
+        if (serializedObject.FindProperty("showPath").boolValue)
+            filter = new string[] { "paths" };
+        else
+            filter = new string[] { "paths", "debugColor" };
+        DrawPropertiesExcluding(serializedObject, filter);
         _pathReorderableList.DoLayoutList();
         serializedObject.ApplyModifiedProperties();
     }
@@ -39,14 +44,10 @@ public class InterLayerEditor : Editor
             Rect propertyRect = rect;
             //STEP TYPE
             propertyRect.height = EditorGUIUtility.singleLineHeight;
-            SerializedProperty patternPathProperty = patternStepsProperty.FindPropertyRelative("path");
-            //patternPathProperty.serializedObject.FindProperty("waypoint");
-            //EditorGUI.PropertyField(propertyRect, patternPathProperty.FindPropertyRelative("waypoint"));
-            EditorGUI.Vector3Field(propertyRect, "Position:", patternPathProperty.FindPropertyRelative("waypoint").vector3Value);
+            EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("path").FindPropertyRelative("waypoint"), new GUIContent("Position"));
             //START TIME
             propertyRect.y += EditorGUIUtility.singleLineHeight + 5f;
-            SerializedProperty patternSpeedProperty = patternStepsProperty.FindPropertyRelative("speed");
-            EditorGUI.FloatField(propertyRect, "Speed:", patternSpeedProperty.floatValue);
+            EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("speed"), new GUIContent("Speed"));
         };
     }
 }
