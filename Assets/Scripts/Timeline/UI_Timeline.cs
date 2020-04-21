@@ -15,6 +15,8 @@ public class UI_Timeline : MonoBehaviour
 {
 	public static UI_Timeline Instance { get; private set; }
 
+	public delegate void MyDelegate();
+	public event MyDelegate OnSetPause;
 
 	[Header("Timer")]
 	[SerializeField] private RectTransform timelineRect = null;
@@ -178,6 +180,8 @@ public class UI_Timeline : MonoBehaviour
 		if (Gamepad.Instance.ButtonDownX)
 		{
 			PauseToggle();
+
+			if (pause) OnSetPause?.Invoke();
 		}
 	}
 

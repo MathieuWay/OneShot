@@ -6,14 +6,19 @@ namespace oneShot
 {
 	public abstract class EnemyBase : MonoBehaviour
 	{
-		[SerializeField] protected EnemyData enemyData;
+		[SerializeField] private EnemyData enemyData = null;
 		[SerializeField] private GameObject firePrefab = null;
+		public EnemyData _EnemyData { get => enemyData; }
 		protected Enemy enemy;
+
+		public delegate void MyDelegate(EnemyBase enemyBase);
+		public static event MyDelegate OnEnemyDeadGetInfo;
 
 		[Header("DEBUG")]
 		[SerializeField] private bool drawGizmos = true;
 		private float reactionTime;
 		private bool hunt;
+		
 
 		private void Start()
 		{
@@ -22,7 +27,7 @@ namespace oneShot
 
 			enemy = GetComponent<Enemy>();
             enemy.speed = enemyData.Speed;
-            enemy.OnKill += StopHunt;
+            enemy.OnKill += EnemyDeath;
 		}
 
 		public virtual void Hit(AttackName attackName, Vector2 hitOriginPos)
@@ -35,9 +40,10 @@ namespace oneShot
 			Gamepad.Instance.Vibrate(1, 1, 0.5f);
 		}
 
-		private void StopHunt()
+		private void EnemyDeath()
 		{
 			hunt = false;
+			OnEnemyDeadGetInfo?.Invoke(this);
 		}
 
 		private void StartHunt()
@@ -61,12 +67,12 @@ namespace oneShot
 						fireTime = fireRate;
 					}
 
-					fireTime -= Time.deltaTime;
+					fireTime -= Time.deltaTime * GameTime.Instance.TimeSpeed;
 					yield return null;
 					continue;
 				}
 
-				reactionTime -= Time.deltaTime;
+				reactionTime -= Time.deltaTime * GameTime.Instance.TimeSpeed;
 				yield return null;
 			}
 		}

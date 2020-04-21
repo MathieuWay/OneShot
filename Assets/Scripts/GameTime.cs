@@ -14,6 +14,12 @@ public class GameTime : MonoBehaviour
 		TimeSpeed = speed;
 	}
 
+	//#Critical: Ne le faire uniquement pour des cas très spécifiques (exemple -> tutoriel)
+	public void CancelCoroutine()
+	{
+		StopAllCoroutines();
+	}
+
 	public void SetTimeSpeed(float speed, float duration)
 	{
 		StartCoroutine(SetTimeSpeedProcess(speed, duration));

@@ -7,6 +7,9 @@ public class UI_PointController : MonoBehaviour
 {
 	public static UI_PointController Instance { get; private set; }
 
+	public delegate void MyDelegate();
+	public event MyDelegate OnPointMoved;
+
 	[SerializeField] private float movePointSpeed = 200f;
 	private UI_Point currentPoint;
 	private bool pointMoved;
@@ -73,6 +76,8 @@ public class UI_PointController : MonoBehaviour
 				UI_Timeline.Instance.UpdatePointsOrder();
 				UI_Timeline.Instance.UpdateCurrentPointSelected();
 				pointMoved = false;
+
+				OnPointMoved?.Invoke();
 			}
 
 			currentPoint.UpdateTime();

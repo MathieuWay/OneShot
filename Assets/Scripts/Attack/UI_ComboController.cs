@@ -13,6 +13,7 @@ namespace oneShot
 		private List<UI_Input> uiInputs;
 		private bool isRunning;
 		private bool nextInput;
+		private bool displayCombo = false;
 		private int currentInput;
 
 
@@ -28,6 +29,7 @@ namespace oneShot
 			ComboController.Instance.ComboFailedEvent += ClearCombo;
 			ComboController.Instance.ComboCompletedEvent += ClearCombo;
 			ComboController.Instance.NextInputEvent += delegate { nextInput = true; };
+			ComboController.Instance.DisplayComboEvent += DisplayCombo;
 		}
 
 		private void InitCombos(Combo[] combos)
@@ -43,6 +45,12 @@ namespace oneShot
 		private void StartCombo(Combo combo)
 		{
 			if (LevelController.Instance.phase != Phase.Combat) return;
+
+			if(displayCombo)
+			{
+				ClearCombo();
+				displayCombo = false;
+			}
 
 			for (int i = 0; i < combo.inputs.Length; i++)
 			{
@@ -74,6 +82,22 @@ namespace oneShot
 			}
 
 			uiInputs.Clear();
+		}
+
+		private void DisplayCombo(Combo combo)
+		{
+			if (LevelController.Instance.phase != Phase.Combat) return;
+
+			displayCombo = true;
+
+			for (int i = 0; i < combo.inputs.Length; i++)
+			{
+				GameObject instance = Instantiate(inputPrefab, comboContainer);
+
+				UI_Input uiInput = instance.GetComponent<UI_Input>();
+				uiInput.Init(UI_Gamepad.Instance.GetInputSprite(combo.inputs[i].inputName));
+				uiInputs.Add(uiInput);
+			}
 		}
 
 		private IEnumerator ComboProcess(Combo combo)

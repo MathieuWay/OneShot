@@ -10,7 +10,7 @@ namespace oneShot
 		public static PlayerBehaviour Instance { get; private set; }
 
 		[SerializeField] private Transform centerPivot = null;
-		[SerializeField] private GameObject pivot;
+		[SerializeField] private GameObject pivot = null;
 		public Transform CenterPivot { get => centerPivot; }
 		public bool IsDead { get; private set; }
 		private Animator anim;

@@ -43,6 +43,7 @@ namespace oneShot
 		public event ComboDelegateV4 InitCombosEvent;
 		public event ComboDelegate ComboSuccessEvent;
 		public event ComboDelegateV2 StartComboEvent;
+		public event ComboDelegateV2 DisplayComboEvent;
 		public event ComboDelegateV3 ComboFailedEvent;
 		public event ComboDelegateV3 ComboCompletedEvent;
 		public event ComboDelegateV3 NextInputEvent;
@@ -53,12 +54,19 @@ namespace oneShot
 		private bool comboRunning = false;
 		private float joystickLimit = 0.8f;
 
+		public bool LockCombo { get; set; }
+
 
 		public void StartCombos(Combo[] combos)
 		{
 			StartCoroutine(ComboSelection(combos));
 
 			InitCombosEvent?.Invoke(combos);
+		}
+
+		public void DisplayCombo(Combo combo)
+		{
+			DisplayComboEvent?.Invoke(combo);
 		}
 
 
@@ -78,7 +86,7 @@ namespace oneShot
 		{
 			while (true)
 			{
-				if (comboRunning)
+				if (comboRunning || LockCombo)
 				{
 					yield return null;
 					continue;

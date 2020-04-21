@@ -94,7 +94,8 @@ namespace oneShot
 
 				if (time >= nextStep.time)
 				{
-					ExecuteNextStep();					
+					ExecuteNextStep();
+					GameTime.Instance.SetTimeSpeed(0.1f, 1);
 				}
                     
                 time += Time.deltaTime * GameTime.Instance.TimeSpeed;

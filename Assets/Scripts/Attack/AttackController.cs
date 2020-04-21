@@ -22,6 +22,12 @@ namespace oneShot
 			attacksDic[attackName].Launch();
 		}
 
+		public void DisplayAttack(AttackName attackName)
+		{
+			if (LevelController.Instance.phase != Phase.Combat) return;
+
+			ComboController.Instance.DisplayCombo(attacksDic[attackName].Combo);
+		}
 
 		private void Awake()
 		{

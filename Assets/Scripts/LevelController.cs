@@ -34,13 +34,17 @@ namespace oneShot
         }
 
 		public delegate void LevelDelegate();
+		public event LevelDelegate OnLaunchCombatPhase;
 		public event LevelDelegate OnStartCombatPhase;
 		public event LevelDelegate OnPlayerDie;
 		public event LevelDelegate OnTimeElapsed;
 
         public Phase phase;
 
-        private void Awake()
+		public bool LockCombatPhase { get; set; }
+
+
+		private void Awake()
         {
             instance = this;
             Fader.OnFadeIn += FocusOnPlayer;
@@ -49,12 +53,14 @@ namespace oneShot
 
 		private void Update()
         {
-            if ((Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
+            if (!LockCombatPhase && (Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
             {
                 CameraController.Instance.FocusOnPlayer();
 				//UI_Timeline.Instance.SetPause(false);
 				UI_Timeline.Instance.BeginCarnage();
                 StartCoroutine(DelayBeforeCombatPhase(CameraController.Instance.focusTime));
+
+				OnLaunchCombatPhase?.Invoke();
             }
 
 			if(Input.GetKeyDown(KeyCode.R))
