@@ -16,13 +16,15 @@ public class PatternEditor : Editor
         oneShot.Pattern pattern = (oneShot.Pattern)target;
         if (pattern.editPattern)
         {
+            serializedObject.Update();
             for (int i = 0; i < pattern.steps.Count; i++)
             {
                 if (pattern.steps[i].type == oneShot.StepType.Move)
                 {
-                    pattern.steps[i].targetPos = Handles.PositionHandle(pattern.steps[i].targetPos, Quaternion.identity);
+                    serializedObject.FindProperty("steps").GetArrayElementAtIndex(i).FindPropertyRelative("targetPos").vector3Value = Handles.PositionHandle(pattern.steps[i].targetPos, Quaternion.identity);
                 }
             }
+            serializedObject.ApplyModifiedProperties();
         }
     }
 
