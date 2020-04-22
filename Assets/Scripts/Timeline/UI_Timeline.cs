@@ -87,6 +87,19 @@ public class UI_Timeline : MonoBehaviour
 		}
 	}
 
+	public bool CheckPointTimeCorrect()
+	{
+		for (int i = 0; i < points.Count; i++)
+		{
+			if(Mathf.Abs(points[i]._Time - timer) < 0.5f)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	//Supprime le dernier point sur la Timeline + le point de spawn associé sur la map
 	public void RemoveSelectedPoint()
 	{
@@ -355,7 +368,6 @@ public class UI_Timeline : MonoBehaviour
 		SelectedPoint = point._ID;
 		UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 	}
-
 
 	//OLD
 	//public void ResetAll()

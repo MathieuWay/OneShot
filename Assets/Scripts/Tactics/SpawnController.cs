@@ -107,7 +107,6 @@ public class SpawnController : MonoBehaviour
 				//!OLD : Fonctionne uniquement avec une camera en vue orthographique
 				//RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
 
-
 				RaycastHit2D hit = FireRaycast(CursorController.Instance.GetPosition());
 
 				if (hit.collider == null)
@@ -231,7 +230,14 @@ public class SpawnController : MonoBehaviour
 				}
 				else
 				{
-					if(SpawnPoints.Count >= spawnCount)
+					if (!UI_Timeline.Instance.CheckPointTimeCorrect())
+					{
+						//TODO: FEEDBACK
+						yield return null;
+						continue;
+					}
+
+					if (SpawnPoints.Count >= spawnCount)
 					{
 						yield return null;
 						continue;

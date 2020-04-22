@@ -16,6 +16,7 @@ namespace oneShot
 #if UNITY_EDITOR
 		private bool isDebugRange;
 		private Vector2 debugDetectionVolume;
+		private Vector2 debugPivot;
 #endif
 
 		public abstract void Launch();
@@ -29,7 +30,7 @@ namespace oneShot
 			Collider2D[] colliders = Physics2D.OverlapBoxAll(PlayerBehaviour.Instance.CenterPivot.position, new Vector2(boxVolume.x, boxVolume.y), 0);
 
 #if UNITY_EDITOR
-			StartCoroutine(DebugOverlapBox(1, boxVolume));
+			StartCoroutine(DebugOverlapBox(1, boxVolume, PlayerBehaviour.Instance.CenterPivot.position));
 #endif
 
 			List<Transform> enemies = new List<Transform>();
@@ -72,10 +73,11 @@ namespace oneShot
 		}
 
 #if UNITY_EDITOR
-		private IEnumerator DebugOverlapBox(float duration, Vector2 volume)
+		protected IEnumerator DebugOverlapBox(float duration, Vector2 volume, Vector2 pivot)
 		{
 			isDebugRange = true;
 			debugDetectionVolume = volume;
+			debugPivot = pivot;
 			yield return new WaitForSeconds(duration);
 			isDebugRange = false;
 		}
@@ -85,7 +87,7 @@ namespace oneShot
 			if(isDebugRange)
 			{
 				Gizmos.color = Color.red;
-				Gizmos.DrawWireCube(PlayerBehaviour.Instance.CenterPivot.position, new Vector3(debugDetectionVolume.x, debugDetectionVolume.y, 0));
+				Gizmos.DrawWireCube(debugPivot, new Vector3(debugDetectionVolume.x, debugDetectionVolume.y, 0));
 			}
 		}
 #endif
