@@ -51,6 +51,11 @@ namespace oneShot
 			UI_Timeline.OnTimeElapsed += delegate { OnTimeElapsed?.Invoke(); };
 		}
 
+		private void Start()
+		{
+			EnemiesController.OnAllEnemiesKilled += Victory;
+		}
+
 		private void Update()
         {
             if (!LockCombatPhase && (Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
@@ -72,6 +77,12 @@ namespace oneShot
                 UI_Timeline.Instance.ResetTimeline();
             }
         }
+
+		private void Victory()
+		{
+			//Verrouille les combos
+			ComboController.Instance.LockCombo = true;
+		}
 
         private void FocusOnPlayer()
         {

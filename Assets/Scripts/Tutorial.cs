@@ -72,6 +72,8 @@ public class Tutorial : MonoBehaviour
 
 	private IEnumerator TutorialProcess()
 	{
+		yield return new WaitForEndOfFrame();
+
 		int currentStep = 0;
 		oneShot.LevelController.Instance.LockCombatPhase = true;
 
