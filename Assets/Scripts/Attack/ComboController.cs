@@ -100,7 +100,7 @@ namespace oneShot
 
 					if (startCombo && !combos[i].IsStopped)
 					{
-						Debug.Log("______________________\n START ATTACK: " + combos[i]._AttackName.ToString());
+						//Debug.Log("______________________\n START ATTACK: " + combos[i]._AttackName.ToString());
 
 						StartComboEvent?.Invoke(combos[i]);
 
@@ -125,14 +125,14 @@ namespace oneShot
 
 				if (inputSucceed)
 				{
-					Debug.Log("SUCCEED: " + combo.inputs[comboID].ToString());
+					//Debug.Log("SUCCEED: " + combo.inputs[comboID].ToString());
 					inputSucceed = false;
 					comboID++;
 					NextInputEvent?.Invoke();
 
 					if (comboID >= combo.inputs.Length)
 					{
-						Debug.Log("COMBO COMPLETED");
+						//Debug.Log("COMBO COMPLETED");
 						ComboSuccessEvent?.Invoke(combo._AttackName);
 						ComboCompletedEvent?.Invoke();
 
@@ -159,11 +159,11 @@ namespace oneShot
 				{
 					if (comboFailed)
 					{
-						Debug.Log("FAILED: " + combo.inputs[comboID]);
+						//Debug.Log("FAILED: " + combo.inputs[comboID]);
 					}
 					else
 					{
-						Debug.Log("FAILED: TIME OUT");
+						//Debug.Log("FAILED: TIME OUT");
 					}
 
 					ComboFailedEvent?.Invoke();

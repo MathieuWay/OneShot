@@ -66,7 +66,7 @@ namespace oneShot
 			{
 				enemy = target.GetComponent<Enemy>();
 
-				Debug.Log("HIT: " + target.name + " " + target.position);
+				//Debug.Log("HIT: " + target.name + " " + target.position);
 			}
 
 			return enemy;

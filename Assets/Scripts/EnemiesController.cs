@@ -39,7 +39,7 @@ namespace oneShot
             currentEnemyCount--;
             if (currentEnemyCount <= 0)
             {
-                Debug.Log("No enemy left");
+                //Debug.Log("No enemy left");
                 //OnNoEnemiesLeft();
                 
 

@@ -73,7 +73,6 @@ namespace oneShot
             }
         }
 
-
         private void FocusOnPlayer()
         {
             if (phase != Phase.Combat)
@@ -101,6 +100,7 @@ namespace oneShot
             {
                 enemies.Add(enemyGameObject.GetComponent<Enemy>());
             }
+			Debug.Log("ENEMIES: " + enemies.Count);
             return enemies;
         }
 

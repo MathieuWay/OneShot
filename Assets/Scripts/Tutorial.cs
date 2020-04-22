@@ -6,6 +6,10 @@ using TMPro;
 public class Tutorial : MonoBehaviour
 {
 	public static Tutorial Instance { get; private set; }
+
+	public delegate void TutoDelegate();
+	public event TutoDelegate OnDestroyTuto;
+
 	[SerializeField] private TextMeshProUGUI tutorialText = null;
 	[SerializeField] private GameObject messageContainer = null;
 	[SerializeField] private TutoStep[] tutoSteps = null;
@@ -49,8 +53,18 @@ public class Tutorial : MonoBehaviour
 		DisplayMessage(false);
 	}
 
+	private void RemoveTutorial()
+	{
+		Debug.Log("REMOVE TUTORIAL " + name);
+		OnDestroyTuto?.Invoke();
+		Destroy(gameObject);
+		Instance = null;
+	}
+
 	private void Start()
 	{
+		LevelLoader.Instance.OnStartLoadNextLevel += RemoveTutorial;
+
 		if (tutorialCompleted) return;
 
 		StartCoroutine(TutorialProcess());

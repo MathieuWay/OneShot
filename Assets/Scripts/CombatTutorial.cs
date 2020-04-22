@@ -47,11 +47,19 @@ public class CombatTutorial : MonoBehaviour
 
 	private void Start()
 	{
-		ResetTuto();
-		SceneManager.sceneLoaded += delegate { ResetTuto(); };
+		SceneManager.sceneLoaded += ResetTuto;
+		Tutorial.Instance.OnDestroyTuto += RemoveTuto;
+		LevelController.Instance.OnLaunchCombatPhase += delegate { StartCoroutine(TutorialProcess()); };
+		currentStep = 0;
+		DisplayMessage(false);
 	}
 
-	private void ResetTuto()
+	private void RemoveTuto()
+	{
+		SceneManager.sceneLoaded -= ResetTuto;
+	}
+
+	private void ResetTuto(Scene scene, LoadSceneMode loadSceneMode)
 	{
 		LevelController.Instance.OnLaunchCombatPhase += delegate { StartCoroutine(TutorialProcess()); };
 		currentStep = 0;
@@ -150,8 +158,6 @@ public class CombatTutorial : MonoBehaviour
 
 			if(enemySteps[i].EnemyKilled) enemyKilledCount++;
 		}
-
-		Debug.Log("KILLS: " + enemyKilledCount);
 
 		//Tant qu'on atteint pas le nombre d'étape d'ennemi, le joueur ne les a pas tous tués
 		if (enemyKilledCount < enemySteps.Length) return;
