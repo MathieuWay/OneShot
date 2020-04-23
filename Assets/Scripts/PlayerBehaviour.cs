@@ -45,10 +45,12 @@ namespace oneShot
 		{
 			anim = GetComponentInChildren<Animator>();
 
-			ComboController.Instance.ComboSuccessEvent += PlayAnim;
+			ComboController.Instance.ComboSuccessEvent += PlayAttackAnim;
+
+			TacticsController.Instance.OnBeforePlayerTeleport += PlayTpAnim;
 		}
 
-		private void PlayAnim(AttackName attackName)
+		private void PlayAttackAnim(AttackName attackName)
 		{
 			switch(attackName)
 			{
@@ -64,6 +66,11 @@ namespace oneShot
 					chronaAnim.SetTrigger("Thrust");
 					break;
 			}
+		}
+
+		private void PlayTpAnim()
+		{
+			chronaAnim.SetTrigger("TP");
 		}
 	}
 }

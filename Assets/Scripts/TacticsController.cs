@@ -42,6 +42,7 @@ namespace oneShot
 
 		public delegate void TacticsDelegate();
 		public event TacticsDelegate OnPlayerTeleport;
+		public event TacticsDelegate OnBeforePlayerTeleport;
 
 		[Header("Main")]
 		[SerializeField] private float timelineDuration = 10;
@@ -81,6 +82,7 @@ namespace oneShot
 				//FX
 				if ((time >= nextStep.time - 0.5f && time < nextStep.time) && !launchStartParticle)
 				{
+					OnBeforePlayerTeleport?.Invoke();
 					launchStartParticle = true;
 					Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
 				}
