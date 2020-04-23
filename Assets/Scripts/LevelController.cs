@@ -111,7 +111,7 @@ namespace oneShot
             {
                 enemies.Add(enemyGameObject.GetComponent<Enemy>());
             }
-			Debug.Log("ENEMIES: " + enemies.Count);
+			//Debug.Log("ENEMIES: " + enemies.Count);
             return enemies;
         }
 

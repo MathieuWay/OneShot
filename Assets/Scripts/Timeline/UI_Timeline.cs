@@ -133,6 +133,11 @@ public class UI_Timeline : MonoBehaviour
 		beginCarnageContainer.SetActive(false);
 	}
 
+	public bool IsMovingTimeBackward()
+	{
+		return UI_PointController.Instance.MovingPointBack;
+	}
+
 
 	private void Awake()
 	{
