@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
 
 [ExecuteInEditMode]
 public class SpriteLoader : MonoBehaviour
@@ -86,5 +84,3 @@ public class SpriteLoader : MonoBehaviour
         currentSprite = sprite;
     }
 }
-
-#endif
