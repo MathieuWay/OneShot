@@ -13,6 +13,7 @@ public class UI_PointController : MonoBehaviour
 	[SerializeField] private float movePointSpeed = 200f;
 	private UI_Point currentPoint;
 	private bool pointMoved;
+	public bool MovingPointBack { get; private set; }
 
 
 	public void SetCurrentPoint(UI_Point point)
@@ -79,6 +80,8 @@ public class UI_PointController : MonoBehaviour
 
 				OnPointMoved?.Invoke();
 			}
+
+			MovingPointBack = Gamepad.Instance.HorizontalJR < 0;
 
 			currentPoint.UpdateTime();
 		}
