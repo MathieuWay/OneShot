@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: debugColor.b
       value: 0.0039215684
       objectReference: {fileID: 0}
+    - target: {fileID: 82172330869104890, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 133501192900983630, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_Color.g
@@ -163,6 +168,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: b8a058d397b78d84aa02f5cc0eab136c, type: 2}
+    - target: {fileID: 5110280401165495349, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 6394652471380386907, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]

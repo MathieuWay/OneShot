@@ -43,6 +43,11 @@ PrefabInstance:
       propertyPath: debugColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 82172330869104890, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -127,6 +132,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Color.a
       value: 0.039215688
+      objectReference: {fileID: 0}
+    - target: {fileID: 5110280401165495349, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15832efbd63208b40b557c9270213c6d, type: 3}
