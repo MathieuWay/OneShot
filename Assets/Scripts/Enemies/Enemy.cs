@@ -27,9 +27,7 @@ namespace oneShot
         //private Agent agent;
         private Vector3 initialPosition;
         private Pattern pattern;
-		private bool isMovingBack;
 		private bool isMoving;
-		private bool hasFlipped;
 
 		public enum Direction { Left, Right }
 
@@ -107,28 +105,24 @@ namespace oneShot
 
 			if (dif.x != 0)
 			{
+				if (UI_Timeline.Instance.IsMovingTimeBackward())
+				{
+					_Direction = dif.x < 0 ? Direction.Right : Direction.Left;
+				}
+				else
+				{
+					_Direction = dif.x < 0 ? Direction.Left : Direction.Right;
+				}
+
 				isMoving = true;
-				hasFlipped = false;
-				_Direction = dif.x < 0 ? Direction.Left : Direction.Right;
 			}
 			else
 			{
-				if(!isMoving && isMovingBack && !hasFlipped)
-				{
-					isMovingBack = false;
-					hasFlipped = true;
-					_Direction = _Direction == Direction.Left ? Direction.Right : Direction.Left;
-				}
-
 				isMoving = false;
 			}
 
-			if (UI_Timeline.Instance.IsMovingTimeBackward())
-			{
-				isMovingBack = true;
-				pivot.rotation = Quaternion.Euler(0, _Direction == Direction.Left ? 0 : 180, 0);
-			}
-			else if(isMoving)
+
+			if(isMoving)
 			{
 				pivot.rotation = Quaternion.Euler(0, _Direction == Direction.Left ? 180 : 0, 0);
 			}

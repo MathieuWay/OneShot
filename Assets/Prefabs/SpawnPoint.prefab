@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 5559989912328591876}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.03, y: 0.03, z: 0.03}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 364099718121373129}
   m_Father: {fileID: 0}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Sprite: {fileID: 21300000, guid: f78a4496c13cb6447a190c42e8238d83, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -98,6 +98,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   numberText: {fileID: 8602085083982113771}
   spriteRenderer: {fileID: 5559989912328591875}
+  pointMove: {fileID: 21300000, guid: f3a72f0c07b105749be39bca6e509ea6, type: 3}
+  pointSelected: {fileID: 21300000, guid: 20c4f68677cddd041b3dbfb07ddc3299, type: 3}
+  pointDefault: {fileID: 21300000, guid: f78a4496c13cb6447a190c42e8238d83, type: 3}
 --- !u!58 &1968880339399612707
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -113,7 +116,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.12
+  m_Radius: 0.3
 --- !u!1 &5985284077944053108
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,10 +149,10 @@ RectTransform:
   m_Father: {fileID: 364099718121373129}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0.0000038146973}
+  m_SizeDelta: {x: 12.53, y: 46.23}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3254049530793582498
 CanvasRenderer:
@@ -205,7 +208,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 70
+  m_fontSize: 22.4
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -297,7 +300,7 @@ RectTransform:
   m_GameObject: {fileID: 7332538661410642707}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.1, y: 0.1, z: 0.1}
+  m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_Children:
   - {fileID: 3742218358031579755}
   m_Father: {fileID: 5559989912328591874}

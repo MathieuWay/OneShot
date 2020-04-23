@@ -146,27 +146,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiInputs:
   - inputName: 0
-    inputSprite: {fileID: 21300000, guid: 375fda2896dfafb4996c512adb7bf575, type: 3}
+    inputSprite: {fileID: -4274297465759658675, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 1
-    inputSprite: {fileID: 21300000, guid: ccc21754487639148b484df410e12fc0, type: 3}
+    inputSprite: {fileID: 8700484617563527968, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 2
-    inputSprite: {fileID: 21300000, guid: 77af83be222f6ec4397d13b4a97fb70f, type: 3}
+    inputSprite: {fileID: 7121640908601499096, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 3
-    inputSprite: {fileID: 21300000, guid: de63f573bc2944a4e9526db387dadb06, type: 3}
+    inputSprite: {fileID: -997354275730288927, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 4
-    inputSprite: {fileID: 21300000, guid: 37f5fba833dbc1c4588f0210faf3a379, type: 3}
+    inputSprite: {fileID: -7841333810922851470, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 5
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+    inputSprite: {fileID: -5879354929235939926, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 6
-    inputSprite: {fileID: 21300000, guid: 463c5d7d2f010f34dbdd9aa502be9b31, type: 3}
+    inputSprite: {fileID: 8078001360415561297, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 7
-    inputSprite: {fileID: 21300000, guid: 6c20830dc83c5fa41bc448eb65385071, type: 3}
-  - inputName: 8
-    inputSprite: {fileID: 21300000, guid: 39098a92f6cfed24d85f7452d240320a, type: 3}
-  - inputName: 9
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
-  - inputName: 10
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+    inputSprite: {fileID: 742898667060642084, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
 --- !u!1 &1978420181470257230
 GameObject:
   m_ObjectHideFlags: 0

@@ -10,6 +10,8 @@ public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
 	[SerializeField] private TextMeshProUGUI text = null;
 	[SerializeField] private Image pointImage = null;
+	[SerializeField] private Sprite pointSelectedSprite = null;
+	[SerializeField] private Sprite pointUnselectedSprite = null;
 	public int _ID { get; set; }
 	public float _Time { get; set; }
 	public SpawnPoint _SpawnPoint { get; set; }
@@ -50,17 +52,20 @@ public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	}
 	public void Select()
 	{
-		pointImage.color = new Color(1, 0.7f, 0);
+		pointImage.sprite = pointSelectedSprite;
+		//pointImage.color = new Color(1, 0.7f, 0);
 		_SpawnPoint.Select();
 	}
 	public void Unselect()
 	{
-		pointImage.color = Color.red;
+		pointImage.sprite = pointUnselectedSprite;
+		//pointImage.color = Color.red;
 		_SpawnPoint.Unselect();
 	}
 	public void SelectUIPointOnly()
 	{
-		pointImage.color = new Color(1, 0.7f, 0);
+		pointImage.sprite = pointSelectedSprite;
+		//pointImage.color = new Color(1, 0.7f, 0);
 	}
 
 	public void UpdateTime()

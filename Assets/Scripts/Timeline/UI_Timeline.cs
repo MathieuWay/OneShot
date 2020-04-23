@@ -25,6 +25,7 @@ public class UI_Timeline : MonoBehaviour
 	[SerializeField] private float pointSelectionSpeed = 10;
 	private float timerDuration;
 	private float timer = 0;
+	private float lastTime = 0;
 	private bool movingTimeline = false;
 	public bool TimeElapsed { get; private set; }
 
@@ -135,7 +136,14 @@ public class UI_Timeline : MonoBehaviour
 
 	public bool IsMovingTimeBackward()
 	{
-		return UI_PointController.Instance.MovingPointBack;
+		if(GameTime.Instance.TimeSpeed != 0)
+		{
+			return GameTime.Instance.TimeSpeed < 0;
+		}
+		else
+		{
+			return UI_PointController.Instance.MovingBack;
+		}
 	}
 
 
