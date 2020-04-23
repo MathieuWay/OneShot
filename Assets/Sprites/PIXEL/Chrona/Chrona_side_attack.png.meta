@@ -1,0 +1,1027 @@
+fileFormatVersion: 2
+guid: 799d3c5fc7502d649b5c9fc92a707c18
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6947861228030380789
+    second: Chrona_side_attack_0
+  - first:
+      213: -8104583487304716761
+    second: Chrona_side_attack_1
+  - first:
+      213: 8879914011445132345
+    second: Chrona_side_attack_2
+  - first:
+      213: 7517251704506205722
+    second: Chrona_side_attack_3
+  - first:
+      213: -6860690979569945291
+    second: Chrona_side_attack_4
+  - first:
+      213: -4299409946252233061
+    second: Chrona_side_attack_5
+  - first:
+      213: -6586754470219519987
+    second: Chrona_side_attack_6
+  - first:
+      213: 7696747373324568082
+    second: Chrona_side_attack_7
+  - first:
+      213: -4949148594753642041
+    second: Chrona_side_attack_8
+  - first:
+      213: 3053156251504532656
+    second: Chrona_side_attack_9
+  - first:
+      213: 1265774905055879349
+    second: Chrona_side_attack_10
+  - first:
+      213: -2593448045847669889
+    second: Chrona_side_attack_11
+  - first:
+      213: -9044237860121432399
+    second: Chrona_side_attack_12
+  - first:
+      213: 7748804701210341956
+    second: Chrona_side_attack_13
+  - first:
+      213: -7585490371815736713
+    second: Chrona_side_attack_14
+  - first:
+      213: -842824906941042676
+    second: Chrona_side_attack_15
+  - first:
+      213: -8104297525702661542
+    second: Chrona_side_attack_16
+  - first:
+      213: 6050350873909689771
+    second: Chrona_side_attack_17
+  - first:
+      213: 786740994421216334
+    second: Chrona_side_attack_18
+  - first:
+      213: 942877097199076687
+    second: Chrona_side_attack_19
+  - first:
+      213: 8394784399510111385
+    second: Chrona_side_attack_20
+  - first:
+      213: -1313519211819778782
+    second: Chrona_side_attack_21
+  - first:
+      213: 6505652946308857580
+    second: Chrona_side_attack_22
+  - first:
+      213: 2772021700410163556
+    second: Chrona_side_attack_23
+  - first:
+      213: 61812870621372066
+    second: Chrona_side_attack_24
+  - first:
+      213: 927463469531453794
+    second: Chrona_side_attack_25
+  - first:
+      213: 7026682477825432592
+    second: Chrona_side_attack_26
+  - first:
+      213: 5066709300687585823
+    second: Chrona_side_attack_27
+  - first:
+      213: 4664795307714058790
+    second: Chrona_side_attack_28
+  - first:
+      213: 3944213473614339687
+    second: Chrona_side_attack_29
+  - first:
+      213: -5517998543939011011
+    second: Chrona_side_attack_30
+  - first:
+      213: -2994853074210716124
+    second: Chrona_side_attack_31
+  - first:
+      213: -8968832879012824429
+    second: Chrona_side_attack_32
+  - first:
+      213: 2179798162711634865
+    second: Chrona_side_attack_33
+  - first:
+      213: -2790968168459372827
+    second: Chrona_side_attack_34
+  - first:
+      213: 6899312515089419307
+    second: Chrona_side_attack_35
+  - first:
+      213: 5454245751091954047
+    second: Chrona_side_attack_36
+  externalObjects: {}
+  serializedVersion: 10
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 1
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 2
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 0
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Windows Store Apps
+    maxTextureSize: 8192
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Chrona_side_attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b053a82460d349f90800000000000000
+      internalID: -6947861228030380789
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_1
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72ea4ba124cb68f80800000000000000
+      internalID: -8104583487304716761
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_2
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93c7330eebacb3b70800000000000000
+      internalID: 8879914011445132345
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_3
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a16ca4ed894a25860800000000000000
+      internalID: 7517251704506205722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_4
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 535b10157ede9c0a0800000000000000
+      internalID: -6860690979569945291
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_5
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b96bad1ee6d6554c0800000000000000
+      internalID: -4299409946252233061
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_6
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 270
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d0869db15b52794a0800000000000000
+      internalID: -6586754470219519987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2168ee8f4f650da60800000000000000
+      internalID: 7696747373324568082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_8
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c1e5152397115bb0800000000000000
+      internalID: -4949148594753642041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_9
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0bcd0b63f6dfe5a20800000000000000
+      internalID: 3053156251504532656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_10
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b0a57dd19fe09110800000000000000
+      internalID: 1265774905055879349
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_11
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f7391d33eb8320cd0800000000000000
+      internalID: -2593448045847669889
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_12
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bea25ba5996c7280800000000000000
+      internalID: -9044237860121432399
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_13
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 216
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 442f48122d8498b60800000000000000
+      internalID: 7748804701210341956
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 77af6cc42bceab690800000000000000
+      internalID: -7585490371815736713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_15
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c007ded663fad44f0800000000000000
+      internalID: -842824906941042676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_16
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5a6a6ab650c78f80800000000000000
+      internalID: -8104297525702661542
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_17
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad7cdd401a27f350800000000000000
+      internalID: 6050350873909689771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_18
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e44d6be14c01bea00800000000000000
+      internalID: 786740994421216334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_19
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f45076d69b5c51d00800000000000000
+      internalID: 942877097199076687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_20
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 162
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9948ac21fe3408470800000000000000
+      internalID: 8394784399510111385
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22db4d57c3175cde0800000000000000
+      internalID: -1313519211819778782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_22
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cee76b0e2e8b84a50800000000000000
+      internalID: 6505652946308857580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_23
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4614f9abc03387620800000000000000
+      internalID: 2772021700410163556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_24
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2ae1fe37a7a9bd000800000000000000
+      internalID: 61812870621372066
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_25
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 269d2939c130fdc00800000000000000
+      internalID: 927463469531453794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_26
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 01c1f301c7ac38160800000000000000
+      internalID: 7026682477825432592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_27
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 108
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f12c6afa341905640800000000000000
+      internalID: 5066709300687585823
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 62a94320e9eacb040800000000000000
+      internalID: 4664795307714058790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_29
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 76e9715c149acb630800000000000000
+      internalID: 3944213473614339687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_30
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3e74655f812c63b0800000000000000
+      internalID: -5517998543939011011
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_31
+      rect:
+        serializedVersion: 2
+        x: 294
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4260f251ff42076d0800000000000000
+      internalID: -2994853074210716124
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_32
+      rect:
+        serializedVersion: 2
+        x: 392
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 39ab894f30e488380800000000000000
+      internalID: -8968832879012824429
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_33
+      rect:
+        serializedVersion: 2
+        x: 490
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b3e97241e2304e10800000000000000
+      internalID: 2179798162711634865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_34
+      rect:
+        serializedVersion: 2
+        x: 588
+        y: 54
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5e67e8bec3d7449d0800000000000000
+      internalID: -2790968168459372827
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2ccf48ad284fbf50800000000000000
+      internalID: 6899312515089419307
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Chrona_side_attack_36
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 0
+        width: 98
+        height: 54
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f71058fdc9f51bb40800000000000000
+      internalID: 5454245751091954047
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
