@@ -74,10 +74,10 @@ public class SpriteLoader : MonoBehaviour
     {
         Renderer renderer = GetComponent<Renderer>();
         var croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
-        var pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
-                                                (int)sprite.textureRect.y,
-                                                (int)sprite.textureRect.width,
-                                                (int)sprite.textureRect.height);
+        var pixels = sprite.texture.GetPixels((int)sprite.rect.x,
+                                                (int)sprite.rect.y,
+                                                (int)sprite.rect.width,
+                                                (int)sprite.rect.height);
         croppedTexture.SetPixels(pixels);
         croppedTexture.Apply();
         croppedTexture.filterMode = FilterMode.Point;
