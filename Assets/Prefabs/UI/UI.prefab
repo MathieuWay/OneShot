@@ -1906,6 +1906,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc44cd8ab484e3c4d9c9f3b4fd2d6229, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  comboPanel: {fileID: 9174763826070433430}
   inputPrefab: {fileID: 3722222477899896948, guid: 3ff698b9359e8114dbed6c1a853e2711,
     type: 3}
   comboPrefab: {fileID: 4152975064154695782, guid: fac94d0e32963614aa9e1bf15e688610,

@@ -42,6 +42,7 @@ namespace oneShot
 		public delegate void ComboDelegateV4(Combo[] combos);
 		public event ComboDelegateV4 InitCombosEvent;
 		public event ComboDelegate ComboSuccessEvent;
+		public event ComboDelegate StartComboNameEvent;
 		public event ComboDelegateV2 StartComboEvent;
 		public event ComboDelegateV2 DisplayComboEvent;
 		public event ComboDelegateV3 ComboFailedEvent;
@@ -103,6 +104,7 @@ namespace oneShot
 						//Debug.Log("______________________\n START ATTACK: " + combos[i]._AttackName.ToString());
 
 						StartComboEvent?.Invoke(combos[i]);
+						StartComboNameEvent?.Invoke(combos[i]._AttackName);
 
 						StartCoroutine(ComboProcess(combos[i]));
 						break;

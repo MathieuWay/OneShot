@@ -75,6 +75,7 @@ MonoBehaviour:
   centerPivot: {fileID: 5373720305252162197}
   pivot: {fileID: 2292501851968759249}
   chronaAnim: {fileID: 4040126900290731189}
+  playerAnimEvent: {fileID: 5340249120966825660}
 --- !u!1 &5969566483369509360
 GameObject:
   m_ObjectHideFlags: 0
@@ -88,6 +89,7 @@ GameObject:
   - component: {fileID: 2733220038182368139}
   - component: {fileID: 7838066754866216446}
   - component: {fileID: 4040126900290731189}
+  - component: {fileID: 5340249120966825660}
   m_Layer: 15
   m_Name: Character_Sprite
   m_TagString: Untagged
@@ -189,6 +191,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5340249120966825660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5969566483369509360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a600ab01176864e952e8c71f1bee3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 4040126900290731189}
 --- !u!1001 &2420946337948179116
 PrefabInstance:
   m_ObjectHideFlags: 0

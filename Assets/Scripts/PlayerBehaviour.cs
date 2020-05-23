@@ -12,8 +12,12 @@ namespace oneShot
 		[SerializeField] private Transform centerPivot = null;
 		[SerializeField] private GameObject pivot = null;
 		[SerializeField] private Animator chronaAnim = null;
+		[SerializeField] private PlayerAnimEvent playerAnimEvent = null;
 		public Transform CenterPivot { get => centerPivot; }
 		public bool IsDead { get; private set; }
+		public PlayerAnimEvent PlayerAnimEvent { get => playerAnimEvent; }
+		public Animator ChronaAnim { get => chronaAnim; }
+
 		private Animator anim;
 
 		public void Kill()
@@ -45,7 +49,7 @@ namespace oneShot
 		{
 			anim = GetComponentInChildren<Animator>();
 
-			ComboController.Instance.ComboSuccessEvent += PlayAttackAnim;
+			ComboController.Instance.StartComboNameEvent += PlayAttackAnim;
 
 			TacticsController.Instance.OnBeforePlayerTeleport += PlayTpAnim;
 		}

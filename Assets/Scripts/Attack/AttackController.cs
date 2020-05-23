@@ -55,7 +55,7 @@ namespace oneShot
 
 			ComboController.Instance.ComboSuccessEvent += LaunchAttack;
 
-			StartCoroutine(StartDelay(combos.ToArray()));
+			LevelController.Instance.OnStartCombatPhase += delegate { StartCoroutine(StartDelay(combos.ToArray())); };
 		}
 
 		private IEnumerator StartDelay(Combo[] combos)

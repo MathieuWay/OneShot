@@ -6,6 +6,7 @@ namespace oneShot
 {
 	public class UI_ComboController : MonoBehaviour
 	{
+		[SerializeField] private GameObject comboPanel = null;
 		[SerializeField] private GameObject inputPrefab = null;
 		[SerializeField] private GameObject comboPrefab = null;
 		[SerializeField] private Transform comboContainer = null;
@@ -16,6 +17,11 @@ namespace oneShot
 		private bool displayCombo = false;
 		private int currentInput;
 
+
+		private void Awake()
+		{
+			comboPanel.SetActive(false);
+		}
 
 		private void Start()
 		{
@@ -34,6 +40,8 @@ namespace oneShot
 
 		private void InitCombos(Combo[] combos)
 		{
+			comboPanel.SetActive(true);
+
 			for (int i = 0; i < combos.Length; i++)
 			{
 				GameObject instance = Instantiate(comboPrefab, comboListContainer);

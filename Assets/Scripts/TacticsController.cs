@@ -134,8 +134,10 @@ namespace oneShot
                 TacticsStep step = new TacticsStep(tp._Position, tp._Time);
                 tpQueue.Enqueue(step);
             }
-            if(tpQueue.Count > 0)
-                nextStep = tpQueue.Dequeue();
+			if (tpQueue.Count > 0)
+				nextStep = tpQueue.Dequeue();
+			else
+				isFinished = true;
 			//Fast Speed
 			SetFastSpeed();
 		}
