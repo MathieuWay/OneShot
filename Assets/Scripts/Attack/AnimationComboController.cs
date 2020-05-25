@@ -19,6 +19,7 @@ namespace oneShot
 			comboController.NextInputEvent += PlayAnim;
 			comboController.StartComboEvent += delegate { ResetInfo(); };
 			comboController.ComboFailedEvent += delegate { ResetAnim(); };
+			comboController.ComboCanceledEvent += delegate { ResetAnim(); };
 		}
 
 		private void StopAnim()

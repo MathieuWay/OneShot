@@ -46,6 +46,7 @@ namespace oneShot
 		public event ComboDelegateV2 StartComboEvent;
 		public event ComboDelegateV2 DisplayComboEvent;
 		public event ComboDelegateV3 ComboFailedEvent;
+		public event ComboDelegateV3 ComboCanceledEvent;
 		public event ComboDelegateV3 ComboCompletedEvent;
 		public event ComboDelegateV3 NextInputEvent;
 
@@ -67,7 +68,15 @@ namespace oneShot
 
 		public void DisplayCombo(Combo combo)
 		{
+			if (LockCombo) return;
+
 			DisplayComboEvent?.Invoke(combo);
+		}
+
+		public void CancelCombo()
+		{
+			ComboCanceledEvent?.Invoke();
+			comboRunning = false;
 		}
 
 
@@ -122,6 +131,12 @@ namespace oneShot
 
 			while (comboID < combo.inputs.Length)
 			{
+				//Si on stop brutalement un combo (annulation), on stop la coroutine
+				if(!comboRunning)
+				{
+					yield break;
+				}
+
 				//Vérification de la réussite de l'input
 				inputSucceed = CheckInput(combo.inputs[comboID].inputName);
 

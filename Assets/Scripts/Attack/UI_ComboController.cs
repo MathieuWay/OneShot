@@ -33,6 +33,7 @@ namespace oneShot
 			ComboController.Instance.InitCombosEvent += InitCombos;
 			ComboController.Instance.StartComboEvent += StartCombo;
 			ComboController.Instance.ComboFailedEvent += ClearCombo;
+			ComboController.Instance.ComboCanceledEvent += ClearCombo;
 			ComboController.Instance.ComboCompletedEvent += ClearCombo;
 			ComboController.Instance.NextInputEvent += delegate { nextInput = true; };
 			ComboController.Instance.DisplayComboEvent += DisplayCombo;
@@ -95,6 +96,11 @@ namespace oneShot
 		private void DisplayCombo(Combo combo)
 		{
 			if (LevelController.Instance.phase != Phase.Combat) return;
+
+			if(displayCombo)
+			{
+				ClearCombo();
+			}
 
 			displayCombo = true;
 

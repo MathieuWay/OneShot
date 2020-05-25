@@ -102,32 +102,7 @@ public class CombatTutorial : MonoBehaviour
 
 	private void CheckNearestEnemy()
 	{
-		float detectionRadius = 5;
-		Vector2 playerPos = PlayerBehaviour.Instance.CenterPivot.position;
-		Collider2D[] colliders = Physics2D.OverlapCircleAll(playerPos, detectionRadius);
-		List<EnemyBase> enemies = new List<EnemyBase>();
-
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			if(colliders[i].GetComponent<EnemyBase>() != null)
-			{
-				enemies.Add(colliders[i].GetComponent<EnemyBase>());
-			}
-		}
-
-		float minDistance = detectionRadius;
-		EnemyBase nearestEnemy = null;
-
-		for (int i = 0; i < enemies.Count; i++)
-		{
-			float distance = Vector2.Distance(enemies[i].transform.position, playerPos);
-
-			if(distance <= minDistance)
-			{
-				minDistance = distance;
-				nearestEnemy = enemies[i];
-			}
-		}
+		EnemyBase nearestEnemy = AttackController.Instance.FindNearestEnemy();
 
 		for (int i = 0; i < enemySteps.Length; i++)
 		{

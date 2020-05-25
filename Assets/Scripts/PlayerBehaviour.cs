@@ -74,6 +74,12 @@ namespace oneShot
 
 		private void PlayTpAnim()
 		{
+			StartCoroutine(WaitTpAnim());
+		}
+		private IEnumerator WaitTpAnim()
+		{
+			//Attente d'une frame pour attendre le reset de l'animator (avec AnimationComboController)
+			yield return new WaitForEndOfFrame();
 			chronaAnim.SetTrigger("TP");
 		}
 	}
