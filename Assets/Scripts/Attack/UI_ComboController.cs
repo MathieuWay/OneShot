@@ -8,9 +8,9 @@ namespace oneShot
 	{
 		[SerializeField] private GameObject comboPanel = null;
 		[SerializeField] private GameObject inputPrefab = null;
-		[SerializeField] private GameObject comboPrefab = null;
 		[SerializeField] private Transform comboContainer = null;
-		[SerializeField] private Transform comboListContainer = null;
+		//[SerializeField] private GameObject comboPrefab = null; //TMP DISABLED
+		//[SerializeField] private Transform comboListContainer = null; //TMP DISABLED
 		private List<UI_Input> uiInputs;
 		private bool isRunning;
 		private bool nextInput;
@@ -41,6 +41,7 @@ namespace oneShot
 
 		private void InitCombos(Combo[] combos)
 		{
+			//TMP DISABLED
 			/*
 			comboPanel.SetActive(true);
 

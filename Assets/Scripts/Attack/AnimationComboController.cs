@@ -6,7 +6,7 @@ namespace oneShot
 {
 	public class AnimationComboController : MonoBehaviour
 	{
-		[SerializeField] private ComboController comboController;
+		[SerializeField] private ComboController comboController = null;
 		private Animator anim;
 		private bool comboSucceed;
 		private int comboStep;
