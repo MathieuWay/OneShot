@@ -74,8 +74,11 @@ public class CameraController : MonoBehaviour
         if (path)
         {
             path.SetDirection(DirectionAxis.Horizontal);
-            path.SetNode(initNode);
-            transform.position = path.GetPositionAlongPath() + offsetPath;
+            if (initNode)
+            {
+                path.SetNode(initNode);
+                transform.position = path.GetPositionAlongPath() + offsetPath;
+            }
         }
     }
 
@@ -84,7 +87,7 @@ public class CameraController : MonoBehaviour
         switch (state)
         {
             case State.Travelling:
-                if (path)
+                if (path.CurrentNode)
                 {
                     transform.position = Vector3.SmoothDamp(transform.position, path.GetPositionAlongPath() + offsetPath, ref VelocitySmooth, SmoothTraveling);
                     if (Input.GetAxis("Mouse ScrollWheel") != 0f)
