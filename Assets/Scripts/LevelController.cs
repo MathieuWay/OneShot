@@ -42,6 +42,7 @@ namespace oneShot
         public Phase phase;
 
 		public bool LockCombatPhase { get; set; }
+		private bool combatPhaseLaunched = false;
 
 
 		private void Awake()
@@ -58,8 +59,9 @@ namespace oneShot
 
 		private void Update()
         {
-            if (!LockCombatPhase && (Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
+            if (!combatPhaseLaunched && !LockCombatPhase && (Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
             {
+				combatPhaseLaunched = true;
                 CameraController.Instance.FocusOnPlayer();
 				//UI_Timeline.Instance.SetPause(false);
 				UI_Timeline.Instance.BeginCarnage();
