@@ -85,6 +85,7 @@ namespace oneShot
 					OnBeforePlayerTeleport?.Invoke();
 					launchStartParticle = true;
 					Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
+					SoundManager.Instance.PlaySound("teleport_01");
 				}
 
 				//Fast Speed
@@ -111,6 +112,7 @@ namespace oneShot
 			//FX
 			launchStartParticle = false;
 			Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
+			SoundManager.Instance.PlaySound("teleport_02");
 
 			OnPlayerTeleport?.Invoke();
 

@@ -183,6 +183,7 @@ namespace oneShot
 						//Debug.Log("FAILED: TIME OUT");
 					}
 
+					SoundManager.Instance.PlaySound("combo_input_fail");
 					ComboFailedEvent?.Invoke();
 
 					yield return new WaitForSeconds(startNewComboOnFailedDelay);

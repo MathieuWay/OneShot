@@ -30,6 +30,7 @@ namespace oneShot
 			pivot.SetActive(false);
 
 			anim.Play("dying");
+			SoundManager.Instance.PlaySound("chrona_death");
 
 			LevelController.Instance.PlayerDie();
 		}

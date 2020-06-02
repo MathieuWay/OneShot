@@ -8,29 +8,22 @@ namespace oneShot
 	{
 		public static SoundManager Instance { get; private set; }
 
-		[SerializeField] private AudioData[] clips = null;
 		[SerializeField] private AudioSource mainSource = null;
+		[SerializeField] private AudioData[] clips = null;
 
 		[System.Serializable]
 		public class AudioData
 		{
-			[SerializeField] private AudioClip clip = null;
 			[SerializeField] private string clipName = string.Empty;
+			[SerializeField] private AudioClip clip = null;
 			public AudioClip Clip { get => clip; }
 			public string ClipName { get => clipName; }
 		}
 
-		public void PlaySound(string soundName)
+		public void PlaySound(string soundName, float volume = 1)
 		{
-			if(mainSource.isPlaying)
-			{
-				//Si la source est déjà entrain de jouer un son, on lance un son dans l'espace 3D
-				PlaySoundAutomatically(soundName);
-				return;
-			}
-
-			mainSource.clip = GetAudioClip(soundName);
-			mainSource.Play();
+			//PlayOneShot permet de lancer plusieurs sons en simultané
+			mainSource.PlayOneShot(GetAudioClip(soundName), volume);
 		}
 		public void PlaySoundAtPosition(string soundName, Vector3 position)
 		{
@@ -47,11 +40,6 @@ namespace oneShot
 			}
 
 			Instance = this;
-		}
-		private void PlaySoundAutomatically(string soundName)
-		{
-			//Position par défaut : Vector3.zero
-			PlaySoundAtPosition(soundName, Vector3.zero);
 		}
 		private AudioClip GetAudioClip(string clipName)
 		{

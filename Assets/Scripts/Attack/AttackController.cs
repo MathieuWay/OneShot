@@ -20,6 +20,8 @@ namespace oneShot
 			if (LevelController.Instance.phase != Phase.Combat) return;
 
 			attacksDic[attackName].Launch();
+
+			SoundManager.Instance.PlaySound("chrona_thrust_attack");
 		}
 
 		public void DisplayAttack(AttackName attackName)

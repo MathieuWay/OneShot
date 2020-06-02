@@ -53,6 +53,8 @@ public class SpawnController : MonoBehaviour
 
 		UI_Timeline.Instance.RemoveSelectedPoint();
 
+		oneShot.SoundManager.Instance.PlaySound("remove_tp_point");
+
 		if(pointSelected)
 		{
 			pointSelected = false;
@@ -252,6 +254,8 @@ public class SpawnController : MonoBehaviour
 
 					//L'ID correspond au nombre de point de spawn, on commence ici par 0
 					spawnPoint.Init(SpawnPoints.Count, rootPoint);
+
+					oneShot.SoundManager.Instance.PlaySound("add_tp_point");
 
 					SpawnPoints.Add(spawnPoint);
 

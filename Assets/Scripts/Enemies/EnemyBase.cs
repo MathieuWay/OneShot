@@ -133,6 +133,8 @@ namespace oneShot
 			LineRenderer line = instance.GetComponent<LineRenderer>();
 			line.SetPositions(new Vector3[] { startPoint, endPoint });
 
+			SoundManager.Instance.PlaySound("shotgun", 0.5f);
+
 			Destroy(instance, 0.1f);
 		}
 
