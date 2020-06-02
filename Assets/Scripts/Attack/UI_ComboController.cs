@@ -41,6 +41,7 @@ namespace oneShot
 
 		private void InitCombos(Combo[] combos)
 		{
+			/*
 			comboPanel.SetActive(true);
 
 			for (int i = 0; i < combos.Length; i++)
@@ -49,6 +50,7 @@ namespace oneShot
 
 				instance.GetComponent<UI_Combo>().Init(combos[i].attackTitle.ToString().ToUpper(), combos[i]);
 			}
+			*/
 		}
 
 		private void StartCombo(Combo combo)
