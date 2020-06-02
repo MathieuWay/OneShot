@@ -13,11 +13,8 @@ namespace oneShot
 		public int enemyCount;
         private int currentEnemyCount;
 
-
 		public delegate void EnemyDelegate();
-		public static event EnemyDelegate OnAllEnemiesKilled;
-        //public delegate void NoEnemiesLeft();
-        //public static event NoEnemiesLeft OnNoEnemiesLeft;
+		public event EnemyDelegate OnAllEnemiesKilled;
 
         private void Awake()
         {
@@ -31,18 +28,16 @@ namespace oneShot
 
             enemyCount = LevelController.Instance.GetEnemies().Count;
             currentEnemyCount = enemyCount;
-            Enemy.OnEnemyDead += EnemyDied;
-            UI_Timeline.OnTimelineReset += ResetEnemyCount;
+
+			Enemy.OnEnemyDead += EnemyDied;
+			UI_Timeline.OnTimelineReset += ResetEnemyCount;
         }
         private void EnemyDied()
         {
-            currentEnemyCount--;
-            if (currentEnemyCount <= 0)
-            {
-                //Debug.Log("No enemy left");
-                //OnNoEnemiesLeft();
-                
+			currentEnemyCount--;
 
+			if (currentEnemyCount <= 0)
+            {
 				OnAllEnemiesKilled?.Invoke();
             }
         }

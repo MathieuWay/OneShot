@@ -46,6 +46,14 @@ MonoBehaviour:
   nextLevel: 0
   levels:
   - levelName: 1
-    level: Level_1
+    level: Tutorial_02
   - levelName: 2
+    level: Tutorial_03
+  - levelName: 3
+    level: Tutorial_04
+  - levelName: 4
+    level: Tutorial_05
+  - levelName: 5
+    level: Level_1
+  - levelName: 6
     level: Level_2

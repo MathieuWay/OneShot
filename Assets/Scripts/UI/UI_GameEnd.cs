@@ -31,7 +31,7 @@ public class UI_GameEnd : MonoBehaviour
 
 	private void Start()
 	{
-		oneShot.EnemiesController.OnAllEnemiesKilled += Victory;
+		oneShot.EnemiesController.Instance.OnAllEnemiesKilled += Victory;
 		oneShot.LevelController.Instance.OnPlayerDie += delegate { Defeat(DefeatType.PlayerDie); };
 		oneShot.LevelController.Instance.OnTimeElapsed += delegate { Defeat(DefeatType.TimeElapsed); };
 		retryButton.onClick.AddListener(ReloadGame);

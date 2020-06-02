@@ -2890,7 +2890,6 @@ MonoBehaviour:
   layers:
   - {fileID: 174402047}
   - {fileID: 335926421}
-  - {fileID: 0}
 --- !u!1001 &448571476
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13441,7 +13440,7 @@ PrefabInstance:
     - target: {fileID: 8048291129830972918, guid: 7b675cfbffc493145a40617912370ed3,
         type: 3}
       propertyPath: nextLevel
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7b675cfbffc493145a40617912370ed3, type: 3}

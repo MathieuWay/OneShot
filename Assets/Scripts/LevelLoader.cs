@@ -29,6 +29,10 @@ public class LevelLoader : MonoBehaviour
 	public enum LevelName
 	{
 		None,
+		Tuto1,
+		Tuto2,
+		Tuto3,
+		Tuto4,
 		Level1,
 		Level2
 	}

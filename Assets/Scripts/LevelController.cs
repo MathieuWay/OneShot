@@ -53,7 +53,7 @@ namespace oneShot
 
 		private void Start()
 		{
-			EnemiesController.OnAllEnemiesKilled += Victory;
+			EnemiesController.Instance.OnAllEnemiesKilled += Victory;
 		}
 
 		private void Update()
