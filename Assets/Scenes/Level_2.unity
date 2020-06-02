@@ -13768,7 +13768,7 @@ PrefabInstance:
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: triggers.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
@@ -13780,6 +13780,16 @@ PrefabInstance:
       propertyPath: triggers.Array.data[0].Clip
       value: 
       objectReference: {fileID: 7400000, guid: 74a78f0bf6160244fab0b852ecf7bd9a, type: 2}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[1].Time
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[1].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 94cbaa91a10576c45b7f129752bbd7be, type: 2}
     - target: {fileID: 7342605328679865740, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: m_LocalPosition.x
