@@ -15,10 +15,19 @@ public class CameraController : MonoBehaviour
     public State state;
     public float focusTime = 2f;
     public float focusFOVSize;
+    public float focusZoomTime = 0.33f;
+    public float FocusResetDelay = 1f;
+    //private float focusFovSizeTarget;
 
     //CURVE
     public AnimationCurve FocusPositionCurve;
     public AnimationCurve FocusCameraFOVSize;
+
+    //Combo
+    public float TimeBeforeCameraReset;
+    public AnimationCurve zoomStep;
+    public AnimationCurve tiltStep;
+    public int comboInputStep;
 
     //LERP
     private float focusStartTime;
@@ -82,6 +91,23 @@ public class CameraController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        ComboController.Instance.NextInputEvent += FocusOnCombatInput;
+        ComboController.Instance.ComboCanceledEvent += FocusReset;
+
+        ComboController.Instance.ComboCompletedEvent += () => {
+            CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.defaultSetting);
+            StartCoroutine(Delay(FocusResetDelay, FocusReset));
+        };
+
+        ComboController.Instance.ComboFailedEvent += () =>
+        {
+            CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.defaultSetting);
+            StartCoroutine(Delay(0.5f, FocusReset));
+        };
+    }
+
     private void Update()
     {
         switch (state)
@@ -118,5 +144,53 @@ public class CameraController : MonoBehaviour
         focusStartPosition = transform.position;
         focusStartFOVSize = mainCamera.fieldOfView;
         state = State.Focusing;
+    }
+
+    public void FocusReset()
+    {
+        StartCoroutine(Zoom(focusFOVSize));
+        //StartCoroutine(Tilt(0));
+        comboInputStep = 0;
+    }
+
+    private void FocusOnCombatInput()
+    {
+        comboInputStep++;
+        StartCoroutine(Zoom(zoomStep.Evaluate(comboInputStep) * focusFOVSize / 100));
+        //StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
+        if(comboInputStep < 3)
+            CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.inputValid);
+    }
+
+    IEnumerator Delay(float time, System.Action callback)
+    {
+        yield return new WaitForSeconds(time);
+        callback();
+    }
+
+    IEnumerator Zoom(float target)
+    {
+        float startTime = Time.time;
+        float initialFOV = mainCamera.fieldOfView;
+        while(target != mainCamera.fieldOfView)
+        {
+            float norm = (Time.time - startTime) / focusZoomTime;
+            mainCamera.fieldOfView = Mathf.Lerp(initialFOV, target, norm);
+
+            yield return null;
+        }
+    }
+
+    IEnumerator Tilt(float target)
+    {
+        float startTime = Time.time;
+        float initialTilt = mainCamera.transform.eulerAngles.z;
+        while (target != mainCamera.transform.eulerAngles.z)
+        {
+            float norm = (Time.time - startTime) / focusZoomTime;
+            float tilt = Mathf.LerpAngle(initialTilt, target, norm);
+            mainCamera.transform.eulerAngles = new Vector3(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, tilt);
+            yield return null;
+        }
     }
 }

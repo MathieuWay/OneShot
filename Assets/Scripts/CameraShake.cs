@@ -6,6 +6,22 @@ namespace oneShot
 {
 	public class CameraShake : MonoBehaviour
 	{
+        public class ShakeSetting
+        {
+            public float amount;
+            public float duration;
+
+            public ShakeSetting(float amount, float duration)
+            {
+                this.amount = amount;
+                this.duration = duration;   
+            }
+        }
+        public static class ShakeTemplate
+        {
+            public static readonly ShakeSetting defaultSetting = new ShakeSetting(2, 0.5f);
+            public static readonly ShakeSetting inputValid = new ShakeSetting(1, 0.33f);
+        }
 		public static CameraShake Instance { get; private set; }
 
 		public bool debugMode = false;//Test-run/Call ShakeCamera() on start
@@ -14,8 +30,9 @@ namespace oneShot
 		[SerializeField] private float shakeDuration = 1;//The duration this frame.
 		[SerializeField] private bool smooth = false;//Smooth rotation?
 		[SerializeField] private float smoothAmount = 5f;//Amount to smooth
+        public AnimationCurve shakeCurveAmount;
 
-		private float initShakeAmount; //The initial shake amount (to determine percentage), set when ShakeCamera is called.
+        private float initShakeAmount; //The initial shake amount (to determine percentage), set when ShakeCamera is called.
 		private float initShakeDuration; //The initial shake duration, set when ShakeCamera is called.
 		private float shakePercentage;//A percentage (0-1) representing the amount of shake to be applied when setting rotation.
 		private bool isRunning = false; //Is the coroutine running right now?
@@ -43,13 +60,19 @@ namespace oneShot
 			if (debugMode) ShakeCamera();
 		}
 
-		public void ShakeCamera()
+        public void ShakeCamera(ShakeSetting shakeSetting)
+        {
+            ShakeCamera(shakeSetting.amount, shakeSetting.duration);
+        }
+
+
+        public void ShakeCamera(float amount = -1, float duration = -1)
 		{
 			if (!IsActive) return;
 
 			//Reset shakeAmount + shakeDuration
-			shakeAmount = initShakeAmount;
-			shakeDuration = initShakeDuration;
+			shakeAmount = amount != -1 ? amount : initShakeAmount;
+			shakeDuration = duration != -1 ? duration : initShakeDuration;
 
 			//Only call the coroutine if it isn't currently running. Otherwise, just set the variables.
 			if (!isRunning) StartCoroutine(Shake());
