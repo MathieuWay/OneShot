@@ -56,6 +56,9 @@ MonoBehaviour:
   - vfxName: bullet
     vfxPrefab: {fileID: 427292004564614240, guid: 1ce09879b8b3422438c173b7a45061df,
       type: 3}
+  - vfxName: chrona_death
+    vfxPrefab: {fileID: 1643676003507134414, guid: 244b39dfc2384834ba197002270f023a,
+      type: 3}
 --- !u!1 &4064191318710604317
 GameObject:
   m_ObjectHideFlags: 0
