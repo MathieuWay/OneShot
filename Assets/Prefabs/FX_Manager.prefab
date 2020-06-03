@@ -43,7 +43,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6236793e34d27840af888f351e82448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  vfxDatas: []
+  vfxDatas:
+  - vfxName: blood
+    vfxPrefab: {fileID: 8957639896613760261, guid: 3b12fb0b8031ad647b7952954c77cea8,
+      type: 3}
+  - vfxName: tp_spawn
+    vfxPrefab: {fileID: 5438670050410544832, guid: 79e0924255a1e2b42b84378f9a6466c9,
+      type: 3}
+  - vfxName: tp_dispawn
+    vfxPrefab: {fileID: 6536982816604541075, guid: 75e68e573890abd458a32d71e2f29687,
+      type: 3}
+  - vfxName: bullet
+    vfxPrefab: {fileID: 427292004564614240, guid: 1ce09879b8b3422438c173b7a45061df,
+      type: 3}
 --- !u!1 &4064191318710604317
 GameObject:
   m_ObjectHideFlags: 0
@@ -139,7 +151,7 @@ AudioSource:
   m_PlayOnAwake: 0
   m_Volume: 0.5
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0

@@ -141,9 +141,7 @@ namespace oneShot
 
 			CameraShake.Instance.ShakeCamera();
 			Gamepad.Instance.Vibrate(0.5f, 0.5f, 0.5f);
-
-			//FX
-			Instantiate(killParticle, transform.position + new Vector3(0, 0.2f, 0), killParticle.transform.rotation);
+			VFX_Manager.Instance.PlayVFX("blood", pivot.position + new Vector3(0, 0.5f, 0));
 
 			OnKill?.Invoke();
 		}

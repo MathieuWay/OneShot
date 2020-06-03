@@ -19,11 +19,18 @@ namespace oneShot
 			public GameObject VfxPrefab { get => vfxPrefab; }
 		}
 
-		public void PlayVFX(string vfxName, Vector3 position)
+		public void PlayVFX(string vfxName, Vector3 position, float destroyDelay = 10)
 		{
 			GameObject instance = Instantiate(GetVFX(vfxName), position, Quaternion.identity);
 			//Destruction VFX après 10s par défaut
-			Destroy(instance, 10);
+			Destroy(instance, destroyDelay);
+		}
+
+		public GameObject GetVFXInstance(string vfxName, Vector3 position, Quaternion rotation)
+		{
+			GameObject instance = Instantiate(GetVFX(vfxName), position, rotation);
+
+			return instance;
 		}
 
 		private void Awake()

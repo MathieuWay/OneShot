@@ -1,12 +1,28 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
 using UnityEngine;
+using System;
 
 namespace oneShot
 {
 	public class SoundManager : MonoBehaviour
 	{
-		public static SoundManager Instance { get; private set; }
+		private static SoundManager instance;
+		public static SoundManager Instance
+		{
+			get
+			{
+				if (instance == null)
+				{
+					Debug.LogWarning("Warning: SoundManager not found");
+					//TODO: instancier le prefab
+					return null;
+				}
+
+				return instance;
+			}
+			private set { instance = value; }
+		}
 
 		[SerializeField] private AudioSource mainSource = null;
 		[SerializeField] private AudioData[] clips = null;

@@ -129,13 +129,20 @@ namespace oneShot
 
 		private void LaunchEffect(Vector2 startPoint, Vector2 endPoint)
 		{
+			/*
 			GameObject instance = Instantiate(firePrefab);
 			LineRenderer line = instance.GetComponent<LineRenderer>();
 			line.SetPositions(new Vector3[] { startPoint, endPoint });
+			*/
+			Quaternion targetRot = Quaternion.LookRotation(endPoint - startPoint) * Quaternion.Euler(90, 0, 0);
+
+			Debug.DrawLine(endPoint, endPoint + new Vector2(0, 1), Color.red, 5);
+
+			GameObject bullet = VFX_Manager.Instance.GetVFXInstance("bullet", startPoint, targetRot);
 
 			SoundManager.Instance.PlaySound("shotgun", 0.5f);
 
-			Destroy(instance, 0.1f);
+			//Destroy(instance, 0.1f);
 		}
 
 		private void ResetReactionTime()
