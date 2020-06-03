@@ -49,8 +49,8 @@ namespace oneShot
 		[SerializeField] private AnimationCurve fastSpeedCurve = null;
 		[SerializeField] private float fastSpeedFactor = 1;
 		[SerializeField] private float fastSpeedDelay = 2;
-		[SerializeField] private GameObject tpStartParticle = null;
-		[SerializeField] private GameObject tpFinishParticle = null;
+		//[SerializeField] private GameObject tpStartParticle = null;
+		//[SerializeField] private GameObject tpFinishParticle = null;
 		private bool launchStartParticle;
 		private float newStepTime;
 		private float fastSpeedTime;

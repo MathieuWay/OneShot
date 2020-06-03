@@ -12,7 +12,6 @@ namespace oneShot
 
 		//public pattern
 		//private Path path;
-		[SerializeField] private GameObject killParticle = null;
 		[SerializeField] private Transform pivot = null;
 		[SerializeField] private Transform weaponPivot = null;
 		[SerializeField] private Direction defaultDirection = Direction.Left;

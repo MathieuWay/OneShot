@@ -6,8 +6,8 @@ namespace Astra
 {
 	public class MusicManager : MonoBehaviour
 	{
-		[SerializeField] private AudioClip[] musics;
-		[SerializeField] private AudioSource source;
+		[SerializeField] private AudioClip[] musics = null;
+		[SerializeField] private AudioSource source = null;
 
 		private void Start()
 		{

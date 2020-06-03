@@ -149,7 +149,7 @@ public class CameraController : MonoBehaviour
     public void FocusReset()
     {
         StartCoroutine(Zoom(focusFOVSize));
-		StartCoroutine(Tilt(0));
+		//StartCoroutine(Tilt(0));
 		comboInputStep = 0;
     }
 
@@ -157,7 +157,7 @@ public class CameraController : MonoBehaviour
     {
         comboInputStep++;
         StartCoroutine(Zoom(zoomStep.Evaluate(comboInputStep) * focusFOVSize / 100));
-		StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
+		//StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
 		if (comboInputStep < 3)
             CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.inputValid);
     }

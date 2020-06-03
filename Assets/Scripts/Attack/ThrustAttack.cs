@@ -27,6 +27,8 @@ namespace oneShot
 					}
 				}
 			}
+
+			SoundManager.Instance.PlaySound("chrona_thrust_attack");
 		}
 
 		private Enemy[] GetAllEnemiesInRange(Enemy nearestEnemy)
