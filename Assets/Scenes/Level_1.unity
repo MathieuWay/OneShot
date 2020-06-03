@@ -5863,17 +5863,33 @@ PrefabInstance:
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[0].messageDuration
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[0].message
-      value: 
+      value: More ennemy ? That's nothing for you.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[1].messageDuration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[1].message
+      value: Just Kill all those rebels ! I don't want to see those ant moving again
+        in this world of mine !
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[1].stepName
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757582, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}

@@ -31,6 +31,7 @@ namespace oneShot
 
 			anim.Play("dying");
 			SoundManager.Instance.PlaySound("chrona_death");
+			VFX_Manager.Instance.PlayVFX("chrona_death", CenterPivot.position - new Vector3(0, 0.2f, 0));
 
 			LevelController.Instance.PlayerDie();
 		}
@@ -65,13 +66,51 @@ namespace oneShot
 
 				case AttackName.SlashAttack:
 					chronaAnim.SetTrigger("Slash");
+					SetAttackAnimDirection(attackName);
 					break;
 
 				case AttackName.ThrustAttack:
 					chronaAnim.SetTrigger("Thrust");
+					SetAttackAnimDirection(attackName);
 					break;
 			}
 		}
+
+		private void SetAttackAnimDirection(AttackName attackName)
+		{
+			EnemyBase nearestEnemy = AttackController.Instance.FindNearestEnemy();
+			Transform target = nearestEnemy.transform;
+
+			float dirValue = 1;
+
+			bool right = true;
+
+			if (target.position.x > CenterPivot.position.x)
+			{
+				right = true;
+			}
+			else if (target.position.x < CenterPivot.position.x)
+			{
+				right = false;
+			}
+
+			switch (attackName)
+			{
+				case AttackName.SpiralAttack:
+					break;
+
+				case AttackName.SlashAttack:
+					dirValue = right ? 1 : -1;
+					break;
+
+				case AttackName.ThrustAttack:
+					dirValue = right ? 1 : -1;
+					break;
+			}
+
+			pivot.transform.localScale = new Vector3(dirValue, pivot.transform.localScale.y, pivot.transform.localScale.z);
+		}
+
 
 		private void PlayTpAnim()
 		{

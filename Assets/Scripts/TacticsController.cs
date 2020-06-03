@@ -49,8 +49,8 @@ namespace oneShot
 		[SerializeField] private AnimationCurve fastSpeedCurve = null;
 		[SerializeField] private float fastSpeedFactor = 1;
 		[SerializeField] private float fastSpeedDelay = 2;
-		[SerializeField] private GameObject tpStartParticle = null;
-		[SerializeField] private GameObject tpFinishParticle = null;
+		//[SerializeField] private GameObject tpStartParticle = null;
+		//[SerializeField] private GameObject tpFinishParticle = null;
 		private bool launchStartParticle;
 		private float newStepTime;
 		private float fastSpeedTime;
@@ -66,11 +66,13 @@ namespace oneShot
         private Queue<TacticsStep> tpQueue;
         private TacticsStep nextStep;
         private GameObject player;
+		private PlayerBehaviour playerBehaviour;
         // Start is called before the first frame update
         private void Awake()
         {
             instance = this;
             player = GameObject.FindWithTag("Player");
+			playerBehaviour = player.GetComponent<PlayerBehaviour>();
 			isFinished = false;
         }
 
@@ -84,8 +86,9 @@ namespace oneShot
 				{
 					OnBeforePlayerTeleport?.Invoke();
 					launchStartParticle = true;
-					Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
+					//Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
 					SoundManager.Instance.PlaySound("teleport_01");
+					VFX_Manager.Instance.PlayVFX("tp_spawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0), 2);
 				}
 
 				//Fast Speed
@@ -111,8 +114,9 @@ namespace oneShot
 
 			//FX
 			launchStartParticle = false;
-			Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
+			//Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
 			SoundManager.Instance.PlaySound("teleport_02");
+			VFX_Manager.Instance.PlayVFX("tp_dispawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0), 2);
 
 			OnPlayerTeleport?.Invoke();
 
