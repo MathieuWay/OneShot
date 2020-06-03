@@ -11,12 +11,11 @@ public enum State
 }
 public class CameraController : MonoBehaviour
 {
+    [Header("Switch Phase Settings")]
     //state
     public State state;
     public float focusTime = 2f;
     public float focusFOVSize;
-    public float focusZoomTime = 0.33f;
-    public float FocusResetDelay = 1f;
     //private float focusFovSizeTarget;
 
     //CURVE
@@ -24,6 +23,9 @@ public class CameraController : MonoBehaviour
     public AnimationCurve FocusCameraFOVSize;
 
     //Combo
+    [Header("Combo Settings")]
+    public float focusZoomTime = 0.33f;
+    public float FocusResetDelay = 1f;
     public float TimeBeforeCameraReset;
     public AnimationCurve zoomStep;
     public AnimationCurve tiltStep;
@@ -39,6 +41,7 @@ public class CameraController : MonoBehaviour
     private Transform AnchorCamera;
 
     //PATH
+    [Header("Path Settings")]
     [Range(0.1f, 2f)]
     public float ScrollSensitivity = 0.1f;
     public float SmoothTraveling = 0.3f;
