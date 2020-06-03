@@ -16,6 +16,7 @@ public class LevelLoader : MonoBehaviour
 	public LevelName NextLevel { get => nextLevel; }
 	public LevelName CurrentLevel { get; private set; }
 	private Dictionary<LevelName, string> levelsDic;
+	private bool loading = false;
 
 	[System.Serializable]
 	public class LevelData
@@ -40,6 +41,9 @@ public class LevelLoader : MonoBehaviour
 
 	public void LoadNextLevel()
 	{
+		if (loading) return;
+		loading = true;
+
 		OnStartLoadNextLevel?.Invoke();
 		Fader.Instance.FadeOut();
 		StartCoroutine(LoadDelay(0.1f));

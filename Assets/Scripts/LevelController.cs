@@ -65,6 +65,7 @@ namespace oneShot
                 CameraController.Instance.FocusOnPlayer();
 				//UI_Timeline.Instance.SetPause(false);
 				UI_Timeline.Instance.BeginCarnage();
+				//SoundManager.Instance.PlaySound("start_carnage");
                 StartCoroutine(DelayBeforeCombatPhase(CameraController.Instance.focusTime));
 
 				OnLaunchCombatPhase?.Invoke();

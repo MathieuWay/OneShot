@@ -102,7 +102,9 @@ MonoBehaviour:
     stepMovePaths: []
     clip: {fileID: 0}
     stepFlag: 0
-  DrawPattern: 0
+  showPattern: 0
+  editPattern: 0
+  debugColor: {r: 1, g: 1, b: 1, a: 1}
 --- !u!114 &174964612362923569
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,13 +230,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2242074854710310320}
-  m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: 0.4936, y: 0.452, z: 0}
-  m_LocalScale: {x: 0.1111788, y: 0.1111788, z: 0.1111788}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.304, y: 0.507, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5753930999024009624}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2012173607127642059
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -274,8 +276,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: d118c11ab605e5c45a9e022cbcc54d11, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 0.13725491}
+  m_Sprite: {fileID: 21300000, guid: 6fc6eb24cda150d43ae7930d4c570eac, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -377,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e96765809a580f489e5121b5012da42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
   ScaleFactor: 0.6
 --- !u!1 &7787529596242297137
 GameObject:
@@ -470,6 +473,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e96765809a580f489e5121b5012da42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 0}
   ScaleFactor: 0.59
 --- !u!1001 &112407703549972221
 PrefabInstance:

@@ -3240,30 +3240,73 @@ PrefabInstance:
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[0].message
-      value: Hello Chrona, here is your target. Kill that filthy gard there. To do
-        so, you will have to teleport yourself close to your enemy in order to strike
-        them with a killing blow.
+      value: Hello Chrona, here is your target. Kill that filthy gard there.
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[1].messageDuration
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[1].message
-      value: Go on ! Place your teleportation point next him by pressing A. If you
-        fail, you can reajust the position by selecting the teleportation point and
-        replacing it. But I hope you don't fail this simple task.
+      value: To do so, you will have to teleport yourself close to your enemy in
+        order to strike them with a killing blow.
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[1].stepName
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[2].messageDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[2].message
+      value: Go on ! Place your teleportation point next him by pressing A.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[2].stepName
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[3].messageDuration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[3].message
+      value: If you fail, you can reajust the position by selecting the teleportation
+        point and replacing it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[0].messageDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[4].messageDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[4].message
+      value: But I hope you won't fail this simple task.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[4].stepName
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757582, guid: a204d4d73a7f5a84f8bd442b080b451d,
