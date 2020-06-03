@@ -31,6 +31,7 @@ namespace oneShot
 
 			anim.Play("dying");
 			SoundManager.Instance.PlaySound("chrona_death");
+			VFX_Manager.Instance.PlayVFX("chrona_death", CenterPivot.position - new Vector3(0, 0.2f, 0));
 
 			LevelController.Instance.PlayerDie();
 		}
