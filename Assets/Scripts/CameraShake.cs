@@ -83,12 +83,15 @@ namespace oneShot
 		{
 			isRunning = true;
 
+			Vector3 initEulerAngles = transform.eulerAngles;
+
 			while (shakeDuration > 0.01f)
 			{
 				//A Vector3 to add to the Local Rotation
 				Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;
 				//Don't change the Z; it looks funny.
-				rotationAmount.z = 0;
+				//rotationAmount.z = 0;
+				rotationAmount.z = transform.eulerAngles.z;
 
 				//Used to set the amount of shake (% * startAmount).
 				shakePercentage = shakeDuration / initShakeDuration;
@@ -113,7 +116,8 @@ namespace oneShot
 			}
 
 			//Set the local rotation to 0 when done, just to get rid of any fudging stuff.
-			transform.localRotation = Quaternion.identity;
+			//transform.localRotation = Quaternion.identity;
+			transform.eulerAngles = initEulerAngles;
 
 			isRunning = false;
 		}
