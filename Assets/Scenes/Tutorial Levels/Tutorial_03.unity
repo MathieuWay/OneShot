@@ -3155,7 +3155,7 @@ PrefabInstance:
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
@@ -3166,14 +3166,13 @@ PrefabInstance:
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[1].messageDuration
-      value: 10
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[1].message
       value: If you feel scared like a puppy, you can adjust the time of the selected
-        point with your left joystick. But an assassin like you should not have to
-        do it.
+        point with your left joystick.
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
@@ -3184,6 +3183,21 @@ PrefabInstance:
         type: 3}
       propertyPath: tutoSteps.Array.data[0].messageDuration
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[2].messageDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[2].message
+      value: But an assassin like you should not have to do it.
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[2].stepName
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757582, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
