@@ -30,6 +30,10 @@ public class CameraController : MonoBehaviour
     public AnimationCurve zoomStep;
     public AnimationCurve tiltStep;
     public int comboInputStep;
+    private Quaternion initialRotation;
+    public bool useZoom = true;
+    public bool useShake = true;
+    public bool useTilt = true;
 
     //LERP
     private float focusStartTime;
@@ -96,18 +100,19 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        initialRotation = transform.rotation;
         ComboController.Instance.NextInputEvent += FocusOnCombatInput;
         ComboController.Instance.ComboCanceledEvent += FocusReset;
 
         ComboController.Instance.ComboCompletedEvent += () => {
-            CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.defaultSetting);
+            if(useShake)
+                CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.defaultSetting);
             StartCoroutine(Delay(FocusResetDelay, FocusReset));
         };
 
-        ComboController.Instance.ComboFailedEvent += () =>
-        {
-            CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.defaultSetting);
-            StartCoroutine(Delay(0.5f, FocusReset));
+        ComboController.Instance.ComboFailedEvent += () => {
+            //CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.defaultSetting);
+            StartCoroutine(Delay(FocusResetDelay, FocusReset));
         };
     }
 
@@ -151,17 +156,22 @@ public class CameraController : MonoBehaviour
 
     public void FocusReset()
     {
-        StartCoroutine(Zoom(focusFOVSize));
-		StartCoroutine(Tilt(0));
+        if(useZoom)
+            StartCoroutine(Zoom(focusFOVSize));
+        if(useTilt)
+		    StartCoroutine(Tilt(0));
+        //StartCoroutine(Delay(focusZoomTime, () => { transform.rotation = initialRotation; }));
 		comboInputStep = 0;
     }
 
     private void FocusOnCombatInput()
     {
         comboInputStep++;
-        StartCoroutine(Zoom(zoomStep.Evaluate(comboInputStep) * focusFOVSize / 100));
-		StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
-		if (comboInputStep < 3)
+        if(useZoom)
+            StartCoroutine(Zoom(zoomStep.Evaluate(comboInputStep) * focusFOVSize / 100));
+        if(useTilt)
+		    StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
+		if (comboInputStep < 3 && useShake)
             CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.inputValid);
     }
 
@@ -187,12 +197,16 @@ public class CameraController : MonoBehaviour
     IEnumerator Tilt(float target)
     {
         float startTime = Time.time;
+        Quaternion initQuaternion = mainCamera.transform.rotation;
+        Quaternion endResult = initialRotation * Quaternion.AngleAxis(target, Vector3.forward);
         float initialTilt = mainCamera.transform.eulerAngles.z;
-        while (target != mainCamera.transform.eulerAngles.z)
+        while (endResult != mainCamera.transform.rotation)
         {
             float norm = (Time.time - startTime) / focusZoomTime;
-            float tilt = Mathf.LerpAngle(initialTilt, target, norm);
-            mainCamera.transform.eulerAngles = new Vector3(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, tilt);
+            transform.rotation = Quaternion.Lerp(initQuaternion, endResult, norm);
+            //Debug.Log(target + "/" + mainCamera.transform.eulerAngles.z);
+            //float tilt = Mathf.LerpAngle(initialTilt, target, norm);
+            //mainCamera.transform.eulerAngles = new Vector3(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, tilt);
             yield return null;
         }
     }

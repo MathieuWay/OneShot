@@ -85,10 +85,10 @@ namespace oneShot
 
 			Vector3 initEulerAngles = transform.eulerAngles;
 
-			while (shakeDuration > 0.01f)
+            while (shakeDuration > 0.01f)
 			{
-				//A Vector3 to add to the Local Rotation
-				Vector3 rotationAmount = Random.insideUnitSphere * shakeAmount;
+                //A Vector3 to add to the Local Rotation
+                Vector3 rotationAmount = initEulerAngles + Random.insideUnitSphere * shakeAmount;
 				//Don't change the Z; it looks funny.
 				//rotationAmount.z = 0;
 				rotationAmount.z = transform.eulerAngles.z;
