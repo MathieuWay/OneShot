@@ -14731,26 +14731,20 @@ Transform:
   - {fileID: 1121945260}
   - {fileID: 1993392747}
   - {fileID: 1596352736}
+  - {fileID: 1359425191}
   - {fileID: 580977609}
-  - {fileID: 585812194}
-  - {fileID: 919420683}
+  - {fileID: 1377344188}
+  - {fileID: 1367598744}
   - {fileID: 1738527173}
+  - {fileID: 585812194}
   - {fileID: 1726555688}
+  - {fileID: 919420683}
+  - {fileID: 457936323}
+  - {fileID: 1791473404}
+  - {fileID: 883503989}
+  - {fileID: 1518372126}
   - {fileID: 239651689}
   - {fileID: 1241992292}
-  - {fileID: 1367598744}
-  - {fileID: 1518372126}
-  - {fileID: 1017617609}
-  - {fileID: 1253972673}
-  - {fileID: 2114180915}
-  - {fileID: 391189304}
-  - {fileID: 194614545}
-  - {fileID: 1382771897}
-  - {fileID: 1359425191}
-  - {fileID: 457936323}
-  - {fileID: 883503989}
-  - {fileID: 1791473404}
-  - {fileID: 1377344188}
   - {fileID: 715082764}
   - {fileID: 1033498580}
   - {fileID: 389445666}
@@ -14759,6 +14753,12 @@ Transform:
   - {fileID: 1284989292}
   - {fileID: 2000510711}
   - {fileID: 1526882835}
+  - {fileID: 1017617609}
+  - {fileID: 1253972673}
+  - {fileID: 2114180915}
+  - {fileID: 391189304}
+  - {fileID: 194614545}
+  - {fileID: 1382771897}
   m_Father: {fileID: 1031987022}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -14900,7 +14900,7 @@ PrefabInstance:
     - target: {fileID: 7284912432814904404, guid: 2e49fcfc86feae746a07d5795672195b,
         type: 3}
       propertyPath: spawnCount
-      value: 5
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7284912432814904405, guid: 2e49fcfc86feae746a07d5795672195b,
         type: 3}
@@ -16900,6 +16900,21 @@ PrefabInstance:
         type: 3}
       propertyPath: offsetPath.y
       value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321179295778232500, guid: 7d6381f655cd9a540afc55fa2848d298,
+        type: 3}
+      propertyPath: focusTime
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321179295778232500, guid: 7d6381f655cd9a540afc55fa2848d298,
+        type: 3}
+      propertyPath: focusZoomTime
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5321179295778232500, guid: 7d6381f655cd9a540afc55fa2848d298,
+        type: 3}
+      propertyPath: FocusResetDelay
+      value: 0.7
       objectReference: {fileID: 0}
     - target: {fileID: 5321179295778232511, guid: 7d6381f655cd9a540afc55fa2848d298,
         type: 3}

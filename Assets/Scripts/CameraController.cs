@@ -29,6 +29,8 @@ public class CameraController : MonoBehaviour
     public float TimeBeforeCameraReset;
     public AnimationCurve zoomStep;
     public AnimationCurve tiltStep;
+    public AnimationCurve shakeDurStep;
+    public AnimationCurve shakePuisStep;
     public int comboInputStep;
     private Quaternion initialRotation;
     public bool useZoom = true;
@@ -173,6 +175,7 @@ public class CameraController : MonoBehaviour
 		    StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
 		if (comboInputStep < 3 && useShake)
             CameraShake.Instance.ShakeCamera(CameraShake.ShakeTemplate.inputValid);
+            //CameraShake.Instance.ShakeCamera(shakePuisStep.Evaluate(comboInputStep),shakeDurStep.Evaluate(comboInputStep));
     }
 
     IEnumerator Delay(float time, System.Action callback)

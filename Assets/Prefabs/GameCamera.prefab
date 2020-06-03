@@ -133,10 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   state: 0
-  focusTime: 2
+  focusTime: 1
   focusFOVSize: 30
-  focusZoomTime: 0.33
-  FocusResetDelay: 1
   FocusPositionCurve:
     serializedVersion: 2
     m_Curve:
@@ -212,6 +210,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  focusZoomTime: 0.2
+  FocusResetDelay: 0.7
   TimeBeforeCameraReset: 0
   zoomStep:
     serializedVersion: 2
@@ -219,17 +219,35 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 100
-      inSlope: -16.638231
-      outSlope: -16.638231
+      inSlope: -10
+      outSlope: -10
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
+      time: 1
+      value: 90
+      inSlope: -12.5
+      outSlope: -12.5
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2
+      value: 75
+      inSlope: -19.936241
+      outSlope: -19.936241
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
       time: 3.005127
       value: 50
-      inSlope: -16.638231
-      outSlope: -16.638231
+      inSlope: -24.87248
+      outSlope: -24.87248
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -243,35 +261,35 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: -15
-      outSlope: -15
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 1
-      value: -15
-      inSlope: 7.5
-      outSlope: 7.5
+      value: 0
+      inSlope: 0
+      outSlope: 0
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 2
-      value: 15
-      inSlope: 7.5
-      outSlope: 7.5
-      tangentMode: 34
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 136
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
       time: 3
-      value: 0
-      inSlope: -15
-      outSlope: -15
+      value: 10
+      inSlope: 10
+      outSlope: 10
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -280,11 +298,14 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   comboInputStep: 0
+  useZoom: 1
+  useShake: 1
+  useTilt: 1
   ScrollSensitivity: 0.75
   SmoothTraveling: 0.3
   initNode: {fileID: 0}
   path: {fileID: 0}
-  offsetPath: {x: 0, y: 1.2, z: -6}
+  offsetPath: {x: -2, y: 1.7, z: -7.2}
 --- !u!114 &5321179295778232501
 MonoBehaviour:
   m_ObjectHideFlags: 0
