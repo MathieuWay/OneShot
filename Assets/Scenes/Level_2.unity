@@ -13268,13 +13268,33 @@ PrefabInstance:
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
       propertyPath: tutoSteps.Array.data[0].message
-      value: Warning, a new enemy as shown itself. He is quite prepare and you will
-        have to attack him by surprise. Attack him in the back !
+      value: They just keep growing in number ! Don't fail me or I'll just toss you
+        in the garbage !
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[0].messageDuration
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[1].messageDuration
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[1].message
+      value: Exterminate the vermin if you don't want to be considered one !
+      objectReference: {fileID: 0}
+    - target: {fileID: 2404632617908757577, guid: a204d4d73a7f5a84f8bd442b080b451d,
+        type: 3}
+      propertyPath: tutoSteps.Array.data[1].stepName
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2404632617908757582, guid: a204d4d73a7f5a84f8bd442b080b451d,
         type: 3}
@@ -13844,12 +13864,12 @@ PrefabInstance:
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: triggers.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: triggers.Array.data[0].Time
-      value: 2
+      value: 3.8
       objectReference: {fileID: 0}
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
@@ -13859,11 +13879,31 @@ PrefabInstance:
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: triggers.Array.data[1].Time
-      value: 4
+      value: 4.5
       objectReference: {fileID: 0}
     - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: triggers.Array.data[1].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 94cbaa91a10576c45b7f129752bbd7be, type: 2}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[2].Time
+      value: 19.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[2].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 74a78f0bf6160244fab0b852ecf7bd9a, type: 2}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[3].Time
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[3].Clip
       value: 
       objectReference: {fileID: 7400000, guid: 94cbaa91a10576c45b7f129752bbd7be, type: 2}
     - target: {fileID: 7342605328679865740, guid: cc4f848b6cb42854badf5018059fdf7c,
@@ -15812,6 +15852,51 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 7.37
       objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[0].Time
+      value: 7.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[1].Time
+      value: 8.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[0].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 74a78f0bf6160244fab0b852ecf7bd9a, type: 2}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[1].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 94cbaa91a10576c45b7f129752bbd7be, type: 2}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[2].Time
+      value: 15.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[2].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 74a78f0bf6160244fab0b852ecf7bd9a, type: 2}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[3].Time
+      value: 15.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 2286899038707775445, guid: cc4f848b6cb42854badf5018059fdf7c,
+        type: 3}
+      propertyPath: triggers.Array.data[3].Clip
+      value: 
+      objectReference: {fileID: 7400000, guid: 94cbaa91a10576c45b7f129752bbd7be, type: 2}
     - target: {fileID: 7342605328679865740, guid: cc4f848b6cb42854badf5018059fdf7c,
         type: 3}
       propertyPath: m_LocalPosition.x
