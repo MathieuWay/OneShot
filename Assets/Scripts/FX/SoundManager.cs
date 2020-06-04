@@ -14,7 +14,7 @@ namespace oneShot
 			{
 				if (instance == null)
 				{
-					Debug.LogWarning("Warning: SoundManager not found");
+					//Debug.LogWarning("Warning: SoundManager not found");
 					//TODO: instancier le prefab
 					return null;
 				}
