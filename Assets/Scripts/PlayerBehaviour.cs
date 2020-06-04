@@ -19,6 +19,8 @@ namespace oneShot
 		public Animator ChronaAnim { get => chronaAnim; }
 
 		private Animator anim;
+		private int soundAttackStep = 0;
+		private AttackName soundCurrentAttackName = AttackName.SlashAttack;
 
 		public void Kill()
 		{
@@ -52,6 +54,8 @@ namespace oneShot
 			anim = GetComponentInChildren<Animator>();
 
 			ComboController.Instance.StartComboNameEvent += PlayAttackAnim;
+			ComboController.Instance.StartComboNameEvent += StartAttackSound;
+			ComboController.Instance.NextInputEvent += PlayAttackSound;
 
 			TacticsController.Instance.OnBeforePlayerTeleport += PlayTpAnim;
 		}
@@ -74,6 +78,27 @@ namespace oneShot
 					SetAttackAnimDirection(attackName);
 					break;
 			}
+		}
+
+		private void StartAttackSound(AttackName attackName)
+		{
+			soundAttackStep = 0;
+			soundCurrentAttackName = attackName;
+		}
+		private void PlayAttackSound()
+		{
+			soundAttackStep++;
+
+			string soundName = string.Empty;
+			switch(soundCurrentAttackName)
+			{
+				case AttackName.SlashAttack: soundName = "chrona_slash_attack_0" + soundAttackStep; break;
+				case AttackName.SpiralAttack: soundName = "chrona_spiral_attack_0" + soundAttackStep; break;
+				case AttackName.ThrustAttack: soundName = "chrona_thrust_attack_0" + soundAttackStep; break;
+			}
+			SoundManager.Instance.PlaySound(soundName);
+
+			if (soundAttackStep >= 3) soundAttackStep = 0;
 		}
 
 		private void SetAttackAnimDirection(AttackName attackName)

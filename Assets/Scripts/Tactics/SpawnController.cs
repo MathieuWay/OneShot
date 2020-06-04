@@ -256,6 +256,8 @@ public class SpawnController : MonoBehaviour
 					spawnPoint.Init(SpawnPoints.Count, rootPoint);
 
 					oneShot.SoundManager.Instance.PlaySound("add_tp_point");
+					GameObject vfxPoint = oneShot.VFX_Manager.Instance.GetVFXInstance("spawnpoint", spawnPosition, Quaternion.Euler(-90, 0, 0));
+					vfxPoint.transform.SetParent(instance.transform);
 
 					SpawnPoints.Add(spawnPoint);
 
