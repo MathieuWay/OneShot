@@ -88,7 +88,7 @@ namespace oneShot
 					launchStartParticle = true;
 					//Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
 					SoundManager.Instance.PlaySound("teleport_01");
-					VFX_Manager.Instance.PlayVFX("tp_spawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0), 2);
+					VFX_Manager.Instance.PlayVFX("tp_spawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0.1f), 2);
 				}
 
 				//Fast Speed
@@ -116,7 +116,7 @@ namespace oneShot
 			launchStartParticle = false;
 			//Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
 			SoundManager.Instance.PlaySound("teleport_02");
-			VFX_Manager.Instance.PlayVFX("tp_dispawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0), 2);
+			VFX_Manager.Instance.PlayVFX("tp_dispawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0.1f), 2);
 			GameTime.Instance.SlowMotion(0.2f, 1.5f);
 
 			OnPlayerTeleport?.Invoke();

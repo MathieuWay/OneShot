@@ -140,8 +140,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   musics:
-  - {fileID: 8300000, guid: 5ae5b125bc3ebbd4fae4e3ec57b02984, type: 3}
-  - {fileID: 8300000, guid: b622dbbca6e923d49831cfe4554e7cd3, type: 3}
+  - musicName: planning_phase
+    musicClip: {fileID: 8300000, guid: 98d6cf8345b7ae749aba732b4fa8d927, type: 3}
+    volume: 1
+  - musicName: combat_phase
+    musicClip: {fileID: 8300000, guid: 50b79df02e7209c4baffc05cd3d5f8e1, type: 3}
+    volume: 1
   source: {fileID: 3061010286693544498}
 --- !u!82 &3061010286693544498
 AudioSource:

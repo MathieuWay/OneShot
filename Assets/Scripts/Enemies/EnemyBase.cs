@@ -124,6 +124,7 @@ namespace oneShot
 				PlayerBehaviour player = nearestHit.transform.GetComponent<PlayerBehaviour>();
 				player.Kill();
 				LaunchEffect(enemy.WeaponPivot.position, nearestHit.point);
+				enemy.Shoot();
 			}
 		}
 
@@ -134,7 +135,9 @@ namespace oneShot
 			LineRenderer line = instance.GetComponent<LineRenderer>();
 			line.SetPositions(new Vector3[] { startPoint, endPoint });
 			*/
-			Quaternion targetRot = Quaternion.LookRotation(endPoint - startPoint) * Quaternion.Euler(90, 0, 0);
+			Vector2 dir = new Vector2(endPoint.x - startPoint.x, 0);
+
+			Quaternion targetRot = Quaternion.LookRotation(dir) * Quaternion.Euler(90, 0, 0);
 
 			Debug.DrawLine(endPoint, endPoint + new Vector2(0, 1), Color.red, 5);
 

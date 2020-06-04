@@ -24,6 +24,7 @@ namespace oneShot
 		public bool isAlive;
         public Animator anim;
 		private string walkBoolean = "Walk";
+		private string shootBoolean = "Shoot";
         public float speed = 1f;
         //private Agent agent;
         private Vector3 initialPosition;
@@ -170,5 +171,10 @@ namespace oneShot
             
             //currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));
         }
+
+		public void Shoot()
+		{
+			enemyAnim.SetBool(shootBoolean, true);
+		}
     }
 }

@@ -829,7 +829,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 971675143259220291}
-  speed: 20
+  speed: 10
 --- !u!1 &427292004687055156
 GameObject:
   m_ObjectHideFlags: 0
