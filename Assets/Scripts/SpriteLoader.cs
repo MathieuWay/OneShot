@@ -79,7 +79,7 @@ public class SpriteLoader : MonoBehaviour
         croppedTexture.SetPixels(pixels);
         croppedTexture.Apply();
         croppedTexture.filterMode = FilterMode.Point;
-        renderer.sharedMaterial.SetTexture("_MainTex", croppedTexture);
+        renderer.material.SetTexture("_MainTex", croppedTexture);
         UpdateQuadSize(croppedTexture);
         currentSprite = sprite;
     }

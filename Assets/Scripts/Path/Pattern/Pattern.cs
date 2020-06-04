@@ -61,7 +61,8 @@ namespace oneShot
                 case StepType.Idle:
                     if (!current.stepFlag)
                     {
-                        anim.Play("idle");
+                        //anim.Play("idle");
+                        anim.SetBool("Walk", false);
                         current.stepFlag = true;
                     }
                     anim.speed = GameTime.Instance.TimeSpeed;
@@ -69,7 +70,8 @@ namespace oneShot
                 case StepType.Move:
                     if(!current.stepFlag)
                     {
-                        anim.Play(StepMove.GetClipName(current.moveType));
+                        anim.SetBool("Walk", true);
+                        //anim.Play(StepMove.GetClipName(current.moveType));
                         current.stepFlag = true;
                     }
                     anim.speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
@@ -78,6 +80,7 @@ namespace oneShot
                 case StepType.Anim:
                     if (!current.stepFlag)
                     {
+                        anim.SetBool("Walk", false);
                         anim.Play(current.clip.name);
                         current.stepFlag = true;
                     }
