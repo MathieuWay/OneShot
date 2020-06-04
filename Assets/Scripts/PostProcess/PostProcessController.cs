@@ -26,7 +26,7 @@ namespace oneShot
         private ChromaticAberration chromaticAberration = null;
         private LensDistortion lensDistortion = null;
         private FilmGrain filmGrain = null;
-        public bool debug;
+        //public bool debug;
 
         private void Awake()
         {
