@@ -117,6 +117,7 @@ namespace oneShot
 			//Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
 			SoundManager.Instance.PlaySound("teleport_02");
 			VFX_Manager.Instance.PlayVFX("tp_dispawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0), 2);
+			GameTime.Instance.SlowMotion(0.2f, 1.5f);
 
 			OnPlayerTeleport?.Invoke();
 
@@ -129,7 +130,7 @@ namespace oneShot
 			SetFastSpeed();
 
 			//Reset time speed
-			GameTime.Instance.SetHardTimeSpeed(1);
+			//GameTime.Instance.SetHardTimeSpeed(1);
 		}
 
         public void loadTactics(List<SpawnPoint> tpList)
