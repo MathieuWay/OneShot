@@ -15,6 +15,7 @@ namespace oneShot
 		[SerializeField] private Transform pivot = null;
 		[SerializeField] private Transform weaponPivot = null;
 		[SerializeField] private Direction defaultDirection = Direction.Left;
+		[SerializeField] private Animator enemyAnim = null;
 		public Direction _Direction { get; private set; }
 		public Transform Pivot { get => pivot; }
 		public Transform WeaponPivot { get => weaponPivot; }
@@ -22,6 +23,7 @@ namespace oneShot
 		private Vector2 lastPos;
 		public bool isAlive;
         public Animator anim;
+		private string walkBoolean = "Walk";
         public float speed = 1f;
         //private Agent agent;
         private Vector3 initialPosition;
@@ -37,7 +39,7 @@ namespace oneShot
 
 		private void Awake()
 		{
-			anim = GetComponentInChildren<Animator>();
+			//anim = GetComponentInChildren<Animator>();
 		}
 
 		private void Start()
@@ -46,7 +48,7 @@ namespace oneShot
 			lastPos = transform.position;
 			_Direction = defaultDirection;
             pattern = GetComponent<Pattern>();
-            anim = GetComponentInChildren<Animator>();
+            //anim = GetComponentInChildren<Animator>();
             //agent = GetComponent<Agent>();
             initialPosition = transform.position;
             /*path = GetComponent<Path>();
@@ -56,34 +58,39 @@ namespace oneShot
 
         private void Update()
         {
-			anim.speed = GameTime.Instance.TimeSpeed;
-            /*if(path)
+			//anim.speed = GameTime.Instance.TimeSpeed;
+			/*if(path)
                 transform.position = path.GetPositionAlongPath();*/
-            /*if (agent)
+			/*if (agent)
             {
                 if (!agent.reach)
                     anim.SetBool("isMoving", true);
                 else
                     anim.SetBool("isMoving", false);
             }*/
-            if (pattern)
-            {
-                if (pattern.currentStep != null)
-                {
-                    if(pattern.currentStep.type == StepType.Move)
-                        anim.SetBool("isMoving", true);
-                    else
-                        anim.SetBool("isMoving", false);
-                }
-                else
-                {
-                    anim.SetBool("isMoving", false);
-                }
-            }
-            else
-            {
-                anim.SetBool("isMoving", false);
-            }
+
+
+			//TMP: PROBLEME -> AFFECTE LES ANIMATOR DE TOUS LES ENNEMIS
+			//if (pattern)
+			//{
+			//    if (pattern.currentStep != null)
+			//    {
+			//        if(pattern.currentStep.type == StepType.Move)
+			//            anim.SetBool(/*"isMoving"*/walkBoolean, true);
+			//        else
+			//            anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//    }
+			//    else
+			//    {
+			//        anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//    }
+			//}
+			//else
+			//{
+			//    anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//}
+
+			enemyAnim.speed = GameTime.Instance.TimeSpeed;
 
 			SetDirection();
         }
@@ -123,8 +130,11 @@ namespace oneShot
 
 			if(isMoving)
 			{
-				pivot.rotation = Quaternion.Euler(0, _Direction == Direction.Left ? 180 : 0, 0);
+				pivot.localScale = new Vector3(_Direction == Direction.Left ? 1 : -1, 1, 1);
+				//pivot.rotation = Quaternion.Euler(0, _Direction == Direction.Left ? 180 : 0, 0);
 			}
+
+			//enemyAnim.SetBool(walkBoolean, isMoving);
 		}
 
 		public void Kill()
@@ -132,7 +142,7 @@ namespace oneShot
 			if (!isAlive) return;
 
 			isAlive = false;
-			anim.Play("dying");
+			//anim.Play("dying");
 			OnEnemyDead();
 
 			//!TMP
@@ -149,10 +159,11 @@ namespace oneShot
         {
             isAlive = true;
 
-			if(anim)
+			if(/*anim*/enemyAnim)
 			{
-				anim.SetBool("isMoving", false);
-				anim.Rebind();
+				//anim.SetBool(/*"isMoving"*/walkBoolean, false);
+				//anim.Rebind();
+				enemyAnim.Rebind();
 
 				transform.position = initialPosition;
 			}

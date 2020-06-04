@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 2961606520505238239}
   - component: {fileID: 8499938993348108622}
   - component: {fileID: 3717638905680919732}
+  - component: {fileID: 1333030591843811525}
+  - component: {fileID: 3795380112654822092}
   m_Layer: 0
-  m_Name: Character_Sprite_V3_Invert
+  m_Name: Character_Sprite_V3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 82172330869104890}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.28, z: 0}
-  m_LocalScale: {x: -0.4421053, y: 0.6, z: 1}
+  m_LocalScale: {x: 0.44210526, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 5753930999024009624}
   m_RootOrder: 5
@@ -79,6 +81,39 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!95 &1333030591843811525
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82172330869104890}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 48bd256c6fad9504abf7cf5ed9d6ddf4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3795380112654822092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 82172330869104890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e96765809a580f489e5121b5012da42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: f96d46a8553f45642a32e5d23225df94, type: 3}
+  ScaleFactor: 0.6
 --- !u!114 &-8053145843063243872
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,11 +152,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51fe8f0172870334e98f7bfa8d934cdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  killParticle: {fileID: 7107743795993528294, guid: bd4db6fabc54b1f42b3429efc46c9e91,
-    type: 3}
   pivot: {fileID: 5753930999024009624}
   weaponPivot: {fileID: 9215181642231620859}
   defaultDirection: 0
+  enemyAnim: {fileID: 1333030591843811525}
   isAlive: 0
   anim: {fileID: 0}
   speed: 1
@@ -231,8 +265,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2242074854710310320}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.304, y: 0.507, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.304, y: 0.507, z: 0}
+  m_LocalScale: {x: -1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 5753930999024009624}
   m_RootOrder: 0
@@ -300,12 +334,12 @@ GameObject:
   - component: {fileID: 581065630518161569}
   - component: {fileID: 256897929907114759}
   m_Layer: 0
-  m_Name: Character_Sprite_V3
+  m_Name: Character_Sprite_V3_Invert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &776137146377569841
 Transform:
   m_ObjectHideFlags: 0
@@ -736,6 +770,11 @@ PrefabInstance:
         type: 3}
       propertyPath: tint.b
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5644501236283756389, guid: e6ae6e55ec3600448b9df080943c4be1,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5803587130830887625, guid: e6ae6e55ec3600448b9df080943c4be1,
         type: 3}
