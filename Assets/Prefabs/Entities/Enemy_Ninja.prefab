@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: d388b2fff81972c4e9488345e21c8fcf, type: 2}
-  firePrefab: {fileID: 5747463930727319770, guid: 71900ff4e3c4f5342a6091f415687cf8,
-    type: 3}
   drawGizmos: 1
 --- !u!1001 &3067250195929728164
 PrefabInstance:
@@ -169,6 +167,11 @@ PrefabInstance:
       value: 0.2509804
       objectReference: {fileID: 0}
     - target: {fileID: 2278131240243740547, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: aee7f04e9d690974d8812684982069f9, type: 2}
+    - target: {fileID: 3717638905680919732, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
