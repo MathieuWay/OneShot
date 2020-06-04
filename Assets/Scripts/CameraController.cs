@@ -33,7 +33,7 @@ public class CameraController : MonoBehaviour
     public AnimationCurve shakePuisStep;
     public int comboInputStep;
     private Quaternion initialRotation;
-    public bool useZoom = true;
+    public bool useZoom = true; 
     public bool useShake = true;
     public bool useTilt = true;
 
@@ -169,7 +169,7 @@ public class CameraController : MonoBehaviour
     private void FocusOnCombatInput()
     {
         comboInputStep++;
-        if(useZoom)
+        if (useZoom)
             StartCoroutine(Zoom(zoomStep.Evaluate(comboInputStep) * focusFOVSize / 100));
         if(useTilt)
 		    StartCoroutine(Tilt(tiltStep.Evaluate(comboInputStep)));
@@ -188,9 +188,10 @@ public class CameraController : MonoBehaviour
     {
         float startTime = Time.time;
         float initialFOV = mainCamera.fieldOfView;
-        while(target != mainCamera.fieldOfView)
+        float norm = 0;
+        while (norm < 1)
         {
-            float norm = (Time.time - startTime) / focusZoomTime;
+            norm = (Time.time - startTime) / focusZoomTime;
             mainCamera.fieldOfView = Mathf.Lerp(initialFOV, target, norm);
 
             yield return null;
@@ -202,10 +203,10 @@ public class CameraController : MonoBehaviour
         float startTime = Time.time;
         Quaternion initQuaternion = mainCamera.transform.rotation;
         Quaternion endResult = initialRotation * Quaternion.AngleAxis(target, Vector3.forward);
-        float initialTilt = mainCamera.transform.eulerAngles.z;
-        while (endResult != mainCamera.transform.rotation)
+        float norm = 0;
+        while (norm < 1)
         {
-            float norm = (Time.time - startTime) / focusZoomTime;
+            norm = (Time.time - startTime) / focusZoomTime;
             transform.rotation = Quaternion.Lerp(initQuaternion, endResult, norm);
             //Debug.Log(target + "/" + mainCamera.transform.eulerAngles.z);
             //float tilt = Mathf.LerpAngle(initialTilt, target, norm);

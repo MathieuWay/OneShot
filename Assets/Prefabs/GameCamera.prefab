@@ -17,6 +17,7 @@ GameObject:
   - component: {fileID: 5321179295778232502}
   - component: {fileID: 5321179295778232503}
   - component: {fileID: 2133623008}
+  - component: {fileID: 7757954488430066534}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: MainCamera
@@ -464,3 +465,62 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 9908b88215eb4794c8cd8048496705c6, type: 2}
+--- !u!114 &7757954488430066534
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321179295778232511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f3fad06000704744a2a6cbb207a5316, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chromaticAberrationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.3
+      outSlope: 0.3
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.3
+      inSlope: 0.25
+      outSlope: 0.25
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 2
+      value: 0.5
+      inSlope: 0.225
+      outSlope: 0.225
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 3
+      value: 0.75
+      inSlope: 0.25
+      outSlope: 0.25
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  chromaticAberrationDecay: 0.4
+  lensDistortionIntensity: 0.35
+  filmGrainIntensity: 0.75
+  SlowmotionPPTransitionDuration: 0.5
+  debug: 0
