@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 5321179295778232503}
   - component: {fileID: 2133623008}
   - component: {fileID: 7757954488430066534}
+  - component: {fileID: 5336182082002111106}
   m_Layer: 0
   m_Name: GameCamera
   m_TagString: MainCamera
@@ -523,4 +524,20 @@ MonoBehaviour:
   lensDistortionIntensity: 0.35
   filmGrainIntensity: 0.75
   SlowmotionPPTransitionDuration: 0.5
-  debug: 0
+--- !u!114 &5336182082002111106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5321179295778232511}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 9908b88215eb4794c8cd8048496705c6, type: 2}
