@@ -7,6 +7,8 @@ public class GameTime : MonoBehaviour
 {
 	public static GameTime Instance { get; private set; }
 	public float TimeSpeed { get; private set; }
+	public delegate void TimeDelegate();
+	public event TimeDelegate OnStartSlowMotion;
 
 
 	public void SetHardTimeSpeed(float speed)
@@ -37,6 +39,8 @@ public class GameTime : MonoBehaviour
 		}
 
 		SetTimeSpeed(speed, duration);
+
+		OnStartSlowMotion?.Invoke();
 	}
 
 
