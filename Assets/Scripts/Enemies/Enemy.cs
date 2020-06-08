@@ -29,7 +29,7 @@ namespace oneShot
         //private Agent agent;
         private Vector3 initialPosition;
         private Pattern pattern;
-		private bool isMoving;
+		public bool isMoving;
 
 		public enum Direction { Left, Right }
 
@@ -121,11 +121,11 @@ namespace oneShot
 					_Direction = dif.x < 0 ? Direction.Left : Direction.Right;
 				}
 
-				isMoving = true;
+				//isMoving = true;
 			}
 			else
 			{
-				isMoving = false;
+				//isMoving = false;
 			}
 
 
