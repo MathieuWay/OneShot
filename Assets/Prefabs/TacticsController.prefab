@@ -77,12 +77,8 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  fastSpeedFactor: 5
+  fastSpeedFactor: 10
   fastSpeedDelay: 2
-  tpStartParticle: {fileID: 7107743795993528294, guid: c9ee5e0ce35fe5b468c15361f06a4535,
-    type: 3}
-  tpFinishParticle: {fileID: 7107743795993528294, guid: c9ee5e0ce35fe5b468c15361f06a4535,
-    type: 3}
   isFinished: 0
   time: 0
   tpArray: []
