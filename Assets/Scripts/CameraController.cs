@@ -49,7 +49,7 @@ public class CameraController : MonoBehaviour
     //PATH
     [Header("Path Settings")]
     [Range(0.1f, 2f)]
-    public float ScrollSensitivity = 0.1f;
+    public float travellingSensitivity = 0.1f;
     public float SmoothTraveling = 0.3f;
     private Vector3 VelocitySmooth = Vector3.zero;
     public Node initNode;
@@ -91,7 +91,7 @@ public class CameraController : MonoBehaviour
         path = GetComponent<Path>();
         if (path)
         {
-            path.SetDirection(DirectionAxis.Horizontal);
+            //path.SetDirection(DirectionAxis.Horizontal);
             if (initNode)
             {
                 path.SetNode(initNode);
@@ -103,6 +103,7 @@ public class CameraController : MonoBehaviour
     private void Start()
     {
         initialRotation = transform.rotation;
+        if (!ComboController.Instance) return;
         ComboController.Instance.NextInputEvent += FocusOnCombatInput;
         ComboController.Instance.ComboCanceledEvent += FocusReset;
 
@@ -126,9 +127,15 @@ public class CameraController : MonoBehaviour
                 if (path.CurrentNode)
                 {
                     transform.position = Vector3.SmoothDamp(transform.position, path.GetPositionAlongPath() + offsetPath, ref VelocitySmooth, SmoothTraveling);
+                    /*
                     if (Input.GetAxis("Mouse ScrollWheel") != 0f)
                     {
                         path.AddProgression(Input.GetAxis("Mouse ScrollWheel") * ScrollSensitivity);
+                    }
+                    */
+                    if(Gamepad.Instance.PadVertical != 0f)
+                    {
+                        path.AddProgression(Gamepad.Instance.PadVertical * travellingSensitivity);
                     }
                 }
                 break;
