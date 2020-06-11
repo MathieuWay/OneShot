@@ -19,6 +19,8 @@ public class UI_GameEnd : MonoBehaviour
 	private bool victory, defeat;
 	private bool readyToReload;
 	private enum DefeatType { PlayerDie, TimeElapsed }
+	private float combatDuration = 0;
+	private bool playCombatPhase = false;
 
 
 	private void Awake()
@@ -31,6 +33,7 @@ public class UI_GameEnd : MonoBehaviour
 
 	private void Start()
 	{
+		oneShot.LevelController.Instance.OnStartCombatPhase += delegate { playCombatPhase = true; };
 		oneShot.EnemiesController.Instance.OnAllEnemiesKilled += Victory;
 		oneShot.LevelController.Instance.OnPlayerDie += delegate { Defeat(DefeatType.PlayerDie); };
 		oneShot.LevelController.Instance.OnTimeElapsed += delegate { Defeat(DefeatType.TimeElapsed); };
@@ -46,6 +49,11 @@ public class UI_GameEnd : MonoBehaviour
 		//{
 		//	retryButton.Select();
 		//}
+
+		if(playCombatPhase)
+		{
+			combatDuration += Time.unscaledDeltaTime;
+		}
 	}
 
 	private void ReloadGame()
@@ -61,6 +69,7 @@ public class UI_GameEnd : MonoBehaviour
 		if (defeat || victory) return;
 
 		victory = true;
+		playCombatPhase = false;
 
 		StartCoroutine(VictoryProcess());
 	}
@@ -72,7 +81,7 @@ public class UI_GameEnd : MonoBehaviour
 		victoryPanel.SetActive(true);
 
 		resultText.text = "YOU KILLED " + oneShot.EnemiesController.Instance.EnemyKilledCount
-			+ " ENEMIES IN " + UI_Timeline.Instance.GetCurrentTime().ToString("0.00") + " SECONDS";
+			+ " ENEMIES IN " + combatDuration.ToString("0.000")/*UI_Timeline.Instance.GetCurrentTime().ToString("0.00")*/ + " SECONDS";
 
 		yield return new WaitForSeconds(1);
 
