@@ -79,6 +79,9 @@ public class UI_GameEnd : MonoBehaviour
 
 		endPanel.SetActive(true);
 		victoryPanel.SetActive(true);
+		resultText.text = string.Empty;
+
+		yield return new WaitForSeconds(0.5f);
 
 		resultText.text = "YOU KILLED " + oneShot.EnemiesController.Instance.EnemyKilledCount
 			+ " ENEMIES IN " + combatDuration.ToString("0.000")/*UI_Timeline.Instance.GetCurrentTime().ToString("0.00")*/ + " SECONDS";
@@ -118,6 +121,7 @@ public class UI_GameEnd : MonoBehaviour
 		endPanel.SetActive(true);
 		defeatPanel.SetActive(true);
 		resultText.enabled = false;
+		resultText.text = string.Empty;
 		oneShot.LevelController.Instance.ReloadScene(1.5f);
 
 		//int enemyLeft = oneShot.EnemiesController.Instance.EnemyLeft;
