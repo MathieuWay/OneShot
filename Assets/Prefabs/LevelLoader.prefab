@@ -57,3 +57,5 @@ MonoBehaviour:
     level: Level_1
   - levelName: 6
     level: Level_2
+  - levelName: 7
+    level: Level_3

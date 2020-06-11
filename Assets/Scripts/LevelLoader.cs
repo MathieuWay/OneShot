@@ -35,7 +35,8 @@ public class LevelLoader : MonoBehaviour
 		Tuto3,
 		Tuto4,
 		Level1,
-		Level2
+		Level2,
+		Level3
 	}
 
 
