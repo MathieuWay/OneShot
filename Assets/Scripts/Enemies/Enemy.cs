@@ -52,6 +52,7 @@ namespace oneShot
             /*path = GetComponent<Path>();
             if(path)
                 path.InitPath(transform.position);*/
+            pivot.localScale = new Vector3(defaultDirection == Direction.Left ? 1 : -1, 1, 1);
         }
 
         private void Update()
@@ -66,26 +67,33 @@ namespace oneShot
                 else
                     anim.SetBool("isMoving", false);
             }*/
-            if (pattern)
-            {
-                if (pattern.currentStep != null)
-                {
-                    if(pattern.currentStep.type == StepType.Move)
-                        anim.SetBool("isMoving", true);
-                    else
-                        anim.SetBool("isMoving", false);
-                }
-                else
-                {
-                    anim.SetBool("isMoving", false);
-                }
-            }
-            else
-            {
-                anim.SetBool("isMoving", false);
-            }
 
-			SetDirection();
+
+			//TMP: PROBLEME -> AFFECTE LES ANIMATOR DE TOUS LES ENNEMIS
+			//if (pattern)
+			//{
+			//    if (pattern.currentStep != null)
+			//    {
+			//        if(pattern.currentStep.type == StepType.Move)
+			//            anim.SetBool(/*"isMoving"*/walkBoolean, true);
+			//        else
+			//            anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//    }
+			//    else
+			//    {
+			//        anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//    }
+			//}
+			//else
+			//{
+			//    anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//}
+
+			enemyAnim.speed = GameTime.Instance.TimeSpeed;
+            if(UI_Timeline.Instance.GetCurrentTime() > 0)
+			    SetDirection();
+            else
+                pivot.localScale = new Vector3(defaultDirection == Direction.Left ? 1 : -1, 1, 1);
         }
 
         private void OnTriggerEnter2D(Collider2D collision)

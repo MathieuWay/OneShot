@@ -2,12 +2,17 @@
 using UnityEngine;
 using XInputDotNetPure;
 
-
+public enum ControllerType
+{
+    Gamepad,
+    KeyboardMouse
+}
 public class Gamepad : MonoBehaviour
 {
 	public static Gamepad Instance { get; private set; }
 
-	public float HorizontalJL { get; private set; }
+    public ControllerType type;
+    public float HorizontalJL { get; private set; }
 	public float VerticalJL { get; private set; }
 	public float HorizontalJR { get; private set; }
 	public float VerticalJR { get; private set; }
@@ -71,18 +76,26 @@ public class Gamepad : MonoBehaviour
 		TriggerL = Input.GetAxis("TriggerL") > 0 ? true : false;
 		TriggerR = Input.GetAxis("TriggerR") > 0 ? true : false;
 
-		//Joysticks
-		HorizontalJL = Input.GetAxis("Horizontal_JL");
-		VerticalJL = Input.GetAxis("Vertical_JL");
-		HorizontalJR = Input.GetAxis("Horizontal_JR");
+        //Joysticks
+        HorizontalJL = Input.GetAxis("Horizontal_JL");
+        if (HorizontalJL == 0)
+            HorizontalJL = Input.GetAxis("Horizontale");
+
+        VerticalJL = Input.GetAxis("Vertical_JL");
+        if(VerticalJL == 0)
+            VerticalJL = Input.GetAxis("Verticale");
+
+        HorizontalJR = Input.GetAxis("Horizontal_JR");
 		VerticalJR = Input.GetAxis("Vertical_JR");
 
 		//Pad
 		PadHorizontal = Input.GetAxis("Pad_Horizontal");
-		PadVertical = Input.GetAxis("Pad_Vertical");
+        PadVertical = Input.GetAxis("Pad_Vertical");
+        if (PadVertical == 0)
+            PadVertical = Input.GetAxis("Mouse ScrollWheel");
 
-		//Boutons enfoncé une fois
-		ButtonDownA = Input.GetKeyDown("joystick button 0");
+        //Boutons enfoncé une fois
+        ButtonDownA = Input.GetKeyDown("joystick button 0");
 		ButtonDownB = Input.GetKeyDown("joystick button 1");
 		ButtonDownX = Input.GetKeyDown("joystick button 2");
 		ButtonDownY = Input.GetKeyDown("joystick button 3");
