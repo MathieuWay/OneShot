@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-#if UNITY_EDITOR
-using UnityEditor;
 
 [ExecuteInEditMode]
 public class SpriteLoader : MonoBehaviour
@@ -12,30 +10,41 @@ public class SpriteLoader : MonoBehaviour
     //public Color tint = Color.white;
     [Range(0.5f, 10f)]
     public float ScaleFactor = 1f;
-    private void Update()
+	private Renderer _renderer;
+
+	private void Awake()
+	{
+		_renderer = GetComponent<Renderer>();
+	}
+	private void Update()
     {
-        if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
+        if (_renderer && currentSprite != sprite && sprite != null)
         {
             UpdateSprite();
         }
     }
 
-    private void OnEnable()
-    {
-        ApplyTextureAndResizeQuad();
+	private void OnEnable()
+	{
+		if(_renderer == null)
+		{
+			_renderer = GetComponent<Renderer>();
+		}
 
-        if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
-            UpdateSprite();
-    }
-    private void OnValidate()
-    {
-        ApplyTextureAndResizeQuad();
+		//ApplyTextureAndResizeQuad();
 
-        if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
-            UpdateSprite();
-    }
+		//if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
+		//	UpdateSprite();
+	}
+	//private void OnValidate()
+	//{
+	//    ApplyTextureAndResizeQuad();
 
-    private void ApplyTextureAndResizeQuad()
+	//    if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
+	//        UpdateSprite();
+	//}
+
+	private void ApplyTextureAndResizeQuad()
     {
         if (GetComponent<Renderer>())
         {
@@ -72,19 +81,17 @@ public class SpriteLoader : MonoBehaviour
 
     private void UpdateSprite()
     {
-        Renderer renderer = GetComponent<Renderer>();
+        //Renderer renderer = GetComponent<Renderer>();
         var croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
-        var pixels = sprite.texture.GetPixels((int)sprite.textureRect.x,
-                                                (int)sprite.textureRect.y,
-                                                (int)sprite.textureRect.width,
-                                                (int)sprite.textureRect.height);
+        var pixels = sprite.texture.GetPixels((int)sprite.rect.x,
+                                                (int)sprite.rect.y,
+                                                (int)sprite.rect.width,
+                                                (int)sprite.rect.height);
         croppedTexture.SetPixels(pixels);
         croppedTexture.Apply();
         croppedTexture.filterMode = FilterMode.Point;
-        renderer.sharedMaterial.SetTexture("_MainTex", croppedTexture);
+        _renderer.material.SetTexture("_MainTex", croppedTexture);
         UpdateQuadSize(croppedTexture);
         currentSprite = sprite;
     }
 }
-
-#endif

@@ -10,10 +10,17 @@ namespace oneShot
 		public static PlayerBehaviour Instance { get; private set; }
 
 		[SerializeField] private Transform centerPivot = null;
-		[SerializeField] private GameObject pivot;
+		[SerializeField] private GameObject pivot = null;
+		[SerializeField] private Animator chronaAnim = null;
+		[SerializeField] private PlayerAnimEvent playerAnimEvent = null;
 		public Transform CenterPivot { get => centerPivot; }
 		public bool IsDead { get; private set; }
+		public PlayerAnimEvent PlayerAnimEvent { get => playerAnimEvent; }
+		public Animator ChronaAnim { get => chronaAnim; }
+
 		private Animator anim;
+		private int soundAttackStep = 0;
+		private AttackName soundCurrentAttackName = AttackName.SlashAttack;
 
 		public void Kill()
 		{
@@ -25,6 +32,8 @@ namespace oneShot
 			pivot.SetActive(false);
 
 			anim.Play("dying");
+			SoundManager.Instance.PlaySound("chrona_death");
+			VFX_Manager.Instance.PlayVFX("chrona_death", CenterPivot.position - new Vector3(0, 0.2f, 0));
 
 			LevelController.Instance.PlayerDie();
 		}
@@ -43,6 +52,100 @@ namespace oneShot
 		private void Start()
 		{
 			anim = GetComponentInChildren<Animator>();
+
+			ComboController.Instance.StartComboNameEvent += PlayAttackAnim;
+			ComboController.Instance.StartComboNameEvent += StartAttackSound;
+			ComboController.Instance.NextInputEvent += PlayAttackSound;
+
+			TacticsController.Instance.OnBeforePlayerTeleport += PlayTpAnim;
+		}
+
+		private void PlayAttackAnim(AttackName attackName)
+		{
+			switch(attackName)
+			{
+				case AttackName.SpiralAttack:
+					chronaAnim.SetTrigger("Spiral");
+					break;
+
+				case AttackName.SlashAttack:
+					chronaAnim.SetTrigger("Slash");
+					SetAttackAnimDirection(attackName);
+					break;
+
+				case AttackName.ThrustAttack:
+					chronaAnim.SetTrigger("Thrust");
+					SetAttackAnimDirection(attackName);
+					break;
+			}
+		}
+
+		private void StartAttackSound(AttackName attackName)
+		{
+			soundAttackStep = 0;
+			soundCurrentAttackName = attackName;
+		}
+		private void PlayAttackSound()
+		{
+			soundAttackStep++;
+
+			string soundName = string.Empty;
+			switch(soundCurrentAttackName)
+			{
+				case AttackName.SlashAttack: soundName = "chrona_slash_attack_0" + soundAttackStep; break;
+				case AttackName.SpiralAttack: soundName = "chrona_spiral_attack_0" + soundAttackStep; break;
+				case AttackName.ThrustAttack: soundName = "chrona_thrust_attack_0" + soundAttackStep; break;
+			}
+			SoundManager.Instance.PlaySound(soundName);
+
+			if (soundAttackStep >= 3) soundAttackStep = 0;
+		}
+
+		private void SetAttackAnimDirection(AttackName attackName)
+		{
+			EnemyBase nearestEnemy = AttackController.Instance.FindNearestEnemy();
+			Transform target = nearestEnemy.transform;
+
+			float dirValue = 1;
+
+			bool right = true;
+
+			if (target.position.x > CenterPivot.position.x)
+			{
+				right = true;
+			}
+			else if (target.position.x < CenterPivot.position.x)
+			{
+				right = false;
+			}
+
+			switch (attackName)
+			{
+				case AttackName.SpiralAttack:
+					break;
+
+				case AttackName.SlashAttack:
+					dirValue = right ? 1 : -1;
+					break;
+
+				case AttackName.ThrustAttack:
+					dirValue = right ? 1 : -1;
+					break;
+			}
+
+			pivot.transform.localScale = new Vector3(dirValue, pivot.transform.localScale.y, pivot.transform.localScale.z);
+		}
+
+
+		private void PlayTpAnim()
+		{
+			StartCoroutine(WaitTpAnim());
+		}
+		private IEnumerator WaitTpAnim()
+		{
+			//Attente d'une frame pour attendre le reset de l'animator (avec AnimationComboController)
+			yield return new WaitForEndOfFrame();
+			chronaAnim.SetTrigger("TP");
 		}
 	}
 }

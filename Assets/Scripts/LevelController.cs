@@ -34,27 +34,41 @@ namespace oneShot
         }
 
 		public delegate void LevelDelegate();
+		public event LevelDelegate OnLaunchCombatPhase;
 		public event LevelDelegate OnStartCombatPhase;
 		public event LevelDelegate OnPlayerDie;
 		public event LevelDelegate OnTimeElapsed;
 
         public Phase phase;
 
-        private void Awake()
+		public bool LockCombatPhase { get; set; }
+		private bool combatPhaseLaunched = false;
+
+
+		private void Awake()
         {
             instance = this;
             Fader.OnFadeIn += FocusOnPlayer;
 			UI_Timeline.OnTimeElapsed += delegate { OnTimeElapsed?.Invoke(); };
 		}
 
+		private void Start()
+		{
+			EnemiesController.Instance.OnAllEnemiesKilled += Victory;
+		}
+
 		private void Update()
         {
-            if ((Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
+            if (!combatPhaseLaunched && !LockCombatPhase && (Input.GetKeyDown(KeyCode.Return) || Gamepad.Instance.ButtonDownY) && phase == Phase.Tactical)
             {
+				combatPhaseLaunched = true;
                 CameraController.Instance.FocusOnPlayer();
 				//UI_Timeline.Instance.SetPause(false);
 				UI_Timeline.Instance.BeginCarnage();
+				//SoundManager.Instance.PlaySound("start_carnage");
                 StartCoroutine(DelayBeforeCombatPhase(CameraController.Instance.focusTime));
+
+				OnLaunchCombatPhase?.Invoke();
             }
 
 			if(Input.GetKeyDown(KeyCode.R))
@@ -67,6 +81,11 @@ namespace oneShot
             }
         }
 
+		private void Victory()
+		{
+			//Verrouille les combos
+			ComboController.Instance.LockCombo = true;
+		}
 
         private void FocusOnPlayer()
         {
@@ -95,6 +114,7 @@ namespace oneShot
             {
                 enemies.Add(enemyGameObject.GetComponent<Enemy>());
             }
+			//Debug.Log("ENEMIES: " + enemies.Count);
             return enemies;
         }
 

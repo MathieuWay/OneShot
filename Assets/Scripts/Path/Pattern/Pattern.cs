@@ -55,13 +55,14 @@ namespace oneShot
             if (UI_Timeline.Instance)
                 currentTime = UI_Timeline.Instance.GetCurrentTime();
             Step current = GetCurrentStep(currentTime);
-
             switch (current.type)
             {
                 case StepType.Idle:
+                    enemy.isMoving = false;
                     if (!current.stepFlag)
                     {
-                        anim.Play("idle");
+                        //anim.Play("idle");
+                        anim.SetBool("Walk", false);
                         current.stepFlag = true;
                     }
                     anim.speed = GameTime.Instance.TimeSpeed;
@@ -69,15 +70,19 @@ namespace oneShot
                 case StepType.Move:
                     if(!current.stepFlag)
                     {
-                        anim.Play(StepMove.GetClipName(current.moveType));
+                        anim.SetBool("Walk", true);
+                        //anim.Play(StepMove.GetClipName(current.moveType));
                         current.stepFlag = true;
                     }
+                    enemy.isMoving = true;
                     anim.speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
                     transform.position = StepMove.GetPositionByTime(current.stepMovePaths, currentTime);
                     break;
                 case StepType.Anim:
+                    enemy.isMoving = false;
                     if (!current.stepFlag)
                     {
+                        anim.SetBool("Walk", false);
                         anim.Play(current.clip.name);
                         current.stepFlag = true;
                     }

@@ -53,6 +53,8 @@ public class SpawnController : MonoBehaviour
 
 		UI_Timeline.Instance.RemoveSelectedPoint();
 
+		oneShot.SoundManager.Instance.PlaySound("remove_tp_point");
+
 		if(pointSelected)
 		{
 			pointSelected = false;
@@ -106,7 +108,6 @@ public class SpawnController : MonoBehaviour
 			{
 				//!OLD : Fonctionne uniquement avec une camera en vue orthographique
 				//RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(CursorController.Instance.GetPosition()/*Input.mousePosition*/), Vector2.zero);
-
 
 				RaycastHit2D hit = FireRaycast(CursorController.Instance.GetPosition());
 
@@ -231,7 +232,14 @@ public class SpawnController : MonoBehaviour
 				}
 				else
 				{
-					if(SpawnPoints.Count >= spawnCount)
+					if (!UI_Timeline.Instance.CheckPointTimeCorrect())
+					{
+						//TODO: FEEDBACK
+						yield return null;
+						continue;
+					}
+
+					if (SpawnPoints.Count >= spawnCount)
 					{
 						yield return null;
 						continue;
@@ -246,6 +254,10 @@ public class SpawnController : MonoBehaviour
 
 					//L'ID correspond au nombre de point de spawn, on commence ici par 0
 					spawnPoint.Init(SpawnPoints.Count, rootPoint);
+
+					oneShot.SoundManager.Instance.PlaySound("add_tp_point");
+					GameObject vfxPoint = oneShot.VFX_Manager.Instance.GetVFXInstance("spawnpoint", spawnPosition, Quaternion.Euler(-90, 0, 0));
+					vfxPoint.transform.SetParent(instance.transform);
 
 					SpawnPoints.Add(spawnPoint);
 

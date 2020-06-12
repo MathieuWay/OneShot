@@ -6,15 +6,22 @@ namespace oneShot
 {
 	public class UI_ComboController : MonoBehaviour
 	{
+		[SerializeField] private GameObject comboPanel = null;
 		[SerializeField] private GameObject inputPrefab = null;
-		[SerializeField] private GameObject comboPrefab = null;
 		[SerializeField] private Transform comboContainer = null;
-		[SerializeField] private Transform comboListContainer = null;
+		//[SerializeField] private GameObject comboPrefab = null; //TMP DISABLED
+		//[SerializeField] private Transform comboListContainer = null; //TMP DISABLED
 		private List<UI_Input> uiInputs;
 		private bool isRunning;
 		private bool nextInput;
+		private bool displayCombo = false;
 		private int currentInput;
 
+
+		private void Awake()
+		{
+			comboPanel.SetActive(false);
+		}
 
 		private void Start()
 		{
@@ -26,23 +33,36 @@ namespace oneShot
 			ComboController.Instance.InitCombosEvent += InitCombos;
 			ComboController.Instance.StartComboEvent += StartCombo;
 			ComboController.Instance.ComboFailedEvent += ClearCombo;
+			ComboController.Instance.ComboCanceledEvent += ClearCombo;
 			ComboController.Instance.ComboCompletedEvent += ClearCombo;
 			ComboController.Instance.NextInputEvent += delegate { nextInput = true; };
+			ComboController.Instance.DisplayComboEvent += DisplayCombo;
 		}
 
 		private void InitCombos(Combo[] combos)
 		{
+			//TMP DISABLED
+			/*
+			comboPanel.SetActive(true);
+
 			for (int i = 0; i < combos.Length; i++)
 			{
 				GameObject instance = Instantiate(comboPrefab, comboListContainer);
 
 				instance.GetComponent<UI_Combo>().Init(combos[i].attackTitle.ToString().ToUpper(), combos[i]);
 			}
+			*/
 		}
 
 		private void StartCombo(Combo combo)
 		{
 			if (LevelController.Instance.phase != Phase.Combat) return;
+
+			if(displayCombo)
+			{
+				ClearCombo();
+				displayCombo = false;
+			}
 
 			for (int i = 0; i < combo.inputs.Length; i++)
 			{
@@ -74,6 +94,27 @@ namespace oneShot
 			}
 
 			uiInputs.Clear();
+		}
+
+		private void DisplayCombo(Combo combo)
+		{
+			if (LevelController.Instance.phase != Phase.Combat) return;
+
+			if(displayCombo)
+			{
+				ClearCombo();
+			}
+
+			displayCombo = true;
+
+			for (int i = 0; i < combo.inputs.Length; i++)
+			{
+				GameObject instance = Instantiate(inputPrefab, comboContainer);
+
+				UI_Input uiInput = instance.GetComponent<UI_Input>();
+				uiInput.Init(UI_Gamepad.Instance.GetInputSprite(combo.inputs[i].inputName));
+				uiInputs.Add(uiInput);
+			}
 		}
 
 		private IEnumerator ComboProcess(Combo combo)

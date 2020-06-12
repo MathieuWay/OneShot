@@ -54,13 +54,13 @@ public class PatternEditor : Editor
             switch (stepType)
             {
                 case oneShot.StepType.Idle:
-                    return EditorGUIUtility.singleLineHeight * 3 + 20f;
+                    return EditorGUIUtility.singleLineHeight * 3 + 17.5f;
                 case oneShot.StepType.Move:
-                    return EditorGUIUtility.singleLineHeight * 5 + 10f;
+                    return EditorGUIUtility.singleLineHeight * 5 + 5f;
                 case oneShot.StepType.Anim:
-                    return EditorGUIUtility.singleLineHeight * 3 + 20f;
+                    return EditorGUIUtility.singleLineHeight * 3 + 17.5f;
                 default:
-                    return EditorGUIUtility.singleLineHeight * 2 + 15f;
+                    return EditorGUIUtility.singleLineHeight * 2 + 12.5f;
             }
         };
         _patternStepsReorderableList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
@@ -69,7 +69,7 @@ public class PatternEditor : Editor
             Rect propertyRect = rect;
             // Step Type
             propertyRect.height = EditorGUIUtility.singleLineHeight;
-            propertyRect.y += 5f;
+            propertyRect.y += 2.5f;
             SerializedProperty patternStepTypeProperty = patternStepsProperty.FindPropertyRelative("type");
             EditorGUI.PropertyField(propertyRect, patternStepTypeProperty, new GUIContent("Step Type"));
             // Start time step

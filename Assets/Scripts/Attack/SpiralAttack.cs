@@ -53,6 +53,8 @@ namespace oneShot
 			{
 				GameTime.Instance.SlowMotion(0.2f, 1.5f);
 			}
+
+			//SoundManager.Instance.PlaySound("chrona_spiral_attack");
 		}
 
 #if UNITY_EDITOR

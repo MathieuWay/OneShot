@@ -8,6 +8,9 @@ public class SpawnPoint : MonoBehaviour
 {
 	[SerializeField] private TextMeshProUGUI numberText = null;
 	[SerializeField] private SpriteRenderer spriteRenderer = null;
+	[SerializeField] private Sprite pointMove = null;
+	[SerializeField] private Sprite pointSelected = null;
+	[SerializeField] private Sprite pointDefault = null;
 	public int _ID { get; set; }
 	public float _Time { get; private set; }
 	public Vector2 _Position { get; private set; }
@@ -39,14 +42,17 @@ public class SpawnPoint : MonoBehaviour
 
 	public void Select()
 	{
-		spriteRenderer.color = new Color(1, 0.7f, 0);
+		spriteRenderer.sprite = pointSelected;
+		//spriteRenderer.color = new Color(1, 0.7f, 0);
 	}
 	public void Unselect()
 	{
-		spriteRenderer.color = Color.red;
+		spriteRenderer.sprite = pointDefault;
+		//spriteRenderer.color = Color.red;
 	}
 	public void Grab()
 	{
-		spriteRenderer.color = Color.green;
+		spriteRenderer.sprite = pointMove;
+		//spriteRenderer.color = Color.green;
 	}
 }

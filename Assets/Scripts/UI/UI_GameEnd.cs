@@ -2,6 +2,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using TMPro;
 
 public class UI_GameEnd : MonoBehaviour
@@ -9,12 +10,17 @@ public class UI_GameEnd : MonoBehaviour
 	[SerializeField] private GameObject endPanel = null;
 	[SerializeField] private GameObject victoryPanel = null;
 	[SerializeField] private GameObject defeatPanel = null;
+	[SerializeField] private GameObject buttonsContainer = null;
 	[SerializeField] private TextMeshProUGUI resultText = null;
-	[SerializeField] private Button continueButton = null;
-	[SerializeField] private TextMeshProUGUI continueText = null;
+	[SerializeField] private Button retryButton = null;
+	[SerializeField] private Button nextLevelButton = null;
+	[SerializeField] private TextMeshProUGUI retryText = null;
+	[SerializeField] private TextMeshProUGUI nextLevelText = null;
 	private bool victory, defeat;
 	private bool readyToReload;
 	private enum DefeatType { PlayerDie, TimeElapsed }
+	private float combatDuration = 0;
+	private bool playCombatPhase = false;
 
 
 	private void Awake()
@@ -22,22 +28,31 @@ public class UI_GameEnd : MonoBehaviour
 		endPanel.SetActive(false);
 		victoryPanel.SetActive(false);
 		defeatPanel.SetActive(false);
-		continueButton.gameObject.SetActive(false);
+		buttonsContainer.SetActive(false);
 	}
 
 	private void Start()
 	{
-		oneShot.EnemiesController.OnAllEnemiesKilled += Victory;
+		oneShot.LevelController.Instance.OnStartCombatPhase += delegate { playCombatPhase = true; };
+		oneShot.EnemiesController.Instance.OnAllEnemiesKilled += Victory;
 		oneShot.LevelController.Instance.OnPlayerDie += delegate { Defeat(DefeatType.PlayerDie); };
 		oneShot.LevelController.Instance.OnTimeElapsed += delegate { Defeat(DefeatType.TimeElapsed); };
-		continueButton.onClick.AddListener(ReloadGame);
+		retryButton.onClick.AddListener(ReloadGame);
+		nextLevelButton.onClick.AddListener(delegate { LevelLoader.Instance.LoadNextLevel(); });
+
+		//if (LevelLoader.Instance.CurrentLevel == LevelLoader.LevelName.Level1) Victory();
 	}
 
 	private void Update()
 	{
-		if(Gamepad.Instance.ButtonDownA)
+		//if(Gamepad.Instance.ButtonDownA)
+		//{
+		//	retryButton.Select();
+		//}
+
+		if(playCombatPhase)
 		{
-			continueButton.Select();
+			combatDuration += Time.unscaledDeltaTime;
 		}
 	}
 
@@ -54,6 +69,7 @@ public class UI_GameEnd : MonoBehaviour
 		if (defeat || victory) return;
 
 		victory = true;
+		playCombatPhase = false;
 
 		StartCoroutine(VictoryProcess());
 	}
@@ -63,14 +79,30 @@ public class UI_GameEnd : MonoBehaviour
 
 		endPanel.SetActive(true);
 		victoryPanel.SetActive(true);
+		resultText.text = string.Empty;
+
+		yield return new WaitForSeconds(0.5f);
 
 		resultText.text = "YOU KILLED " + oneShot.EnemiesController.Instance.EnemyKilledCount
-			+ " ENEMIES IN " + UI_Timeline.Instance.GetCurrentTime().ToString("0.00") + " SECONDS";
+			+ " ENEMIES IN " + combatDuration.ToString("0.000")/*UI_Timeline.Instance.GetCurrentTime().ToString("0.00")*/ + " SECONDS";
 
 		yield return new WaitForSeconds(1);
 
-		continueButton.gameObject.SetActive(true);
-		continueText.text = "PLAY AGAIN";
+		buttonsContainer.SetActive(true);
+
+		if(LevelLoader.Instance.NextLevel == LevelLoader.LevelName.None)
+		{
+			nextLevelButton.gameObject.SetActive(false);
+			EventSystem.current.SetSelectedGameObject(retryButton.gameObject);
+		}
+		else
+		{
+			nextLevelButton.gameObject.SetActive(true);
+			EventSystem.current.SetSelectedGameObject(nextLevelButton.gameObject);
+		}
+
+		retryText.text = "PLAY AGAIN";
+		nextLevelText.text = "NEXT LEVEL";
 		readyToReload = true;
 	}
 
@@ -89,6 +121,7 @@ public class UI_GameEnd : MonoBehaviour
 		endPanel.SetActive(true);
 		defeatPanel.SetActive(true);
 		resultText.enabled = false;
+		resultText.text = string.Empty;
 		oneShot.LevelController.Instance.ReloadScene(1.5f);
 
 		//int enemyLeft = oneShot.EnemiesController.Instance.EnemyLeft;

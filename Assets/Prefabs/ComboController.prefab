@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9075805905090111029}
   - component: {fileID: 9075805905090111030}
+  - component: {fileID: 3438799254261045166}
   m_Layer: 0
   m_Name: ComboController
   m_TagString: Untagged
@@ -43,3 +44,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0733827e5983764e8d09ddb03957fe2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  startNewComboOnFailedDelay: 1
+  startNewComboOnSucceedDelay: 0.5
+--- !u!114 &3438799254261045166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9075805905090110920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c1c9683f5836f248b6c0322bc46c20c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  comboController: {fileID: 9075805905090111030}

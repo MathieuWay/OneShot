@@ -39,13 +39,14 @@ public class InterLayerEditor : Editor
     {
         SerializedProperty patternsStepsProperty = serializedObject.FindProperty("paths");
         _pathReorderableList = new ReorderableList(serializedObject, patternsStepsProperty);
-        _pathReorderableList.elementHeight = EditorGUIUtility.singleLineHeight * 2 + 10f;
+        _pathReorderableList.elementHeight = EditorGUIUtility.singleLineHeight * 2 + 12.5f;
         _pathReorderableList.drawElementCallback = (Rect rect, int index, bool isActive, bool isFocused) =>
         {
             SerializedProperty patternStepsProperty = serializedObject.FindProperty("paths").GetArrayElementAtIndex(index);
             Rect propertyRect = rect;
             //STEP TYPE
             propertyRect.height = EditorGUIUtility.singleLineHeight;
+            propertyRect.y += 2.5f;
             EditorGUI.PropertyField(propertyRect, patternStepsProperty.FindPropertyRelative("path").FindPropertyRelative("waypoint"), new GUIContent("Position"));
             //START TIME
             propertyRect.y += EditorGUIUtility.singleLineHeight + 5f;

@@ -42,14 +42,15 @@ namespace oneShot
 
 		public delegate void TacticsDelegate();
 		public event TacticsDelegate OnPlayerTeleport;
+		public event TacticsDelegate OnBeforePlayerTeleport;
 
 		[Header("Main")]
 		[SerializeField] private float timelineDuration = 10;
 		[SerializeField] private AnimationCurve fastSpeedCurve = null;
 		[SerializeField] private float fastSpeedFactor = 1;
 		[SerializeField] private float fastSpeedDelay = 2;
-		[SerializeField] private GameObject tpStartParticle = null;
-		[SerializeField] private GameObject tpFinishParticle = null;
+		//[SerializeField] private GameObject tpStartParticle = null;
+		//[SerializeField] private GameObject tpFinishParticle = null;
 		private bool launchStartParticle;
 		private float newStepTime;
 		private float fastSpeedTime;
@@ -65,11 +66,13 @@ namespace oneShot
         private Queue<TacticsStep> tpQueue;
         private TacticsStep nextStep;
         private GameObject player;
+		private PlayerBehaviour playerBehaviour;
         // Start is called before the first frame update
         private void Awake()
         {
             instance = this;
             player = GameObject.FindWithTag("Player");
+			playerBehaviour = player.GetComponent<PlayerBehaviour>();
 			isFinished = false;
         }
 
@@ -81,8 +84,11 @@ namespace oneShot
 				//FX
 				if ((time >= nextStep.time - 0.5f && time < nextStep.time) && !launchStartParticle)
 				{
+					OnBeforePlayerTeleport?.Invoke();
 					launchStartParticle = true;
-					Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
+					//Instantiate(tpStartParticle, player.transform.position, tpStartParticle.transform.rotation);
+					SoundManager.Instance.PlaySound("teleport_01");
+					VFX_Manager.Instance.PlayVFX("tp_spawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0.1f), 2);
 				}
 
 				//Fast Speed
@@ -94,7 +100,8 @@ namespace oneShot
 
 				if (time >= nextStep.time)
 				{
-					ExecuteNextStep();					
+					ExecuteNextStep();
+					GameTime.Instance.SetTimeSpeed(0.1f, 1);
 				}
                     
                 time += Time.deltaTime * GameTime.Instance.TimeSpeed;
@@ -107,7 +114,10 @@ namespace oneShot
 
 			//FX
 			launchStartParticle = false;
-			Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
+			//Instantiate(tpFinishParticle, player.transform.position, tpFinishParticle.transform.rotation);
+			SoundManager.Instance.PlaySound("teleport_02");
+			VFX_Manager.Instance.PlayVFX("tp_dispawn", playerBehaviour.CenterPivot.position - new Vector3(0, 0.2f, 0.1f), 2);
+			GameTime.Instance.SlowMotion(0.2f, 1.5f);
 
 			OnPlayerTeleport?.Invoke();
 
@@ -120,7 +130,7 @@ namespace oneShot
 			SetFastSpeed();
 
 			//Reset time speed
-			GameTime.Instance.SetHardTimeSpeed(1);
+			//GameTime.Instance.SetHardTimeSpeed(1);
 		}
 
         public void loadTactics(List<SpawnPoint> tpList)
@@ -131,8 +141,10 @@ namespace oneShot
                 TacticsStep step = new TacticsStep(tp._Position, tp._Time);
                 tpQueue.Enqueue(step);
             }
-            if(tpQueue.Count > 0)
-                nextStep = tpQueue.Dequeue();
+			if (tpQueue.Count > 0)
+				nextStep = tpQueue.Dequeue();
+			else
+				isFinished = true;
 			//Fast Speed
 			SetFastSpeed();
 		}

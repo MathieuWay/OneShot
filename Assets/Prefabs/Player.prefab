@@ -74,6 +74,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   centerPivot: {fileID: 5373720305252162197}
   pivot: {fileID: 2292501851968759249}
+  chronaAnim: {fileID: 4040126900290731189}
+  playerAnimEvent: {fileID: 5340249120966825660}
 --- !u!1 &5969566483369509360
 GameObject:
   m_ObjectHideFlags: 0
@@ -86,7 +88,9 @@ GameObject:
   - component: {fileID: 7286508438729941827}
   - component: {fileID: 2733220038182368139}
   - component: {fileID: 7838066754866216446}
-  m_Layer: 0
+  - component: {fileID: 4040126900290731189}
+  - component: {fileID: 5340249120966825660}
+  m_Layer: 15
   m_Name: Character_Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -101,8 +105,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5969566483369509360}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.36, z: 0}
-  m_LocalScale: {x: 0.22826086, y: 0.75, z: 1}
+  m_LocalPosition: {x: 0, y: 0.36, z: -0.2}
+  m_LocalScale: {x: 0.75, y: 0.75, z: 1}
   m_Children: []
   m_Father: {fileID: 8056278007475426761}
   m_RootOrder: 1
@@ -166,7 +170,39 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e96765809a580f489e5121b5012da42, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sprite: {fileID: 1870357308512752582, guid: 6c0e736c2c416864e881af7b76f1d1b5, type: 3}
   ScaleFactor: 0.75
+--- !u!95 &4040126900290731189
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5969566483369509360}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 0f76301cf56c87a4281a1adb67655287, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5340249120966825660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5969566483369509360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6a600ab01176864e952e8c71f1bee3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2420946337948179116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -434,6 +470,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: c8d87df998cfab945b594bd64680c0a6, type: 2}
+    - target: {fileID: 6656909897156228386, guid: e6ae6e55ec3600448b9df080943c4be1,
+        type: 3}
+      propertyPath: m_Size.x
+      value: 0.3
+      objectReference: {fileID: 0}
     - target: {fileID: 6860611766688052674, guid: e6ae6e55ec3600448b9df080943c4be1,
         type: 3}
       propertyPath: tint.r

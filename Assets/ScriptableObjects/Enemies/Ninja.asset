@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ebd71675f2b214042b0632521502f999, type: 3}
   m_Name: Ninja
   m_EditorClassIdentifier: 
-  speed: 1.4
-  reactionTime: 0.8
-  fieldOfView: 0.6
+  enemyName: 1
+  speed: 1.5
+  reactionTime: 1.2
+  fieldOfView: 0.9

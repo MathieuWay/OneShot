@@ -1,5 +1,71 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &91846984
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 91846985}
+  - component: {fileID: 91846987}
+  - component: {fileID: 91846986}
+  m_Layer: 11
+  m_Name: EventSystem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &91846985
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91846984}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1978420180411566663}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &91846987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91846984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_FirstSelected: {fileID: 0}
+  m_sendNavigationEvents: 1
+  m_DragThreshold: 10
+--- !u!114 &91846986
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 91846984}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f231c4fb786f3946a6b90b886c48677, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_HorizontalAxis: Horizontal_JL
+  m_VerticalAxis: Vertical_JL
+  m_SubmitButton: Submit
+  m_CancelButton: Cancel
+  m_InputActionsPerSecond: 10
+  m_RepeatDelay: 0.25
+  m_ForceModuleActive: 1
 --- !u!1 &1978420180411566661
 GameObject:
   m_ObjectHideFlags: 0
@@ -12,7 +78,7 @@ GameObject:
   - component: {fileID: 1978420180411566660}
   - component: {fileID: 1978420180411566662}
   - component: {fileID: 8663024865212203370}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Gamepad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +97,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1978420182415845287}
+  - {fileID: 91846985}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -79,27 +146,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiInputs:
   - inputName: 0
-    inputSprite: {fileID: 21300000, guid: 375fda2896dfafb4996c512adb7bf575, type: 3}
+    inputSprite: {fileID: -4274297465759658675, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 1
-    inputSprite: {fileID: 21300000, guid: ccc21754487639148b484df410e12fc0, type: 3}
+    inputSprite: {fileID: 8700484617563527968, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 2
-    inputSprite: {fileID: 21300000, guid: 77af83be222f6ec4397d13b4a97fb70f, type: 3}
+    inputSprite: {fileID: 7121640908601499096, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 3
-    inputSprite: {fileID: 21300000, guid: de63f573bc2944a4e9526db387dadb06, type: 3}
+    inputSprite: {fileID: -997354275730288927, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 4
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+    inputSprite: {fileID: -7841333810922851470, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 5
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+    inputSprite: {fileID: -5879354929235939926, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 6
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+    inputSprite: {fileID: 8078001360415561297, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 7
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
-  - inputName: 8
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
-  - inputName: 9
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
-  - inputName: 10
-    inputSprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+    inputSprite: {fileID: 742898667060642084, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
 --- !u!1 &1978420181470257230
 GameObject:
   m_ObjectHideFlags: 0
@@ -111,7 +180,7 @@ GameObject:
   - component: {fileID: 1978420181470257233}
   - component: {fileID: 1978420181470257235}
   - component: {fileID: 1978420181470257232}
-  m_Layer: 5
+  m_Layer: 11
   m_Name: Cursor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +195,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1978420181470257230}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: -134}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1978420182415845287}
@@ -135,7 +204,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 40, y: 40}
+  m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1978420181470257235
 CanvasRenderer:
@@ -158,12 +227,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 1, b: 1, a: 0.33333334}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 59247406a9d895641957e82ad933c47a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbf701843ee91704c9bb638f9c78f41c, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -185,7 +254,7 @@ GameObject:
   - component: {fileID: 1978420182415845288}
   - component: {fileID: 1978420182415845289}
   - component: {fileID: 1978420182415845286}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}

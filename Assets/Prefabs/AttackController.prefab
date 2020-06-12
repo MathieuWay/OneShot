@@ -46,15 +46,16 @@ MonoBehaviour:
   attackName: 2
   combo:
     inputs:
-    - inputName: 6
-      delay: 1
-    - inputName: 1
-      delay: 1
-    - inputName: 7
-      delay: 1
+    - inputName: 0
+      delay: 2
+    - inputName: 2
+      delay: 2
+    - inputName: 4
+      delay: 2
     repeatDelay: 2
     attackTitle: Slash
-  detectionRange: 4
+  detectionRange: 1
+  widthRange: 2.5
 --- !u!1 &3672627027250455344
 GameObject:
   m_ObjectHideFlags: 0
@@ -152,14 +153,14 @@ MonoBehaviour:
   combo:
     inputs:
     - inputName: 2
-      delay: 1
-    - inputName: 2
-      delay: 1
-    - inputName: 8
-      delay: 1.5
+      delay: 2
+    - inputName: 3
+      delay: 2
+    - inputName: 5
+      delay: 2
     repeatDelay: 2
     attackTitle: Spiral
-  radius: 1
+  radius: 0.7
 --- !u!1 &3672627028709258143
 GameObject:
   m_ObjectHideFlags: 0
@@ -206,12 +207,13 @@ MonoBehaviour:
   attackName: 1
   combo:
     inputs:
+    - inputName: 1
+      delay: 2
     - inputName: 3
-      delay: 1
-    - inputName: 4
-      delay: 1
-    - inputName: 2
-      delay: 1
+      delay: 2
+    - inputName: 7
+      delay: 2
     repeatDelay: 2
     attackTitle: Thrust
-  detectionRange: 4
+  detectionRange: 2.5
+  heightRange: 1

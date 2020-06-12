@@ -24,12 +24,12 @@ TagManager:
   - Layer_2
   - Elevator_Inside
   - Elevator_Front
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Light_Entity
+  - Layer_building
+  - Layer_Cardboard
+  - Layer_3
+  - Layer_Cardboard_2
+  - Layer_Cardboard_3
   - 
   - 
   - 

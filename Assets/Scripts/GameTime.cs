@@ -7,11 +7,19 @@ public class GameTime : MonoBehaviour
 {
 	public static GameTime Instance { get; private set; }
 	public float TimeSpeed { get; private set; }
+	public delegate void TimeDelegate(float duration);
+	public event TimeDelegate OnStartSlowMotion;
 
 
-	public void SetHardTimeSpeed(float speed)
+    public void SetHardTimeSpeed(float speed)
 	{
 		TimeSpeed = speed;
+	}
+
+	//#Critical: Ne le faire uniquement pour des cas très spécifiques (exemple -> tutoriel)
+	public void CancelCoroutine()
+	{
+		StopAllCoroutines();
 	}
 
 	public void SetTimeSpeed(float speed, float duration)
@@ -20,8 +28,8 @@ public class GameTime : MonoBehaviour
 	}
 
 	public void SlowMotion(float speed, float duration)
-	{
-		if (speed > 1)
+    {
+        if (speed > 1)
 		{
 			speed = 1;
 		}
@@ -31,7 +39,9 @@ public class GameTime : MonoBehaviour
 		}
 
 		SetTimeSpeed(speed, duration);
-	}
+
+		OnStartSlowMotion?.Invoke(duration); 
+    }
 
 
 	private void Awake()
@@ -51,11 +61,11 @@ public class GameTime : MonoBehaviour
 	}
 
 	private IEnumerator SetTimeSpeedProcess(float speed, float duration)
-	{
-		TimeSpeed = speed;
+    {
+        TimeSpeed = speed;
 
 		yield return new WaitForSeconds(duration);
 
 		TimeSpeed = 1;
-	}
+    }
 }

@@ -13,8 +13,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyData: {fileID: 11400000, guid: e0739bcf20c61e44a97c8b59c3ea3e29, type: 2}
-  firePrefab: {fileID: 5747463930727319770, guid: 71900ff4e3c4f5342a6091f415687cf8,
-    type: 3}
   drawGizmos: 1
 --- !u!1001 &1280414440443483244
 PrefabInstance:
@@ -23,6 +21,31 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8053145843063243872, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: showPattern
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8053145843063243872, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: debugColor.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8053145843063243872, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: debugColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8053145843063243872, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: debugColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 82172330869104890, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 133501194019460205, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -98,10 +121,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Basic
       objectReference: {fileID: 0}
+    - target: {fileID: 1991958093246605931, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -0.001
+      objectReference: {fileID: 0}
     - target: {fileID: 2012173607127642059, guid: 15832efbd63208b40b557c9270213c6d,
         type: 3}
       propertyPath: m_Color.a
-      value: 0.039215688
+      value: 0.2509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 3717638905680919732, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 90f6d7710e92f4146981871b6ee46d9b, type: 2}
+    - target: {fileID: 5110280401165495349, guid: 15832efbd63208b40b557c9270213c6d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 15832efbd63208b40b557c9270213c6d, type: 3}

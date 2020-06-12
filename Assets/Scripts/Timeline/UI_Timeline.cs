@@ -15,6 +15,8 @@ public class UI_Timeline : MonoBehaviour
 {
 	public static UI_Timeline Instance { get; private set; }
 
+	public delegate void MyDelegate();
+	public event MyDelegate OnSetPause;
 
 	[Header("Timer")]
 	[SerializeField] private RectTransform timelineRect = null;
@@ -85,6 +87,19 @@ public class UI_Timeline : MonoBehaviour
 		}
 	}
 
+	public bool CheckPointTimeCorrect()
+	{
+		for (int i = 0; i < points.Count; i++)
+		{
+			if(Mathf.Abs(points[i]._Time - timer) < 0.5f)
+			{
+				return false;
+			}
+		}
+
+		return true;
+	}
+
 	//Supprime le dernier point sur la Timeline + le point de spawn associé sur la map
 	public void RemoveSelectedPoint()
 	{
@@ -116,6 +131,18 @@ public class UI_Timeline : MonoBehaviour
 	public void BeginCarnage()
 	{
 		beginCarnageContainer.SetActive(false);
+	}
+
+	public bool IsMovingTimeBackward()
+	{
+		if(GameTime.Instance.TimeSpeed != 0)
+		{
+			return GameTime.Instance.TimeSpeed < 0;
+		}
+		else
+		{
+			return UI_PointController.Instance.MovingBack;
+		}
 	}
 
 
@@ -178,6 +205,8 @@ public class UI_Timeline : MonoBehaviour
 		if (Gamepad.Instance.ButtonDownX)
 		{
 			PauseToggle();
+
+			if (pause) OnSetPause?.Invoke();
 		}
 	}
 
@@ -351,7 +380,6 @@ public class UI_Timeline : MonoBehaviour
 		SelectedPoint = point._ID;
 		UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 	}
-
 
 	//OLD
 	//public void ResetAll()

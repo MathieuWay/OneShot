@@ -7,9 +7,13 @@ public class UI_PointController : MonoBehaviour
 {
 	public static UI_PointController Instance { get; private set; }
 
+	public delegate void MyDelegate();
+	public event MyDelegate OnPointMoved;
+
 	[SerializeField] private float movePointSpeed = 200f;
 	private UI_Point currentPoint;
 	private bool pointMoved;
+	public bool MovingBack { get; set; }
 
 
 	public void SetCurrentPoint(UI_Point point)
@@ -73,7 +77,11 @@ public class UI_PointController : MonoBehaviour
 				UI_Timeline.Instance.UpdatePointsOrder();
 				UI_Timeline.Instance.UpdateCurrentPointSelected();
 				pointMoved = false;
+
+				OnPointMoved?.Invoke();
 			}
+
+			MovingBack = Gamepad.Instance.HorizontalJR < 0;
 
 			currentPoint.UpdateTime();
 		}
