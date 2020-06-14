@@ -47,6 +47,8 @@ public class LevelLoader : MonoBehaviour
 
 		OnStartLoadNextLevel?.Invoke();
 		Fader.Instance.FadeOut();
+        //SpawnController.Instance.RemoveAllPoints();
+        //UI_Timeline.Instance.RemoveAllPoints();
 		StartCoroutine(LoadDelay(0.1f));
 	}
 

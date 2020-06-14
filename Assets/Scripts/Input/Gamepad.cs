@@ -11,37 +11,245 @@ public class Gamepad : MonoBehaviour
 {
 	public static Gamepad Instance { get; private set; }
 
-    public ControllerType type;
-    public float HorizontalJL { get; private set; }
-	public float VerticalJL { get; private set; }
-	public float HorizontalJR { get; private set; }
-	public float VerticalJR { get; private set; }
-	public float PadHorizontal { get; private set; }
-	public float PadVertical { get; private set; }
-	public bool TriggerL { get; private set; }
+    public ControllerType type = ControllerType.KeyboardMouse;
+    public float HorizontalJL
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetAxis("Horizontal_JL");
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.RightArrow))
+                {
+                    return 1;
+                }
+                else if(Input.GetKey(KeyCode.LeftArrow))
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+    }
+    public float VerticalJL
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetAxis("Vertical_JL");
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.UpArrow))
+                {
+                    return 1;
+                }
+                else if (Input.GetKey(KeyCode.DownArrow))
+                {
+                    return -1;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+    }
+    public float HorizontalJR
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetAxis("Horizontal_JR");
+            }
+            else
+            {
+                return Input.GetAxis("Horizontal");
+            }
+        }
+    }
+    //public float VerticalJR { get; private set; }
+    public float PadHorizontal
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetAxis("Pad_Horizontal");
+            }
+            else
+            {
+                return 0;
+            }
+        }
+    }
+    public float PadVertical
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetAxis("Pad_Vertical");
+            }
+            else
+            {
+                if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
+                {
+                    return 0;
+                }
+                else
+                {
+                    return Input.GetAxis("Mouse ScrollWheel");
+                }
+            }
+        }
+    }
+    public bool TriggerL { get; private set; }
 	public bool TriggerR { get; private set; }
+    /*
 	public bool ButtonA { get; private set; }
-	public bool ButtonB { get; private set; }
-	public bool ButtonX { get; private set; }
+    public bool ButtonB { get; private set; }
+    public bool ButtonX { get; private set; }
 	public bool ButtonY { get; private set; }
 	public bool ButtonR { get; private set; }
 	public bool ButtonL { get; private set; }
 	public bool ButtonTriggerL { get; private set; }
 	public bool ButtonTriggerR { get; private set; }
 	public bool ButtonStart { get; private set; }
-	public bool ButtonDownA { get; private set; }
-	public bool ButtonDownB { get; private set; }
-	public bool ButtonDownX { get; private set; }
-	public bool ButtonDownY { get; private set; }
-	public bool ButtonDownL { get; private set; }
-	public bool ButtonDownR { get; private set; }
-	public bool ButtonDownTriggerL { get; private set; }
-	public bool ButtonDownTriggerR { get; private set; }
-	public bool ButtonDownStart { get; private set; }
+    */
+    public bool ButtonDownA
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 0");
+            }
+            else
+            {
+                if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
+                {
+                    return Input.GetKeyDown(KeyCode.S);
+                }
+                else
+                {
+                    return Input.GetMouseButtonDown(0);
+                }
+            }
+        }
+    }
+    public bool ButtonDownB
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 1");
+            }
+            else
+            {
+                if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
+                {
+                    return Input.GetKeyDown(KeyCode.D);
+                }
+                else
+                {
+                    return Input.GetMouseButtonDown(1);
+                }
+            }
+        }
+    }
+    public bool ButtonDownX
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 2");
+            }
+            else
+            {
+                if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
+                {
+                    return Input.GetKeyDown(KeyCode.Q);
+                }
+                else
+                {
+                    return Input.GetKeyDown(KeyCode.Space);
+                }
+            }
+        }
+    }
+    public bool ButtonDownY
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 3");
+            }
+            else
+            {
+                if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
+                {
+                    return Input.GetKeyDown(KeyCode.Z);
+                }
+                else
+                {
+                    return Input.GetKeyDown(KeyCode.Return);
+                }
+            }
+        }
+    }
+    //public bool ButtonDownL { get; private set; }
+	//public bool ButtonDownR { get; private set; }
+	public bool ButtonDownTriggerL
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 4");
+            }
+            else
+            {
+                return Input.GetKeyDown(KeyCode.A);
+            }
+        }
+    }
+    public bool ButtonDownTriggerR
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 5");
+            }
+            else
+            {
+                return Input.GetKeyDown(KeyCode.E);
+            }
+        }
+    }
+    public bool ButtonDownStart { get; private set; }
+    //Gamepad Specific
 	private bool isVibrating;
 
+    //Keyboard/Mouse Specific
+    //private Vector2 lastMousePosition = Vector2.zero;
+    //private Vector2 currentMousePosition = Vector2.zero;
+    //private Vector2 deltaMousePosition = Vector2.zero;
 
-	public void Vibrate(float leftMotor, float rightMotor, float duration)
+
+    public void Vibrate(float leftMotor, float rightMotor, float duration)
 	{
 		if (isVibrating) return;
 
@@ -72,49 +280,54 @@ public class Gamepad : MonoBehaviour
 
 	private void Update()
 	{
+        if (type == ControllerType.Gamepad)
+            ListenKeyboardInput();
+        else
+            ListenGamepadInput();
+        /*if(type == ControllerType.KeyboardMouse)
+        {
+            currentMousePosition = Input.mousePosition;
+            deltaMousePosition = currentMousePosition - lastMousePosition;
+            lastMousePosition = currentMousePosition;
+        }*/
 		//Gâchettes
 		TriggerL = Input.GetAxis("TriggerL") > 0 ? true : false;
 		TriggerR = Input.GetAxis("TriggerR") > 0 ? true : false;
 
         //Joysticks
-        HorizontalJL = Input.GetAxis("Horizontal_JL");
-        if (HorizontalJL == 0)
-            HorizontalJL = Input.GetAxis("Horizontale");
+        //HorizontalJL = Input.GetAxis("Horizontal_JL");
+        //VerticalJL = Input.GetAxis("Vertical_JL");
 
-        VerticalJL = Input.GetAxis("Vertical_JL");
-        if(VerticalJL == 0)
-            VerticalJL = Input.GetAxis("Verticale");
-
-        HorizontalJR = Input.GetAxis("Horizontal_JR");
-		VerticalJR = Input.GetAxis("Vertical_JR");
+        //HorizontalJR = Input.GetAxis("Horizontal_JR");
+		//VerticalJR = Input.GetAxis("Vertical_JR");
 
 		//Pad
-		PadHorizontal = Input.GetAxis("Pad_Horizontal");
-        PadVertical = Input.GetAxis("Pad_Vertical");
-        if (PadVertical == 0)
-            PadVertical = Input.GetAxis("Mouse ScrollWheel");
+		//PadHorizontal = Input.GetAxis("Pad_Horizontal");
+        //PadVertical = Input.GetAxis("Pad_Vertical");
+        //if (PadVertical == 0)
+        //    PadVertical = Input.GetAxis("Mouse ScrollWheel");
 
         //Boutons enfoncé une fois
-        ButtonDownA = Input.GetKeyDown("joystick button 0");
-		ButtonDownB = Input.GetKeyDown("joystick button 1");
-		ButtonDownX = Input.GetKeyDown("joystick button 2");
-		ButtonDownY = Input.GetKeyDown("joystick button 3");
-		ButtonDownR = Input.GetKeyDown("joystick button 9");
-		ButtonDownL = Input.GetKeyDown("joystick button 8");
-		ButtonStart = Input.GetKeyDown("joystick button 7");
-		ButtonDownTriggerL = Input.GetKeyDown("joystick button 4");
-		ButtonDownTriggerR = Input.GetKeyDown("joystick button 5");
+        //ButtonDownA = Input.GetKeyDown("joystick button 0");
+		//ButtonDownB = Input.GetKeyDown("joystick button 1");
+		//ButtonDownX = Input.GetKeyDown("joystick button 2");
+		//ButtonDownY = Input.GetKeyDown("joystick button 3");
+		//ButtonDownR = Input.GetKeyDown("joystick button 9");
+		//ButtonDownL = Input.GetKeyDown("joystick button 8");
+		//ButtonStart = Input.GetKeyDown("joystick button 7");
+		//ButtonDownTriggerL = Input.GetKeyDown("joystick button 4");
+		//ButtonDownTriggerR = Input.GetKeyDown("joystick button 5");
 
 		//Boutons enfoncé en continue
-		ButtonA = Input.GetKey("joystick button 0");
-		ButtonB = Input.GetKey("joystick button 1");
-		ButtonX = Input.GetKey("joystick button 2");
-		ButtonY = Input.GetKey("joystick button 3");
-		ButtonR = Input.GetKey("joystick button 9");
-		ButtonL = Input.GetKey("joystick button 8");
-		ButtonTriggerL = Input.GetKey("joystick button 4");
-		ButtonTriggerR = Input.GetKey("joystick button 5");
-		ButtonDownStart = Input.GetKeyDown("joystick button 7");
+		//ButtonA = Input.GetKey("joystick button 0");
+		//ButtonB = Input.GetKey("joystick button 1");
+		//ButtonX = Input.GetKey("joystick button 2");
+		//ButtonY = Input.GetKey("joystick button 3");
+		//ButtonR = Input.GetKey("joystick button 9");
+		//ButtonL = Input.GetKey("joystick button 8");
+		//ButtonTriggerL = Input.GetKey("joystick button 4");
+		//ButtonTriggerR = Input.GetKey("joystick button 5");
+		//ButtonDownStart = Input.GetKeyDown("joystick button 7");
 
 		//!DEBUG : Input Clavier/Souris
 		//ButtonDownStart = Input.GetKeyDown(KeyCode.Return);
@@ -128,4 +341,47 @@ public class Gamepad : MonoBehaviour
 	{
 		GamePad.SetVibration(0, 0, 0);
 	}
+
+    private void ListenKeyboardInput()
+    {
+        KeyCode[] inputs = new KeyCode[] { KeyCode.A, KeyCode.E, KeyCode.Z, KeyCode.Q, KeyCode.S, KeyCode.D, KeyCode.Space, KeyCode.Return};
+        int i = 0;
+        while(i < inputs.Length)
+        {
+            if (Input.GetKeyDown(inputs[i]))
+            {
+                type = ControllerType.KeyboardMouse;
+                return;
+            }
+            i++;
+        }
+    }
+
+
+    private void ListenGamepadInput()
+    {
+        string[] inputs = new string[] { "joystick button 0", "joystick button 1", "joystick button 2", "joystick button 3", "joystick button 4", "joystick button 5" };
+        string[] axis = new string[] { "Pad_Vertical", "Horizontal_JR", "Vertical_JR", "Horizontal_JL", "Vertical_JL" };
+        int i = 0;
+        while (i < inputs.Length)
+        {
+            if (Input.GetKeyDown(inputs[i]))
+            {
+                type = ControllerType.KeyboardMouse;
+                return;
+            }
+            i++;
+        }
+
+        i = 0;
+        while (i < axis.Length)
+        {
+            if (Mathf.Abs(Input.GetAxis(axis[i])) >= 0.1f)
+            {
+                type = ControllerType.Gamepad;
+                return;
+            }
+            i++;
+        }
+    }
 }

@@ -113,6 +113,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0d78f270c70e1747ae84e75851fc330, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 1
 --- !u!114 &1978420180411566662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -148,26 +149,42 @@ MonoBehaviour:
   - inputName: 0
     inputSprite: {fileID: -4274297465759658675, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
       type: 3}
+    inputKeyboardSprite: {fileID: 7978510928897922, guid: fac66cf6b4afe534f87b4b93a7638510,
+      type: 3}
   - inputName: 1
     inputSprite: {fileID: 8700484617563527968, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
+    inputKeyboardSprite: {fileID: -9208729022587211405, guid: fac66cf6b4afe534f87b4b93a7638510,
       type: 3}
   - inputName: 2
     inputSprite: {fileID: 7121640908601499096, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
       type: 3}
+    inputKeyboardSprite: {fileID: 519702973383695948, guid: fac66cf6b4afe534f87b4b93a7638510,
+      type: 3}
   - inputName: 3
     inputSprite: {fileID: -997354275730288927, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
+    inputKeyboardSprite: {fileID: 2363765209125506600, guid: fac66cf6b4afe534f87b4b93a7638510,
       type: 3}
   - inputName: 4
     inputSprite: {fileID: -7841333810922851470, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
       type: 3}
+    inputKeyboardSprite: {fileID: -7841333810922851470, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 5
     inputSprite: {fileID: -5879354929235939926, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
+    inputKeyboardSprite: {fileID: -5879354929235939926, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
       type: 3}
   - inputName: 6
     inputSprite: {fileID: 8078001360415561297, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
       type: 3}
+    inputKeyboardSprite: {fileID: 8078001360415561297, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
   - inputName: 7
     inputSprite: {fileID: 742898667060642084, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
+      type: 3}
+    inputKeyboardSprite: {fileID: 742898667060642084, guid: 8ecfdf9f5e63bb6499ebfec18dc96057,
       type: 3}
 --- !u!1 &1978420181470257230
 GameObject:

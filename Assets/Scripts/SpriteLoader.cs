@@ -16,6 +16,7 @@ public class SpriteLoader : MonoBehaviour
 	{
 		_renderer = GetComponent<Renderer>();
 	}
+
 	private void Update()
     {
         if (_renderer && currentSprite != sprite && sprite != null)
@@ -29,22 +30,20 @@ public class SpriteLoader : MonoBehaviour
 		if(_renderer == null)
 		{
 			_renderer = GetComponent<Renderer>();
-		}
-
-		//ApplyTextureAndResizeQuad();
-
-		//if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
-		//	UpdateSprite();
+            if(currentSprite != sprite && sprite != null)
+                UpdateSprite();
+        }
 	}
-	//private void OnValidate()
-	//{
-	//    ApplyTextureAndResizeQuad();
 
-	//    if (GetComponent<Renderer>() && currentSprite != sprite && sprite != null)
-	//        UpdateSprite();
-	//}
+	/*private void OnValidate()
+	{
+	    ApplyTextureAndResizeQuad();
 
-	private void ApplyTextureAndResizeQuad()
+	    if (_renderer && currentSprite != sprite && sprite != null)
+	        UpdateSprite();
+	}*/
+
+    private void ApplyTextureAndResizeQuad()
     {
         if (GetComponent<Renderer>())
         {
@@ -81,6 +80,7 @@ public class SpriteLoader : MonoBehaviour
 
     private void UpdateSprite()
     {
+        if (sprite == null) return;
         //Renderer renderer = GetComponent<Renderer>();
         var croppedTexture = new Texture2D((int)sprite.rect.width, (int)sprite.rect.height);
         var pixels = sprite.texture.GetPixels((int)sprite.rect.x,
@@ -90,7 +90,18 @@ public class SpriteLoader : MonoBehaviour
         croppedTexture.SetPixels(pixels);
         croppedTexture.Apply();
         croppedTexture.filterMode = FilterMode.Point;
+#if UNITY_EDITOR
+        if (Application.isPlaying)
+        {
+            _renderer.material.SetTexture("_MainTex", croppedTexture);
+        }
+        else
+        {
+            _renderer.sharedMaterial.SetTexture("_MainTex", croppedTexture);
+        }
+#else
         _renderer.material.SetTexture("_MainTex", croppedTexture);
+#endif
         UpdateQuadSize(croppedTexture);
         currentSprite = sprite;
     }

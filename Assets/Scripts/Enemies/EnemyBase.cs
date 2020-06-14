@@ -118,13 +118,17 @@ namespace oneShot
 					nearestHit = correctHits[i];
 				}
 			}
-
-			if (nearestHit.transform.GetComponent<PlayerBehaviour>())
+            PlayerBehaviour player = nearestHit.transform.GetComponent<PlayerBehaviour>();
+            if (player)
 			{
-				PlayerBehaviour player = nearestHit.transform.GetComponent<PlayerBehaviour>();
-				player.Kill();
-				LaunchEffect(enemy.WeaponPivot.position, nearestHit.point);
-				enemy.Shoot();
+                if (!player.IsDead)
+                {
+                    GameTime.Instance.SetHardTimeSpeed(1);
+                    player.Kill();
+                    LaunchEffect(enemy.WeaponPivot.position, nearestHit.point);
+                    enemy.Shoot();
+                    enemy.followPattern = false;
+                }
 			}
 		}
 

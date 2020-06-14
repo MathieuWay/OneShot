@@ -15,8 +15,13 @@ public class UI_Point : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	public int _ID { get; set; }
 	public float _Time { get; set; }
 	public SpawnPoint _SpawnPoint { get; set; }
+    /*
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }*/
 
-	public void Init(int id, float time, SpawnPoint spawnPoint)
+    public void Init(int id, float time, SpawnPoint spawnPoint)
 	{
 		_ID = id;
 		_Time = time;

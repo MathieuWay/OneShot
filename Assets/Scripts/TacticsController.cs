@@ -82,7 +82,7 @@ namespace oneShot
             if (LevelController.Instance.phase == Phase.Combat && !isFinished && !PlayerBehaviour.Instance.IsDead)
             {
 				//FX
-				if ((time >= nextStep.time - 0.5f && time < nextStep.time) && !launchStartParticle)
+				if ((UI_Timeline.Instance.GetCurrentTime() >= nextStep.time - 0.5f && UI_Timeline.Instance.GetCurrentTime() < nextStep.time) && !launchStartParticle)
 				{
 					OnBeforePlayerTeleport?.Invoke();
 					launchStartParticle = true;
@@ -92,19 +92,19 @@ namespace oneShot
 				}
 
 				//Fast Speed
-				if(time >= newStepTime + fastSpeedDelay)
+				if(UI_Timeline.Instance.GetCurrentTime() >= newStepTime + fastSpeedDelay)
 				{
 					GameTime.Instance.SetHardTimeSpeed(1 + fastSpeedCurve.Evaluate(fastSpeedTime / fastSpeedDuration) * fastSpeedFactor);
 					fastSpeedTime += Time.deltaTime * GameTime.Instance.TimeSpeed;
 				}
 
-				if (time >= nextStep.time)
+				if (UI_Timeline.Instance.GetCurrentTime() >= nextStep.time)
 				{
 					ExecuteNextStep();
 					GameTime.Instance.SetTimeSpeed(0.1f, 1);
 				}
                     
-                time += Time.deltaTime * GameTime.Instance.TimeSpeed;
+                //time += Time.deltaTime * GameTime.Instance.TimeSpeed;
             }
         }
 
@@ -151,7 +151,7 @@ namespace oneShot
 
 		private void SetFastSpeed()
 		{
-			newStepTime = time;
+			newStepTime = UI_Timeline.Instance.GetCurrentTime();
 			fastSpeedTime = 0;
 			float durationBetweenStep = nextStep.time - newStepTime;
 			if (durationBetweenStep > fastSpeedDelay)

@@ -46,6 +46,7 @@ public class UI_Timeline : MonoBehaviour
 
 	[Header("Other")]
 	[SerializeField] private GameObject beginCarnageContainer = null;
+    public bool showTime = false;
 
 
 	public delegate void TimelineReset();
@@ -381,27 +382,44 @@ public class UI_Timeline : MonoBehaviour
 		UI_PointController.Instance.SetCurrentPoint(points[SelectedPoint]);
 	}
 
-	//OLD
-	//public void ResetAll()
-	//{
-	//	while (points.Count > 0)
-	//	{
-	//		RemoveSelectedPoint();
-	//	}
+    //OLD
+    //public void ResetAll()
+    //{
+    //	while (points.Count > 0)
+    //	{
+    //		RemoveSelectedPoint();
+    //	}
 
-	//	timer = 0;
+    //	timer = 0;
 
-	//	SetOnTimeline(timerIndicator, timer / timerDuration);
+    //	SetOnTimeline(timerIndicator, timer / timerDuration);
 
-	//	pause = true;
-	//}
+    //	pause = true;
+    //}
 
-	//OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline
-	//
-	//private void SetOnTimeline(Transform point, float value)
-	//{
-	//	point.localPosition = new Vector2((timelineRect.rect.xMin + (point.GetComponent<RectTransform>().sizeDelta.x / 2)) +
-	//		value * ((timelineRect.rect.xMax - timelineRect.rect.xMin) - point.GetComponent<RectTransform>().sizeDelta.x),
-	//		timelineRect.localPosition.y);
-	//}
+    //OLD VERSION: Prend en compte la taille de l'image pour ne pas dépasser les bordures de la timeline
+    //
+    //private void SetOnTimeline(Transform point, float value)
+    //{
+    //	point.localPosition = new Vector2((timelineRect.rect.xMin + (point.GetComponent<RectTransform>().sizeDelta.x / 2)) +
+    //		value * ((timelineRect.rect.xMax - timelineRect.rect.xMin) - point.GetComponent<RectTransform>().sizeDelta.x),
+    //		timelineRect.localPosition.y);
+    //}
+#if UNITY_EDITOR
+    private void OnGUI()
+    {
+        if(showTime)
+            GUILayout.Label(new GUIContent("        " + GetCurrentTime().ToString()));
+    }
+#endif
+
+    public void RemoveAllPoints()
+    {
+        for (int i = 0; i < points.Count; i++)
+        {
+            Destroy(points[i].gameObject);
+        }
+
+        points.Clear();
+    }
 }

@@ -15,8 +15,13 @@ public class SpawnPoint : MonoBehaviour
 	public float _Time { get; private set; }
 	public Vector2 _Position { get; private set; }
 	public GameObject _GameObject { get; private set; }
-
-	public void Init(int id, Vector3 root)
+    /*
+    private void Start()
+    {
+        DontDestroyOnLoad(this.gameObject);
+    }
+    */
+    public void Init(int id, Vector3 root)
 	{
 		SetID(id);
 		_Position = root;

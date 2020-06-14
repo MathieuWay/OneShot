@@ -33,7 +33,7 @@ namespace oneShot
 
 			anim.Play("dying");
 			SoundManager.Instance.PlaySound("chrona_death");
-			VFX_Manager.Instance.PlayVFX("chrona_death", CenterPivot.position - new Vector3(0, 0.2f, 0));
+			VFX_Manager.Instance.PlayVFX("chrona_death", CenterPivot.position - new Vector3(0, 0.2f, 0), 2f);
 
 			LevelController.Instance.PlayerDie();
 		}
@@ -53,7 +53,7 @@ namespace oneShot
 		{
 			anim = GetComponentInChildren<Animator>();
 
-			ComboController.Instance.StartComboNameEvent += PlayAttackAnim;
+            ComboController.Instance.StartComboNameEvent += PlayAttackAnim;
 			ComboController.Instance.StartComboNameEvent += StartAttackSound;
 			ComboController.Instance.NextInputEvent += PlayAttackSound;
 
@@ -147,5 +147,5 @@ namespace oneShot
 			yield return new WaitForEndOfFrame();
 			chronaAnim.SetTrigger("TP");
 		}
-	}
+    }
 }
