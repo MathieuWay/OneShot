@@ -90,7 +90,7 @@ namespace oneShot
 			Vector2 shootDir = PlayerBehaviour.Instance.CenterPivot.position - enemy.WeaponPivot.position;
 
 			//Le joueur doit être dans sa direction
-			if (Vector2.Dot(shootDir, new Vector2(enemy.GetDirectionX(), 0)) < 0) return;
+			if (Vector2.Dot(shootDir.normalized, new Vector2(enemy.GetDirectionX(), 0)) < 0) return;
 
 
 			RaycastHit2D[] hits = Physics2D.RaycastAll(enemy.WeaponPivot.position, shootDir, enemyData.FieldOfView);
