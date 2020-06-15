@@ -21,7 +21,6 @@ public class SpawnPoint : MonoBehaviour
 		SetID(id);
 		_Position = root;
 		_GameObject = gameObject;
-		_Time = UI_Timeline.Instance.GetCurrentTime();
 	}
 
 	public void SetTime(float time)

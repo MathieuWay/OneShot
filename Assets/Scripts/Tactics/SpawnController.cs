@@ -98,6 +98,49 @@ public class SpawnController : MonoBehaviour
 	private void Start()
 	{
 		StartCoroutine(SpawnProcess());
+
+		//Sauvegarde des points à chaque rechargement de scène
+		oneShot.LevelController.Instance.OnReloadScene += SavePointData;
+
+		//Chargement des points
+		StartCoroutine(LoadPointDelay());
+	}
+	private void SavePointData()
+	{
+		if (SpawnPoints.Count <= 0) return;
+
+		for (int i = 0; i < SpawnPoints.Count; i++)
+		{
+			Debug.Log("TIME: " + SpawnPoints[i]._Time);
+			SpawnPointManager.AddPoint(SpawnPoints[i]._ID, SpawnPoints[i]._Time, SpawnPoints[i]._Position, SpawnPoints[i].transform.position);
+		}
+	}
+	private IEnumerator LoadPointDelay()
+	{
+		//Attente d'une frame pour laisser le temps aux autres classes de charger des données dans la fonction Start
+		//Par exemple avec UI_Timeline qui doit attendre que TacticsController soit initialisé (en singleton) pour
+		//pouvoir définir la durée de la timeline (dont on a besoin pour charger nos points)
+		yield return new WaitForEndOfFrame();
+		LoadPointData();
+	}
+	private void LoadPointData()
+	{
+		if (SpawnPointManager.PointDatas.Count <= 0) return;
+
+		PointData[] points = SpawnPointManager.LoadPoints();
+
+		for (int i = 0; i < points.Length; i++)
+		{
+			SpawnPoint spawnPoint = AddPoint(points[i]._ID, points[i]._SpawnPosition, points[i]._Position);
+			spawnPoint.SetTime(points[i]._Time);
+
+			UI_Timeline.Instance.LoadPoint(spawnPoint);
+		}
+
+		UI_Timeline.Instance.FinishLoadPoint();
+
+		//On efface automatiquement les points après les avoir chargés
+		SpawnPointManager.ClearPoints();
 	}
 
 	private IEnumerator SpawnProcess()
@@ -246,20 +289,12 @@ public class SpawnController : MonoBehaviour
 					}
 
 					//Ajout Point
-
-					//Instance du point de spawn sur la surface touché
-					GameObject instance = Instantiate(pointPrefab, spawnPosition, Quaternion.identity);
-
-					SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
-
-					//L'ID correspond au nombre de point de spawn, on commence ici par 0
-					spawnPoint.Init(SpawnPoints.Count, rootPoint);
+					SpawnPoint spawnPoint = AddPoint(SpawnPoints.Count, spawnPosition, rootPoint);
+					spawnPoint.SetTime(UI_Timeline.Instance.GetCurrentTime());
 
 					oneShot.SoundManager.Instance.PlaySound("add_tp_point");
 					GameObject vfxPoint = oneShot.VFX_Manager.Instance.GetVFXInstance("spawnpoint", spawnPosition, Quaternion.Euler(-90, 0, 0));
-					vfxPoint.transform.SetParent(instance.transform);
-
-					SpawnPoints.Add(spawnPoint);
+					vfxPoint.transform.SetParent(spawnPoint.transform);
 
 					SpawnPointEvent?.Invoke(spawnPoint);
 				}
@@ -276,6 +311,21 @@ public class SpawnController : MonoBehaviour
 		}
 
 		SpawnComplete?.Invoke();
+	}
+
+	private SpawnPoint AddPoint(int id, Vector3 spawnPosition, Vector3 rootPoint)
+	{
+		//Instance du point de spawn sur la surface touché
+		GameObject instance = Instantiate(pointPrefab, spawnPosition, Quaternion.identity);
+
+		SpawnPoint spawnPoint = instance.GetComponent<SpawnPoint>();
+
+		//L'ID correspond au nombre de point de spawn, on commence ici par 0
+		spawnPoint.Init(SpawnPoints.Count, rootPoint);
+
+		SpawnPoints.Add(spawnPoint);
+
+		return spawnPoint;
 	}
 
 	private bool CheckBlockerTags(RaycastHit2D hit)

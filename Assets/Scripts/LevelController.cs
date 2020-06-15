@@ -38,6 +38,7 @@ namespace oneShot
 		public event LevelDelegate OnStartCombatPhase;
 		public event LevelDelegate OnPlayerDie;
 		public event LevelDelegate OnTimeElapsed;
+		public event LevelDelegate OnReloadScene;
 
         public Phase phase;
 
@@ -126,6 +127,7 @@ namespace oneShot
 		{
 			Fader.Instance.FadeOut();
 			yield return new WaitForSeconds(delay);
+			OnReloadScene?.Invoke();
 			SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 		}
 

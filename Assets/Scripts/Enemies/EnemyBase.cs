@@ -135,6 +135,7 @@ namespace oneShot
 			LineRenderer line = instance.GetComponent<LineRenderer>();
 			line.SetPositions(new Vector3[] { startPoint, endPoint });
 			*/
+
 			Vector2 dir = new Vector2(endPoint.x - startPoint.x, 0);
 
 			Quaternion targetRot = Quaternion.LookRotation(dir) * Quaternion.Euler(90, 0, 0);

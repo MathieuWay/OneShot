@@ -145,6 +145,23 @@ public class UI_Timeline : MonoBehaviour
 		}
 	}
 
+	public void LoadPoint(SpawnPoint spawnPoint)
+	{
+		GameObject instance = Instantiate(pointPrefab, pointContainer);
+		UI_Point uiPoint = instance.GetComponent<UI_Point>();
+		uiPoint.Init(spawnPoint._ID, spawnPoint._Time, spawnPoint);
+		points.Add(uiPoint);
+
+		Debug.Log (spawnPoint._Time + " " + spawnPoint._Time / timerDuration);
+		SetOnTimeline(instance.transform, spawnPoint._Time / timerDuration);
+	}
+	public void FinishLoadPoint()
+	{
+		UI_PointController.Instance.SetCurrentPoint(points[points.Count - 1]);
+		SelectedPoint = points.Count - 1;
+		DisplayPointCount();
+	}
+
 
 	private void Awake()
 	{
