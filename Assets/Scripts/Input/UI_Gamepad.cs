@@ -13,18 +13,27 @@ namespace oneShot
 		{
 			[SerializeField] private InputName inputName = InputName.X;
 			[SerializeField] private Sprite inputSprite = null;
-			public InputName InputName { get => inputName; }
-			public Sprite InputSprite { get => inputSprite; }
-		}
+            [SerializeField] private Sprite inputKeyboardSprite = null;
+            public InputName InputName { get => inputName; }
+			public Sprite InputSprite {
+                get
+                {
+                    if(Gamepad.Instance.type == ControllerType.Gamepad)
+                        return inputSprite;
+                    else
+                        return inputKeyboardSprite;
+                }
+            }
+        }
 
 		[SerializeField] private UI_Input[] uiInputs = null;
 		private Dictionary<InputName, UI_Input> uiInputDic;
 
 
 		public Sprite GetInputSprite(InputName inputName)
-		{
-			return uiInputDic[inputName].InputSprite;
-		}
+        {
+            return uiInputDic[inputName].InputSprite;
+        }
 
 		private void Awake()
 		{

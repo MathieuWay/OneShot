@@ -48,9 +48,12 @@ namespace oneShot
         
         void Update()
         {
-			if (!enemy.isAlive) return;
+			if (!enemy.isAlive ||
+                !enemy.followPattern ||
+                !Application.isPlaying ||
+                stepsLoaded.Count == 0)
+                return;
 
-			if (!Application.isPlaying || stepsLoaded.Count == 0) return;
             float currentTime = 0f;
             if (UI_Timeline.Instance)
                 currentTime = UI_Timeline.Instance.GetCurrentTime();
@@ -59,33 +62,19 @@ namespace oneShot
             {
                 case StepType.Idle:
                     enemy.isMoving = false;
-                    if (!current.stepFlag)
-                    {
-                        //anim.Play("idle");
-                        anim.SetBool("Walk", false);
-                        current.stepFlag = true;
-                    }
+                    anim.SetBool("Walk", false);
                     anim.speed = GameTime.Instance.TimeSpeed;
                     break;
                 case StepType.Move:
-                    if(!current.stepFlag)
-                    {
-                        anim.SetBool("Walk", true);
-                        //anim.Play(StepMove.GetClipName(current.moveType));
-                        current.stepFlag = true;
-                    }
+                    anim.SetBool("Walk", true);
                     enemy.isMoving = true;
                     anim.speed = StepMove.GetMoveFactor(current.moveType) * GameTime.Instance.TimeSpeed;
+                    anim.Play("Enemy_Walk", 0, (currentTime - current.startTime) % 1);
                     transform.position = StepMove.GetPositionByTime(current.stepMovePaths, currentTime);
                     break;
                 case StepType.Anim:
                     enemy.isMoving = false;
-                    if (!current.stepFlag)
-                    {
-                        anim.SetBool("Walk", false);
-                        anim.Play(current.clip.name);
-                        current.stepFlag = true;
-                    }
+                    anim.Play(current.clip.name, 0, (currentTime - current.startTime) % current.clip.length);
                     anim.speed = GameTime.Instance.TimeSpeed;
                     break;
                 default:

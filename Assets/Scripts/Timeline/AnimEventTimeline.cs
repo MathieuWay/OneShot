@@ -39,14 +39,17 @@ public class AnimEventTimeline : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(GameTime.Instance)
-            anim.speed = GameTime.Instance.TimeSpeed;
+        //if(GameTime.Instance)
+        //    anim.speed = GameTime.Instance.TimeSpeed;
         float currentTime = 0f;
         if (UI_Timeline.Instance)
             currentTime = UI_Timeline.Instance.GetCurrentTime();
+
         currentTrigger = GetCurrentClipTrigger(currentTime);
         if(currentTrigger != null)
+        {
             anim.Play(currentTrigger.Clip.name, 0, GetNormalizedTime(currentTime, currentTrigger));
+        }
     }
 
     private AnimTriggerEvent GetCurrentClipTrigger(float time)
@@ -63,7 +66,7 @@ public class AnimEventTimeline : MonoBehaviour
 
     private float GetNormalizedTime(float time, AnimTriggerEvent trigger)
     {
-        return Mathf.Clamp(time - trigger.Time / trigger.Clip.length, 0, 1);
+        return Mathf.Clamp((time - trigger.Time) / trigger.Clip.length, 0, 1);
     }
 }
 

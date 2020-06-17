@@ -12,9 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fe5abdbc99cfcd4eb8743ce125d49cd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  animTriggerEvents:
-  - Time: 1
-    Clip: {fileID: 7400000, guid: 74a78f0bf6160244fab0b852ecf7bd9a, type: 2}
+  triggers: []
 --- !u!1 &1118906994656088351
 GameObject:
   m_ObjectHideFlags: 0
@@ -129,6 +127,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7342605328679865740}
     m_Modifications:
+    - target: {fileID: 6475033231983274439, guid: c37a9097dcf3c54469de2a61596e9d99,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475033232046729789, guid: c37a9097dcf3c54469de2a61596e9d99,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475033232715954197, guid: c37a9097dcf3c54469de2a61596e9d99,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6475033233542447408, guid: c37a9097dcf3c54469de2a61596e9d99,
         type: 3}
       propertyPath: m_Name
@@ -188,6 +201,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6475033233592955603, guid: c37a9097dcf3c54469de2a61596e9d99,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c37a9097dcf3c54469de2a61596e9d99, type: 3}

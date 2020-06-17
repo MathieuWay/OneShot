@@ -17,7 +17,6 @@ public class InterLayerEditor : Editor
             serializedObject.Update();
             for (int i = 0; i < interlayer.paths.Count; i++)
             {
-                //interlayer.paths[i].path.waypoint = interlayer.transform.InverseTransformPoint(Handles.PositionHandle(interlayer.transform.TransformPoint(interlayer.paths[i].path.waypoint), Quaternion.identity));
                 serializedObject.FindProperty("paths").GetArrayElementAtIndex(i).FindPropertyRelative("path").FindPropertyRelative("waypoint").vector3Value = interlayer.transform.InverseTransformPoint(Handles.PositionHandle(interlayer.transform.TransformPoint(interlayer.paths[i].path.waypoint), Quaternion.identity));
             }
             serializedObject.ApplyModifiedProperties();

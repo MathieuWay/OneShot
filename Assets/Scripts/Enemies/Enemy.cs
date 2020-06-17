@@ -21,7 +21,8 @@ namespace oneShot
 		public Transform WeaponPivot { get => weaponPivot; }
 
 		private Vector2 lastPos;
-		public bool isAlive;
+        public bool isAlive;
+        public bool followPattern;
         public Animator anim;
 		private string walkBoolean = "Walk";
 		private string shootBoolean = "Shoot";
@@ -46,15 +47,18 @@ namespace oneShot
 		private void Start()
         {
 			isAlive = true;
+            followPattern = true;
 			lastPos = transform.position;
 			_Direction = defaultDirection;
             pattern = GetComponent<Pattern>();
+            enemyAnim = GetComponentInChildren<Animator>();
             //anim = GetComponentInChildren<Animator>();
             //agent = GetComponent<Agent>();
             initialPosition = transform.position;
             /*path = GetComponent<Path>();
             if(path)
                 path.InitPath(transform.position);*/
+            pivot.localScale = new Vector3(defaultDirection == Direction.Left ? 1 : -1, 1, 1);
         }
 
         private void Update()
@@ -93,16 +97,32 @@ namespace oneShot
 
 			enemyAnim.speed = GameTime.Instance.TimeSpeed;
 
-			SetDirection();
-        }
 
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            //if (collision.gameObject.CompareTag("Player"))
-            //{
-            //    anim.SetTrigger("dying");
-            //    OnEnemyDead();
-            //}
+			//TMP: PROBLEME -> AFFECTE LES ANIMATOR DE TOUS LES ENNEMIS
+			//if (pattern)
+			//{
+			//    if (pattern.currentStep != null)
+			//    {
+			//        if(pattern.currentStep.type == StepType.Move)
+			//            anim.SetBool(/*"isMoving"*/walkBoolean, true);
+			//        else
+			//            anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//    }
+			//    else
+			//    {
+			//        anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//    }
+			//}
+			//else
+			//{
+			//    anim.SetBool(/*"isMoving"*/walkBoolean, false);
+			//}
+
+			enemyAnim.speed = GameTime.Instance.TimeSpeed;
+            if(UI_Timeline.Instance.GetCurrentTime() > 0)
+			    SetDirection();
+            else
+                pivot.localScale = new Vector3(defaultDirection == Direction.Left ? 1 : -1, 1, 1);
         }
 
 		private void SetDirection()
@@ -120,22 +140,13 @@ namespace oneShot
 				{
 					_Direction = dif.x < 0 ? Direction.Left : Direction.Right;
 				}
-
-				//isMoving = true;
-			}
-			else
-			{
-				//isMoving = false;
 			}
 
 
 			if(isMoving)
 			{
 				pivot.localScale = new Vector3(_Direction == Direction.Left ? 1 : -1, 1, 1);
-				//pivot.rotation = Quaternion.Euler(0, _Direction == Direction.Left ? 180 : 0, 0);
 			}
-
-			//enemyAnim.SetBool(walkBoolean, isMoving);
 		}
 
 		public void Kill()
@@ -143,8 +154,8 @@ namespace oneShot
 			if (!isAlive) return;
 
 			isAlive = false;
-			//anim.Play("dying");
-			OnEnemyDead();
+            followPattern = false;
+            OnEnemyDead();
 
 			//!TMP
 			pivot.gameObject.SetActive(false);
@@ -159,14 +170,13 @@ namespace oneShot
         public void ResetEnemy()
         {
             isAlive = true;
-
-			if(/*anim*/enemyAnim)
+            followPattern = true;
+            ///SetDirection();
+            if (enemyAnim)
 			{
-				//anim.SetBool(/*"isMoving"*/walkBoolean, false);
-				//anim.Rebind();
 				enemyAnim.Rebind();
-
-				transform.position = initialPosition;
+                enemyAnim.SetBool(shootBoolean, false);
+                transform.position = initialPosition;
 			}
             
             //currentLayer = LayersController.instance.GetLayer(LayersController.instance.GetLayerIndexByHeight(transform.position.y));

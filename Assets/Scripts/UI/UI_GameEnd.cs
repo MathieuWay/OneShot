@@ -122,34 +122,43 @@ public class UI_GameEnd : MonoBehaviour
 		defeatPanel.SetActive(true);
 		resultText.enabled = false;
 		resultText.text = string.Empty;
-		oneShot.LevelController.Instance.ReloadScene(1.5f);
+        oneShot.LevelController.Instance.ReloadScene(1.5f);
 
-		//int enemyLeft = oneShot.EnemiesController.Instance.EnemyLeft;
-		//int enemyKilled = oneShot.EnemiesController.Instance.EnemyKilledCount;
+        /*
+        yield return new WaitForSeconds(2);
+        victory = false;
+        defeat = false;
+        endPanel.SetActive(false);
+        defeatPanel.SetActive(false);
+        oneShot.LevelController.Instance.ResetLevel();
+        */
 
-		//switch (defeatType)
-		//{
-		//	case DefeatType.PlayerDie:
-		//		resultText.text = "YOU KILLED " + enemyKilled + " ENEMIES BUT DIED";
-		//		break;
+        //int enemyLeft = oneShot.EnemiesController.Instance.EnemyLeft;
+        //int enemyKilled = oneShot.EnemiesController.Instance.EnemyKilledCount;
 
-		//	case DefeatType.TimeElapsed:
-		//		if(enemyKilled <= 0)
-		//		{
-		//			resultText.text = "YOU KILLED NO ENEMY";
-		//		}
-		//		else
-		//		{
-		//			resultText.text = "YOU KILLED " + enemyKilled.ToString() + (enemyKilled > 1 ? " ENEMIES" : " ENEMY") 
-		//				+ " AND MISSED " + enemyLeft + (enemyLeft > 1 ? " OTHERS" : " OTHER");
-		//		}
-		//		break;
-		//}
+        //switch (defeatType)
+        //{
+        //	case DefeatType.PlayerDie:
+        //		resultText.text = "YOU KILLED " + enemyKilled + " ENEMIES BUT DIED";
+        //		break;
 
-		//yield return new WaitForSeconds(1);
+        //	case DefeatType.TimeElapsed:
+        //		if(enemyKilled <= 0)
+        //		{
+        //			resultText.text = "YOU KILLED NO ENEMY";
+        //		}
+        //		else
+        //		{
+        //			resultText.text = "YOU KILLED " + enemyKilled.ToString() + (enemyKilled > 1 ? " ENEMIES" : " ENEMY") 
+        //				+ " AND MISSED " + enemyLeft + (enemyLeft > 1 ? " OTHERS" : " OTHER");
+        //		}
+        //		break;
+        //}
 
-		//continueButton.gameObject.SetActive(true);
-		//continueText.text = "RETRY";
-		//readyToReload = true;
-	}
+        //yield return new WaitForSeconds(1);
+
+        //continueButton.gameObject.SetActive(true);
+        //continueText.text = "RETRY";
+        //readyToReload = true;
+    }
 }

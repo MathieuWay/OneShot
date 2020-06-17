@@ -6,7 +6,7 @@ namespace oneShot
 {
 	public class UI_ComboController : MonoBehaviour
 	{
-		[SerializeField] private GameObject comboPanel = null;
+        [SerializeField] private GameObject comboPanel = null;
 		[SerializeField] private GameObject inputPrefab = null;
 		[SerializeField] private Transform comboContainer = null;
 		//[SerializeField] private GameObject comboPrefab = null; //TMP DISABLED
@@ -19,8 +19,8 @@ namespace oneShot
 
 
 		private void Awake()
-		{
-			comboPanel.SetActive(false);
+        {
+            comboPanel.SetActive(false);
 		}
 
 		private void Start()
