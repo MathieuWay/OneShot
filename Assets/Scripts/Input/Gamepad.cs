@@ -179,7 +179,7 @@ public class Gamepad : MonoBehaviour
             {
                 if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
                 {
-                    return Input.GetKeyDown(KeyCode.Q);
+                    return Input.GetKeyDown(KeyCode.A);
                 }
                 else
                 {
@@ -200,7 +200,7 @@ public class Gamepad : MonoBehaviour
             {
                 if (oneShot.LevelController.Instance.phase == oneShot.Phase.Combat)
                 {
-                    return Input.GetKeyDown(KeyCode.Z);
+                    return Input.GetKeyDown(KeyCode.W);
                 }
                 else
                 {
@@ -221,7 +221,7 @@ public class Gamepad : MonoBehaviour
             }
             else
             {
-                return Input.GetKeyDown(KeyCode.A);
+                return Input.GetKeyDown(KeyCode.Q);
             }
         }
     }
@@ -244,9 +244,9 @@ public class Gamepad : MonoBehaviour
 	private bool isVibrating;
 
     //Keyboard/Mouse Specific
-    //private Vector2 lastMousePosition = Vector2.zero;
-    //private Vector2 currentMousePosition = Vector2.zero;
-    //private Vector2 deltaMousePosition = Vector2.zero;
+    private Vector2 lastMousePosition = Vector2.zero;
+    private Vector2 currentMousePosition = Vector2.zero;
+    private Vector2 deltaMousePosition = Vector2.zero;
 
 
     public void Vibrate(float leftMotor, float rightMotor, float duration)
@@ -274,9 +274,15 @@ public class Gamepad : MonoBehaviour
 			Destroy(gameObject);
 			return;
 		}
-
-		Instance = this;
-	}
+        if (!Instance)
+            Instance = this;
+        else
+            Destroy(this.gameObject);
+        DontDestroyOnLoad(this.gameObject);
+        currentMousePosition = Input.mousePosition;
+        deltaMousePosition = currentMousePosition - lastMousePosition;
+        lastMousePosition = currentMousePosition;
+    }
 
 	private void Update()
 	{
@@ -284,12 +290,6 @@ public class Gamepad : MonoBehaviour
             ListenKeyboardInput();
         else
             ListenGamepadInput();
-        /*if(type == ControllerType.KeyboardMouse)
-        {
-            currentMousePosition = Input.mousePosition;
-            deltaMousePosition = currentMousePosition - lastMousePosition;
-            lastMousePosition = currentMousePosition;
-        }*/
 		//Gâchettes
 		TriggerL = Input.GetAxis("TriggerL") > 0 ? true : false;
 		TriggerR = Input.GetAxis("TriggerR") > 0 ? true : false;
@@ -355,6 +355,16 @@ public class Gamepad : MonoBehaviour
             }
             i++;
         }
+        /*
+        if (deltaMousePosition.magnitude > 0.1f)
+        {
+            type = ControllerType.KeyboardMouse;
+            return;
+        }
+        currentMousePosition = Input.mousePosition;
+        deltaMousePosition = currentMousePosition - lastMousePosition;
+        lastMousePosition = currentMousePosition;
+        */
     }
 
 
