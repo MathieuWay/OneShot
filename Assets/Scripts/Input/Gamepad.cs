@@ -239,9 +239,22 @@ public class Gamepad : MonoBehaviour
             }
         }
     }
-    public bool ButtonDownStart { get; private set; }
+    public bool ButtonDownStart
+    {
+        get
+        {
+            if (type == ControllerType.Gamepad)
+            {
+                return Input.GetKeyDown("joystick button 7");
+            }
+            else
+            {
+                return Input.GetKeyDown(KeyCode.Return);
+            }
+        }
+    }
     //Gamepad Specific
-	private bool isVibrating;
+    private bool isVibrating;
 
     //Keyboard/Mouse Specific
     private Vector2 lastMousePosition = Vector2.zero;
@@ -370,7 +383,7 @@ public class Gamepad : MonoBehaviour
 
     private void ListenGamepadInput()
     {
-        string[] inputs = new string[] { "joystick button 0", "joystick button 1", "joystick button 2", "joystick button 3", "joystick button 4", "joystick button 5" };
+        string[] inputs = new string[] { "joystick button 0", "joystick button 1", "joystick button 2", "joystick button 3", "joystick button 4", "joystick button 5", "joystick button 7"};
         string[] axis = new string[] { "Pad_Vertical", "Horizontal_JR", "Vertical_JR", "Horizontal_JL", "Vertical_JL" };
         int i = 0;
         while (i < inputs.Length)
